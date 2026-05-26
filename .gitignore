@@ -1,0 +1,15 @@
+.DS_Store
+**/.DS_Store
+node_modules/
+.env
+.env.*
+!.env.example
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Local research/extraction artifacts.
+claude-code-sourcemap-main/
+*.tgz
+*.map
