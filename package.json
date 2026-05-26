@@ -53,7 +53,9 @@
     "core:15:verify": "node src/core/reference-agent-comparison.verify.mjs",
     "core:16": "node src/core/reference-agent-cost-and-cross-agent.mjs",
     "core:16:verify": "node src/core/reference-agent-cost-and-cross-agent.verify.mjs",
+    "core:17": "node src/core/reference-agent-pricing-table-baseline.mjs",
+    "core:17:verify": "node src/core/reference-agent-pricing-table-baseline.verify.mjs",
     "verify:labs": "npm run lab:01:verify && npm run lab:02:verify && npm run lab:03:verify && npm run lab:04:verify && npm run lab:05:verify && npm run lab:06:verify && npm run lab:07:verify && npm run lab:08:verify",
-    "verify:all": "npm run verify:labs && npm run core:verify && npm run core:02:verify && npm run core:03:verify && npm run core:04:verify && npm run core:05:verify && npm run core:06:verify && npm run core:07:verify && npm run core:08:verify && npm run core:09:verify && npm run core:10:verify && npm run core:11:verify && npm run core:12:verify && npm run core:13:verify && npm run core:14:verify && npm run core:15:verify && npm run core:16:verify"
+    "verify:all": "npm run verify:labs && npm run core:verify && npm run core:02:verify && npm run core:03:verify && npm run core:04:verify && npm run core:05:verify && npm run core:06:verify && npm run core:07:verify && npm run core:08:verify && npm run core:09:verify && npm run core:10:verify && npm run core:11:verify && npm run core:12:verify && npm run core:13:verify && npm run core:14:verify && npm run core:15:verify && npm run core:16:verify && npm run core:17:verify"
   }
 }

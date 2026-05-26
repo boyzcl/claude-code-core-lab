@@ -33,7 +33,7 @@ Related Files: README.md, AGENTS.md, CURRENT_STATE.md, docs/index.md
 | Agent 工作控制 | `AGENTS.md` | current-rule | repo | active | none | `core-run-record.md` | 操作边界冲突时以 `AGENTS.md` 和安全策略为准 |
 | 文档导航 | `docs/index.md` | index | docs | active | none | none | 导航冲突时以 authority map 的 canonical doc 为准 |
 | 文档 authority | `docs/authority-map.md` | reference-authority | docs | active | none | none | 本文优先于索引和历史材料 |
-| Core 集成行为 | `core-01-integrated-runtime.md` through `core-16-reference-agent-cost-and-cross-agent.md` | design-record | core | active | `claude-code-core-implementation-blueprint.md` | `src/core/*.verify.mjs`, `core-run-record.md` | 具体 Core 阶段以对应 `core-XX` 文档和 verify 脚本为准 |
+| Core 集成行为 | `core-01-integrated-runtime.md` through `core-17-reference-agent-pricing-table-baseline.md` | design-record | core | active | `claude-code-core-implementation-blueprint.md` | `src/core/*.verify.mjs`, `core-run-record.md` | 具体 Core 阶段以对应 `core-XX` 文档和 verify 脚本为准 |
 | Lab 机制 | `lab-01-mock-runtime-loop.md` through `lab-08-eval-runner.md` | tutorial | lab | active | `course-06-labs-to-core-map.md` | `src/lab*/**/*.verify.mjs`, `labs-verification-record.md` | 实验行为以源码 verify 为准 |
 | 70%-80% 验收框架 | `claude-code-70-80-validation-and-model-access.md` | reference-authority | eval | active | `agent-runtime-optimization-loop.md` | `core-10-70-80-eval-open-source-packaging.md`, `src/core/core-readiness-package.verify.mjs` | 能力声明必须经过 Core 10 和后续 eval 证据 |
 | 历史产品分析 | 原始中文分析文章 | history | background | active | none | none | 只解释背景，不覆盖当前实现规则 |

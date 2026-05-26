@@ -1,6 +1,6 @@
 # CURRENT_STATE：Claude Code Core 学习项目当前状态
 
-最后更新：2026-05-27 00:11 CST
+最后更新：2026-05-27 01:05 CST
 
 本文是新对话入口和当前状态单一事实源。它不替代课程、Lab、Core 文档，只回答：
 
@@ -117,6 +117,7 @@ Eval 如何证明能力真的变强。
 | `core-14-eval-expansion-final-starter-batch.md` | 集成实现记录 | 证明剩余 starter case 可以变成 executable repo seeds，累计 20/20 starter case executable |
 | `core-15-reference-agent-comparison.md` | 集成实现记录 | 证明本机 Codex CLI 可以作为第一阶段 reference-agent baseline 产生小样本真实对照证据 |
 | `core-16-reference-agent-cost-and-cross-agent.md` | 集成实现记录 | 证明 8 个 codex-local runs 已有 cost 计量口径，并明确横向对照仍被第二 agent baseline 阻塞 |
+| `core-17-reference-agent-pricing-table-baseline.md` | 集成实现记录 | 证明显式本地 pricing table 可以为 8 个 codex-local runs 生成 configured estimated USD，同时不声称真实厂商账单 |
 | `README.md` | 项目总入口 | 快速运行、文档导航和当前边界 |
 | `AGENTS.md` | Agent 控制入口 | Agent 工作规则、secret 边界和完成定义 |
 | `docs/index.md` | 文档索引 | 区分当前规则、历史和证据 |
@@ -135,7 +136,7 @@ Eval 如何证明能力真的变强。
 学习顺序 / 命名规则：claude-code-core-learning-path.md
 课程正文：对应 course-XX 文档
 实验机制：对应 lab-XX 文档和 src/labXX 代码
-集成行为：core-01-integrated-runtime.md、core-02-model-gateway.md、core-03-context-engine-integration.md、core-04-plan-mode-integration.md、core-05-compaction-artifact-integration.md、core-06-trace-eval-harness-expansion.md、core-07-real-model-api-e2e.md、core-08-prompt-pack-recovery-loop.md、core-09-real-repo-task-layer.md、core-10-70-80-eval-open-source-packaging.md、core-11-eval-expansion-executable-seeds.md、core-12-eval-expansion-second-batch.md、core-13-eval-expansion-third-batch.md、core-14-eval-expansion-final-starter-batch.md、core-15-reference-agent-comparison.md、core-16-reference-agent-cost-and-cross-agent.md 和 src/core 代码
+集成行为：core-01-integrated-runtime.md、core-02-model-gateway.md、core-03-context-engine-integration.md、core-04-plan-mode-integration.md、core-05-compaction-artifact-integration.md、core-06-trace-eval-harness-expansion.md、core-07-real-model-api-e2e.md、core-08-prompt-pack-recovery-loop.md、core-09-real-repo-task-layer.md、core-10-70-80-eval-open-source-packaging.md、core-11-eval-expansion-executable-seeds.md、core-12-eval-expansion-second-batch.md、core-13-eval-expansion-third-batch.md、core-14-eval-expansion-final-starter-batch.md、core-15-reference-agent-comparison.md、core-16-reference-agent-cost-and-cross-agent.md、core-17-reference-agent-pricing-table-baseline.md 和 src/core 代码
 历史观点：两篇原始分析文章只作背景材料
 ```
 
@@ -168,21 +169,23 @@ course-06 中 Lab 到 Core 的映射问题已由学习者确认能回答。
 当前正在进行：
 
 ```text
-Reference-Agent Comparison 后续决策
+Second Reference-Agent Baseline 准备
 ```
 
-它的目的不是继续补 starter seed 或扩写抽象架构，而是在 Core 16 之后决定下一步最小推进：先接入第二个 reference agent 跑同一批 seeds，或先配置明确 pricing table 生成 codex-local baseline 的 estimatedCostUsd。
+它的目的不是继续补 starter seed 或扩写抽象架构，而是在 Core 17 已完成本地 pricing table baseline 之后，准备接入第二个 reference agent，对同一批 8 个 seeds 跑真实 runs。
 
 当前断点：
 
 ```text
 Core 15 Reference-Agent Comparison 已实现并通过目标验证。
 Core 16 Reference-Agent Cost + Cross-Agent 已实现并通过目标验证。
+Core 17 Reference-Agent Pricing Table Baseline 已实现并通过目标验证。
 Core Build Pass 第一轮完成。
 Teaching Consolidation Pass 第一轮完成，course-07 到 course-12 已由学习者复盘通过。
 Eval Expansion Pass starter executable suite 完成，累计 20/20 starter case executable。
 Reference-Agent Comparison Pass 已完成第一批 Codex local CLI 小样本对照：8 个 executable seeds 有真实 run evidence，覆盖修复、失败归因、安全拒绝和歧义拒绝。
 Cost + Cross-Agent Pass 已补上 8 个 codex-local sample runs 的 cost 计量口径：token、cached token、uncached token、output token、reasoning output token、latency 和 raw log hash 都可汇总；没有 pricing table 时 USD 仍保持 null。横向对照当前结论是 single_baseline_only：本机只有 codex-local 有 recorded runs，未检测到 Claude Code / Claude / OpenCode / Aider / Cursor Agent / Gemini / Qwen / OpenAI CLI 的可用第二 baseline。没有第二 agent 真实 runs 前，不生成 RelativeScore。
+Pricing Table Baseline Pass 已给同一批 8 个 runs 接入显式本地示例价格表，total estimatedCostUsd=0.609534，averageEstimatedCostUsd=0.07619175；这不是厂商真实账单，也不是跨 agent RelativeScore。
 ```
 
 ---
@@ -242,6 +245,7 @@ src/core/prompt-pack.mjs
 src/core/real-repo-task.mjs
 src/core/reference-agent-comparison.mjs
 src/core/reference-agent-cost-and-cross-agent.mjs
+src/core/reference-agent-pricing-table-baseline.mjs
 ```
 
 验证层：
@@ -266,6 +270,7 @@ src/core/prompt-pack.verify.mjs
 src/core/real-repo-task.verify.mjs
 src/core/reference-agent-comparison.verify.mjs
 src/core/reference-agent-cost-and-cross-agent.verify.mjs
+src/core/reference-agent-pricing-table-baseline.verify.mjs
 ```
 
 集成层：
@@ -287,6 +292,7 @@ core-13-eval-expansion-third-batch.md
 core-14-eval-expansion-final-starter-batch.md
 core-15-reference-agent-comparison.md
 core-16-reference-agent-cost-and-cross-agent.md
+core-17-reference-agent-pricing-table-baseline.md
 README.md
 AGENTS.md
 docs/index.md
@@ -323,6 +329,8 @@ src/core/reference-agent-comparison.mjs
 src/core/reference-agent-comparison.verify.mjs
 src/core/reference-agent-cost-and-cross-agent.mjs
 src/core/reference-agent-cost-and-cross-agent.verify.mjs
+src/core/reference-agent-pricing-table-baseline.mjs
+src/core/reference-agent-pricing-table-baseline.verify.mjs
 ```
 
 ---
@@ -580,6 +588,19 @@ claude-code、claude、opencode、aider、cursor-agent、gemini、qwen、openai 
 RelativeScore 继续 blocked_until_second_agent_runs。
 ```
 
+Core 17 已确认：
+
+```text
+同一批 8 个 codex-local sample runs 已经可以用显式本地 pricing table 生成 configured estimated USD。
+当前本地示例价格表 id 为 local-example-codex-cost-table-2026-05-27。
+该价格表 source 为 local_configured_example_not_vendor_price，realVendorPriceClaim=false。
+当前 8-run estimatedCostUsd 汇总为 0.609534，averageEstimatedCostUsd 为 0.07619175。
+每个 run 都保留 rawLogSha256，pricing 不改写原始 evidence。
+伪装真实 vendor price 或负数价格会被验证拒绝。
+pricing table 不会创建第二 baseline，crossAgentReadiness.status 仍为 single_baseline_only。
+RelativeScore 继续 blocked_until_second_agent_runs。
+```
+
 ---
 
 ## 7. 最新验证结果
@@ -587,7 +608,7 @@ RelativeScore 继续 blocked_until_second_agent_runs。
 最后一次完整验证时间：
 
 ```text
-2026-05-27 00:11 CST
+2026-05-27 01:05 CST
 ```
 
 运行命令：
@@ -623,15 +644,16 @@ core-13: 7/7 passed
 core-14: 7/7 passed
 core-15: 6/6 passed
 core-16: 7/7 passed
+core-17: 7/7 passed
 
-total: 137/137 passed
+total: 144/144 passed
 exit code: 0
 ```
 
 这证明：
 
 ```text
-当前 Lab 机制、Core 01 集成链路、Core 02 Model Gateway 边界、Core 03 Context Engine 集成链路、Core 04 Plan Mode 权限链路、Core 05 Compaction / Artifact 链路、Core 06 Trace / Eval Harness 链路、Core 07 Real Model API E2E 链路、Core 08 Prompt Pack / Recovery Loop 链路、Core 09 Real Repo Task Layer 链路、Core 10 Eval / Open Source Packaging 链路、Core 11 第一批 executable seed 链路、Core 12 第二批 executable seed 链路、Core 13 第三批 executable seed 链路、Core 14 final starter batch 链路、Core 15 codex-local reference comparison 链路和 Core 16 reference-agent cost/cross-agent readiness 链路都可运行。
+当前 Lab 机制、Core 01 集成链路、Core 02 Model Gateway 边界、Core 03 Context Engine 集成链路、Core 04 Plan Mode 权限链路、Core 05 Compaction / Artifact 链路、Core 06 Trace / Eval Harness 链路、Core 07 Real Model API E2E 链路、Core 08 Prompt Pack / Recovery Loop 链路、Core 09 Real Repo Task Layer 链路、Core 10 Eval / Open Source Packaging 链路、Core 11 第一批 executable seed 链路、Core 12 第二批 executable seed 链路、Core 13 第三批 executable seed 链路、Core 14 final starter batch 链路、Core 15 codex-local reference comparison 链路、Core 16 reference-agent cost/cross-agent readiness 链路和 Core 17 pricing table baseline 链路都可运行。
 ```
 
 Core 07 live 另已确认：
@@ -666,8 +688,8 @@ Core 08 仍是 starter Prompt Pack / Recovery Loop，不是完整 production pro
 Core 09 仍是受控 fixture，不是直接在任意真实仓库里自动执行复杂任务。
 Core 10 到 Core 14 已完成 20/20 starter executable suite，但仍不是完整 120-case benchmark，也不是 reference-agent 70%-80% 认证。
 Core 15 已记录 8 个 codex-local CLI 小样本对照，但仍不是 Claude Code baseline，也不是跨 agent RelativeScore。
-Core 16 已补 cost 计量口径，但仍没有配置 pricing table，因此 estimatedCostUsd 仍为 null。
 Core 16 已完成横向对照 readiness 评估，但当前只有 codex-local 有 recorded runs，第二 agent baseline 尚未建立。
+Core 17 已接入本地显式 pricing table，并能生成 configured estimated USD；但它不是厂商真实账单，也不是跨 agent 成本对比。
 ```
 
 文档治理侧还缺：
@@ -685,30 +707,30 @@ README + docs/index + authority-map 的最小入口层已经建立。
 下一步只做一件事：
 
 ```text
-建立第二 reference-agent baseline，或者先配置 pricing table。
+建立第二 reference-agent baseline。
 ```
 
 推荐优先顺序：
 
 ```text
-1. 如果目标是横向对比：先安装或配置第二个可非交互运行的 coding agent。
+1. 先安装或配置第二个可非交互运行的 coding agent。
 2. 对同一批 8 个 seeds 跑第二 agent 的真实 runs。
 3. 用同一 schema 对比 score、failureType、verificationStatus、latencyMs、token/cost basis、safety outcome 和 notes。
-4. 如果目标是预算估算：先配置明确 pricing table，再生成 estimatedCostUsd。
+4. 如果要把 Core 17 的本地示例价格表替换成真实价格，必须明确来源、模型、时间和价格表版本。
 5. 只有第二 agent 有真实 runs 后，才计算跨 agent RelativeScore。
 ```
 
 做完下一步后的预期结果：
 
 ```text
-如果只配置 pricing table：
-  得到 codex-local baseline 的 estimatedCostUsd，但仍没有横向 RelativeScore。
-
 如果接入第二 agent 并跑同一批 seeds：
   得到真正的横向对照表，可以比较通过率、失败类型、延迟、token/cost 口径和安全结果。
 
 如果第二 agent 仍不可用：
   保持 single_baseline_only，继续不生成 RelativeScore。
+
+如果只替换真实 pricing table：
+  得到更接近真实价格来源的 codex-local estimatedCostUsd，但仍没有横向 RelativeScore。
 ```
 
 ---
@@ -742,6 +764,7 @@ core-13-eval-expansion-third-batch.md
 core-14-eval-expansion-final-starter-batch.md
 core-15-reference-agent-comparison.md
 core-16-reference-agent-cost-and-cross-agent.md
+core-17-reference-agent-pricing-table-baseline.md
 README.md
 AGENTS.md
 docs/index.md
@@ -768,9 +791,10 @@ Core 13 Eval Expansion Third Batch 已经实现并通过目标验证。
 Core 14 Eval Expansion Final Starter Batch 已经实现并通过目标验证。
 Core 15 Reference-Agent Comparison 已经实现并通过目标验证。
 Core 16 Reference-Agent Cost + Cross-Agent 已实现并通过目标验证。
+Core 17 Reference-Agent Pricing Table Baseline 已实现并通过目标验证。
 course-07 Core Build Pass Overview 已创建并复盘完成。
 course-08 到 course-12 已按执行链样板重写并复盘完成。
-下一步不是继续进入 Core 16，而是在第二 reference-agent baseline 和 pricing table 之间择一推进；没有第二 agent 真实 runs 前不生成 RelativeScore，没有价格表前不生成 USD cost。
+下一步进入第二 reference-agent baseline 准备；没有第二 agent 真实 runs 前不生成 RelativeScore。Core 17 的 estimated USD 来自本地显式示例价格表，不是厂商真实账单。
 ```
 
 恢复后不要立即做：
@@ -788,9 +812,9 @@ course-08 到 course-12 已按执行链样板重写并复盘完成。
 
 ```text
 1. 不再补 starter seed；20/20 starter executable suite 已完成。
-2. 如果目标是横向对比，先接入第二 reference agent 并跑同一批 8 个 seeds。
-3. 如果目标是预算估算，先配置明确 pricing table，再生成 estimatedCostUsd。
-4. 先不要继续扩 codex-local 样本，除非第二 baseline 或价格表方向已经明确。
+2. 先接入第二 reference agent 并跑同一批 8 个 seeds。
+3. 继续沿用 Core 17 的 pricing table schema 记录第二 agent 的 cost basis。
+4. 先不要继续扩 codex-local 样本，除非第二 baseline 已经跑通。
 5. 不要在没有跨 agent 真实 runs 时生成 RelativeScore。
 ```
 
@@ -847,6 +871,8 @@ npm --prefix /Users/boyzcl/Documents/A/C run core:15
 npm --prefix /Users/boyzcl/Documents/A/C run core:15:verify
 npm --prefix /Users/boyzcl/Documents/A/C run core:16
 npm --prefix /Users/boyzcl/Documents/A/C run core:16:verify
+npm --prefix /Users/boyzcl/Documents/A/C run core:17
+npm --prefix /Users/boyzcl/Documents/A/C run core:17:verify
 npm --prefix /Users/boyzcl/Documents/A/C run verify:all
 ```
 
@@ -881,7 +907,8 @@ Core Build Pass 第一轮已完成。
 Eval Expansion starter executable suite 已完成 20/20。
 Reference-Agent Comparison 已有 8 个 codex-local CLI sample runs。
 Core 16 cost basis 和 cross-agent readiness gate 已完成。
-下一步建立第二 reference-agent baseline，或先配置 pricing table。
+Core 17 pricing table baseline 已完成，本地示例 total estimatedCostUsd=0.609534。
+下一步建立第二 reference-agent baseline。
 没有跨 agent 真实 runs 前不要生成 RelativeScore。
-没有 pricing table 前不要生成 USD cost。
+不要把 Core 17 的本地示例价格表当作真实厂商账单。
 ```

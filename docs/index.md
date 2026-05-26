@@ -50,6 +50,7 @@
 - `../core-14-eval-expansion-final-starter-batch.md`
 - `../core-15-reference-agent-comparison.md`
 - `../core-16-reference-agent-cost-and-cross-agent.md`
+- `../core-17-reference-agent-pricing-table-baseline.md`
 
 ## Lab Evidence
 

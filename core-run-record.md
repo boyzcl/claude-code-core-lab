@@ -2,7 +2,7 @@
 
 运行日期：2026-05-27
 
-最后验证时间：2026-05-27 00:11 CST
+最后验证时间：2026-05-27 01:05 CST
 
 运行命令：
 
@@ -23,6 +23,7 @@ npm run core:13:verify
 npm run core:14:verify
 npm run core:15:verify
 npm run core:16:verify
+npm run core:17:verify
 npm run verify:all
 ```
 
@@ -47,6 +48,7 @@ core-13: 7/7 passed
 core-14: 7/7 passed
 core-15: 6/6 passed
 core-16: 7/7 passed
+core-17: 7/7 passed
 ```
 
 case：
@@ -227,6 +229,18 @@ cross-agent gate: only codex-local has recorded runs on this machine snapshot
 cross-agent option: a second agent needs recorded runs before RelativeScore can exist
 ```
 
+Core 17 case：
+
+```text
+core17: pricing table baseline runs and verifies
+pricing table contract: local table is explicit and bounded
+per-run estimates: all 8 codex-local runs have configured USD estimates
+totals: configured estimate sums are stable
+evidence boundary: pricing does not rewrite raw run hashes
+relative score boundary: pricing table does not create a second baseline
+pricing validation: invalid local table is rejected
+```
+
 ---
 
 ## 2. 全量验证结果
@@ -256,8 +270,9 @@ core-13: 7/7 passed
 core-14: 7/7 passed
 core-15: 6/6 passed
 core-16: 7/7 passed
+core-17: 7/7 passed
 
-total: 137/137 passed
+total: 144/144 passed
 exit code: 0
 ```
 
@@ -284,6 +299,7 @@ Core 13 可以把第三批 5 个 starter case 推进为 executable repo seeds，
 Core 14 可以把最终 5 个 starter case 推进为 executable repo seeds，使累计 executable starter coverage 达到 20/20。
 Core 15 可以把 reference-agent comparison 从空接口推进到 8 个真实 codex-local CLI sample runs。
 Core 16 可以为这 8 个 codex-local runs 建立 token/cache/latency/hash cost basis，并在只有单 baseline 时阻止 RelativeScore。
+Core 17 可以给这 8 个 codex-local runs 接入显式本地 pricing table，生成 configured estimated USD，同时不声称真实厂商账单。
 ```
 
 它能在临时 toy workspace 中完成：
@@ -338,7 +354,8 @@ Core 15 已记录 codex-local CLI 对照样本：pagination fix、similar-file s
 Core 15 不是 Claude Code baseline，不生成 RelativeScore；costUsd 仍为 null，costStatus=not_reported_by_cli。
 Core 16 已为 8 个 codex-local sample runs 建立 cost basis：inputTokens=660067、cachedInputTokens=523904、uncachedInputTokens=136163、outputTokens=7233、reasoningOutputTokens=2174、visibleTotalTokens=667300、latencyMs=362003。
 Core 16 没有配置 pricing table 时 estimatedCostUsd 保持 null；当前只有 codex-local-cli 有 recorded runs，crossAgentReadiness.status=single_baseline_only，RelativeScore=blocked_until_second_agent_runs。
+Core 17 已用本地显式 pricing table 生成 8-run configured estimate：estimatedCostUsd=0.609534，averageEstimatedCostUsd=0.07619175；该表 source=local_configured_example_not_vendor_price，realVendorPriceClaim=false。
 README.md、AGENTS.md、docs/index.md 和 docs/authority-map.md 已形成最小开源入口。
 docs/authority-map.md 声明当前规则、历史背景和证据目录的边界。
-verify:all 已覆盖 core:16:verify。
+verify:all 已覆盖 core:17:verify。
 ```

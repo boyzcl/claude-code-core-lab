@@ -37,6 +37,7 @@ npm run core:13
 npm run core:14
 npm run core:15
 npm run core:16
+npm run core:17
 ```
 
 `core:07:live` 会读取本地 `.env.local` 里的模型配置。`.env.local` 被 git 忽略，不能提交。
@@ -73,6 +74,8 @@ npm run core:16
 - Verify Codex local reference comparison sample: `npm run core:15:verify`
 - Run reference-agent cost and cross-agent readiness report: `npm run core:16`
 - Verify reference-agent cost and cross-agent readiness report: `npm run core:16:verify`
+- Run reference-agent pricing table baseline: `npm run core:17`
+- Verify reference-agent pricing table baseline: `npm run core:17:verify`
 
 ## Docs
 
@@ -116,10 +119,11 @@ Core implementation records:
 - `core-14-eval-expansion-final-starter-batch.md`
 - `core-15-reference-agent-comparison.md`
 - `core-16-reference-agent-cost-and-cross-agent.md`
+- `core-17-reference-agent-pricing-table-baseline.md`
 
 ## Current Boundary
 
-Core 14 establishes executable repo seeds for all 20 Core 10 starter cases and brings cumulative executable starter coverage to 20/20. Core 15 records a small Codex local CLI reference-agent sample for 8 seeds, including repair, safety refusal, ambiguity refusal, and expected failed-verification outcomes. Core 16 adds a cost measurement basis and cross-agent readiness gate for those runs. This is not a Claude Code baseline, not a RelativeScore, and not a production-level Claude Code 70%-80% capability claim. USD cost remains null until a pricing table is configured, and horizontal comparison remains blocked until a second agent has real runs.
+Core 14 establishes executable repo seeds for all 20 Core 10 starter cases and brings cumulative executable starter coverage to 20/20. Core 15 records a small Codex local CLI reference-agent sample for 8 seeds, including repair, safety refusal, ambiguity refusal, and expected failed-verification outcomes. Core 16 adds a cost measurement basis and cross-agent readiness gate for those runs. Core 17 adds an explicit local pricing table baseline that produces configured USD estimates from the same evidence. This is not a Claude Code baseline, not a RelativeScore, not a real vendor bill, and not a production-level Claude Code 70%-80% capability claim. Horizontal comparison remains blocked until a second agent has real runs.
 
 ## Contributing
 
