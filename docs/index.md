@@ -61,6 +61,7 @@
 - `../core-21-long-running-task-eval.md`
 - `../core-22-tool-runtime-transaction.md`
 - `../core-23-model-gateway-budget-controller.md`
+- `../core-24-durable-session-store-replay.md`
 
 ## Production Upgrade
 

@@ -231,23 +231,25 @@ Core 18-26 暂不承诺：
 
 ## 9. 当前进度和下一步
 
-Core 23 已完成 deterministic local verification：
+Core 24 已完成 deterministic local verification：
 
 ```text
-token/cost budget gate
-retry/fallback
-provider capability registry
-schema-bound JSON tool_call repair
+append-only event log
+snapshot restore
+crash recovery
+trace replay
+compaction audit
+secret boundary scan
 ```
 
 下一步进入：
 
 ```text
-Core 24: Durable Session Store + Replay
+Core 25: Repo Intelligence + Relevance Index
 ```
 
-Core 24 的第一目标：
+Core 25 的第一目标：
 
 ```text
-让 session 从内存状态升级为 append-only event log、snapshot restore、trace replay 和 secret-safe recovery evidence。
+让 Context Engine 的输入从全文搜索升级为 repo map、symbol/test/rule index、relevance scoring 和 token benefit evidence。
 ```

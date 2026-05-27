@@ -1,6 +1,6 @@
 # CURRENT_STATE：Claude Code Core 学习项目当前状态
 
-最后更新：2026-05-27 22:15 CST
+最后更新：2026-05-28 00:27 CST
 
 本文是新对话入口和当前状态单一事实源。它不替代课程、Lab、Core 文档，只回答：
 
@@ -124,6 +124,7 @@ Eval 如何证明能力真的变强。
 | `core-21-long-running-task-eval.md` | 集成实现记录 | 证明 Long-Running Task Eval 可以评估多轮修复、重复失败、压缩恢复、成本曲线和 no false final |
 | `core-22-tool-runtime-transaction.md` | 集成实现记录 | 证明 ToolRuntime Transaction 可以预览 diff、多文件提交、回滚并拦截 stale/protected/high-risk |
 | `core-23-model-gateway-budget-controller.md` | 集成实现记录 | 证明 ModelGateway 可以在 provider 调用前执行 token/cost budget gate，并记录 retry/fallback、capability filtering 和 output repair evidence |
+| `core-24-durable-session-store-replay.md` | 集成实现记录 | 证明 Durable Session Store 可以记录 append-only event log、snapshot restore、crash recovery、trace replay、compaction audit 和 secret boundary evidence |
 | `production-upgrade-roadmap.md` | 生产化升级总控 | Core 18-26 的路线、依赖、边界和统一完成定义 |
 | `production-upgrade-validation-matrix.md` | 验证矩阵 | Core 18-26 的验证先行口径和必过检查 |
 | `README.md` | 项目总入口 | 快速运行、文档导航和当前边界 |
@@ -194,6 +195,7 @@ Core 20 Plan State Machine 已实现并通过目标验证。
 Core 21 Long-Running Task Eval 已实现并通过目标验证。
 Core 22 ToolRuntime Transaction + Patch Safety 已实现并通过目标验证。
 Core 23 Production ModelGateway + Budget Controller 已实现并通过目标验证。
+Core 24 Durable Session Store + Replay 已实现并通过目标验证。
 Production Upgrade Roadmap Pass 已建立 Core 18-26 路线：Context Economy、Compaction Quality、Plan State Machine、Long-Running Eval、ToolRuntime Transaction、ModelGateway Budget、Durable Replay、Repo Intelligence、Human Approval。
 Core Build Pass 第一轮完成。
 Teaching Consolidation Pass 第一轮完成，course-07 到 course-12 已由学习者复盘通过。
@@ -207,7 +209,8 @@ Plan State Machine Pass 已建立 step-level plan lifecycle：pending -> active 
 Long-Running Task Eval Pass 已建立 7 轮长任务压力场：multi-turn repair、repeated failure history、compaction resume、per-turn cost curve、verification_missing false final 和 learning handoff 均有 verify evidence。
 ToolRuntime Transaction Pass 已建立 patch safety 事务层：diff preview、multi-file commit、rollback、stale reread、protected file approval 和 high-risk Bash approval routing 均有 verify evidence。
 ModelGateway Budget Controller Pass 已建立模型调用预算层：token/cost budget gate、retry/fallback、provider capability registry 和 schema-bound JSON repair 均有 verify evidence。
-下一步进入 Core 24 Durable Session Store + Replay，不再把第二 reference-agent baseline 作为当前主线。
+Durable Session Store Replay Pass 已建立本地可恢复事实流：append-only event log、snapshot restore、crash recovery、trace replay、compaction audit 和 secret boundary 均有 verify evidence。
+下一步进入 Core 25 Repo Intelligence + Relevance Index，不再把第二 reference-agent baseline 作为当前主线。
 ```
 
 ---
@@ -274,6 +277,7 @@ src/core/plan-state-machine.mjs
 src/core/long-running-task-eval.mjs
 src/core/tool-runtime-transaction.mjs
 src/core/model-gateway-budget-controller.mjs
+src/core/durable-session-store-replay.mjs
 ```
 
 验证层：
@@ -305,6 +309,7 @@ src/core/plan-state-machine.verify.mjs
 src/core/long-running-task-eval.verify.mjs
 src/core/tool-runtime-transaction.verify.mjs
 src/core/model-gateway-budget-controller.verify.mjs
+src/core/durable-session-store-replay.verify.mjs
 ```
 
 集成层：
@@ -333,6 +338,7 @@ core-20-plan-state-machine.md
 core-21-long-running-task-eval.md
 core-22-tool-runtime-transaction.md
 core-23-model-gateway-budget-controller.md
+core-24-durable-session-store-replay.md
 production-upgrade-roadmap.md
 production-upgrade-validation-matrix.md
 README.md
@@ -385,6 +391,8 @@ src/core/tool-runtime-transaction.mjs
 src/core/tool-runtime-transaction.verify.mjs
 src/core/model-gateway-budget-controller.mjs
 src/core/model-gateway-budget-controller.verify.mjs
+src/core/durable-session-store-replay.mjs
+src/core/durable-session-store-replay.verify.mjs
 ```
 
 ---
@@ -735,6 +743,18 @@ ProviderCapabilityRegistry 会过滤 unsupported tools、streaming 和 reasoning
 这只是 deterministic local gateway evidence，不是真实 provider SLA、真实厂商账单或完整生产级 provider router。
 ```
 
+Core 24 已确认：
+
+```text
+DurableSessionStore 可以把 session event 写入 append-only events.jsonl，并用 seq、previousHash 和 hash 检测重排。
+snapshot 会记录 throughSeq、eventLogHash、stateHash 和 replay state，restore 后可以和 replay(... throughSeq) 对照。
+crash recovery 会从最新 snapshot 重放 tail events，保留 activePlan、currentStepId 和 pendingActions。
+trace replay 可以从事件流重建 messages、runtimeTrace、modelGatewayDecisions、modifiedFiles、verificationState、failureHistory 和 compactionAudit。
+compaction audit 会记录 before / after / quality report，并复用 Core 19 的 compaction quality evidence。
+session evidence 写入前会 redaction provider credential；verify 会扫描 event log 和 snapshot，确认 raw secret 不落盘。
+这只是 deterministic local durable replay evidence，不是分布式 durable storage、跨机器 session 产品或生产级 audit log。
+```
+
 Production Upgrade Roadmap Pass 已确认：
 
 ```text
@@ -753,7 +773,7 @@ Core 18 到 Core 26 的顺序为 Context Economy、Compaction Quality Eval、Pla
 最后一次完整验证时间：
 
 ```text
-2026-05-27 22:15 CST
+2026-05-28 00:27 CST
 ```
 
 运行命令：
@@ -796,15 +816,16 @@ core-20: 10/10 passed
 core-21: 8/8 passed
 core-22: 8/8 passed
 core-23: 9/9 passed
+core-24: 8/8 passed
 
-total: 196/196 passed
+total: 204/204 passed
 exit code: 0
 ```
 
 这证明：
 
 ```text
-当前 Lab 机制、Core 01 集成链路、Core 02 Model Gateway 边界、Core 03 Context Engine 集成链路、Core 04 Plan Mode 权限链路、Core 05 Compaction / Artifact 链路、Core 06 Trace / Eval Harness 链路、Core 07 Real Model API E2E 链路、Core 08 Prompt Pack / Recovery Loop 链路、Core 09 Real Repo Task Layer 链路、Core 10 Eval / Open Source Packaging 链路、Core 11 第一批 executable seed 链路、Core 12 第二批 executable seed 链路、Core 13 第三批 executable seed 链路、Core 14 final starter batch 链路、Core 15 codex-local reference comparison 链路、Core 16 reference-agent cost/cross-agent readiness 链路、Core 17 pricing table baseline 链路、Core 18 context economy/cache-aware context 链路、Core 19 compaction quality eval 链路、Core 20 plan state machine 链路、Core 21 long-running task eval 链路、Core 22 tool runtime transaction 链路和 Core 23 model gateway budget controller 链路都可运行。
+当前 Lab 机制、Core 01 集成链路、Core 02 Model Gateway 边界、Core 03 Context Engine 集成链路、Core 04 Plan Mode 权限链路、Core 05 Compaction / Artifact 链路、Core 06 Trace / Eval Harness 链路、Core 07 Real Model API E2E 链路、Core 08 Prompt Pack / Recovery Loop 链路、Core 09 Real Repo Task Layer 链路、Core 10 Eval / Open Source Packaging 链路、Core 11 第一批 executable seed 链路、Core 12 第二批 executable seed 链路、Core 13 第三批 executable seed 链路、Core 14 final starter batch 链路、Core 15 codex-local reference comparison 链路、Core 16 reference-agent cost/cross-agent readiness 链路、Core 17 pricing table baseline 链路、Core 18 context economy/cache-aware context 链路、Core 19 compaction quality eval 链路、Core 20 plan state machine 链路、Core 21 long-running task eval 链路、Core 22 tool runtime transaction 链路、Core 23 model gateway budget controller 链路和 Core 24 durable session replay 链路都可运行。
 ```
 
 Core 07 live 另已确认：
@@ -847,7 +868,8 @@ Core 20 已实现 deterministic plan state machine；但它不是完整生产级
 Core 21 已实现 deterministic long-running task eval；但它不是生产级长任务 benchmark，也不保证任意真实长任务自动完成。
 Core 22 已实现 deterministic tool runtime transaction；但它不是完整生产级 ToolRuntime，也不保证任意真实 patch parser / IDE diff UI / human approval 产品能力。
 Core 23 已实现 deterministic model gateway budget controller；但它不是真实 provider SLA、真实厂商账单，也不是完整生产级 provider router。
-Core 24-26 仍未实现；当前只有路线和验证矩阵，不能把 Durable Replay / Repo Intelligence / Human Approval 等能力说成生产级。
+Core 24 已实现 deterministic durable session replay；但它不是分布式 durable storage、跨机器 session 产品或生产级 audit log。
+Core 25-26 仍未实现；当前只有路线和验证矩阵，不能把 Repo Intelligence / Human Approval 等能力说成生产级。
 ```
 
 文档治理侧还缺：
@@ -866,28 +888,28 @@ Production Upgrade Roadmap Pass 已建立路线入口，但未来每个 Core 完
 下一步只做一件事：
 
 ```text
-实现 Core 24 Durable Session Store + Replay。
+实现 Core 25 Repo Intelligence + Relevance Index。
 ```
 
 推荐优先顺序：
 
 ```text
-1. 先阅读 production-upgrade-roadmap.md 和 production-upgrade-validation-matrix.md 的 Core 24 条目。
-2. 新建 core-24-durable-session-store-replay.md，定义问题、机制、边界和验收。
-3. 实现 append-only event log、snapshot restore、crash recovery、trace replay 和 compaction audit 的 deterministic evidence。
-4. 编写 Core 24 verify，覆盖 event sequence、snapshot restore、crash recovery、trace replay、compaction audit 和 secret boundary。
+1. 先阅读 production-upgrade-roadmap.md 和 production-upgrade-validation-matrix.md 的 Core 25 条目。
+2. 新建 core-25-repo-intelligence-relevance-index.md，定义问题、机制、边界和验收。
+3. 实现 repo map、symbol/test/rule index、relevance scoring、incremental update 和 token benefit 的 deterministic evidence。
+4. 编写 Core 25 verify，覆盖 repo map、symbol index、test index、rule discovery、relevance scoring、incremental update 和 token benefit。
 5. 接入 package.json demo / verify，并跑 npm run verify:all。
 ```
 
 做完下一步后的预期结果：
 
 ```text
-得到一个可恢复和可审计的 Session Store 层：
-  每轮 runtime event 进入 append-only log。
-  snapshot restore 可以恢复关键 state。
-  crash / handoff 后 pending action 和 active plan 不丢。
-  trace replay 可以重建关键状态和 compaction 转换。
-  secret boundary 可以证明 session evidence 不写入 secret。
+得到一个 repo-aware relevance evidence layer：
+  repo map 可以解释文件、脚本和规则入口。
+  symbol / test / rule index 可以定位实现、测试和项目约束。
+  relevance scoring 可以解释为什么某个文件更相关。
+  incremental update 可以只刷新改动文件的索引证据。
+  token benefit 可以证明更少上下文选中正确文件。
 ```
 
 ---
@@ -928,6 +950,7 @@ core-20-plan-state-machine.md
 core-21-long-running-task-eval.md
 core-22-tool-runtime-transaction.md
 core-23-model-gateway-budget-controller.md
+core-24-durable-session-store-replay.md
 production-upgrade-roadmap.md
 production-upgrade-validation-matrix.md
 README.md
@@ -963,10 +986,11 @@ Core 20 Plan State Machine 已实现并通过目标验证。
 Core 21 Long-Running Task Eval 已实现并通过目标验证。
 Core 22 ToolRuntime Transaction + Patch Safety 已实现并通过目标验证。
 Core 23 Production ModelGateway + Budget Controller 已实现并通过目标验证。
+Core 24 Durable Session Store + Replay 已实现并通过目标验证。
 Production Upgrade Roadmap Pass 已建立 Core 18-26 路线和验证矩阵。
 course-07 Core Build Pass Overview 已创建并复盘完成。
 course-08 到 course-12 已按执行链样板重写并复盘完成。
-下一步进入 Core 24 Durable Session Store + Replay；先实现 append-only event log、snapshot restore、crash recovery、trace replay 和 secret boundary。第二 reference-agent baseline 暂不作为当前主线。
+下一步进入 Core 25 Repo Intelligence + Relevance Index；先实现 repo map、symbol/test/rule index、relevance scoring、incremental update 和 token benefit evidence。第二 reference-agent baseline 暂不作为当前主线。
 ```
 
 恢复后不要立即做：
@@ -985,8 +1009,8 @@ course-08 到 course-12 已按执行链样板重写并复盘完成。
 ```text
 1. 不再补 starter seed；20/20 starter executable suite 已完成。
 2. 先读 production-upgrade-roadmap.md 和 production-upgrade-validation-matrix.md。
-3. 从 Core 24 继续，不跳到 Core 25/26。
-4. Core 24 先做 Durable Session Store + Replay。
+3. 从 Core 25 继续，不跳到 Core 26。
+4. Core 25 先做 Repo Intelligence + Relevance Index。
 5. 不要在没有对应 verify evidence 时声称生产级能力。
 ```
 
@@ -1057,6 +1081,8 @@ npm --prefix /Users/boyzcl/Documents/A/C run core:22
 npm --prefix /Users/boyzcl/Documents/A/C run core:22:verify
 npm --prefix /Users/boyzcl/Documents/A/C run core:23
 npm --prefix /Users/boyzcl/Documents/A/C run core:23:verify
+npm --prefix /Users/boyzcl/Documents/A/C run core:24
+npm --prefix /Users/boyzcl/Documents/A/C run core:24:verify
 npm --prefix /Users/boyzcl/Documents/A/C run verify:all
 ```
 
@@ -1099,8 +1125,9 @@ Core 20 plan state machine 已完成，step lifecycle / blocked / revision / res
 Core 21 long-running task eval 已完成，multi-turn repair / repeated failure / compaction resume / cost curve / no false final / learning handoff 均有 verify evidence。
 Core 22 tool runtime transaction 已完成，diff preview / multi-file commit / rollback / stale reread / protected file / high-risk Bash 均有 verify evidence。
 Core 23 model gateway budget controller 已完成，token/cost budget gate / retry / fallback / capability filtering / JSON repair 均有 verify evidence。
+Core 24 durable session replay 已完成，append-only event log / snapshot restore / crash recovery / trace replay / compaction audit / secret boundary 均有 verify evidence。
 Production Upgrade Roadmap Pass 已建立 Core 18-26 路线和验证矩阵。
-下一步实现 Core 24 Durable Session Store + Replay。
+下一步实现 Core 25 Repo Intelligence + Relevance Index。
 没有跨 agent 真实 runs 前不要生成 RelativeScore。
 不要把 Core 17 的本地示例价格表当作真实厂商账单。
 不要把 Core 18 的 cache simulation 当作真实 provider cache billing。
@@ -1109,4 +1136,5 @@ Production Upgrade Roadmap Pass 已建立 Core 18-26 路线和验证矩阵。
 不要把 Core 21 的 deterministic long-running eval 当作生产级长任务 benchmark。
 不要把 Core 22 的 deterministic transaction layer 当作完整生产级 ToolRuntime。
 不要把 Core 23 的 deterministic gateway budget controller 当作真实 provider SLA、真实厂商账单或完整生产级 provider router。
+不要把 Core 24 的 deterministic durable replay 当作分布式 durable storage、跨机器 session 产品或生产级 audit log。
 ```
