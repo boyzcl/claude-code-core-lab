@@ -231,14 +231,14 @@ Core 18-26 暂不承诺：
 
 ## 9. 下一步
 
-Core 21 已完成后，下一步进入：
+Core 22 已完成后，下一步进入：
 
 ```text
-Core 22: ToolRuntime Transaction + Patch Safety
+Core 23: Production ModelGateway + Budget Controller
 ```
 
-Core 22 的第一目标：
+Core 23 的第一目标：
 
 ```text
-让工具修改从单次 edit 升级为可预览、可回滚、可事务化的安全写入。
+让模型调用从单次 adapter 调用升级为有 token/cost budget gate、retry/fallback 和 provider capability registry 的可控网关。
 ```

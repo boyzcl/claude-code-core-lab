@@ -2,7 +2,7 @@
 
 运行日期：2026-05-27
 
-最后验证时间：2026-05-27 19:01 CST
+最后验证时间：2026-05-27 21:59 CST
 
 运行命令：
 
@@ -28,6 +28,7 @@ npm run core:18:verify
 npm run core:19:verify
 npm run core:20:verify
 npm run core:21:verify
+npm run core:22:verify
 npm run verify:all
 ```
 
@@ -57,6 +58,7 @@ core-18: 8/8 passed
 core-19: 9/9 passed
 core-20: 10/10 passed
 core-21: 8/8 passed
+core-22: 8/8 passed
 ```
 
 case：
@@ -304,6 +306,19 @@ learning handoff: summary explains continue, compact, resume, and cost
 boundary: long-running eval is local evidence, not production claim
 ```
 
+Core 22 case：
+
+```text
+core22: transaction demo runs and verifies
+diff preview: preview creates diff artifacts and does not write
+transaction commit: multi-file transaction writes only after commit
+rollback: simulated failure restores pre-transaction hashes
+stale reread: external change after read blocks preview
+protected file: protected API edit requires approval
+bash risk class: high-risk command is denied or sent to approval
+boundary: transaction layer is local evidence, not full ToolRuntime
+```
+
 ---
 
 ## 2. 全量验证结果
@@ -338,8 +353,9 @@ core-18: 8/8 passed
 core-19: 9/9 passed
 core-20: 10/10 passed
 core-21: 8/8 passed
+core-22: 8/8 passed
 
-total: 179/179 passed
+total: 187/187 passed
 exit code: 0
 ```
 
@@ -371,6 +387,7 @@ Core 18 可以让 Context Engine 输出 stable prefix、dynamic tail、eviction�
 Core 19 可以让 Compaction Quality Eval 机器对照目标、约束、失败、计划、文件和下一步动作，并把坏摘要归因为 compaction_loss。
 Core 20 可以让 Plan State Machine 追踪 step lifecycle、blocked reason、revision、compaction resume、permission 和 final grounding。
 Core 21 可以让 Long-Running Task Eval 记录多轮修复、重复失败、compaction resume、成本曲线、no false final 和学习交接摘要。
+Core 22 可以让 ToolRuntime 修改先生成 diff preview，再以多文件 transaction commit；失败时 rollback，stale/protected/high-risk 会被结构化拦截。
 ```
 
 它能在临时 toy workspace 中完成：
@@ -434,7 +451,9 @@ Core 20 已验证 pending -> active -> done、blocked reason、revision history�
 Core 20 的 Plan State Machine 是 deterministic local evidence，不是完整生产级人工审批系统。
 Core 21 已验证 7 轮 long-running repair、2 次失败 history、turn 5 compaction resume、per-turn cost curve、verification_missing false final 和 learning handoff。
 Core 21 的 Long-Running Task Eval 是 deterministic local evidence，不是生产级长任务 benchmark。
+Core 22 已验证 diff preview 不写文件、多文件 transaction commit、rollback、stale reread、protected file approval 和 high-risk Bash approval routing。
+Core 22 的 ToolRuntime Transaction 是 deterministic local evidence，不是完整生产级 ToolRuntime。
 README.md、AGENTS.md、docs/index.md 和 docs/authority-map.md 已形成最小开源入口。
 docs/authority-map.md 声明当前规则、历史背景和证据目录的边界。
-verify:all 已覆盖 core:21:verify。
+verify:all 已覆盖 core:22:verify。
 ```
