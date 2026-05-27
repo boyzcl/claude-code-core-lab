@@ -53,6 +53,8 @@ npm run core:17
 - `labs-verification-record.md`: Lab 验证记录。
 - `docs/index.md`: 开源文档导航。
 - `docs/authority-map.md`: 文档 authority 和冲突优先级。
+- `production-upgrade-roadmap.md`: Core 18-26 生产化升级路线。
+- `production-upgrade-validation-matrix.md`: Core 18-26 验证先行矩阵。
 
 ## Common Tasks
 
@@ -82,6 +84,8 @@ npm run core:17
 Start here:
 
 - `CURRENT_STATE.md`
+- `production-upgrade-roadmap.md`
+- `production-upgrade-validation-matrix.md`
 - `docs/index.md`
 - `docs/authority-map.md`
 
@@ -123,7 +127,7 @@ Core implementation records:
 
 ## Current Boundary
 
-Core 14 establishes executable repo seeds for all 20 Core 10 starter cases and brings cumulative executable starter coverage to 20/20. Core 15 records a small Codex local CLI reference-agent sample for 8 seeds, including repair, safety refusal, ambiguity refusal, and expected failed-verification outcomes. Core 16 adds a cost measurement basis and cross-agent readiness gate for those runs. Core 17 adds an explicit local pricing table baseline that produces configured USD estimates from the same evidence. This is not a Claude Code baseline, not a RelativeScore, not a real vendor bill, and not a production-level Claude Code 70%-80% capability claim. Horizontal comparison remains blocked until a second agent has real runs.
+Core 14 establishes executable repo seeds for all 20 Core 10 starter cases and brings cumulative executable starter coverage to 20/20. Core 15 records a small Codex local CLI reference-agent sample for 8 seeds, including repair, safety refusal, ambiguity refusal, and expected failed-verification outcomes. Core 16 adds a cost measurement basis and cross-agent readiness gate for those runs. Core 17 adds an explicit local pricing table baseline that produces configured USD estimates from the same evidence. The current roadmap shifts the next pass toward Core 18-26 production upgrades: context economy, compaction quality, plan state, long-running eval, tool transactions, model budget, durable replay, repo intelligence, and human approval. This is not a Claude Code baseline, not a RelativeScore, not a real vendor bill, and not a production-level Claude Code 70%-80% capability claim.
 
 ## Contributing
 

@@ -1,6 +1,6 @@
 # CURRENT_STATE：Claude Code Core 学习项目当前状态
 
-最后更新：2026-05-27 01:05 CST
+最后更新：2026-05-27 12:26 CST
 
 本文是新对话入口和当前状态单一事实源。它不替代课程、Lab、Core 文档，只回答：
 
@@ -118,6 +118,8 @@ Eval 如何证明能力真的变强。
 | `core-15-reference-agent-comparison.md` | 集成实现记录 | 证明本机 Codex CLI 可以作为第一阶段 reference-agent baseline 产生小样本真实对照证据 |
 | `core-16-reference-agent-cost-and-cross-agent.md` | 集成实现记录 | 证明 8 个 codex-local runs 已有 cost 计量口径，并明确横向对照仍被第二 agent baseline 阻塞 |
 | `core-17-reference-agent-pricing-table-baseline.md` | 集成实现记录 | 证明显式本地 pricing table 可以为 8 个 codex-local runs 生成 configured estimated USD，同时不声称真实厂商账单 |
+| `production-upgrade-roadmap.md` | 生产化升级总控 | Core 18-26 的路线、依赖、边界和统一完成定义 |
+| `production-upgrade-validation-matrix.md` | 验证矩阵 | Core 18-26 的验证先行口径和必过检查 |
 | `README.md` | 项目总入口 | 快速运行、文档导航和当前边界 |
 | `AGENTS.md` | Agent 控制入口 | Agent 工作规则、secret 边界和完成定义 |
 | `docs/index.md` | 文档索引 | 区分当前规则、历史和证据 |
@@ -169,10 +171,10 @@ course-06 中 Lab 到 Core 的映射问题已由学习者确认能回答。
 当前正在进行：
 
 ```text
-Second Reference-Agent Baseline 准备
+Production Upgrade Roadmap Pass
 ```
 
-它的目的不是继续补 starter seed 或扩写抽象架构，而是在 Core 17 已完成本地 pricing table baseline 之后，准备接入第二个 reference agent，对同一批 8 个 seeds 跑真实 runs。
+它的目的不是继续补 starter seed、扩写抽象架构，或优先依赖第二 reference agent，而是先把 Core 18-26 的生产化升级路线、依赖关系、边界和验证矩阵钉住，再逐个实现和学习。
 
 当前断点：
 
@@ -180,12 +182,14 @@ Second Reference-Agent Baseline 准备
 Core 15 Reference-Agent Comparison 已实现并通过目标验证。
 Core 16 Reference-Agent Cost + Cross-Agent 已实现并通过目标验证。
 Core 17 Reference-Agent Pricing Table Baseline 已实现并通过目标验证。
+Production Upgrade Roadmap Pass 已建立 Core 18-26 路线：Context Economy、Compaction Quality、Plan State Machine、Long-Running Eval、ToolRuntime Transaction、ModelGateway Budget、Durable Replay、Repo Intelligence、Human Approval。
 Core Build Pass 第一轮完成。
 Teaching Consolidation Pass 第一轮完成，course-07 到 course-12 已由学习者复盘通过。
 Eval Expansion Pass starter executable suite 完成，累计 20/20 starter case executable。
 Reference-Agent Comparison Pass 已完成第一批 Codex local CLI 小样本对照：8 个 executable seeds 有真实 run evidence，覆盖修复、失败归因、安全拒绝和歧义拒绝。
 Cost + Cross-Agent Pass 已补上 8 个 codex-local sample runs 的 cost 计量口径：token、cached token、uncached token、output token、reasoning output token、latency 和 raw log hash 都可汇总；没有 pricing table 时 USD 仍保持 null。横向对照当前结论是 single_baseline_only：本机只有 codex-local 有 recorded runs，未检测到 Claude Code / Claude / OpenCode / Aider / Cursor Agent / Gemini / Qwen / OpenAI CLI 的可用第二 baseline。没有第二 agent 真实 runs 前，不生成 RelativeScore。
 Pricing Table Baseline Pass 已给同一批 8 个 runs 接入显式本地示例价格表，total estimatedCostUsd=0.609534，averageEstimatedCostUsd=0.07619175；这不是厂商真实账单，也不是跨 agent RelativeScore。
+下一步进入 Core 18 Context Economy + Cache-Aware Context Engine，不再把第二 reference-agent baseline 作为当前主线。
 ```
 
 ---
@@ -293,6 +297,8 @@ core-14-eval-expansion-final-starter-batch.md
 core-15-reference-agent-comparison.md
 core-16-reference-agent-cost-and-cross-agent.md
 core-17-reference-agent-pricing-table-baseline.md
+production-upgrade-roadmap.md
+production-upgrade-validation-matrix.md
 README.md
 AGENTS.md
 docs/index.md
@@ -601,6 +607,17 @@ pricing table 不会创建第二 baseline，crossAgentReadiness.status 仍为 si
 RelativeScore 继续 blocked_until_second_agent_runs。
 ```
 
+Production Upgrade Roadmap Pass 已确认：
+
+```text
+Core 18-26 的生产化升级路线已经落到 production-upgrade-roadmap.md。
+Core 18-26 的验证先行口径已经落到 production-upgrade-validation-matrix.md。
+下一阶段主线从 second reference-agent baseline 调整为 Runtime 生产化升级。
+Core 18 到 Core 26 的顺序为 Context Economy、Compaction Quality Eval、Plan State Machine、Long-Running Task Eval、ToolRuntime Transaction、ModelGateway Budget、Durable Replay、Repo Intelligence、Human Approval。
+每个 Core 必须先有阶段文档、实现、verify 脚本、package 脚本、verify:all、CURRENT_STATE 和 run record 更新，才算完成。
+生产化升级仍不声称完整 Claude Code 复刻、生产级 70%-80% 能力认证或跨 agent RelativeScore。
+```
+
 ---
 
 ## 7. 最新验证结果
@@ -608,7 +625,7 @@ RelativeScore 继续 blocked_until_second_agent_runs。
 最后一次完整验证时间：
 
 ```text
-2026-05-27 01:05 CST
+2026-05-27 12:26 CST
 ```
 
 运行命令：
@@ -690,6 +707,7 @@ Core 10 到 Core 14 已完成 20/20 starter executable suite，但仍不是完�
 Core 15 已记录 8 个 codex-local CLI 小样本对照，但仍不是 Claude Code baseline，也不是跨 agent RelativeScore。
 Core 16 已完成横向对照 readiness 评估，但当前只有 codex-local 有 recorded runs，第二 agent baseline 尚未建立。
 Core 17 已接入本地显式 pricing table，并能生成 configured estimated USD；但它不是厂商真实账单，也不是跨 agent 成本对比。
+Core 18-26 仍未实现；当前只有路线和验证矩阵，不能把 Context / Plan / Compaction / Eval 等能力说成生产级。
 ```
 
 文档治理侧还缺：
@@ -698,6 +716,7 @@ Core 17 已接入本地显式 pricing table，并能生成 configured estimated 
 README + docs/index + authority-map 的最小入口层已经建立。
 历史文档还没有全量迁移或归档；当前只做了 bounded pilot。
 当前仍是学习工作区，不是最终开源版本。
+Production Upgrade Roadmap Pass 已建立路线入口，但未来每个 Core 完成后仍要同步 CURRENT_STATE、core-run-record、README、docs/index 和 authority-map。
 ```
 
 ---
@@ -707,30 +726,28 @@ README + docs/index + authority-map 的最小入口层已经建立。
 下一步只做一件事：
 
 ```text
-建立第二 reference-agent baseline。
+实现 Core 18 Context Economy + Cache-Aware Context Engine。
 ```
 
 推荐优先顺序：
 
 ```text
-1. 先安装或配置第二个可非交互运行的 coding agent。
-2. 对同一批 8 个 seeds 跑第二 agent 的真实 runs。
-3. 用同一 schema 对比 score、failureType、verificationStatus、latencyMs、token/cost basis、safety outcome 和 notes。
-4. 如果要把 Core 17 的本地示例价格表替换成真实价格，必须明确来源、模型、时间和价格表版本。
-5. 只有第二 agent 有真实 runs 后，才计算跨 agent RelativeScore。
+1. 先阅读 production-upgrade-roadmap.md 和 production-upgrade-validation-matrix.md 的 Core 18 条目。
+2. 新建 core-18-context-economy-cache-aware-context-engine.md，定义问题、机制、边界和验收。
+3. 实现 cache-aware context blocks、stable prefix、dynamic tail、token estimate、eviction reason 和 cache simulation。
+4. 编写 Core 18 verify，覆盖 stable prefix、dynamic tail、token budget、cache simulation、artifact boundary、latest failure 和 no prompt-only saving。
+5. 接入 package.json demo / verify，并跑 npm run verify:all。
 ```
 
 做完下一步后的预期结果：
 
 ```text
-如果接入第二 agent 并跑同一批 seeds：
-  得到真正的横向对照表，可以比较通过率、失败类型、延迟、token/cost 口径和安全结果。
-
-如果第二 agent 仍不可用：
-  保持 single_baseline_only，继续不生成 RelativeScore。
-
-如果只替换真实 pricing table：
-  得到更接近真实价格来源的 codex-local estimatedCostUsd，但仍没有横向 RelativeScore。
+得到一个能解释上下文经济性的 Context Engine：
+  每个 context block 有 id、kind、priority、volatility、contentHash、tokenEstimate、cacheEligible。
+  每轮能输出 selected / evicted reason。
+  稳定前缀和动态尾部可区分。
+  本地 cache simulation 能汇总 stablePrefixTokens、cacheHitTokens、cacheMissTokens、uncachedTailTokens 和 estimatedSavedTokens。
+  latest failure / verification state / active plan 在预算压力下仍保留。
 ```
 
 ---
@@ -765,6 +782,8 @@ core-14-eval-expansion-final-starter-batch.md
 core-15-reference-agent-comparison.md
 core-16-reference-agent-cost-and-cross-agent.md
 core-17-reference-agent-pricing-table-baseline.md
+production-upgrade-roadmap.md
+production-upgrade-validation-matrix.md
 README.md
 AGENTS.md
 docs/index.md
@@ -774,7 +793,7 @@ docs/authority-map.md
 然后告诉 Agent：
 
 ```text
-我们正在进行 Reference-Agent Comparison 后续决策。
+我们正在进行 Core 18-26 Production Upgrade Roadmap 后的逐阶段生产化升级。
 学习者已经理解 lab-01 到 lab-08，并完成 course-06。
 Core 02 Model Gateway 已经实现并通过验证。
 Core 03 Context Engine Integration 已经实现并通过目标验证。
@@ -792,9 +811,10 @@ Core 14 Eval Expansion Final Starter Batch 已经实现并通过目标验证。
 Core 15 Reference-Agent Comparison 已经实现并通过目标验证。
 Core 16 Reference-Agent Cost + Cross-Agent 已实现并通过目标验证。
 Core 17 Reference-Agent Pricing Table Baseline 已实现并通过目标验证。
+Production Upgrade Roadmap Pass 已建立 Core 18-26 路线和验证矩阵。
 course-07 Core Build Pass Overview 已创建并复盘完成。
 course-08 到 course-12 已按执行链样板重写并复盘完成。
-下一步进入第二 reference-agent baseline 准备；没有第二 agent 真实 runs 前不生成 RelativeScore。Core 17 的 estimated USD 来自本地显式示例价格表，不是厂商真实账单。
+下一步进入 Core 18 Context Economy + Cache-Aware Context Engine；先实现 token estimate、stable prefix、dynamic tail、cache simulation、eviction reason 和 hard-state preservation。第二 reference-agent baseline 暂不作为当前主线。
 ```
 
 恢复后不要立即做：
@@ -812,10 +832,10 @@ course-08 到 course-12 已按执行链样板重写并复盘完成。
 
 ```text
 1. 不再补 starter seed；20/20 starter executable suite 已完成。
-2. 先接入第二 reference agent 并跑同一批 8 个 seeds。
-3. 继续沿用 Core 17 的 pricing table schema 记录第二 agent 的 cost basis。
-4. 先不要继续扩 codex-local 样本，除非第二 baseline 已经跑通。
-5. 不要在没有跨 agent 真实 runs 时生成 RelativeScore。
+2. 先读 production-upgrade-roadmap.md 和 production-upgrade-validation-matrix.md。
+3. 从 Core 18 开始，不跳到 Core 22/23/24。
+4. Core 18 先做 Context Economy + Cache-Aware Context Engine。
+5. 不要在没有对应 verify evidence 时声称生产级能力。
 ```
 
 ---
@@ -896,7 +916,8 @@ UI 产品化
 ```text
 直接从真实 GPT 模型开始调。
 直接写完整 Agent。
-继续补 starter seed 或扩写开源包装，而不先做 reference-agent 对照。
+继续补 starter seed 或扩写开源包装。
+优先做第二 reference-agent baseline 而跳过 Core 18-26 生产化升级。
 继续扩写抽象架构文档。
 ```
 
@@ -908,7 +929,8 @@ Eval Expansion starter executable suite 已完成 20/20。
 Reference-Agent Comparison 已有 8 个 codex-local CLI sample runs。
 Core 16 cost basis 和 cross-agent readiness gate 已完成。
 Core 17 pricing table baseline 已完成，本地示例 total estimatedCostUsd=0.609534。
-下一步建立第二 reference-agent baseline。
+Production Upgrade Roadmap Pass 已建立 Core 18-26 路线和验证矩阵。
+下一步实现 Core 18 Context Economy + Cache-Aware Context Engine。
 没有跨 agent 真实 runs 前不要生成 RelativeScore。
 不要把 Core 17 的本地示例价格表当作真实厂商账单。
 ```

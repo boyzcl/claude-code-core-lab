@@ -7,11 +7,15 @@
 - `../README.md`: 项目总入口、快速运行和常用命令。
 - `../AGENTS.md`: Agent 工作控制入口。
 - `../CURRENT_STATE.md`: 当前断点、最新验证和下一步动作。
+- `../production-upgrade-roadmap.md`: Core 18-26 生产化升级路线。
+- `../production-upgrade-validation-matrix.md`: Core 18-26 验证先行矩阵。
 - `docs/authority-map.md`: 文档 authority、冲突优先级和证据边界。
 
 ## Current Rules
 
 - `../CURRENT_STATE.md`: 当前进度和下一步唯一事实源。
+- `../production-upgrade-roadmap.md`: Core 18-26 生产化升级路线、依赖、边界和统一完成定义。
+- `../production-upgrade-validation-matrix.md`: Core 18-26 验证口径和必过检查。
 - `../claude-code-core-learning-path.md`: 学习路线、阶段定义、命名规则。
 - `../course-00-teaching-standard.md`: 教学展开标准。
 - `../AGENTS.md`: Agent 操作边界和完成定义。
@@ -51,6 +55,11 @@
 - `../core-15-reference-agent-comparison.md`
 - `../core-16-reference-agent-cost-and-cross-agent.md`
 - `../core-17-reference-agent-pricing-table-baseline.md`
+
+## Production Upgrade
+
+- `../production-upgrade-roadmap.md`
+- `../production-upgrade-validation-matrix.md`
 
 ## Lab Evidence
 
