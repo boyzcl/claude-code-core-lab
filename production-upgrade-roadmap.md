@@ -231,26 +231,33 @@ Core 18-26 暂不承诺：
 
 ## 9. 当前进度和下一步
 
-Core 25 已完成 deterministic local verification：
+Core 26 已完成 deterministic local verification：
 
 ```text
-repo map
-symbol index
-test index
-rule discovery
-relevance scoring
-incremental update
-token benefit
+high-risk approval_required
+approve path
+reject path
+interruption
+handoff
+no hidden execution
 ```
 
-下一步进入：
+Core 18-26 Production Upgrade Roadmap Pass 已完成当前 deterministic local evidence 主线：
 
 ```text
-Core 26: Human Approval + Interruption Protocol
+Core 18 Context Economy + Cache-Aware Context Engine
+Core 19 Compaction Quality Eval
+Core 20 Plan State Machine
+Core 21 Long-Running Task Eval
+Core 22 ToolRuntime Transaction + Patch Safety
+Core 23 Production ModelGateway + Budget Controller
+Core 24 Durable Session Store + Replay
+Core 25 Repo Intelligence + Relevance Index
+Core 26 Human Approval + Interruption Protocol
 ```
 
-Core 26 的第一目标：
+下一步可以进入：
 
 ```text
-让高风险动作、用户审批、拒绝、打断、需求变化和 handoff 进入可 replay 的 Runtime 状态。
+复盘 Core 18-26 证据链，并选择下一条路线：真实 repo benchmark、第二 reference-agent baseline，或更完整的 approval / policy 产品层。
 ```

@@ -1,6 +1,6 @@
 # CURRENT_STATE：Claude Code Core 学习项目当前状态
 
-最后更新：2026-05-28 00:47 CST
+最后更新：2026-05-28 00:57 CST
 
 本文是新对话入口和当前状态单一事实源。它不替代课程、Lab、Core 文档，只回答：
 
@@ -126,6 +126,7 @@ Eval 如何证明能力真的变强。
 | `core-23-model-gateway-budget-controller.md` | 集成实现记录 | 证明 ModelGateway 可以在 provider 调用前执行 token/cost budget gate，并记录 retry/fallback、capability filtering 和 output repair evidence |
 | `core-24-durable-session-store-replay.md` | 集成实现记录 | 证明 Durable Session Store 可以记录 append-only event log、snapshot restore、crash recovery、trace replay、compaction audit 和 secret boundary evidence |
 | `core-25-repo-intelligence-relevance-index.md` | 集成实现记录 | 证明 Repo Intelligence 可以记录 repo map、symbol/test/rule index、relevance scoring、incremental update 和 token benefit evidence |
+| `core-26-human-approval-interruption-protocol.md` | 集成实现记录 | 证明 Human Approval Protocol 可以记录 approval_required、approve/reject path、interruption、handoff 和 no hidden execution evidence |
 | `production-upgrade-roadmap.md` | 生产化升级总控 | Core 18-26 的路线、依赖、边界和统一完成定义 |
 | `production-upgrade-validation-matrix.md` | 验证矩阵 | Core 18-26 的验证先行口径和必过检查 |
 | `README.md` | 项目总入口 | 快速运行、文档导航和当前边界 |
@@ -198,6 +199,7 @@ Core 22 ToolRuntime Transaction + Patch Safety 已实现并通过目标验证。
 Core 23 Production ModelGateway + Budget Controller 已实现并通过目标验证。
 Core 24 Durable Session Store + Replay 已实现并通过目标验证。
 Core 25 Repo Intelligence + Relevance Index 已实现并通过目标验证。
+Core 26 Human Approval + Interruption Protocol 已实现并通过目标验证。
 Production Upgrade Roadmap Pass 已建立 Core 18-26 路线：Context Economy、Compaction Quality、Plan State Machine、Long-Running Eval、ToolRuntime Transaction、ModelGateway Budget、Durable Replay、Repo Intelligence、Human Approval。
 Core Build Pass 第一轮完成。
 Teaching Consolidation Pass 第一轮完成，course-07 到 course-12 已由学习者复盘通过。
@@ -213,7 +215,8 @@ ToolRuntime Transaction Pass 已建立 patch safety 事务层：diff preview、m
 ModelGateway Budget Controller Pass 已建立模型调用预算层：token/cost budget gate、retry/fallback、provider capability registry 和 schema-bound JSON repair 均有 verify evidence。
 Durable Session Store Replay Pass 已建立本地可恢复事实流：append-only event log、snapshot restore、crash recovery、trace replay、compaction audit 和 secret boundary 均有 verify evidence。
 Repo Intelligence Relevance Pass 已建立本地 repo-aware relevance 层：repo map、symbol/test/rule index、relevance scoring、incremental update 和 token benefit 均有 verify evidence。
-下一步进入 Core 26 Human Approval + Interruption Protocol，不再把第二 reference-agent baseline 作为当前主线。
+Human Approval Interruption Pass 已建立本地人类协作协议层：approval_required、approve path、reject path、interruption、handoff 和 no hidden execution 均有 verify evidence。
+Core 18-26 Production Upgrade Roadmap Pass 已完成当前 deterministic local evidence 主线；第二 reference-agent baseline 仍不作为当前已完成项。
 ```
 
 ---
@@ -282,6 +285,7 @@ src/core/tool-runtime-transaction.mjs
 src/core/model-gateway-budget-controller.mjs
 src/core/durable-session-store-replay.mjs
 src/core/repo-intelligence-relevance-index.mjs
+src/core/human-approval-interruption-protocol.mjs
 ```
 
 验证层：
@@ -315,6 +319,7 @@ src/core/tool-runtime-transaction.verify.mjs
 src/core/model-gateway-budget-controller.verify.mjs
 src/core/durable-session-store-replay.verify.mjs
 src/core/repo-intelligence-relevance-index.verify.mjs
+src/core/human-approval-interruption-protocol.verify.mjs
 ```
 
 集成层：
@@ -345,6 +350,7 @@ core-22-tool-runtime-transaction.md
 core-23-model-gateway-budget-controller.md
 core-24-durable-session-store-replay.md
 core-25-repo-intelligence-relevance-index.md
+core-26-human-approval-interruption-protocol.md
 production-upgrade-roadmap.md
 production-upgrade-validation-matrix.md
 README.md
@@ -401,6 +407,8 @@ src/core/durable-session-store-replay.mjs
 src/core/durable-session-store-replay.verify.mjs
 src/core/repo-intelligence-relevance-index.mjs
 src/core/repo-intelligence-relevance-index.verify.mjs
+src/core/human-approval-interruption-protocol.mjs
+src/core/human-approval-interruption-protocol.verify.mjs
 ```
 
 ---
@@ -778,6 +786,19 @@ token benefit 对比证明 indexed context 用更少 token 选中正确实现、
 这只是 deterministic local repo index evidence，不是完整语义 embedding 检索、任意超大仓库生产级索引或真实 IDE / LSP 全量符号能力。
 ```
 
+Core 26 已确认：
+
+```text
+HumanApprovalInterruptionProtocol 可以把 protected edit 和 high-risk Bash 分类为 approval_required，并写入 durable session events。
+approve path 会先写入 approval.approved，再执行 tool.executed，并留下 runtimeTrace。
+reject path 会写入 approval.rejected，不执行被拒绝动作，并生成 plan revision。
+用户 interruption 会 pause 当前 active step，写入 session.interrupted 和 constraint.added，并生成 revised plan。
+handoff artifact 会记录 sessionId、lastEventSeq、activePlan、pendingApprovals、constraints、pendingActions 和 recoveryInstructions。
+assertNoHiddenExecution 会扫描 event log，确认 approvalRequired tool.executed 必须有更早 approval.approved。
+构造隐藏执行坏事件会被 verify 拒绝。
+这只是 deterministic local approval protocol evidence，不是完整 GUI approval 产品、enterprise policy 系统或真实多人协作权限模型。
+```
+
 Production Upgrade Roadmap Pass 已确认：
 
 ```text
@@ -796,7 +817,7 @@ Core 18 到 Core 26 的顺序为 Context Economy、Compaction Quality Eval、Pla
 最后一次完整验证时间：
 
 ```text
-2026-05-28 00:47 CST
+2026-05-28 00:57 CST
 ```
 
 运行命令：
@@ -841,15 +862,16 @@ core-22: 8/8 passed
 core-23: 9/9 passed
 core-24: 8/8 passed
 core-25: 9/9 passed
+core-26: 9/9 passed
 
-total: 213/213 passed
+total: 222/222 passed
 exit code: 0
 ```
 
 这证明：
 
 ```text
-当前 Lab 机制、Core 01 集成链路、Core 02 Model Gateway 边界、Core 03 Context Engine 集成链路、Core 04 Plan Mode 权限链路、Core 05 Compaction / Artifact 链路、Core 06 Trace / Eval Harness 链路、Core 07 Real Model API E2E 链路、Core 08 Prompt Pack / Recovery Loop 链路、Core 09 Real Repo Task Layer 链路、Core 10 Eval / Open Source Packaging 链路、Core 11 第一批 executable seed 链路、Core 12 第二批 executable seed 链路、Core 13 第三批 executable seed 链路、Core 14 final starter batch 链路、Core 15 codex-local reference comparison 链路、Core 16 reference-agent cost/cross-agent readiness 链路、Core 17 pricing table baseline 链路、Core 18 context economy/cache-aware context 链路、Core 19 compaction quality eval 链路、Core 20 plan state machine 链路、Core 21 long-running task eval 链路、Core 22 tool runtime transaction 链路、Core 23 model gateway budget controller 链路、Core 24 durable session replay 链路和 Core 25 repo intelligence relevance 链路都可运行。
+当前 Lab 机制、Core 01 集成链路、Core 02 Model Gateway 边界、Core 03 Context Engine 集成链路、Core 04 Plan Mode 权限链路、Core 05 Compaction / Artifact 链路、Core 06 Trace / Eval Harness 链路、Core 07 Real Model API E2E 链路、Core 08 Prompt Pack / Recovery Loop 链路、Core 09 Real Repo Task Layer 链路、Core 10 Eval / Open Source Packaging 链路、Core 11 第一批 executable seed 链路、Core 12 第二批 executable seed 链路、Core 13 第三批 executable seed 链路、Core 14 final starter batch 链路、Core 15 codex-local reference comparison 链路、Core 16 reference-agent cost/cross-agent readiness 链路、Core 17 pricing table baseline 链路、Core 18 context economy/cache-aware context 链路、Core 19 compaction quality eval 链路、Core 20 plan state machine 链路、Core 21 long-running task eval 链路、Core 22 tool runtime transaction 链路、Core 23 model gateway budget controller 链路、Core 24 durable session replay 链路、Core 25 repo intelligence relevance 链路和 Core 26 human approval interruption 链路都可运行。
 ```
 
 Core 07 live 另已确认：
@@ -894,7 +916,8 @@ Core 22 已实现 deterministic tool runtime transaction；但它不是完整生
 Core 23 已实现 deterministic model gateway budget controller；但它不是真实 provider SLA、真实厂商账单，也不是完整生产级 provider router。
 Core 24 已实现 deterministic durable session replay；但它不是分布式 durable storage、跨机器 session 产品或生产级 audit log。
 Core 25 已实现 deterministic repo intelligence relevance index；但它不是完整语义 embedding 检索、任意超大仓库生产级索引或真实 IDE / LSP 全量符号能力。
-Core 26 仍未实现；当前只有路线和验证矩阵，不能把 Human Approval 能力说成生产级。
+Core 26 已实现 deterministic human approval interruption protocol；但它不是完整 GUI approval 产品、enterprise policy 系统或真实多人协作权限模型。
+Core 18-26 已完成 deterministic local evidence 主线；但仍不能声称完整 Claude Code 生产能力、任意真实仓库 70%-80% 成功率或跨 agent RelativeScore。
 ```
 
 文档治理侧还缺：
@@ -913,29 +936,25 @@ Production Upgrade Roadmap Pass 已建立路线入口，但未来每个 Core 完
 下一步只做一件事：
 
 ```text
-实现 Core 26 Human Approval + Interruption Protocol。
+复盘 Core 18-26 的 deterministic local evidence 链，并选择下一条路线。
 ```
 
 推荐优先顺序：
 
 ```text
-1. 先阅读 production-upgrade-roadmap.md 和 production-upgrade-validation-matrix.md 的 Core 26 条目。
-2. 新建 core-26-human-approval-interruption-protocol.md，定义问题、机制、边界和验收。
-3. 实现 high-risk approval、approve path、reject path、interruption、handoff 和 no hidden execution 的 deterministic evidence。
-4. 编写 Core 26 verify，覆盖 approval_required、批准继续、拒绝修订计划、用户打断、新约束、handoff artifact 和审批前不执行。
-5. 接入 package.json demo / verify，并跑 npm run verify:all。
+1. 先阅读 production-upgrade-roadmap.md 的当前进度和 Core 18-26 stage docs。
+2. 对照 production-upgrade-validation-matrix.md，确认每个 Core 的必过验证都已有对应 verify evidence。
+3. 选择下一条路线：真实 repo benchmark、第二 reference-agent baseline，或更完整的 approval / policy 产品层。
+4. 新路线开始前，先写新的 roadmap / validation matrix，不直接把当前 deterministic local evidence 扩写成生产级声明。
 ```
 
 做完下一步后的预期结果：
 
 ```text
-得到一个 human collaboration protocol evidence layer：
-  高风险 Bash / protected edit 进入 approval_required。
-  用户批准后继续执行，并留下 runtime trace。
-  用户拒绝后不执行，并生成 plan revision。
-  用户打断会 pause 当前 step，并把新约束写入 session event。
-  未完成任务可以输出可恢复 handoff artifact。
-  审批前工具执行会被 policy assertion 拦截。
+得到一个新的阶段路线入口：
+  明确下一阶段要证明真实 repo benchmark、第二 reference-agent baseline，还是 approval / policy 产品层。
+  明确哪些证据属于 deterministic local evidence，哪些需要真实外部对照。
+  继续避免生产级能力声明漂移。
 ```
 
 ---
@@ -978,6 +997,7 @@ core-22-tool-runtime-transaction.md
 core-23-model-gateway-budget-controller.md
 core-24-durable-session-store-replay.md
 core-25-repo-intelligence-relevance-index.md
+core-26-human-approval-interruption-protocol.md
 production-upgrade-roadmap.md
 production-upgrade-validation-matrix.md
 README.md
@@ -989,7 +1009,7 @@ docs/authority-map.md
 然后告诉 Agent：
 
 ```text
-我们正在进行 Core 18-26 Production Upgrade Roadmap 后的逐阶段生产化升级。
+Core 18-26 Production Upgrade Roadmap 后的逐阶段生产化升级已完成当前 deterministic local evidence 主线。
 学习者已经理解 lab-01 到 lab-08，并完成 course-06。
 Core 02 Model Gateway 已经实现并通过验证。
 Core 03 Context Engine Integration 已经实现并通过目标验证。
@@ -1015,10 +1035,11 @@ Core 22 ToolRuntime Transaction + Patch Safety 已实现并通过目标验证。
 Core 23 Production ModelGateway + Budget Controller 已实现并通过目标验证。
 Core 24 Durable Session Store + Replay 已实现并通过目标验证。
 Core 25 Repo Intelligence + Relevance Index 已实现并通过目标验证。
+Core 26 Human Approval + Interruption Protocol 已实现并通过目标验证。
 Production Upgrade Roadmap Pass 已建立 Core 18-26 路线和验证矩阵。
 course-07 Core Build Pass Overview 已创建并复盘完成。
 course-08 到 course-12 已按执行链样板重写并复盘完成。
-下一步进入 Core 26 Human Approval + Interruption Protocol；先实现 approval state、approve/reject path、interruption handling、plan revision、handoff artifact 和 no hidden execution evidence。第二 reference-agent baseline 暂不作为当前主线。
+Core 18-26 Production Upgrade Roadmap Pass 已完成当前 deterministic local evidence 主线。下一步先复盘证据链并选择新路线：真实 repo benchmark、第二 reference-agent baseline，或更完整的 approval / policy 产品层。
 ```
 
 恢复后不要立即做：
@@ -1037,9 +1058,9 @@ course-08 到 course-12 已按执行链样板重写并复盘完成。
 ```text
 1. 不再补 starter seed；20/20 starter executable suite 已完成。
 2. 先读 production-upgrade-roadmap.md 和 production-upgrade-validation-matrix.md。
-3. 从 Core 26 继续，不跳过 Human Approval + Interruption Protocol。
-4. Core 26 先做 approval state、interrupt handling、plan revision 和 handoff protocol。
-5. 不要在没有对应 verify evidence 时声称生产级能力。
+3. 不要把 Core 18-26 的 deterministic local evidence 扩写成生产级 Claude Code 能力声明。
+4. 下一阶段开始前，先写清新的 roadmap / validation matrix。
+5. 不要在没有真实外部对照或更大 benchmark 时声称 70%-80% 成功率、真实 provider SLA 或跨 agent RelativeScore。
 ```
 
 ---
@@ -1113,6 +1134,8 @@ npm --prefix /Users/boyzcl/Documents/A/C run core:24
 npm --prefix /Users/boyzcl/Documents/A/C run core:24:verify
 npm --prefix /Users/boyzcl/Documents/A/C run core:25
 npm --prefix /Users/boyzcl/Documents/A/C run core:25:verify
+npm --prefix /Users/boyzcl/Documents/A/C run core:26
+npm --prefix /Users/boyzcl/Documents/A/C run core:26:verify
 npm --prefix /Users/boyzcl/Documents/A/C run verify:all
 ```
 
@@ -1157,8 +1180,9 @@ Core 22 tool runtime transaction 已完成，diff preview / multi-file commit / 
 Core 23 model gateway budget controller 已完成，token/cost budget gate / retry / fallback / capability filtering / JSON repair 均有 verify evidence。
 Core 24 durable session replay 已完成，append-only event log / snapshot restore / crash recovery / trace replay / compaction audit / secret boundary 均有 verify evidence。
 Core 25 repo intelligence relevance index 已完成，repo map / symbol index / test index / rule discovery / relevance scoring / incremental update / token benefit 均有 verify evidence。
+Core 26 human approval interruption protocol 已完成，approval_required / approve path / reject path / interruption / handoff / no hidden execution 均有 verify evidence。
 Production Upgrade Roadmap Pass 已建立 Core 18-26 路线和验证矩阵。
-下一步实现 Core 26 Human Approval + Interruption Protocol。
+Core 18-26 Production Upgrade Roadmap Pass 当前实现主线已完成。
 没有跨 agent 真实 runs 前不要生成 RelativeScore。
 不要把 Core 17 的本地示例价格表当作真实厂商账单。
 不要把 Core 18 的 cache simulation 当作真实 provider cache billing。
@@ -1169,4 +1193,5 @@ Production Upgrade Roadmap Pass 已建立 Core 18-26 路线和验证矩阵。
 不要把 Core 23 的 deterministic gateway budget controller 当作真实 provider SLA、真实厂商账单或完整生产级 provider router。
 不要把 Core 24 的 deterministic durable replay 当作分布式 durable storage、跨机器 session 产品或生产级 audit log。
 不要把 Core 25 的 deterministic repo index 当作完整语义 embedding 检索、任意超大仓库生产级索引或真实 IDE / LSP 全量符号能力。
+不要把 Core 26 的 deterministic approval protocol 当作完整 GUI approval 产品、enterprise policy 系统或真实多人协作权限模型。
 ```

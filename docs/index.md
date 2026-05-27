@@ -63,6 +63,7 @@
 - `../core-23-model-gateway-budget-controller.md`
 - `../core-24-durable-session-store-replay.md`
 - `../core-25-repo-intelligence-relevance-index.md`
+- `../core-26-human-approval-interruption-protocol.md`
 
 ## Production Upgrade
 
