@@ -2,7 +2,7 @@
 
 运行日期：2026-05-27
 
-最后验证时间：2026-05-27 21:59 CST
+最后验证时间：2026-05-27 22:15 CST
 
 运行命令：
 
@@ -29,6 +29,7 @@ npm run core:19:verify
 npm run core:20:verify
 npm run core:21:verify
 npm run core:22:verify
+npm run core:23:verify
 npm run verify:all
 ```
 
@@ -59,6 +60,7 @@ core-19: 9/9 passed
 core-20: 10/10 passed
 core-21: 8/8 passed
 core-22: 8/8 passed
+core-23: 9/9 passed
 ```
 
 case：
@@ -319,6 +321,20 @@ bash risk class: high-risk command is denied or sent to approval
 boundary: transaction layer is local evidence, not full ToolRuntime
 ```
 
+Core 23 case：
+
+```text
+core23: budgeted gateway demo runs and verifies
+token budget gate: oversized request is blocked before provider call
+cost budget gate: expensive primary is skipped for cheaper fallback
+retryable failure: mock rate limit and timeout are retried
+non-retryable failure: invalid tool schema is not retried
+fallback: primary failover uses fallback provider
+capability registry: unsupported tools and streaming are not exposed
+output repair boundary: repairable JSON becomes schema-valid tool call
+boundary: gateway budget evidence is local and not production claim
+```
+
 ---
 
 ## 2. 全量验证结果
@@ -354,8 +370,9 @@ core-19: 9/9 passed
 core-20: 10/10 passed
 core-21: 8/8 passed
 core-22: 8/8 passed
+core-23: 9/9 passed
 
-total: 187/187 passed
+total: 196/196 passed
 exit code: 0
 ```
 
@@ -388,6 +405,7 @@ Core 19 可以让 Compaction Quality Eval 机器对照目标、约束、失败�
 Core 20 可以让 Plan State Machine 追踪 step lifecycle、blocked reason、revision、compaction resume、permission 和 final grounding。
 Core 21 可以让 Long-Running Task Eval 记录多轮修复、重复失败、compaction resume、成本曲线、no false final 和学习交接摘要。
 Core 22 可以让 ToolRuntime 修改先生成 diff preview，再以多文件 transaction commit；失败时 rollback，stale/protected/high-risk 会被结构化拦截。
+Core 23 可以让 ModelGateway 在 provider 调用前执行 token/cost budget gate，并留下 retry/fallback、capability registry 和 output repair 证据。
 ```
 
 它能在临时 toy workspace 中完成：
@@ -453,7 +471,9 @@ Core 21 已验证 7 轮 long-running repair、2 次失败 history、turn 5 compa
 Core 21 的 Long-Running Task Eval 是 deterministic local evidence，不是生产级长任务 benchmark。
 Core 22 已验证 diff preview 不写文件、多文件 transaction commit、rollback、stale reread、protected file approval 和 high-risk Bash approval routing。
 Core 22 的 ToolRuntime Transaction 是 deterministic local evidence，不是完整生产级 ToolRuntime。
+Core 23 已验证 token budget preflight、cost downgrade、retryable failure retry、non-retryable failure no-retry、fallback provider、capability registry filtering 和 schema-bound JSON repair。
+Core 23 的 ModelGateway Budget Controller 是 deterministic local evidence，不是真实 provider SLA、真实厂商账单或完整生产级 provider router。
 README.md、AGENTS.md、docs/index.md 和 docs/authority-map.md 已形成最小开源入口。
 docs/authority-map.md 声明当前规则、历史背景和证据目录的边界。
-verify:all 已覆盖 core:22:verify。
+verify:all 已覆盖 core:23:verify。
 ```

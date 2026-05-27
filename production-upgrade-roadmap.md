@@ -229,16 +229,25 @@ Core 18-26 暂不承诺：
 
 ---
 
-## 9. 下一步
+## 9. 当前进度和下一步
 
-Core 22 已完成后，下一步进入：
+Core 23 已完成 deterministic local verification：
 
 ```text
-Core 23: Production ModelGateway + Budget Controller
+token/cost budget gate
+retry/fallback
+provider capability registry
+schema-bound JSON tool_call repair
 ```
 
-Core 23 的第一目标：
+下一步进入：
 
 ```text
-让模型调用从单次 adapter 调用升级为有 token/cost budget gate、retry/fallback 和 provider capability registry 的可控网关。
+Core 24: Durable Session Store + Replay
+```
+
+Core 24 的第一目标：
+
+```text
+让 session 从内存状态升级为 append-only event log、snapshot restore、trace replay 和 secret-safe recovery evidence。
 ```

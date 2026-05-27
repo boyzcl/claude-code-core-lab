@@ -60,6 +60,7 @@
 - `../core-20-plan-state-machine.md`
 - `../core-21-long-running-task-eval.md`
 - `../core-22-tool-runtime-transaction.md`
+- `../core-23-model-gateway-budget-controller.md`
 
 ## Production Upgrade
 
