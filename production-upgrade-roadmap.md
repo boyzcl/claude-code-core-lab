@@ -231,14 +231,14 @@ Core 18-26 暂不承诺：
 
 ## 9. 下一步
 
-路线文档和验证矩阵建立后，下一步进入：
+Core 18 已完成后，下一步进入：
 
 ```text
-Core 18: Context Economy + Cache-Aware Context Engine
+Core 19: Compaction Quality Eval
 ```
 
-Core 18 的第一目标：
+Core 19 的第一目标：
 
 ```text
-让 Context Engine 解释每一块上下文为什么入选、为什么被裁剪、估计花了多少 token、哪些前缀可缓存、哪些 token 可命中缓存。
+让 Compaction 从普通摘要升级为可验证的状态保真转换，能机器对照目标、约束、失败、计划、文件和下一步动作。
 ```
