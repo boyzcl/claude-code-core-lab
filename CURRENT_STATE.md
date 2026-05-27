@@ -1,6 +1,6 @@
 # CURRENT_STATE：Claude Code Core 学习项目当前状态
 
-最后更新：2026-05-27 17:56 CST
+最后更新：2026-05-27 19:01 CST
 
 本文是新对话入口和当前状态单一事实源。它不替代课程、Lab、Core 文档，只回答：
 
@@ -121,6 +121,7 @@ Eval 如何证明能力真的变强。
 | `core-18-context-economy-cache-aware-context-engine.md` | 集成实现记录 | 证明 Context Economy Engine 可以输出 stable prefix、dynamic tail、eviction、artifact 和 cache simulation 证据 |
 | `core-19-compaction-quality-eval.md` | 集成实现记录 | 证明 Compaction Quality Eval 可以机器对照压缩前后状态并识别 compaction_loss |
 | `core-20-plan-state-machine.md` | 集成实现记录 | 证明 Plan State Machine 可以追踪 step lifecycle、blocked、revision、resume、permission 和 final grounding |
+| `core-21-long-running-task-eval.md` | 集成实现记录 | 证明 Long-Running Task Eval 可以评估多轮修复、重复失败、压缩恢复、成本曲线和 no false final |
 | `production-upgrade-roadmap.md` | 生产化升级总控 | Core 18-26 的路线、依赖、边界和统一完成定义 |
 | `production-upgrade-validation-matrix.md` | 验证矩阵 | Core 18-26 的验证先行口径和必过检查 |
 | `README.md` | 项目总入口 | 快速运行、文档导航和当前边界 |
@@ -141,7 +142,7 @@ Eval 如何证明能力真的变强。
 学习顺序 / 命名规则：claude-code-core-learning-path.md
 课程正文：对应 course-XX 文档
 实验机制：对应 lab-XX 文档和 src/labXX 代码
-集成行为：core-01-integrated-runtime.md、core-02-model-gateway.md、core-03-context-engine-integration.md、core-04-plan-mode-integration.md、core-05-compaction-artifact-integration.md、core-06-trace-eval-harness-expansion.md、core-07-real-model-api-e2e.md、core-08-prompt-pack-recovery-loop.md、core-09-real-repo-task-layer.md、core-10-70-80-eval-open-source-packaging.md、core-11-eval-expansion-executable-seeds.md、core-12-eval-expansion-second-batch.md、core-13-eval-expansion-third-batch.md、core-14-eval-expansion-final-starter-batch.md、core-15-reference-agent-comparison.md、core-16-reference-agent-cost-and-cross-agent.md、core-17-reference-agent-pricing-table-baseline.md、core-18-context-economy-cache-aware-context-engine.md、core-19-compaction-quality-eval.md、core-20-plan-state-machine.md 和 src/core 代码
+集成行为：core-01-integrated-runtime.md、core-02-model-gateway.md、core-03-context-engine-integration.md、core-04-plan-mode-integration.md、core-05-compaction-artifact-integration.md、core-06-trace-eval-harness-expansion.md、core-07-real-model-api-e2e.md、core-08-prompt-pack-recovery-loop.md、core-09-real-repo-task-layer.md、core-10-70-80-eval-open-source-packaging.md、core-11-eval-expansion-executable-seeds.md、core-12-eval-expansion-second-batch.md、core-13-eval-expansion-third-batch.md、core-14-eval-expansion-final-starter-batch.md、core-15-reference-agent-comparison.md、core-16-reference-agent-cost-and-cross-agent.md、core-17-reference-agent-pricing-table-baseline.md、core-18-context-economy-cache-aware-context-engine.md、core-19-compaction-quality-eval.md、core-20-plan-state-machine.md、core-21-long-running-task-eval.md 和 src/core 代码
 历史观点：两篇原始分析文章只作背景材料
 ```
 
@@ -188,6 +189,7 @@ Core 17 Reference-Agent Pricing Table Baseline 已实现并通过目标验证。
 Core 18 Context Economy + Cache-Aware Context Engine 已实现并通过目标验证。
 Core 19 Compaction Quality Eval 已实现并通过目标验证。
 Core 20 Plan State Machine 已实现并通过目标验证。
+Core 21 Long-Running Task Eval 已实现并通过目标验证。
 Production Upgrade Roadmap Pass 已建立 Core 18-26 路线：Context Economy、Compaction Quality、Plan State Machine、Long-Running Eval、ToolRuntime Transaction、ModelGateway Budget、Durable Replay、Repo Intelligence、Human Approval。
 Core Build Pass 第一轮完成。
 Teaching Consolidation Pass 第一轮完成，course-07 到 course-12 已由学习者复盘通过。
@@ -198,7 +200,8 @@ Pricing Table Baseline Pass 已给同一批 8 个 runs 接入显式本地示例�
 Context Economy Pass 已建立 cache-aware context report：stable prefix、dynamic tail、token budget eviction、artifact boundary、cache simulation 和 no prompt-only saving 均有 verify evidence。
 Compaction Quality Pass 已建立 compaction 前后机器对照：objective、constraints、failure、plan、modified files、pending actions 和 bad summary compaction_loss 均有 verify evidence。
 Plan State Machine Pass 已建立 step-level plan lifecycle：pending -> active -> done、blocked reason、revision history、compaction resume、permission denial 和 final grounding 均有 verify evidence。
-下一步进入 Core 21 Long-Running Task Eval，不再把第二 reference-agent baseline 作为当前主线。
+Long-Running Task Eval Pass 已建立 7 轮长任务压力场：multi-turn repair、repeated failure history、compaction resume、per-turn cost curve、verification_missing false final 和 learning handoff 均有 verify evidence。
+下一步进入 Core 22 ToolRuntime Transaction + Patch Safety，不再把第二 reference-agent baseline 作为当前主线。
 ```
 
 ---
@@ -262,6 +265,7 @@ src/core/reference-agent-pricing-table-baseline.mjs
 src/core/context-economy.mjs
 src/core/compaction-quality.mjs
 src/core/plan-state-machine.mjs
+src/core/long-running-task-eval.mjs
 ```
 
 验证层：
@@ -290,6 +294,7 @@ src/core/reference-agent-pricing-table-baseline.verify.mjs
 src/core/context-economy.verify.mjs
 src/core/compaction-quality.verify.mjs
 src/core/plan-state-machine.verify.mjs
+src/core/long-running-task-eval.verify.mjs
 ```
 
 集成层：
@@ -315,6 +320,7 @@ core-17-reference-agent-pricing-table-baseline.md
 core-18-context-economy-cache-aware-context-engine.md
 core-19-compaction-quality-eval.md
 core-20-plan-state-machine.md
+core-21-long-running-task-eval.md
 production-upgrade-roadmap.md
 production-upgrade-validation-matrix.md
 README.md
@@ -361,6 +367,8 @@ src/core/compaction-quality.mjs
 src/core/compaction-quality.verify.mjs
 src/core/plan-state-machine.mjs
 src/core/plan-state-machine.verify.mjs
+src/core/long-running-task-eval.mjs
+src/core/long-running-task-eval.verify.mjs
 ```
 
 ---
@@ -672,6 +680,19 @@ final answer 前会检查所有 steps 已 done 且 verificationState.status=pass
 这只是 deterministic local state machine，不是完整生产级人工审批系统，也不是生产级 Claude Code 能力认证。
 ```
 
+Core 21 已确认：
+
+```text
+Long-Running Task Eval 可以输出 version、status、score、turns、failureHistory、compactionEvents、costCurve、learningHandoff 和 boundary。
+7 轮 deterministic long-running repair 会保持状态连续，并最终以 passed verification 收束。
+连续两次 failed verification 会进入 failureHistory，并记录 nextAction 和 influencedNextAction。
+第 5 轮 compaction 会经过 Core 19 quality eval，active step 保留并恢复为 resumed。
+每轮记录 inputTokens、cachedInputTokens、uncachedInputTokens、outputTokens 和 estimatedCostUsd。
+提前 final 会被 evaluateLongRunningTaskEvalReport 归因为 verification_missing。
+learningHandoff 会解释为什么继续、何时压缩、如何恢复以及成本曲线。
+这只是 deterministic local long-running eval，不是生产级长任务 benchmark，也不是真实 provider billing。
+```
+
 Production Upgrade Roadmap Pass 已确认：
 
 ```text
@@ -690,7 +711,7 @@ Core 18 到 Core 26 的顺序为 Context Economy、Compaction Quality Eval、Pla
 最后一次完整验证时间：
 
 ```text
-2026-05-27 17:56 CST
+2026-05-27 19:01 CST
 ```
 
 运行命令：
@@ -730,15 +751,16 @@ core-17: 7/7 passed
 core-18: 8/8 passed
 core-19: 9/9 passed
 core-20: 10/10 passed
+core-21: 8/8 passed
 
-total: 171/171 passed
+total: 179/179 passed
 exit code: 0
 ```
 
 这证明：
 
 ```text
-当前 Lab 机制、Core 01 集成链路、Core 02 Model Gateway 边界、Core 03 Context Engine 集成链路、Core 04 Plan Mode 权限链路、Core 05 Compaction / Artifact 链路、Core 06 Trace / Eval Harness 链路、Core 07 Real Model API E2E 链路、Core 08 Prompt Pack / Recovery Loop 链路、Core 09 Real Repo Task Layer 链路、Core 10 Eval / Open Source Packaging 链路、Core 11 第一批 executable seed 链路、Core 12 第二批 executable seed 链路、Core 13 第三批 executable seed 链路、Core 14 final starter batch 链路、Core 15 codex-local reference comparison 链路、Core 16 reference-agent cost/cross-agent readiness 链路、Core 17 pricing table baseline 链路、Core 18 context economy/cache-aware context 链路、Core 19 compaction quality eval 链路和 Core 20 plan state machine 链路都可运行。
+当前 Lab 机制、Core 01 集成链路、Core 02 Model Gateway 边界、Core 03 Context Engine 集成链路、Core 04 Plan Mode 权限链路、Core 05 Compaction / Artifact 链路、Core 06 Trace / Eval Harness 链路、Core 07 Real Model API E2E 链路、Core 08 Prompt Pack / Recovery Loop 链路、Core 09 Real Repo Task Layer 链路、Core 10 Eval / Open Source Packaging 链路、Core 11 第一批 executable seed 链路、Core 12 第二批 executable seed 链路、Core 13 第三批 executable seed 链路、Core 14 final starter batch 链路、Core 15 codex-local reference comparison 链路、Core 16 reference-agent cost/cross-agent readiness 链路、Core 17 pricing table baseline 链路、Core 18 context economy/cache-aware context 链路、Core 19 compaction quality eval 链路、Core 20 plan state machine 链路和 Core 21 long-running task eval 链路都可运行。
 ```
 
 Core 07 live 另已确认：
@@ -778,7 +800,8 @@ Core 17 已接入本地显式 pricing table，并能生成 configured estimated 
 Core 18 已实现 cache-aware context economy simulation；但它不是真实 provider cache billing，也不是完整生产级上下文系统。
 Core 19 已实现 deterministic compaction quality eval；但它不是完整生产级压缩系统，也不保证任意长任务无损恢复。
 Core 20 已实现 deterministic plan state machine；但它不是完整生产级人工审批系统，也不保证任意长任务自动恢复。
-Core 21-26 仍未实现；当前只有路线和验证矩阵，不能把 Long-Running Eval / ToolRuntime Transaction 等能力说成生产级。
+Core 21 已实现 deterministic long-running task eval；但它不是生产级长任务 benchmark，也不保证任意真实长任务自动完成。
+Core 22-26 仍未实现；当前只有路线和验证矩阵，不能把 ToolRuntime Transaction / ModelGateway Budget 等能力说成生产级。
 ```
 
 文档治理侧还缺：
@@ -797,29 +820,29 @@ Production Upgrade Roadmap Pass 已建立路线入口，但未来每个 Core 完
 下一步只做一件事：
 
 ```text
-实现 Core 21 Long-Running Task Eval。
+实现 Core 22 ToolRuntime Transaction + Patch Safety。
 ```
 
 推荐优先顺序：
 
 ```text
-1. 先阅读 production-upgrade-roadmap.md 和 production-upgrade-validation-matrix.md 的 Core 21 条目。
-2. 新建 core-21-long-running-task-eval.md，定义问题、机制、边界和验收。
-3. 构造多轮长任务压力场，覆盖 repeated failure、compaction under pressure、plan resume 和 cost curve。
-4. 编写 Core 21 verify，覆盖 multi-turn repair、repeated failure、compaction、cost curve、no false final 和 learning handoff。
+1. 先阅读 production-upgrade-roadmap.md 和 production-upgrade-validation-matrix.md 的 Core 22 条目。
+2. 新建 core-22-tool-runtime-transaction.md，定义问题、机制、边界和验收。
+3. 实现 diff preview、transaction commit、rollback、stale reread、protected file 和 bash risk class。
+4. 编写 Core 22 verify，覆盖 diff preview、commit、rollback、stale reread、protected file 和 high-risk command。
 5. 接入 package.json demo / verify，并跑 npm run verify:all。
 ```
 
 做完下一步后的预期结果：
 
 ```text
-得到一个可复现的 Long-Running Task Eval：
-  多轮修复任务有状态连续性证据。
-  连续失败会进入 failure history 并影响下一步。
-  中途 compaction 后仍能从 plan state 恢复。
-  每轮 token / cost basis 可汇总成曲线。
-  提前 final 会被归因为 verification_missing。
-  学习者能读懂每轮为何继续、压缩或恢复。
+得到一个可事务化的 ToolRuntime Patch Safety 层：
+  edit 前可以生成 diff preview。
+  多文件修改可以一次 transaction commit。
+  中途失败可以 rollback 到事务前状态。
+  外部修改会触发 stale reread。
+  受保护文件会被拒绝或要求审批。
+  高风险 bash 会被拒绝或进入审批。
 ```
 
 ---
@@ -857,6 +880,7 @@ core-17-reference-agent-pricing-table-baseline.md
 core-18-context-economy-cache-aware-context-engine.md
 core-19-compaction-quality-eval.md
 core-20-plan-state-machine.md
+core-21-long-running-task-eval.md
 production-upgrade-roadmap.md
 production-upgrade-validation-matrix.md
 README.md
@@ -889,10 +913,11 @@ Core 17 Reference-Agent Pricing Table Baseline 已实现并通过目标验证。
 Core 18 Context Economy + Cache-Aware Context Engine 已实现并通过目标验证。
 Core 19 Compaction Quality Eval 已实现并通过目标验证。
 Core 20 Plan State Machine 已实现并通过目标验证。
+Core 21 Long-Running Task Eval 已实现并通过目标验证。
 Production Upgrade Roadmap Pass 已建立 Core 18-26 路线和验证矩阵。
 course-07 Core Build Pass Overview 已创建并复盘完成。
 course-08 到 course-12 已按执行链样板重写并复盘完成。
-下一步进入 Core 21 Long-Running Task Eval；先构造多轮长任务压力场，验证 Context / Compaction / Plan / Cost 在多轮中不崩。第二 reference-agent baseline 暂不作为当前主线。
+下一步进入 Core 22 ToolRuntime Transaction + Patch Safety；先实现 diff preview、transaction commit、rollback、stale reread、protected file 和 high-risk command safety。第二 reference-agent baseline 暂不作为当前主线。
 ```
 
 恢复后不要立即做：
@@ -911,8 +936,8 @@ course-08 到 course-12 已按执行链样板重写并复盘完成。
 ```text
 1. 不再补 starter seed；20/20 starter executable suite 已完成。
 2. 先读 production-upgrade-roadmap.md 和 production-upgrade-validation-matrix.md。
-3. 从 Core 21 继续，不跳到 Core 22/23/24。
-4. Core 21 先做 Long-Running Task Eval。
+3. 从 Core 22 继续，不跳到 Core 23/24/25。
+4. Core 22 先做 ToolRuntime Transaction + Patch Safety。
 5. 不要在没有对应 verify evidence 时声称生产级能力。
 ```
 
@@ -977,6 +1002,8 @@ npm --prefix /Users/boyzcl/Documents/A/C run core:19
 npm --prefix /Users/boyzcl/Documents/A/C run core:19:verify
 npm --prefix /Users/boyzcl/Documents/A/C run core:20
 npm --prefix /Users/boyzcl/Documents/A/C run core:20:verify
+npm --prefix /Users/boyzcl/Documents/A/C run core:21
+npm --prefix /Users/boyzcl/Documents/A/C run core:21:verify
 npm --prefix /Users/boyzcl/Documents/A/C run verify:all
 ```
 
@@ -1016,11 +1043,13 @@ Core 17 pricing table baseline 已完成，本地示例 total estimatedCostUsd=0
 Core 18 context economy 已完成，stable prefix / dynamic tail / artifact / cache simulation 均有 verify evidence。
 Core 19 compaction quality eval 已完成，objective / constraints / failure / plan / modified files / pending actions 和 compaction_loss 均有 verify evidence。
 Core 20 plan state machine 已完成，step lifecycle / blocked / revision / resume / permission / final grounding 均有 verify evidence。
+Core 21 long-running task eval 已完成，multi-turn repair / repeated failure / compaction resume / cost curve / no false final / learning handoff 均有 verify evidence。
 Production Upgrade Roadmap Pass 已建立 Core 18-26 路线和验证矩阵。
-下一步实现 Core 21 Long-Running Task Eval。
+下一步实现 Core 22 ToolRuntime Transaction + Patch Safety。
 没有跨 agent 真实 runs 前不要生成 RelativeScore。
 不要把 Core 17 的本地示例价格表当作真实厂商账单。
 不要把 Core 18 的 cache simulation 当作真实 provider cache billing。
 不要把 Core 19 的 deterministic quality eval 当作完整生产级压缩系统。
 不要把 Core 20 的 deterministic state machine 当作完整生产级人工审批系统。
+不要把 Core 21 的 deterministic long-running eval 当作生产级长任务 benchmark。
 ```

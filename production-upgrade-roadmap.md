@@ -231,14 +231,14 @@ Core 18-26 暂不承诺：
 
 ## 9. 下一步
 
-Core 20 已完成后，下一步进入：
+Core 21 已完成后，下一步进入：
 
 ```text
-Core 21: Long-Running Task Eval
+Core 22: ToolRuntime Transaction + Patch Safety
 ```
 
-Core 21 的第一目标：
+Core 22 的第一目标：
 
 ```text
-建立长任务压力场，验证 Context / Compaction / Plan / Cost 在多轮中不崩。
+让工具修改从单次 edit 升级为可预览、可回滚、可事务化的安全写入。
 ```

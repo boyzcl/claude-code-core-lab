@@ -58,6 +58,7 @@
 - `../core-18-context-economy-cache-aware-context-engine.md`
 - `../core-19-compaction-quality-eval.md`
 - `../core-20-plan-state-machine.md`
+- `../core-21-long-running-task-eval.md`
 
 ## Production Upgrade
 

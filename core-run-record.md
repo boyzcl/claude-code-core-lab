@@ -2,7 +2,7 @@
 
 运行日期：2026-05-27
 
-最后验证时间：2026-05-27 17:56 CST
+最后验证时间：2026-05-27 19:01 CST
 
 运行命令：
 
@@ -27,6 +27,7 @@ npm run core:17:verify
 npm run core:18:verify
 npm run core:19:verify
 npm run core:20:verify
+npm run core:21:verify
 npm run verify:all
 ```
 
@@ -55,6 +56,7 @@ core-17: 7/7 passed
 core-18: 8/8 passed
 core-19: 9/9 passed
 core-20: 10/10 passed
+core-21: 8/8 passed
 ```
 
 case：
@@ -289,6 +291,19 @@ boundary: plan machine is local runtime evidence, not prompt-only claim
 validation: malformed plan is rejected before execution
 ```
 
+Core 21 case：
+
+```text
+core21: long-running task eval demo runs and verifies
+multi-turn repair: state continues until final verification passes
+repeated failure: two failures remain in history and steer next action
+compaction under pressure: active step survives and resumes
+cost curve: every turn has token and configured cost basis
+no false final: premature final is attributed to verification_missing
+learning handoff: summary explains continue, compact, resume, and cost
+boundary: long-running eval is local evidence, not production claim
+```
+
 ---
 
 ## 2. 全量验证结果
@@ -322,8 +337,9 @@ core-17: 7/7 passed
 core-18: 8/8 passed
 core-19: 9/9 passed
 core-20: 10/10 passed
+core-21: 8/8 passed
 
-total: 171/171 passed
+total: 179/179 passed
 exit code: 0
 ```
 
@@ -354,6 +370,7 @@ Core 17 可以给这 8 个 codex-local runs 接入显式本地 pricing table，�
 Core 18 可以让 Context Engine 输出 stable prefix、dynamic tail、eviction、artifact 和 cache simulation 证据，同时不把 token 节省归因于 prompt 文案。
 Core 19 可以让 Compaction Quality Eval 机器对照目标、约束、失败、计划、文件和下一步动作，并把坏摘要归因为 compaction_loss。
 Core 20 可以让 Plan State Machine 追踪 step lifecycle、blocked reason、revision、compaction resume、permission 和 final grounding。
+Core 21 可以让 Long-Running Task Eval 记录多轮修复、重复失败、compaction resume、成本曲线、no false final 和学习交接摘要。
 ```
 
 它能在临时 toy workspace 中完成：
@@ -415,7 +432,9 @@ Core 19 已验证 objective / constraints / failure / plan / modified files / pe
 Core 19 的 quality eval 是 deterministic local evidence，不是完整生产级 compaction system。
 Core 20 已验证 pending -> active -> done、blocked reason、revision history、compaction resume、permission denial 和 final grounding。
 Core 20 的 Plan State Machine 是 deterministic local evidence，不是完整生产级人工审批系统。
+Core 21 已验证 7 轮 long-running repair、2 次失败 history、turn 5 compaction resume、per-turn cost curve、verification_missing false final 和 learning handoff。
+Core 21 的 Long-Running Task Eval 是 deterministic local evidence，不是生产级长任务 benchmark。
 README.md、AGENTS.md、docs/index.md 和 docs/authority-map.md 已形成最小开源入口。
 docs/authority-map.md 声明当前规则、历史背景和证据目录的边界。
-verify:all 已覆盖 core:20:verify。
+verify:all 已覆盖 core:21:verify。
 ```
