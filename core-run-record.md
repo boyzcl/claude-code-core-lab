@@ -2,7 +2,7 @@
 
 运行日期：2026-05-28
 
-最后验证时间：2026-05-28 00:27 CST
+最后验证时间：2026-05-28 00:47 CST
 
 运行命令：
 
@@ -31,6 +31,7 @@ npm run core:21:verify
 npm run core:22:verify
 npm run core:23:verify
 npm run core:24:verify
+npm run core:25:verify
 npm run verify:all
 ```
 
@@ -63,6 +64,7 @@ core-21: 8/8 passed
 core-22: 8/8 passed
 core-23: 9/9 passed
 core-24: 8/8 passed
+core-25: 9/9 passed
 ```
 
 case：
@@ -350,6 +352,20 @@ secret boundary: raw provider credentials are not persisted
 boundary: durable replay is local evidence, not production store
 ```
 
+Core 25 case：
+
+```text
+core25: repo intelligence demo runs and verifies
+repo map: fixture files, scripts, and rule entries are indexed
+symbol index: exported symbol and references can be located
+test index: package scripts and test files are associated
+rule discovery: AGENTS and README rules enter high priority index
+relevance scoring: correct file ranks above similar files
+incremental update: modified file refreshes without full reindex
+token benefit: indexed context selects correct file with fewer tokens
+boundary: repo intelligence is local evidence, not production search
+```
+
 ---
 
 ## 2. 全量验证结果
@@ -387,8 +403,9 @@ core-21: 8/8 passed
 core-22: 8/8 passed
 core-23: 9/9 passed
 core-24: 8/8 passed
+core-25: 9/9 passed
 
-total: 204/204 passed
+total: 213/213 passed
 exit code: 0
 ```
 
@@ -423,6 +440,7 @@ Core 21 可以让 Long-Running Task Eval 记录多轮修复、重复失败、com
 Core 22 可以让 ToolRuntime 修改先生成 diff preview，再以多文件 transaction commit；失败时 rollback，stale/protected/high-risk 会被结构化拦截。
 Core 23 可以让 ModelGateway 在 provider 调用前执行 token/cost budget gate，并留下 retry/fallback、capability registry 和 output repair 证据。
 Core 24 可以让 session event 进入 append-only log，并留下 snapshot restore、crash recovery、trace replay、compaction audit 和 secret scan 证据。
+Core 25 可以让 Context Engine 的输入来自 repo map、symbol/test/rule index、relevance scoring、incremental update 和 token benefit 证据。
 ```
 
 它能在临时 toy workspace 中完成：
@@ -492,7 +510,9 @@ Core 23 已验证 token budget preflight、cost downgrade、retryable failure re
 Core 23 的 ModelGateway Budget Controller 是 deterministic local evidence，不是真实 provider SLA、真实厂商账单或完整生产级 provider router。
 Core 24 已验证 append-only event log、snapshot restore、crash recovery、trace replay、compaction audit 和 raw provider credential redaction。
 Core 24 的 Durable Session Store + Replay 是 deterministic local evidence，不是分布式 durable storage、跨机器 session 产品或生产级 audit log。
+Core 25 已验证 repo map、exported symbol/reference、package scripts/test association、high-priority rules、relevance scoring、incremental update 和 token benefit。
+Core 25 的 Repo Intelligence + Relevance Index 是 deterministic local evidence，不是完整语义 embedding 检索、任意超大仓库生产级索引或真实 IDE / LSP 全量符号能力。
 README.md、AGENTS.md、docs/index.md 和 docs/authority-map.md 已形成最小开源入口。
 docs/authority-map.md 声明当前规则、历史背景和证据目录的边界。
-verify:all 已覆盖 core:24:verify。
+verify:all 已覆盖 core:25:verify。
 ```

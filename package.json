@@ -69,7 +69,9 @@
     "core:23:verify": "node src/core/model-gateway-budget-controller.verify.mjs",
     "core:24": "node src/core/durable-session-store-replay.mjs",
     "core:24:verify": "node src/core/durable-session-store-replay.verify.mjs",
+    "core:25": "node src/core/repo-intelligence-relevance-index.mjs",
+    "core:25:verify": "node src/core/repo-intelligence-relevance-index.verify.mjs",
     "verify:labs": "npm run lab:01:verify && npm run lab:02:verify && npm run lab:03:verify && npm run lab:04:verify && npm run lab:05:verify && npm run lab:06:verify && npm run lab:07:verify && npm run lab:08:verify",
-    "verify:all": "npm run verify:labs && npm run core:verify && npm run core:02:verify && npm run core:03:verify && npm run core:04:verify && npm run core:05:verify && npm run core:06:verify && npm run core:07:verify && npm run core:08:verify && npm run core:09:verify && npm run core:10:verify && npm run core:11:verify && npm run core:12:verify && npm run core:13:verify && npm run core:14:verify && npm run core:15:verify && npm run core:16:verify && npm run core:17:verify && npm run core:18:verify && npm run core:19:verify && npm run core:20:verify && npm run core:21:verify && npm run core:22:verify && npm run core:23:verify && npm run core:24:verify"
+    "verify:all": "npm run verify:labs && npm run core:verify && npm run core:02:verify && npm run core:03:verify && npm run core:04:verify && npm run core:05:verify && npm run core:06:verify && npm run core:07:verify && npm run core:08:verify && npm run core:09:verify && npm run core:10:verify && npm run core:11:verify && npm run core:12:verify && npm run core:13:verify && npm run core:14:verify && npm run core:15:verify && npm run core:16:verify && npm run core:17:verify && npm run core:18:verify && npm run core:19:verify && npm run core:20:verify && npm run core:21:verify && npm run core:22:verify && npm run core:23:verify && npm run core:24:verify && npm run core:25:verify"
   }
 }

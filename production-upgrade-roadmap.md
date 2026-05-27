@@ -231,25 +231,26 @@ Core 18-26 暂不承诺：
 
 ## 9. 当前进度和下一步
 
-Core 24 已完成 deterministic local verification：
+Core 25 已完成 deterministic local verification：
 
 ```text
-append-only event log
-snapshot restore
-crash recovery
-trace replay
-compaction audit
-secret boundary scan
+repo map
+symbol index
+test index
+rule discovery
+relevance scoring
+incremental update
+token benefit
 ```
 
 下一步进入：
 
 ```text
-Core 25: Repo Intelligence + Relevance Index
+Core 26: Human Approval + Interruption Protocol
 ```
 
-Core 25 的第一目标：
+Core 26 的第一目标：
 
 ```text
-让 Context Engine 的输入从全文搜索升级为 repo map、symbol/test/rule index、relevance scoring 和 token benefit evidence。
+让高风险动作、用户审批、拒绝、打断、需求变化和 handoff 进入可 replay 的 Runtime 状态。
 ```
