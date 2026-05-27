@@ -1,6 +1,6 @@
 # CURRENT_STATE：Claude Code Core 学习项目当前状态
 
-最后更新：2026-05-27 16:01 CST
+最后更新：2026-05-27 16:48 CST
 
 本文是新对话入口和当前状态单一事实源。它不替代课程、Lab、Core 文档，只回答：
 
@@ -119,6 +119,7 @@ Eval 如何证明能力真的变强。
 | `core-16-reference-agent-cost-and-cross-agent.md` | 集成实现记录 | 证明 8 个 codex-local runs 已有 cost 计量口径，并明确横向对照仍被第二 agent baseline 阻塞 |
 | `core-17-reference-agent-pricing-table-baseline.md` | 集成实现记录 | 证明显式本地 pricing table 可以为 8 个 codex-local runs 生成 configured estimated USD，同时不声称真实厂商账单 |
 | `core-18-context-economy-cache-aware-context-engine.md` | 集成实现记录 | 证明 Context Economy Engine 可以输出 stable prefix、dynamic tail、eviction、artifact 和 cache simulation 证据 |
+| `core-19-compaction-quality-eval.md` | 集成实现记录 | 证明 Compaction Quality Eval 可以机器对照压缩前后状态并识别 compaction_loss |
 | `production-upgrade-roadmap.md` | 生产化升级总控 | Core 18-26 的路线、依赖、边界和统一完成定义 |
 | `production-upgrade-validation-matrix.md` | 验证矩阵 | Core 18-26 的验证先行口径和必过检查 |
 | `README.md` | 项目总入口 | 快速运行、文档导航和当前边界 |
@@ -139,7 +140,7 @@ Eval 如何证明能力真的变强。
 学习顺序 / 命名规则：claude-code-core-learning-path.md
 课程正文：对应 course-XX 文档
 实验机制：对应 lab-XX 文档和 src/labXX 代码
-集成行为：core-01-integrated-runtime.md、core-02-model-gateway.md、core-03-context-engine-integration.md、core-04-plan-mode-integration.md、core-05-compaction-artifact-integration.md、core-06-trace-eval-harness-expansion.md、core-07-real-model-api-e2e.md、core-08-prompt-pack-recovery-loop.md、core-09-real-repo-task-layer.md、core-10-70-80-eval-open-source-packaging.md、core-11-eval-expansion-executable-seeds.md、core-12-eval-expansion-second-batch.md、core-13-eval-expansion-third-batch.md、core-14-eval-expansion-final-starter-batch.md、core-15-reference-agent-comparison.md、core-16-reference-agent-cost-and-cross-agent.md、core-17-reference-agent-pricing-table-baseline.md、core-18-context-economy-cache-aware-context-engine.md 和 src/core 代码
+集成行为：core-01-integrated-runtime.md、core-02-model-gateway.md、core-03-context-engine-integration.md、core-04-plan-mode-integration.md、core-05-compaction-artifact-integration.md、core-06-trace-eval-harness-expansion.md、core-07-real-model-api-e2e.md、core-08-prompt-pack-recovery-loop.md、core-09-real-repo-task-layer.md、core-10-70-80-eval-open-source-packaging.md、core-11-eval-expansion-executable-seeds.md、core-12-eval-expansion-second-batch.md、core-13-eval-expansion-third-batch.md、core-14-eval-expansion-final-starter-batch.md、core-15-reference-agent-comparison.md、core-16-reference-agent-cost-and-cross-agent.md、core-17-reference-agent-pricing-table-baseline.md、core-18-context-economy-cache-aware-context-engine.md、core-19-compaction-quality-eval.md 和 src/core 代码
 历史观点：两篇原始分析文章只作背景材料
 ```
 
@@ -184,6 +185,7 @@ Core 15 Reference-Agent Comparison 已实现并通过目标验证。
 Core 16 Reference-Agent Cost + Cross-Agent 已实现并通过目标验证。
 Core 17 Reference-Agent Pricing Table Baseline 已实现并通过目标验证。
 Core 18 Context Economy + Cache-Aware Context Engine 已实现并通过目标验证。
+Core 19 Compaction Quality Eval 已实现并通过目标验证。
 Production Upgrade Roadmap Pass 已建立 Core 18-26 路线：Context Economy、Compaction Quality、Plan State Machine、Long-Running Eval、ToolRuntime Transaction、ModelGateway Budget、Durable Replay、Repo Intelligence、Human Approval。
 Core Build Pass 第一轮完成。
 Teaching Consolidation Pass 第一轮完成，course-07 到 course-12 已由学习者复盘通过。
@@ -192,7 +194,8 @@ Reference-Agent Comparison Pass 已完成第一批 Codex local CLI 小样本对�
 Cost + Cross-Agent Pass 已补上 8 个 codex-local sample runs 的 cost 计量口径：token、cached token、uncached token、output token、reasoning output token、latency 和 raw log hash 都可汇总；没有 pricing table 时 USD 仍保持 null。横向对照当前结论是 single_baseline_only：本机只有 codex-local 有 recorded runs，未检测到 Claude Code / Claude / OpenCode / Aider / Cursor Agent / Gemini / Qwen / OpenAI CLI 的可用第二 baseline。没有第二 agent 真实 runs 前，不生成 RelativeScore。
 Pricing Table Baseline Pass 已给同一批 8 个 runs 接入显式本地示例价格表，total estimatedCostUsd=0.609534，averageEstimatedCostUsd=0.07619175；这不是厂商真实账单，也不是跨 agent RelativeScore。
 Context Economy Pass 已建立 cache-aware context report：stable prefix、dynamic tail、token budget eviction、artifact boundary、cache simulation 和 no prompt-only saving 均有 verify evidence。
-下一步进入 Core 19 Compaction Quality Eval，不再把第二 reference-agent baseline 作为当前主线。
+Compaction Quality Pass 已建立 compaction 前后机器对照：objective、constraints、failure、plan、modified files、pending actions 和 bad summary compaction_loss 均有 verify evidence。
+下一步进入 Core 20 Plan State Machine，不再把第二 reference-agent baseline 作为当前主线。
 ```
 
 ---
@@ -254,6 +257,7 @@ src/core/reference-agent-comparison.mjs
 src/core/reference-agent-cost-and-cross-agent.mjs
 src/core/reference-agent-pricing-table-baseline.mjs
 src/core/context-economy.mjs
+src/core/compaction-quality.mjs
 ```
 
 验证层：
@@ -280,6 +284,7 @@ src/core/reference-agent-comparison.verify.mjs
 src/core/reference-agent-cost-and-cross-agent.verify.mjs
 src/core/reference-agent-pricing-table-baseline.verify.mjs
 src/core/context-economy.verify.mjs
+src/core/compaction-quality.verify.mjs
 ```
 
 集成层：
@@ -303,6 +308,7 @@ core-15-reference-agent-comparison.md
 core-16-reference-agent-cost-and-cross-agent.md
 core-17-reference-agent-pricing-table-baseline.md
 core-18-context-economy-cache-aware-context-engine.md
+core-19-compaction-quality-eval.md
 production-upgrade-roadmap.md
 production-upgrade-validation-matrix.md
 README.md
@@ -345,6 +351,8 @@ src/core/reference-agent-pricing-table-baseline.mjs
 src/core/reference-agent-pricing-table-baseline.verify.mjs
 src/core/context-economy.mjs
 src/core/context-economy.verify.mjs
+src/core/compaction-quality.mjs
+src/core/compaction-quality.verify.mjs
 ```
 
 ---
@@ -628,6 +636,20 @@ token 节省由 block selection、artifact boundary 和 cache simulation 证明�
 这只是 deterministic local simulation，不是真实 provider cache billing，也不是生产级 Claude Code context engine。
 ```
 
+Core 19 已确认：
+
+```text
+Compaction Quality Eval 可以输出 version、status、score、failureType、checks、failedChecks、diff、evidence 和 boundary。
+压缩前后的 objective 可以机器对照，目标不漂移。
+用户约束和安全约束可以机器对照，constraint loss 会被抓出。
+failed verification 不能被压成 passed，failure preservation 会检查 latestFailures 和 verificationState。
+active plan 的 id、status、step id、step text 和 step status 会被对照。
+modified files 的 path 和 reason 会被对照。
+pending actions 会被对照，下一步动作不能丢。
+构造坏 compact summary 会得到 status=failed、failureType=compaction_loss、recommendedAction=repair_or_rerun_compaction_before_restore。
+这只是 deterministic local quality eval，不是完整生产级 compaction system，也不是生产级 Claude Code 能力认证。
+```
+
 Production Upgrade Roadmap Pass 已确认：
 
 ```text
@@ -646,7 +668,7 @@ Core 18 到 Core 26 的顺序为 Context Economy、Compaction Quality Eval、Pla
 最后一次完整验证时间：
 
 ```text
-2026-05-27 16:01 CST
+2026-05-27 16:48 CST
 ```
 
 运行命令：
@@ -684,15 +706,16 @@ core-15: 6/6 passed
 core-16: 7/7 passed
 core-17: 7/7 passed
 core-18: 8/8 passed
+core-19: 9/9 passed
 
-total: 152/152 passed
+total: 161/161 passed
 exit code: 0
 ```
 
 这证明：
 
 ```text
-当前 Lab 机制、Core 01 集成链路、Core 02 Model Gateway 边界、Core 03 Context Engine 集成链路、Core 04 Plan Mode 权限链路、Core 05 Compaction / Artifact 链路、Core 06 Trace / Eval Harness 链路、Core 07 Real Model API E2E 链路、Core 08 Prompt Pack / Recovery Loop 链路、Core 09 Real Repo Task Layer 链路、Core 10 Eval / Open Source Packaging 链路、Core 11 第一批 executable seed 链路、Core 12 第二批 executable seed 链路、Core 13 第三批 executable seed 链路、Core 14 final starter batch 链路、Core 15 codex-local reference comparison 链路、Core 16 reference-agent cost/cross-agent readiness 链路、Core 17 pricing table baseline 链路和 Core 18 context economy/cache-aware context 链路都可运行。
+当前 Lab 机制、Core 01 集成链路、Core 02 Model Gateway 边界、Core 03 Context Engine 集成链路、Core 04 Plan Mode 权限链路、Core 05 Compaction / Artifact 链路、Core 06 Trace / Eval Harness 链路、Core 07 Real Model API E2E 链路、Core 08 Prompt Pack / Recovery Loop 链路、Core 09 Real Repo Task Layer 链路、Core 10 Eval / Open Source Packaging 链路、Core 11 第一批 executable seed 链路、Core 12 第二批 executable seed 链路、Core 13 第三批 executable seed 链路、Core 14 final starter batch 链路、Core 15 codex-local reference comparison 链路、Core 16 reference-agent cost/cross-agent readiness 链路、Core 17 pricing table baseline 链路、Core 18 context economy/cache-aware context 链路和 Core 19 compaction quality eval 链路都可运行。
 ```
 
 Core 07 live 另已确认：
@@ -730,7 +753,8 @@ Core 15 已记录 8 个 codex-local CLI 小样本对照，但仍不是 Claude Co
 Core 16 已完成横向对照 readiness 评估，但当前只有 codex-local 有 recorded runs，第二 agent baseline 尚未建立。
 Core 17 已接入本地显式 pricing table，并能生成 configured estimated USD；但它不是厂商真实账单，也不是跨 agent 成本对比。
 Core 18 已实现 cache-aware context economy simulation；但它不是真实 provider cache billing，也不是完整生产级上下文系统。
-Core 19-26 仍未实现；当前只有路线和验证矩阵，不能把 Plan / Compaction / Eval 等能力说成生产级。
+Core 19 已实现 deterministic compaction quality eval；但它不是完整生产级压缩系统，也不保证任意长任务无损恢复。
+Core 20-26 仍未实现；当前只有路线和验证矩阵，不能把 Plan / Eval 等能力说成生产级。
 ```
 
 文档治理侧还缺：
@@ -749,29 +773,29 @@ Production Upgrade Roadmap Pass 已建立路线入口，但未来每个 Core 完
 下一步只做一件事：
 
 ```text
-实现 Core 19 Compaction Quality Eval。
+实现 Core 20 Plan State Machine。
 ```
 
 推荐优先顺序：
 
 ```text
-1. 先阅读 production-upgrade-roadmap.md 和 production-upgrade-validation-matrix.md 的 Core 19 条目。
-2. 新建 core-19-compaction-quality-eval.md，定义问题、机制、边界和验收。
-3. 实现 compaction quality 对照，比较压缩前后的目标、约束、失败、计划、文件和 pending actions。
-4. 编写 Core 19 verify，覆盖 objective preservation、constraint preservation、failure preservation、plan preservation、modified files、pending actions 和 quality score。
+1. 先阅读 production-upgrade-roadmap.md 和 production-upgrade-validation-matrix.md 的 Core 20 条目。
+2. 新建 core-20-plan-state-machine.md，定义问题、机制、边界和验收。
+3. 实现 step-level plan lifecycle，追踪 pending、active、done、blocked、revised 和 resumed。
+4. 编写 Core 20 verify，覆盖 step lifecycle、blocked reason、revision、resume、permission 和 final grounding。
 5. 接入 package.json demo / verify，并跑 npm run verify:all。
 ```
 
 做完下一步后的预期结果：
 
 ```text
-得到一个能机器对照压缩保真的 Compaction Quality Eval：
-  压缩前后的 objective 不漂移。
-  用户约束和安全约束不丢。
-  failed verification 不能被压成 passed。
-  active plan 的 id、step、status 保留。
-  modified files 和 pending actions 可追踪。
-  坏压缩会被归因为 compaction_loss。
+得到一个可审计的 Plan State Machine：
+  step 可以从 pending -> active -> done。
+  缺文件或验证失败时 step 可以 blocked 并记录 reason。
+  用户改需求时生成 revised plan，不覆盖历史。
+  compaction 后 active step 可以恢复。
+  未批准写操作仍由 ToolRuntime / Policy 拒绝。
+  final answer 前能检查 plan 是否完成。
 ```
 
 ---
@@ -807,6 +831,7 @@ core-15-reference-agent-comparison.md
 core-16-reference-agent-cost-and-cross-agent.md
 core-17-reference-agent-pricing-table-baseline.md
 core-18-context-economy-cache-aware-context-engine.md
+core-19-compaction-quality-eval.md
 production-upgrade-roadmap.md
 production-upgrade-validation-matrix.md
 README.md
@@ -837,10 +862,11 @@ Core 15 Reference-Agent Comparison 已经实现并通过目标验证。
 Core 16 Reference-Agent Cost + Cross-Agent 已实现并通过目标验证。
 Core 17 Reference-Agent Pricing Table Baseline 已实现并通过目标验证。
 Core 18 Context Economy + Cache-Aware Context Engine 已实现并通过目标验证。
+Core 19 Compaction Quality Eval 已实现并通过目标验证。
 Production Upgrade Roadmap Pass 已建立 Core 18-26 路线和验证矩阵。
 course-07 Core Build Pass Overview 已创建并复盘完成。
 course-08 到 course-12 已按执行链样板重写并复盘完成。
-下一步进入 Core 19 Compaction Quality Eval；先验证 compaction 前后的目标、约束、失败、计划、文件和 pending action 保真。第二 reference-agent baseline 暂不作为当前主线。
+下一步进入 Core 20 Plan State Machine；先实现 step-level plan lifecycle、blocked reason、revision、resume、permission 和 final grounding。第二 reference-agent baseline 暂不作为当前主线。
 ```
 
 恢复后不要立即做：
@@ -859,8 +885,8 @@ course-08 到 course-12 已按执行链样板重写并复盘完成。
 ```text
 1. 不再补 starter seed；20/20 starter executable suite 已完成。
 2. 先读 production-upgrade-roadmap.md 和 production-upgrade-validation-matrix.md。
-3. 从 Core 19 继续，不跳到 Core 22/23/24。
-4. Core 19 先做 Compaction Quality Eval。
+3. 从 Core 20 继续，不跳到 Core 22/23/24。
+4. Core 20 先做 Plan State Machine。
 5. 不要在没有对应 verify evidence 时声称生产级能力。
 ```
 
@@ -921,6 +947,8 @@ npm --prefix /Users/boyzcl/Documents/A/C run core:17
 npm --prefix /Users/boyzcl/Documents/A/C run core:17:verify
 npm --prefix /Users/boyzcl/Documents/A/C run core:18
 npm --prefix /Users/boyzcl/Documents/A/C run core:18:verify
+npm --prefix /Users/boyzcl/Documents/A/C run core:19
+npm --prefix /Users/boyzcl/Documents/A/C run core:19:verify
 npm --prefix /Users/boyzcl/Documents/A/C run verify:all
 ```
 
@@ -958,9 +986,11 @@ Reference-Agent Comparison 已有 8 个 codex-local CLI sample runs。
 Core 16 cost basis 和 cross-agent readiness gate 已完成。
 Core 17 pricing table baseline 已完成，本地示例 total estimatedCostUsd=0.609534。
 Core 18 context economy 已完成，stable prefix / dynamic tail / artifact / cache simulation 均有 verify evidence。
+Core 19 compaction quality eval 已完成，objective / constraints / failure / plan / modified files / pending actions 和 compaction_loss 均有 verify evidence。
 Production Upgrade Roadmap Pass 已建立 Core 18-26 路线和验证矩阵。
-下一步实现 Core 19 Compaction Quality Eval。
+下一步实现 Core 20 Plan State Machine。
 没有跨 agent 真实 runs 前不要生成 RelativeScore。
 不要把 Core 17 的本地示例价格表当作真实厂商账单。
 不要把 Core 18 的 cache simulation 当作真实 provider cache billing。
+不要把 Core 19 的 deterministic quality eval 当作完整生产级压缩系统。
 ```

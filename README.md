@@ -39,6 +39,7 @@ npm run core:15
 npm run core:16
 npm run core:17
 npm run core:18
+npm run core:19
 ```
 
 `core:07:live` 会读取本地 `.env.local` 里的模型配置。`.env.local` 被 git 忽略，不能提交。
@@ -81,6 +82,8 @@ npm run core:18
 - Verify reference-agent pricing table baseline: `npm run core:17:verify`
 - Run context economy and cache-aware context report: `npm run core:18`
 - Verify context economy and cache-aware context report: `npm run core:18:verify`
+- Run compaction quality eval report: `npm run core:19`
+- Verify compaction quality eval report: `npm run core:19:verify`
 
 ## Docs
 
@@ -128,10 +131,11 @@ Core implementation records:
 - `core-16-reference-agent-cost-and-cross-agent.md`
 - `core-17-reference-agent-pricing-table-baseline.md`
 - `core-18-context-economy-cache-aware-context-engine.md`
+- `core-19-compaction-quality-eval.md`
 
 ## Current Boundary
 
-Core 14 establishes executable repo seeds for all 20 Core 10 starter cases and brings cumulative executable starter coverage to 20/20. Core 15 records a small Codex local CLI reference-agent sample for 8 seeds, including repair, safety refusal, ambiguity refusal, and expected failed-verification outcomes. Core 16 adds a cost measurement basis and cross-agent readiness gate for those runs. Core 17 adds an explicit local pricing table baseline that produces configured USD estimates from the same evidence. Core 18 adds a cache-aware Context Economy Engine with stable prefix, dynamic tail, token budget eviction, artifact boundary, and cache simulation reports. The current roadmap continues through Core 19-26 production upgrades: compaction quality, plan state, long-running eval, tool transactions, model budget, durable replay, repo intelligence, and human approval. This is not a Claude Code baseline, not a RelativeScore, not a real vendor bill, not real provider cache billing, and not a production-level Claude Code 70%-80% capability claim.
+Core 14 establishes executable repo seeds for all 20 Core 10 starter cases and brings cumulative executable starter coverage to 20/20. Core 15 records a small Codex local CLI reference-agent sample for 8 seeds, including repair, safety refusal, ambiguity refusal, and expected failed-verification outcomes. Core 16 adds a cost measurement basis and cross-agent readiness gate for those runs. Core 17 adds an explicit local pricing table baseline that produces configured USD estimates from the same evidence. Core 18 adds a cache-aware Context Economy Engine with stable prefix, dynamic tail, token budget eviction, artifact boundary, and cache simulation reports. Core 19 adds a compaction quality evaluator that detects objective drift, constraint loss, failure loss, plan loss, modified-file loss, and pending-action loss. The current roadmap continues through Core 20-26 production upgrades: plan state, long-running eval, tool transactions, model budget, durable replay, repo intelligence, and human approval. This is not a Claude Code baseline, not a RelativeScore, not a real vendor bill, not real provider cache billing, and not a production-level Claude Code 70%-80% capability claim.
 
 ## Contributing
 

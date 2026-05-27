@@ -56,6 +56,7 @@
 - `../core-16-reference-agent-cost-and-cross-agent.md`
 - `../core-17-reference-agent-pricing-table-baseline.md`
 - `../core-18-context-economy-cache-aware-context-engine.md`
+- `../core-19-compaction-quality-eval.md`
 
 ## Production Upgrade
 

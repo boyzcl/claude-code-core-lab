@@ -2,7 +2,7 @@
 
 运行日期：2026-05-27
 
-最后验证时间：2026-05-27 16:01 CST
+最后验证时间：2026-05-27 16:48 CST
 
 运行命令：
 
@@ -25,6 +25,7 @@ npm run core:15:verify
 npm run core:16:verify
 npm run core:17:verify
 npm run core:18:verify
+npm run core:19:verify
 npm run verify:all
 ```
 
@@ -51,6 +52,7 @@ core-15: 6/6 passed
 core-16: 7/7 passed
 core-17: 7/7 passed
 core-18: 8/8 passed
+core-19: 9/9 passed
 ```
 
 case：
@@ -256,6 +258,20 @@ latest failure: failure, verification state, and active plan survive pressure
 no prompt-only saving: savings are proven by selection, artifacts, and cache
 ```
 
+Core 19 case：
+
+```text
+core19: compaction quality demo runs and verifies
+objective preservation: compacted objective does not drift
+constraint preservation: user and safety constraints remain complete
+failure preservation: failed verification cannot become passed
+plan preservation: active plan id, steps, and status survive
+modified files: file path and reason remain traceable
+pending actions: next actions remain available after compact
+quality score: bad summary is identified as compaction_loss
+boundary: quality eval is local evidence, not production claim
+```
+
 ---
 
 ## 2. 全量验证结果
@@ -287,8 +303,9 @@ core-15: 6/6 passed
 core-16: 7/7 passed
 core-17: 7/7 passed
 core-18: 8/8 passed
+core-19: 9/9 passed
 
-total: 152/152 passed
+total: 161/161 passed
 exit code: 0
 ```
 
@@ -317,6 +334,7 @@ Core 15 可以把 reference-agent comparison 从空接口推进到 8 个真实 c
 Core 16 可以为这 8 个 codex-local runs 建立 token/cache/latency/hash cost basis，并在只有单 baseline 时阻止 RelativeScore。
 Core 17 可以给这 8 个 codex-local runs 接入显式本地 pricing table，生成 configured estimated USD，同时不声称真实厂商账单。
 Core 18 可以让 Context Engine 输出 stable prefix、dynamic tail、eviction、artifact 和 cache simulation 证据，同时不把 token 节省归因于 prompt 文案。
+Core 19 可以让 Compaction Quality Eval 机器对照目标、约束、失败、计划、文件和下一步动作，并把坏摘要归因为 compaction_loss。
 ```
 
 它能在临时 toy workspace 中完成：
@@ -374,7 +392,9 @@ Core 16 没有配置 pricing table 时 estimatedCostUsd 保持 null；当前只�
 Core 17 已用本地显式 pricing table 生成 8-run configured estimate：estimatedCostUsd=0.609534，averageEstimatedCostUsd=0.07619175；该表 source=local_configured_example_not_vendor_price，realVendorPriceClaim=false。
 Core 18 已验证 stable prefix / dynamic tail 分离、token budget eviction、artifact boundary、cache simulation 和 no prompt-only saving。
 Core 18 的 cache simulation 是 deterministic local evidence，不是真实 provider cache billing。
+Core 19 已验证 objective / constraints / failure / plan / modified files / pending actions 保真，并能把坏摘要归因为 compaction_loss。
+Core 19 的 quality eval 是 deterministic local evidence，不是完整生产级 compaction system。
 README.md、AGENTS.md、docs/index.md 和 docs/authority-map.md 已形成最小开源入口。
 docs/authority-map.md 声明当前规则、历史背景和证据目录的边界。
-verify:all 已覆盖 core:18:verify。
+verify:all 已覆盖 core:19:verify。
 ```

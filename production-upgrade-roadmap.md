@@ -231,14 +231,14 @@ Core 18-26 暂不承诺：
 
 ## 9. 下一步
 
-Core 18 已完成后，下一步进入：
+Core 19 已完成后，下一步进入：
 
 ```text
-Core 19: Compaction Quality Eval
+Core 20: Plan State Machine
 ```
 
-Core 19 的第一目标：
+Core 20 的第一目标：
 
 ```text
-让 Compaction 从普通摘要升级为可验证的状态保真转换，能机器对照目标、约束、失败、计划、文件和下一步动作。
+让 Plan 从一次性审批文本升级为 step-level Runtime 状态机，能追踪 pending、active、done、blocked、revised 和 resumed。
 ```
