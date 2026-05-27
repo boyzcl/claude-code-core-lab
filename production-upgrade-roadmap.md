@@ -231,14 +231,14 @@ Core 18-26 暂不承诺：
 
 ## 9. 下一步
 
-Core 19 已完成后，下一步进入：
+Core 20 已完成后，下一步进入：
 
 ```text
-Core 20: Plan State Machine
+Core 21: Long-Running Task Eval
 ```
 
-Core 20 的第一目标：
+Core 21 的第一目标：
 
 ```text
-让 Plan 从一次性审批文本升级为 step-level Runtime 状态机，能追踪 pending、active、done、blocked、revised 和 resumed。
+建立长任务压力场，验证 Context / Compaction / Plan / Cost 在多轮中不崩。
 ```

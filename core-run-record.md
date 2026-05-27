@@ -2,7 +2,7 @@
 
 运行日期：2026-05-27
 
-最后验证时间：2026-05-27 16:48 CST
+最后验证时间：2026-05-27 17:56 CST
 
 运行命令：
 
@@ -26,6 +26,7 @@ npm run core:16:verify
 npm run core:17:verify
 npm run core:18:verify
 npm run core:19:verify
+npm run core:20:verify
 npm run verify:all
 ```
 
@@ -53,6 +54,7 @@ core-16: 7/7 passed
 core-17: 7/7 passed
 core-18: 8/8 passed
 core-19: 9/9 passed
+core-20: 10/10 passed
 ```
 
 case：
@@ -272,6 +274,21 @@ quality score: bad summary is identified as compaction_loss
 boundary: quality eval is local evidence, not production claim
 ```
 
+Core 20 case：
+
+```text
+core20: plan state machine demo runs and verifies
+step lifecycle: steps move pending to active to done
+blocked reason: failed step records structured reason and evidence
+revision: user change creates revised plan without overwriting history
+resume: compaction preserves active step and restore marks it resumed
+permission: unapproved write tool is denied by plan state
+permission: approved execution is bounded to active step tool
+final grounding: incomplete plan cannot claim completion
+boundary: plan machine is local runtime evidence, not prompt-only claim
+validation: malformed plan is rejected before execution
+```
+
 ---
 
 ## 2. 全量验证结果
@@ -304,8 +321,9 @@ core-16: 7/7 passed
 core-17: 7/7 passed
 core-18: 8/8 passed
 core-19: 9/9 passed
+core-20: 10/10 passed
 
-total: 161/161 passed
+total: 171/171 passed
 exit code: 0
 ```
 
@@ -335,6 +353,7 @@ Core 16 可以为这 8 个 codex-local runs 建立 token/cache/latency/hash cost
 Core 17 可以给这 8 个 codex-local runs 接入显式本地 pricing table，生成 configured estimated USD，同时不声称真实厂商账单。
 Core 18 可以让 Context Engine 输出 stable prefix、dynamic tail、eviction、artifact 和 cache simulation 证据，同时不把 token 节省归因于 prompt 文案。
 Core 19 可以让 Compaction Quality Eval 机器对照目标、约束、失败、计划、文件和下一步动作，并把坏摘要归因为 compaction_loss。
+Core 20 可以让 Plan State Machine 追踪 step lifecycle、blocked reason、revision、compaction resume、permission 和 final grounding。
 ```
 
 它能在临时 toy workspace 中完成：
@@ -394,7 +413,9 @@ Core 18 已验证 stable prefix / dynamic tail 分离、token budget eviction、
 Core 18 的 cache simulation 是 deterministic local evidence，不是真实 provider cache billing。
 Core 19 已验证 objective / constraints / failure / plan / modified files / pending actions 保真，并能把坏摘要归因为 compaction_loss。
 Core 19 的 quality eval 是 deterministic local evidence，不是完整生产级 compaction system。
+Core 20 已验证 pending -> active -> done、blocked reason、revision history、compaction resume、permission denial 和 final grounding。
+Core 20 的 Plan State Machine 是 deterministic local evidence，不是完整生产级人工审批系统。
 README.md、AGENTS.md、docs/index.md 和 docs/authority-map.md 已形成最小开源入口。
 docs/authority-map.md 声明当前规则、历史背景和证据目录的边界。
-verify:all 已覆盖 core:19:verify。
+verify:all 已覆盖 core:20:verify。
 ```
