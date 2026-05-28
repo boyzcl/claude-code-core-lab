@@ -1,0 +1,126 @@
+# Docs Index
+
+本文档负责导航，不替代各主题的 canonical doc。当前进度以 `../CURRENT_STATE.md` 为准；冲突优先级以 `docs/authority-map.md` 为准。
+
+## Start Here
+
+- `../README.md`: 项目总入口、快速运行和常用命令。
+- `../AGENTS.md`: Agent 工作控制入口。
+- `../CURRENT_STATE.md`: 当前断点、最新验证和下一步动作。
+- `docs/start-here-for-learners.md`: 第一次学习者入口。
+- `docs/open-source-boundary.md`: 开源定位、能力声明和 clean-room 边界。
+- `../production-upgrade-roadmap.md`: Core 18-26 生产化升级路线。
+- `../production-upgrade-validation-matrix.md`: Core 18-26 验证先行矩阵。
+- `docs/authority-map.md`: 文档 authority、冲突优先级和证据边界。
+
+## Current Rules
+
+- `../CURRENT_STATE.md`: 当前进度和下一步唯一事实源。
+- `../production-upgrade-roadmap.md`: Core 18-26 生产化升级路线、依赖、边界和统一完成定义。
+- `../production-upgrade-validation-matrix.md`: Core 18-26 验证口径和必过检查。
+- `../claude-code-core-learning-path.md`: 学习路线、阶段定义、命名规则。
+- `../course-00-teaching-standard.md`: 教学展开标准。
+- `../AGENTS.md`: Agent 操作边界和完成定义。
+- `docs/open-source-boundary.md`: 开源能力声明、clean-room 和 secret 边界。
+
+## Learning Courses
+
+- `../course-00-teaching-standard.md`
+- `../course-01-initial-model-request.md`
+- `../course-02-action-selection-rubric.md`
+- `../course-03-clean-room-prompt-pack.md`
+- `../course-04-single-task-full-trace.md`
+- `../course-05-product-mental-model.md`
+- `../course-06-labs-to-core-map.md`
+- `../course-07-core-build-pass-overview.md`
+- `../course-08-model-gateway-and-context-engine.md`
+- `../course-09-plan-mode-and-compaction.md`
+- `../course-10-trace-eval-real-model-and-recovery.md`
+- `../course-11-real-repo-task-layer.md`
+- `../course-12-eval-packaging-and-executable-seeds.md`
+- `../course-13-eval-reference-cost-evidence.md`
+- `../course-14-production-upgrade-evidence-chain.md`
+- `../course-15-context-compaction-plan-production.md`
+- `../course-16-long-running-tool-gateway-production.md`
+- `../course-17-session-repo-approval-production.md`
+
+## Core Records
+
+- `../core-01-integrated-runtime.md`
+- `../core-02-model-gateway.md`
+- `../core-03-context-engine-integration.md`
+- `../core-04-plan-mode-integration.md`
+- `../core-05-compaction-artifact-integration.md`
+- `../core-06-trace-eval-harness-expansion.md`
+- `../core-07-real-model-api-e2e.md`
+- `../core-08-prompt-pack-recovery-loop.md`
+- `../core-09-real-repo-task-layer.md`
+- `../core-10-70-80-eval-open-source-packaging.md`
+- `../core-11-eval-expansion-executable-seeds.md`
+- `../core-12-eval-expansion-second-batch.md`
+- `../core-13-eval-expansion-third-batch.md`
+- `../core-14-eval-expansion-final-starter-batch.md`
+- `../core-15-reference-agent-comparison.md`
+- `../core-16-reference-agent-cost-and-cross-agent.md`
+- `../core-17-reference-agent-pricing-table-baseline.md`
+- `../core-18-context-economy-cache-aware-context-engine.md`
+- `../core-19-compaction-quality-eval.md`
+- `../core-20-plan-state-machine.md`
+- `../core-21-long-running-task-eval.md`
+- `../core-22-tool-runtime-transaction.md`
+- `../core-23-model-gateway-budget-controller.md`
+- `../core-24-durable-session-store-replay.md`
+- `../core-25-repo-intelligence-relevance-index.md`
+- `../core-26-human-approval-interruption-protocol.md`
+
+## Production Upgrade
+
+- `docs/production-upgrade-terms-zh.md`
+- `../course-14-production-upgrade-evidence-chain.md`
+- `../course-15-context-compaction-plan-production.md`
+- `../course-16-long-running-tool-gateway-production.md`
+- `../course-17-session-repo-approval-production.md`
+- `../production-upgrade-roadmap.md`
+- `../production-upgrade-validation-matrix.md`
+
+## Open Source Readiness
+
+- `docs/start-here-for-learners.md`
+- `docs/open-source-boundary.md`
+- `docs/github-release-checklist.md`
+- `../CONTRIBUTING.md`
+- `../SECURITY.md`
+- `../CODE_OF_CONDUCT.md`
+- `../LICENSE`
+
+## Lab Evidence
+
+- `../labs-verification-record.md`
+- `../lab-01-run-record.md`
+- `../lab-02-run-record.md`
+- `../lab-03-run-record.md`
+- `../lab-04-run-record.md`
+- `../lab-05-run-record.md`
+- `../lab-06-run-record.md`
+- `../lab-07-run-record.md`
+- `../lab-08-run-record.md`
+
+## History
+
+- `../从 Agent 范式出发看：AI Coding 为什么会从 Cursor 走向 Claude Code.md`
+- `../基于文章框架的 Claude Code 完整版本：把产品逻辑、工程技术逻辑与代码实现讲透.md`
+- `../claude-code-agent-runtime-framework.md`
+- `../claude-code-core-implementation-blueprint.md`
+- `../agent-runtime-optimization-loop.md`
+- `../claude-code-70-80-validation-and-model-access.md`
+
+## Evidence
+
+- `../core-run-record.md`: Core 集成验证证据。
+- `../labs-verification-record.md`: Lab 验证证据。
+- `../src/core/*.verify.mjs`: Core 可执行验证。
+- `../src/lab*/**/*.verify.mjs`: Lab 可执行验证。
+
+## Notes
+
+历史和证据默认不是当前规则入口。当前规则冲突时，先看 `docs/authority-map.md`，再按主题 canonical doc 处理。
