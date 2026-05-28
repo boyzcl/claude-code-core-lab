@@ -6,7 +6,7 @@ Scope: repo
 Status: active
 Owner: project-maintainer
 Source of Truth: yes
-Related Files: README.md, AGENTS.md, CURRENT_STATE.md, docs/index.md
+Related Files: README.md, AGENTS.md, CURRENT_STATE.md, docs/index.md, docs/open-source-boundary.md
 
 # Claude Code Core Learning Authority Map
 
@@ -23,6 +23,8 @@ Related Files: README.md, AGENTS.md, CURRENT_STATE.md, docs/index.md
 | `CURRENT_STATE.md` | 当前状态入口 | yes | 当前进度、最新验证、下一步动作唯一事实源 |
 | `docs/index.md` | 文档索引 | yes | 按 Current Rules / History / Evidence 路由 |
 | `docs/authority-map.md` | authority map | yes | 本文，负责冲突优先级 |
+| `docs/start-here-for-learners.md` | 学习者入口 | yes | 第一次阅读仓库时使用，不替代 current state |
+| `docs/open-source-boundary.md` | 开源边界入口 | yes | 公开声明、clean-room 和能力边界 |
 
 ## Topic Register
 
@@ -33,7 +35,10 @@ Related Files: README.md, AGENTS.md, CURRENT_STATE.md, docs/index.md
 | Agent 工作控制 | `AGENTS.md` | current-rule | repo | active | none | `core-run-record.md` | 操作边界冲突时以 `AGENTS.md` 和安全策略为准 |
 | 文档导航 | `docs/index.md` | index | docs | active | none | none | 导航冲突时以 authority map 的 canonical doc 为准 |
 | 文档 authority | `docs/authority-map.md` | reference-authority | docs | active | none | none | 本文优先于索引和历史材料 |
+| 开源边界 | `docs/open-source-boundary.md` | current-rule | open-source | active | `claude-code-core-learning-path.md` | `core-run-record.md`, `src/core/*.verify.mjs` | 对外能力声明、clean-room 边界和 secret 边界以 open-source boundary、AGENTS 和 verify 证据为准 |
+| Core 13-17 教学整理 | `course-13-eval-reference-cost-evidence.md` | tutorial | course | active | `course-12-eval-packaging-and-executable-seeds.md` | `core-13-eval-expansion-third-batch.md`, `core-14-eval-expansion-final-starter-batch.md`, `core-15-reference-agent-comparison.md`, `core-16-reference-agent-cost-and-cross-agent.md`, `core-17-reference-agent-pricing-table-baseline.md`, `src/core/eval-expansion-third-batch.verify.mjs`, `src/core/eval-expansion-final-starter-batch.verify.mjs`, `src/core/reference-agent-comparison.verify.mjs`, `src/core/reference-agent-cost-and-cross-agent.verify.mjs`, `src/core/reference-agent-pricing-table-baseline.verify.mjs` | Core 13-17 的教学解释以 course-13 为准；具体验收以对应 core 文档和 verify 脚本为准 |
 | 生产化升级路线 | `production-upgrade-roadmap.md` | current-rule | production-upgrade | active | `claude-code-agent-runtime-framework.md`, `claude-code-core-implementation-blueprint.md` | `production-upgrade-validation-matrix.md`, `core-18-context-economy-cache-aware-context-engine.md`, `core-19-compaction-quality-eval.md`, `core-20-plan-state-machine.md`, `core-21-long-running-task-eval.md`, `core-22-tool-runtime-transaction.md`, `core-23-model-gateway-budget-controller.md`, `core-24-durable-session-store-replay.md`, `core-25-repo-intelligence-relevance-index.md`, `core-26-human-approval-interruption-protocol.md` | Core 18-26 的路线和顺序以 roadmap 为准，具体验收以 validation matrix 和对应 verify 为准 |
+| Core 18-26 教学整理 | `course-14-production-upgrade-evidence-chain.md` through `course-17-session-repo-approval-production.md` | tutorial | course | active | `course-07-core-build-pass-overview.md` through `course-13-eval-reference-cost-evidence.md`, `production-upgrade-roadmap.md` | `production-upgrade-validation-matrix.md`, `core-run-record.md`, `src/core/context-economy.verify.mjs` through `src/core/human-approval-interruption-protocol.verify.mjs` | Core 18-26 的总览叙事以 course-14 为准，逐 verify case 教学以 course-15 到 course-17 为准；路线和验收仍以 roadmap、validation matrix 和 verify 脚本为准 |
 | Core 集成行为 | `core-01-integrated-runtime.md` through `core-26-human-approval-interruption-protocol.md` | design-record | core | active | `claude-code-core-implementation-blueprint.md` | `src/core/*.verify.mjs`, `core-run-record.md` | 具体 Core 阶段以对应 `core-XX` 文档和 verify 脚本为准 |
 | Lab 机制 | `lab-01-mock-runtime-loop.md` through `lab-08-eval-runner.md` | tutorial | lab | active | `course-06-labs-to-core-map.md` | `src/lab*/**/*.verify.mjs`, `labs-verification-record.md` | 实验行为以源码 verify 为准 |
 | 70%-80% 验收框架 | `claude-code-70-80-validation-and-model-access.md` | reference-authority | eval | active | `agent-runtime-optimization-loop.md` | `core-10-70-80-eval-open-source-packaging.md`, `src/core/core-readiness-package.verify.mjs` | 能力声明必须经过 Core 10 和后续 eval 证据 |
@@ -58,3 +63,4 @@ Related Files: README.md, AGENTS.md, CURRENT_STATE.md, docs/index.md
 
 - 当前治理范围是最小开源入口层，不全量重写历史材料。
 - Core 10 只建立 starter eval packaging，不是生产级 70%-80% 能力认证。
+- Open Source Learning Preview 可以发布学习路径、deterministic local evidence 和协作规范；不能发布或暗示官方源码复刻、Claude Code baseline、真实厂商账单或 RelativeScore。

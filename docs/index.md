@@ -7,6 +7,8 @@
 - `../README.md`: 项目总入口、快速运行和常用命令。
 - `../AGENTS.md`: Agent 工作控制入口。
 - `../CURRENT_STATE.md`: 当前断点、最新验证和下一步动作。
+- `docs/start-here-for-learners.md`: 第一次学习者入口。
+- `docs/open-source-boundary.md`: 开源定位、能力声明和 clean-room 边界。
 - `../production-upgrade-roadmap.md`: Core 18-26 生产化升级路线。
 - `../production-upgrade-validation-matrix.md`: Core 18-26 验证先行矩阵。
 - `docs/authority-map.md`: 文档 authority、冲突优先级和证据边界。
@@ -19,6 +21,7 @@
 - `../claude-code-core-learning-path.md`: 学习路线、阶段定义、命名规则。
 - `../course-00-teaching-standard.md`: 教学展开标准。
 - `../AGENTS.md`: Agent 操作边界和完成定义。
+- `docs/open-source-boundary.md`: 开源能力声明、clean-room 和 secret 边界。
 
 ## Learning Courses
 
@@ -35,6 +38,11 @@
 - `../course-10-trace-eval-real-model-and-recovery.md`
 - `../course-11-real-repo-task-layer.md`
 - `../course-12-eval-packaging-and-executable-seeds.md`
+- `../course-13-eval-reference-cost-evidence.md`
+- `../course-14-production-upgrade-evidence-chain.md`
+- `../course-15-context-compaction-plan-production.md`
+- `../course-16-long-running-tool-gateway-production.md`
+- `../course-17-session-repo-approval-production.md`
 
 ## Core Records
 
@@ -67,8 +75,23 @@
 
 ## Production Upgrade
 
+- `docs/production-upgrade-terms-zh.md`
+- `../course-14-production-upgrade-evidence-chain.md`
+- `../course-15-context-compaction-plan-production.md`
+- `../course-16-long-running-tool-gateway-production.md`
+- `../course-17-session-repo-approval-production.md`
 - `../production-upgrade-roadmap.md`
 - `../production-upgrade-validation-matrix.md`
+
+## Open Source Readiness
+
+- `docs/start-here-for-learners.md`
+- `docs/open-source-boundary.md`
+- `docs/github-release-checklist.md`
+- `../CONTRIBUTING.md`
+- `../SECURITY.md`
+- `../CODE_OF_CONDUCT.md`
+- `../LICENSE`
 
 ## Lab Evidence
 

@@ -1,6 +1,6 @@
 # CURRENT_STATE：Claude Code Core 学习项目当前状态
 
-最后更新：2026-05-28 00:57 CST
+最后更新：2026-05-28 15:35 CST
 
 本文是新对话入口和当前状态单一事实源。它不替代课程、Lab、Core 文档，只回答：
 
@@ -100,6 +100,15 @@ Eval 如何证明能力真的变强。
 | `course-10-trace-eval-real-model-and-recovery.md` | 课程 | Trace / Eval / Real Model / Prompt Recovery 如何让系统可证明、可恢复 |
 | `course-11-real-repo-task-layer.md` | 课程 | 真实 repo fixture 比 toy workspace 多证明了什么 |
 | `course-12-eval-packaging-and-executable-seeds.md` | 课程 | Eval packaging 与 executable seeds 如何把能力证明体系落地 |
+| `course-13-eval-reference-cost-evidence.md` | 课程 | Core 13-17 的 executable suite、reference-agent、cost basis 和 pricing boundary 执行链 |
+| `course-14-production-upgrade-evidence-chain.md` | 课程 | Core 18-26 Production Upgrade 如何形成 deterministic local evidence 链 |
+| `course-15-context-compaction-plan-production.md` | 课程 | Core 18-20 的 Context Economy、Compaction Quality、Plan State Machine 执行链 |
+| `course-16-long-running-tool-gateway-production.md` | 课程 | Core 21-23 的 Long-Running Eval、ToolRuntime Transaction、ModelGateway Budget 执行链 |
+| `course-17-session-repo-approval-production.md` | 课程 | Core 24-26 的 Durable Session、Repo Intelligence、Human Approval 执行链 |
+| `docs/production-upgrade-terms-zh.md` | 术语参考 | Core 18-26 英文术语的中文解释和边界 |
+| `docs/start-here-for-learners.md` | 学习者入口 | 第一次打开仓库时的学习路线和运行入口 |
+| `docs/open-source-boundary.md` | 开源边界 | 对外能力声明、clean-room 和 secret 边界 |
+| `docs/github-release-checklist.md` | 开源检查表 | 发布到 GitHub 前的最小检查 |
 | `lab-01-*` 到 `lab-08-*` | 可执行实验 | 每个 Lab 证明一个局部机制 |
 | `core-01-integrated-runtime.md` | 集成实现记录 | 证明多个 Lab 机制可以合成最小 Runtime |
 | `core-02-model-gateway.md` | 集成实现记录 | 证明模型层可以替换成 Model Gateway，且 Runtime / Tool / Policy 边界不变 |
@@ -167,7 +176,13 @@ course-01 到 course-06 已由学习者复习完成。
 ```text
 course-07-core-build-pass-overview.md 已完成并由学习者复盘通过。
 course-08 到 course-12 已按执行链样板重写，并由学习者逐课复盘完成。
+course-13-eval-reference-cost-evidence.md 已创建，用于补齐 Core 13-17 的 executable suite、reference-agent baseline、cost basis、pricing table 和 RelativeScore 阻塞边界。
+course-14-production-upgrade-evidence-chain.md 已创建，用于衔接 course-13，并讲清 Core 18-26 Production Upgrade 的阶段理由、生产化问题、证据链和 out-of-scope 边界。
+course-15-context-compaction-plan-production.md、course-16-long-running-tool-gateway-production.md、course-17-session-repo-approval-production.md 已创建，用于按 course-08 到 course-12 的同一执行链标准细读 Core 18-26 verify case。
+docs/production-upgrade-terms-zh.md 已创建，用于把 Core 18-26 的英文代码术语翻译成中文机制解释。
+docs/start-here-for-learners.md、docs/open-source-boundary.md、docs/github-release-checklist.md 已创建，用于开源前的学习者入口、能力声明边界和发布检查。
 Teaching Consolidation Pass 第一轮完成。
+Production Upgrade Teaching Consolidation Pass 已完成总览课和三门细课整理；Open Source Learning Preview Preparation 正在收束。
 ```
 
 已亲自体验：
@@ -180,10 +195,10 @@ course-06 中 Lab 到 Core 的映射问题已由学习者确认能回答。
 当前正在进行：
 
 ```text
-Production Upgrade Roadmap Pass
+Open Source Learning Preview Preparation
 ```
 
-它的目的不是继续补 starter seed、扩写抽象架构，或优先依赖第二 reference agent，而是先把 Core 18-26 的生产化升级路线、依赖关系、边界和验证矩阵钉住，再逐个实现和学习。
+它的目的不是继续补 starter seed、扩写抽象架构，或把 deterministic local evidence 夸大成生产级能力，而是把课程主线、开源边界、协作文件、CI 和导航整理到可以发布学习预览的状态。
 
 当前断点：
 
@@ -203,6 +218,10 @@ Core 26 Human Approval + Interruption Protocol 已实现并通过目标验证。
 Production Upgrade Roadmap Pass 已建立 Core 18-26 路线：Context Economy、Compaction Quality、Plan State Machine、Long-Running Eval、ToolRuntime Transaction、ModelGateway Budget、Durable Replay、Repo Intelligence、Human Approval。
 Core Build Pass 第一轮完成。
 Teaching Consolidation Pass 第一轮完成，course-07 到 course-12 已由学习者复盘通过。
+Eval / Reference / Cost Teaching Bridge 已完成 course-13 整理：Core 13-17 被讲成 20/20 executable suite、codex-local baseline、cost basis、pricing boundary 和 RelativeScore 阻塞的 evidence bridge。
+Production Upgrade Teaching Consolidation Pass 已完成 course-14 到 course-17 整理：Core 18-26 被讲成 Context / Compaction / Plan / Eval / ToolRuntime / ModelGateway / Session / Repo Intelligence / Human Approval 的 deterministic local evidence 链，并按 Core 18-20、Core 21-23、Core 24-26 拆成 verify-case execution-chain 细课。
+Production Upgrade 中文术语表已补充，课程阅读时先按中文理解，英文只用于对照代码字段和 verify case 名称。
+Open Source Learning Preview docs 已补齐：LICENSE、CONTRIBUTING、SECURITY、CODE_OF_CONDUCT、.env.example、GitHub Actions verify workflow、学习者入口、开源边界和 GitHub release checklist。
 Eval Expansion Pass starter executable suite 完成，累计 20/20 starter case executable。
 Reference-Agent Comparison Pass 已完成第一批 Codex local CLI 小样本对照：8 个 executable seeds 有真实 run evidence，覆盖修复、失败归因、安全拒绝和歧义拒绝。
 Cost + Cross-Agent Pass 已补上 8 个 codex-local sample runs 的 cost 计量口径：token、cached token、uncached token、output token、reasoning output token、latency 和 raw log hash 都可汇总；没有 pricing table 时 USD 仍保持 null。横向对照当前结论是 single_baseline_only：本机只有 codex-local 有 recorded runs，未检测到 Claude Code / Claude / OpenCode / Aider / Cursor Agent / Gemini / Qwen / OpenAI CLI 的可用第二 baseline。没有第二 agent 真实 runs 前，不生成 RelativeScore。
@@ -239,6 +258,11 @@ course-09-plan-mode-and-compaction.md
 course-10-trace-eval-real-model-and-recovery.md
 course-11-real-repo-task-layer.md
 course-12-eval-packaging-and-executable-seeds.md
+course-13-eval-reference-cost-evidence.md
+course-14-production-upgrade-evidence-chain.md
+course-15-context-compaction-plan-production.md
+course-16-long-running-tool-gateway-production.md
+course-17-session-repo-approval-production.md
 ```
 
 Lab 层：
@@ -889,9 +913,10 @@ DeepSeek Chat Completions API 已经在本机完成真实端到端调用。
 学习侧还缺：
 
 ```text
-学习者需要正式复盘 Core 10 的 starter eval packaging、Core 11 / Core 12 的 executable repo seeds 和开源文档 authority 边界。
-学习者需要区分 toy workspace、fixture workspace 和真实项目仓库之间的差异。
-学习者需要区分 eval_readiness_coverage、executable_repo_seed_score、SystemScore、RelativeScore 四种不同分数。
+学习者需要正式复盘 course-13-eval-reference-cost-evidence.md 到 course-17-session-repo-approval-production.md。
+学习者需要能把 Core 13-17 复述为 executable suite -> codex-local baseline -> cost basis -> pricing boundary -> RelativeScore blocked 的证据桥。
+学习者需要能把 Core 18-26 复述为 Context / Compaction / Plan / Eval / ToolRuntime / ModelGateway / Session / Repo Intelligence / Human Approval 的生产化证据链。
+学习者需要继续区分 deterministic local evidence、真实 provider billing、真实 provider cache billing、生产级 benchmark、SystemScore 和 RelativeScore。
 ```
 
 工程侧还缺：
@@ -924,9 +949,10 @@ Core 18-26 已完成 deterministic local evidence 主线；但仍不能声称完
 
 ```text
 README + docs/index + authority-map 的最小入口层已经建立。
+开源协作文件、学习者入口、开源边界和 GitHub release checklist 已补齐。
 历史文档还没有全量迁移或归档；当前只做了 bounded pilot。
-当前仍是学习工作区，不是最终开源版本。
-Production Upgrade Roadmap Pass 已建立路线入口，但未来每个 Core 完成后仍要同步 CURRENT_STATE、core-run-record、README、docs/index 和 authority-map。
+当前已接近 GitHub learning-preview 发布状态，但仍应在发布前完成最终验证和人工确认。
+Production Upgrade Roadmap Pass 已建立路线入口，course-14 到 course-17 已建立 Core 18-26 教学整理入口；未来新路线开始前仍要先写清新的 roadmap / validation matrix，并同步 CURRENT_STATE、README、docs/index 和 authority-map。
 ```
 
 ---
@@ -936,16 +962,18 @@ Production Upgrade Roadmap Pass 已建立路线入口，但未来每个 Core 完
 下一步只做一件事：
 
 ```text
-复盘 Core 18-26 的 deterministic local evidence 链，并选择下一条路线。
+完成 Open Source Learning Preview 的最终验证，并由维护者决定是否推送到 GitHub。
 ```
 
 推荐优先顺序：
 
 ```text
-1. 先阅读 production-upgrade-roadmap.md 的当前进度和 Core 18-26 stage docs。
-2. 对照 production-upgrade-validation-matrix.md，确认每个 Core 的必过验证都已有对应 verify evidence。
-3. 选择下一条路线：真实 repo benchmark、第二 reference-agent baseline，或更完整的 approval / policy 产品层。
-4. 新路线开始前，先写新的 roadmap / validation matrix，不直接把当前 deterministic local evidence 扩写成生产级声明。
+1. 运行 git diff --check。
+2. 如修改核心验证链路或 package.json，再运行 npm run verify:all；开源前推荐仍运行 npm run verify:all。
+3. 阅读 docs/open-source-boundary.md，确认 README 和课程没有越界能力声明。
+4. 阅读 docs/github-release-checklist.md，确认 secret、课程连续性、CI 和 evidence boundary。
+5. 维护者决定是否创建 GitHub repo、推送分支并开放 issue / PR。
+6. 下一条路线开始前，先写新的 roadmap / validation matrix，不直接把当前 deterministic local evidence 扩写成生产级声明。
 ```
 
 做完下一步后的预期结果：
@@ -966,6 +994,9 @@ Production Upgrade Roadmap Pass 已建立路线入口，但未来每个 Core 完
 ```text
 CURRENT_STATE.md
 claude-code-core-learning-path.md
+docs/start-here-for-learners.md
+docs/open-source-boundary.md
+docs/github-release-checklist.md
 course-06-labs-to-core-map.md
 course-07-core-build-pass-overview.md
 course-08-model-gateway-and-context-engine.md
@@ -973,6 +1004,11 @@ course-09-plan-mode-and-compaction.md
 course-10-trace-eval-real-model-and-recovery.md
 course-11-real-repo-task-layer.md
 course-12-eval-packaging-and-executable-seeds.md
+course-13-eval-reference-cost-evidence.md
+course-14-production-upgrade-evidence-chain.md
+course-15-context-compaction-plan-production.md
+course-16-long-running-tool-gateway-production.md
+course-17-session-repo-approval-production.md
 core-02-model-gateway.md
 core-03-context-engine-integration.md
 core-04-plan-mode-integration.md
@@ -1039,7 +1075,10 @@ Core 26 Human Approval + Interruption Protocol 已实现并通过目标验证。
 Production Upgrade Roadmap Pass 已建立 Core 18-26 路线和验证矩阵。
 course-07 Core Build Pass Overview 已创建并复盘完成。
 course-08 到 course-12 已按执行链样板重写并复盘完成。
-Core 18-26 Production Upgrade Roadmap Pass 已完成当前 deterministic local evidence 主线。下一步先复盘证据链并选择新路线：真实 repo benchmark、第二 reference-agent baseline，或更完整的 approval / policy 产品层。
+course-13 Eval Reference Cost Evidence 已创建，用于复盘 Core 13-17 的 executable suite、codex-local baseline、cost basis、pricing boundary 和 RelativeScore 阻塞。
+course-14 Production Upgrade Evidence Chain 已创建，用于复盘 Core 18-26 的 deterministic local evidence 主线。
+course-15 到 course-17 已创建，用于按同一执行链标准细读 Core 18-26 verify case。
+Open Source Learning Preview Preparation 已补齐课程桥、开源边界、协作文件和 CI。下一步完成最终验证，并由维护者决定是否推送到 GitHub。
 ```
 
 恢复后不要立即做：
@@ -1057,10 +1096,12 @@ Core 18-26 Production Upgrade Roadmap Pass 已完成当前 deterministic local e
 
 ```text
 1. 不再补 starter seed；20/20 starter executable suite 已完成。
-2. 先读 production-upgrade-roadmap.md 和 production-upgrade-validation-matrix.md。
-3. 不要把 Core 18-26 的 deterministic local evidence 扩写成生产级 Claude Code 能力声明。
-4. 下一阶段开始前，先写清新的 roadmap / validation matrix。
-5. 不要在没有真实外部对照或更大 benchmark 时声称 70%-80% 成功率、真实 provider SLA 或跨 agent RelativeScore。
+2. 先读 docs/start-here-for-learners.md 和 docs/open-source-boundary.md。
+3. 再读 course-13-eval-reference-cost-evidence.md，确认 Core 13-17 的 evidence bridge 不再缺课。
+4. 继续读 course-14-production-upgrade-evidence-chain.md 到 course-17-session-repo-approval-production.md，确认 Core 18-26 每组 verify case 的对象、状态和断言。
+5. 不要把 Core 18-26 的 deterministic local evidence 扩写成生产级 Claude Code 能力声明。
+6. 下一阶段开始前，先写清新的 roadmap / validation matrix。
+7. 不要在没有真实外部对照或更大 benchmark 时声称 70%-80% 成功率、真实 provider SLA 或跨 agent RelativeScore。
 ```
 
 ---

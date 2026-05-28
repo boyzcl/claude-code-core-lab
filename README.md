@@ -62,8 +62,12 @@ npm run core:26
 - `labs-verification-record.md`: Lab 验证记录。
 - `docs/index.md`: 开源文档导航。
 - `docs/authority-map.md`: 文档 authority 和冲突优先级。
+- `docs/start-here-for-learners.md`: 第一次学习者入口。
+- `docs/open-source-boundary.md`: 开源能力声明和 clean-room 边界。
+- `docs/github-release-checklist.md`: 发布到 GitHub 前的检查表。
 - `production-upgrade-roadmap.md`: Core 18-26 生产化升级路线。
 - `production-upgrade-validation-matrix.md`: Core 18-26 验证先行矩阵。
+- `docs/production-upgrade-terms-zh.md`: Core 18-26 中文术语对照。
 
 ## Common Tasks
 
@@ -111,6 +115,8 @@ npm run core:26
 Start here:
 
 - `CURRENT_STATE.md`
+- `docs/start-here-for-learners.md`
+- `docs/open-source-boundary.md`
 - `production-upgrade-roadmap.md`
 - `production-upgrade-validation-matrix.md`
 - `docs/index.md`
@@ -131,6 +137,12 @@ Learning courses:
 - `course-10-trace-eval-real-model-and-recovery.md`
 - `course-11-real-repo-task-layer.md`
 - `course-12-eval-packaging-and-executable-seeds.md`
+- `course-13-eval-reference-cost-evidence.md`
+- `course-14-production-upgrade-evidence-chain.md`
+- `course-15-context-compaction-plan-production.md`
+- `course-16-long-running-tool-gateway-production.md`
+- `course-17-session-repo-approval-production.md`
+- `docs/production-upgrade-terms-zh.md`
 
 Core implementation records:
 
@@ -163,7 +175,7 @@ Core implementation records:
 
 ## Current Boundary
 
-Core 14 establishes executable repo seeds for all 20 Core 10 starter cases and brings cumulative executable starter coverage to 20/20. Core 15 records a small Codex local CLI reference-agent sample for 8 seeds, including repair, safety refusal, ambiguity refusal, and expected failed-verification outcomes. Core 16 adds a cost measurement basis and cross-agent readiness gate for those runs. Core 17 adds an explicit local pricing table baseline that produces configured USD estimates from the same evidence. Core 18 adds a cache-aware Context Economy Engine with stable prefix, dynamic tail, token budget eviction, artifact boundary, and cache simulation reports. Core 19 adds a compaction quality evaluator that detects objective drift, constraint loss, failure loss, plan loss, modified-file loss, and pending-action loss. Core 20 adds a Plan State Machine with step lifecycle, blocked reasons, revisions, compaction resume, permission checks, and final grounding. Core 21 adds a long-running task eval with repeated failure history, compaction resume, cost curve, no-false-final attribution, and learning handoff. Core 22 adds a deterministic ToolRuntime transaction layer with diff preview, multi-file commit, rollback, stale reread protection, protected-file approval gates, and high-risk Bash approval routing. Core 23 adds a deterministic ModelGateway budget controller with token/cost budget gates, retry/fallback traces, capability registry filtering, and narrow JSON tool-call repair. Core 24 adds deterministic durable session replay with append-only event logs, snapshot restore, crash recovery, compaction audit, and secret redaction checks. Core 25 adds deterministic repo intelligence with repo map, symbol/test/rule index, relevance scoring, incremental update, and token benefit evidence. Core 26 adds deterministic human approval and interruption protocol evidence with approval_required, approve/reject path, interruption, handoff, and no-hidden-execution checks. This is not a Claude Code baseline, not a RelativeScore, not a real vendor bill, not real provider cache billing, not a production long-running benchmark, not a full production ToolRuntime, not a real provider reliability guarantee, not a distributed durable store, not production semantic search, not a production approval UI, and not a production-level Claude Code 70%-80% capability claim.
+Core 14 establishes executable repo seeds for all 20 Core 10 starter cases and brings cumulative executable starter coverage to 20/20. Core 15 records a small Codex local CLI reference-agent sample for 8 seeds, including repair, safety refusal, ambiguity refusal, and expected failed-verification outcomes. Core 16 adds a cost measurement basis and cross-agent readiness gate for those runs. Core 17 adds an explicit local pricing table baseline that produces configured USD estimates from the same evidence. `course-13-eval-reference-cost-evidence.md` teaches this Core 13-17 bridge before Production Upgrade. Core 18 adds a cache-aware Context Economy Engine with stable prefix, dynamic tail, token budget eviction, artifact boundary, and cache simulation reports. Core 19 adds a compaction quality evaluator that detects objective drift, constraint loss, failure loss, plan loss, modified-file loss, and pending-action loss. Core 20 adds a Plan State Machine with step lifecycle, blocked reasons, revisions, compaction resume, permission checks, and final grounding. Core 21 adds a long-running task eval with repeated failure history, compaction resume, cost curve, no-false-final attribution, and learning handoff. Core 22 adds a deterministic ToolRuntime transaction layer with diff preview, multi-file commit, rollback, stale reread protection, protected-file approval gates, and high-risk Bash approval routing. Core 23 adds a deterministic ModelGateway budget controller with token/cost budget gates, retry/fallback traces, capability registry filtering, and narrow JSON tool-call repair. Core 24 adds deterministic durable session replay with append-only event logs, snapshot restore, crash recovery, compaction audit, and secret redaction checks. Core 25 adds deterministic repo intelligence with repo map, symbol/test/rule index, relevance scoring, incremental update, and token benefit evidence. Core 26 adds deterministic human approval and interruption protocol evidence with approval_required, approve/reject path, interruption, handoff, and no-hidden-execution checks. `course-14-production-upgrade-evidence-chain.md` teaches Core 18-26 as one Production Upgrade evidence chain; `course-15` through `course-17` split it into detailed verify-case execution-chain courses. This is not a Claude Code baseline, not a RelativeScore, not a real vendor bill, not real provider cache billing, not a production long-running benchmark, not a full production ToolRuntime, not a real provider reliability guarantee, not a distributed durable store, not production semantic search, not a production approval UI, and not a production-level Claude Code 70%-80% capability claim.
 
 ## Contributing
 
@@ -174,3 +186,5 @@ npm run verify:all
 ```
 
 Keep secrets in local ignored files such as `.env.local`; do not write API keys into source, docs, traces, or verification records.
+
+See `CONTRIBUTING.md`, `SECURITY.md`, `CODE_OF_CONDUCT.md`, and `docs/github-release-checklist.md` before opening a public PR or release.

@@ -225,13 +225,20 @@ run-record / verification-record
 当前学习主线只认：
 
 ```text
-course-00 -> course-01 -> course-02 -> course-03 -> course-04 -> course-05 -> course-06 -> course-07 -> course-08 -> course-09 -> course-10 -> course-11 -> course-12
+course-00 -> course-01 -> course-02 -> course-03 -> course-04 -> course-05 -> course-06 -> course-07 -> course-08 -> course-09 -> course-10 -> course-11 -> course-12 -> course-13 -> course-14 -> course-15 -> course-16 -> course-17
 ```
 
 `course-06` 之后进入 Core Build Pass，`course-07` 负责把 Core Build Pass 已完成的 Core 01 到 Core 12 重新整理成教学总览；`course-08` 到 `course-12` 负责按主题拆开学习：
 
 ```text
 core-01 -> core-02 -> core-03 -> ... -> core-12
+```
+
+`course-13` 负责补齐 Core 13-17 的 executable suite、reference-agent、cost basis 和 pricing boundary 教学；`course-14` 负责把 Core 18-26 Production Upgrade 重新整理成教学总览；`course-15` 到 `course-17` 负责按主题拆开学习：
+
+```text
+core-13 -> core-14 -> core-15 -> core-16 -> core-17
+core-18 -> core-19 -> core-20 -> ... -> core-26
 ```
 
 Core Build Pass 不再新增一条平行的 `Review-XX` 主线。
@@ -254,6 +261,11 @@ Core Build Pass 不再新增一条平行的 `Review-XX` 主线。
 | 10 | `course-10-trace-eval-real-model-and-recovery.md` | Trace / Eval / Real Model / Prompt Recovery 如何让系统可证明、可接真模型、可恢复 | 你能解释 verification_missing、provider adapter、denied ToolResult 回灌和 prompt 与 policy 的边界 |
 | 11 | `course-11-real-repo-task-layer.md` | 真实 repo fixture 比 toy workspace 多证明了什么 | 你能解释项目规则、测试发现、多候选文件、stale_file 和 public API 边界 |
 | 12 | `course-12-eval-packaging-and-executable-seeds.md` | Eval packaging 与 executable seeds 如何把能力证明体系落地 | 你能区分 eval_readiness_coverage、executable_repo_seed_score、SystemScore 和 RelativeScore |
+| 13 | `course-13-eval-reference-cost-evidence.md` | Core 13-17 如何把 executable suite、reference-agent baseline、cost basis 和 pricing boundary 接起来 | 你能解释 20/20 executable、codex-local baseline、rawLogSha256、configured estimated USD 和 RelativeScore 阻塞边界 |
+| 14 | `course-14-production-upgrade-evidence-chain.md` | Core 18-26 Production Upgrade 如何形成 deterministic local evidence 链 | 你能解释 Context / Compaction / Plan / Eval / ToolRuntime / ModelGateway / Session / Repo Intelligence / Human Approval 如何连成生产化证据链，并说清 out-of-scope |
+| 15 | `course-15-context-compaction-plan-production.md` | Context Economy、Compaction Quality、Plan State Machine 如何构成状态保真链 | 你能从 Core 18-20 verify case 指到 stablePrefix、compaction diff、plan trace、permission 和 final grounding |
+| 16 | `course-16-long-running-tool-gateway-production.md` | Long-Running Eval、ToolRuntime Transaction、ModelGateway Budget 如何构成执行安全链 | 你能从 Core 21-23 verify case 解释 failureHistory、transaction rollback、budget gate、retry/fallback 和 capability filtering |
+| 17 | `course-17-session-repo-approval-production.md` | Durable Session、Repo Intelligence、Human Approval 如何构成恢复和协作链 | 你能从 Core 24-26 verify case 解释 event replay、relevance reasons、approval_required、interrupt 和 no hidden execution |
 
 不要再使用：
 
