@@ -1,190 +1,177 @@
-# Claude Code Core Learning
+# Claude Code Core Lab
 
-这是一个 clean-room 学习项目，用 course -> lab -> core 的方式，从零构建一个 Claude Code-like Core。目标不是一次性复刻完整产品，而是把本地 coding agent 的关键闭环拆成可运行、可验证、可教学的阶段。
+[![Verify](https://github.com/boyzcl/claude-code-core-lab/actions/workflows/verify.yml/badge.svg)](https://github.com/boyzcl/claude-code-core-lab/actions/workflows/verify.yml)
 
-当前状态以 `CURRENT_STATE.md` 为准。历史解释、架构背景和实验记录只作为辅助材料。
+这是一个中文学习项目：围绕 Claude Code 这类代码智能体的核心机制，从零搭一个可运行、可验证、可复盘的本地核心运行时。
 
-## Quick Start
+你可以把它理解成一套“动手学 Claude Code 产品机制”的课程和实验：
 
-Prerequisites:
+```text
+先学 Claude Code 为什么不是普通聊天机器人
+再手工推演一次代码任务怎么跑
+再用 Lab 拆开单个机制
+再把机制集成成 Core
+最后用验证脚本证明每一步到底成立了什么
+```
+
+为了让项目能公开学习和长期维护，本仓库不复制 Claude Code 官方源码、私有提示词或非公开实现。它学习的是 Claude Code 暴露出来的产品问题和代码智能体运行时设计方法，并用我们自己写的代码和评测来复现核心闭环。
+
+## 你会学到什么
+
+学完后，你应该能用自己的话解释并动手验证：
+
+- 模型第一次被调用时，到底看见哪些消息、工具、状态和规则。
+- 工具为什么必须由运行时执行，而不是靠提示词口头授权。
+- 上下文如何组装、裁剪、附件化，以及为什么有些内容可以稳定复用。
+- 计划为什么是状态机，不是模型写的一段计划文本。
+- 压缩为什么不是普通摘要，而是任务状态保真。
+- 评测如何把“能力变强了”变成可运行证据。
+- 参考智能体、成本估算、相对分数为什么都有严格证据门槛。
+- Core 18-26 为什么是一条生产化升级证据链，而不是九个散功能。
+
+## 适合谁
+
+- 想系统理解 Claude Code / 代码智能体工作机制的学习者。
+- 想从零实现一个本地代码智能体运行时的工程师。
+- 想学习代码智能体产品如何做上下文、工具、权限策略、计划和评测的开发者。
+- 想把 AI Coding 项目做成可验证、可教学、可开源项目的人。
+
+不适合把它当成：
+
+- Claude Code 官方源码。
+- Claude Code 完整复刻。
+- 可直接替代 Claude Code 的生产级产品。
+- 真实厂商账单、真实 Claude Code baseline 或跨 Agent RelativeScore。
+
+## 30 秒跑起来
+
+环境要求：
 
 ```bash
 node --version
 npm --version
 ```
 
-Install:
+安装并运行全部本地验证：
 
 ```bash
 npm install
-```
-
-Verify:
-
-```bash
 npm run verify:all
 ```
 
-Run selected demos:
+如果看到命令正常结束，说明本地 Lab 和 Core 的确定性验证都可复现。当前完整记录见 [docs/records/core-run-record.md](docs/records/core-run-record.md)，最近一次记录是 `222/222 passed`。
+
+## 你会得到什么结果
+
+跑完和学完后，预期结果不是“得到一个 Claude Code 替代品”，而是：
+
+- 你能在本地运行一套最小代码智能体核心。
+- 你能读懂一次任务从用户输入、上下文组装、工具执行、计划更新到最终验证的链路。
+- 你能用 `npm run core:*:verify` 证明某个机制到底成立了什么。
+- 你能分清“本地确定性证据”和“真实生产能力声明”的差别。
+
+## 推荐学习路线
+
+第一次打开仓库，按这个顺序来：
+
+1. 读 [学习者入口](docs/start-here-for-learners.md)，先建立整体地图。
+2. 读 [课程路线](docs/course/claude-code-core-learning-path.md)，知道课程为什么这样排。
+3. 从 [Course 00](docs/course/course-00-teaching-standard.md) 开始顺序读到 [Course 17](docs/course/course-17-session-repo-approval-production.md)。
+4. 每读完一组机制，运行对应 Lab 或 Core 验证脚本。
+5. 不懂英文术语时，看 [中文术语表](docs/production-upgrade-terms-zh.md)。
+
+最小体验路径：
 
 ```bash
-npm run core:demo
-npm run core:07:live
-npm run core:10
-npm run core:11
-npm run core:12
-npm run core:13
-npm run core:14
-npm run core:15
-npm run core:16
-npm run core:17
-npm run core:18
-npm run core:19
-npm run core:20
-npm run core:21
-npm run core:22
-npm run core:23
-npm run core:24
-npm run core:25
-npm run core:26
+npm run verify:labs
+npm run core:10:verify
+npm run core:14:verify
+npm run core:18:verify
+npm run core:26:verify
 ```
 
-`core:07:live` 会读取本地 `.env.local` 里的模型配置。`.env.local` 被 git 忽略，不能提交。
+## 项目结构
 
-## Repository Map
+```text
+.
+├── README.md                     # GitHub 首页，先看这里
+├── package.json                  # npm scripts，所有 verify 入口
+├── src/                          # 可运行实现
+│   ├── lab01 ... lab08           # 单机制实验
+│   └── core/                     # 集成后的核心运行时实现和验证脚本
+├── docs/
+│   ├── course/                   # 课程主线：course-00 到 course-17
+│   ├── lab/                      # Lab 说明：单机制怎么跑
+│   ├── core/                     # Core 阶段记录：每个集成阶段证明什么
+│   ├── records/                  # 验证记录
+│   ├── roadmap/                  # 生产化升级路线和验证矩阵
+│   ├── reference/                # 架构、实现和评测参考资料
+│   └── history/                  # 早期分析文章，仅作背景
+├── AGENTS.md                     # 给 Agent / 维护者看的工作规则
+├── CURRENT_STATE.md              # 当前进度和恢复入口
+└── .github/workflows/verify.yml  # GitHub Actions 验证
+```
 
-- `CURRENT_STATE.md`: 当前进度、最新验证、下一步动作和新对话恢复入口。
-- `claude-code-core-learning-path.md`: 学习路线、阶段定义和命名规则。
-- `course-*.md`: 课程层，解释每个机制为什么存在。
-- `lab-*.md` and `src/lab*/`: 局部机制实验。
-- `core-*.md` and `src/core/`: 集成实现与验证。
-- `core-run-record.md`: Core 验证记录。
-- `labs-verification-record.md`: Lab 验证记录。
-- `docs/index.md`: 开源文档导航。
-- `docs/authority-map.md`: 文档 authority 和冲突优先级。
-- `docs/start-here-for-learners.md`: 第一次学习者入口。
-- `docs/open-source-boundary.md`: 开源能力声明和 clean-room 边界。
-- `docs/github-release-checklist.md`: 发布到 GitHub 前的检查表。
-- `production-upgrade-roadmap.md`: Core 18-26 生产化升级路线。
-- `production-upgrade-validation-matrix.md`: Core 18-26 验证先行矩阵。
-- `docs/production-upgrade-terms-zh.md`: Core 18-26 中文术语对照。
+更详细的目录解释见 [项目结构说明](docs/project-structure.md)。
+完整文档导航见 [docs/index.md](docs/index.md)，文档冲突和权威关系见 [docs/authority-map.md](docs/authority-map.md)。
 
-## Common Tasks
-
-- Run all lab checks: `npm run verify:labs`
-- Run all checks: `npm run verify:all`
-- Verify real model adapter contract: `npm run core:07:verify`
-- Run live DeepSeek E2E: `npm run core:07:live`
-- Inspect eval/open-source readiness: `npm run core:10`
-- Verify eval/open-source readiness: `npm run core:10:verify`
-- Run executable eval seeds: `npm run core:11`
-- Verify executable eval seeds: `npm run core:11:verify`
-- Run second executable seed batch: `npm run core:12`
-- Verify second executable seed batch: `npm run core:12:verify`
-- Run third executable seed batch: `npm run core:13`
-- Verify third executable seed batch: `npm run core:13:verify`
-- Run final starter seed batch: `npm run core:14`
-- Verify final starter seed batch: `npm run core:14:verify`
-- Run Codex local reference comparison sample: `npm run core:15`
-- Verify Codex local reference comparison sample: `npm run core:15:verify`
-- Run reference-agent cost and cross-agent readiness report: `npm run core:16`
-- Verify reference-agent cost and cross-agent readiness report: `npm run core:16:verify`
-- Run reference-agent pricing table baseline: `npm run core:17`
-- Verify reference-agent pricing table baseline: `npm run core:17:verify`
-- Run context economy and cache-aware context report: `npm run core:18`
-- Verify context economy and cache-aware context report: `npm run core:18:verify`
-- Run compaction quality eval report: `npm run core:19`
-- Verify compaction quality eval report: `npm run core:19:verify`
-- Run plan state machine report: `npm run core:20`
-- Verify plan state machine report: `npm run core:20:verify`
-- Run long-running task eval report: `npm run core:21`
-- Verify long-running task eval report: `npm run core:21:verify`
-- Run tool runtime transaction report: `npm run core:22`
-- Verify tool runtime transaction report: `npm run core:22:verify`
-- Run model gateway budget controller report: `npm run core:23`
-- Verify model gateway budget controller report: `npm run core:23:verify`
-- Run durable session store replay report: `npm run core:24`
-- Verify durable session store replay report: `npm run core:24:verify`
-- Run repo intelligence relevance index report: `npm run core:25`
-- Verify repo intelligence relevance index report: `npm run core:25:verify`
-- Run human approval interruption protocol report: `npm run core:26`
-- Verify human approval interruption protocol report: `npm run core:26:verify`
-
-## Docs
-
-Start here:
-
-- `CURRENT_STATE.md`
-- `docs/start-here-for-learners.md`
-- `docs/open-source-boundary.md`
-- `production-upgrade-roadmap.md`
-- `production-upgrade-validation-matrix.md`
-- `docs/index.md`
-- `docs/authority-map.md`
-
-Learning courses:
-
-- `course-00-teaching-standard.md`
-- `course-01-initial-model-request.md`
-- `course-02-action-selection-rubric.md`
-- `course-03-clean-room-prompt-pack.md`
-- `course-04-single-task-full-trace.md`
-- `course-05-product-mental-model.md`
-- `course-06-labs-to-core-map.md`
-- `course-07-core-build-pass-overview.md`
-- `course-08-model-gateway-and-context-engine.md`
-- `course-09-plan-mode-and-compaction.md`
-- `course-10-trace-eval-real-model-and-recovery.md`
-- `course-11-real-repo-task-layer.md`
-- `course-12-eval-packaging-and-executable-seeds.md`
-- `course-13-eval-reference-cost-evidence.md`
-- `course-14-production-upgrade-evidence-chain.md`
-- `course-15-context-compaction-plan-production.md`
-- `course-16-long-running-tool-gateway-production.md`
-- `course-17-session-repo-approval-production.md`
-- `docs/production-upgrade-terms-zh.md`
-
-Core implementation records:
-
-- `core-01-integrated-runtime.md`
-- `core-02-model-gateway.md`
-- `core-03-context-engine-integration.md`
-- `core-04-plan-mode-integration.md`
-- `core-05-compaction-artifact-integration.md`
-- `core-06-trace-eval-harness-expansion.md`
-- `core-07-real-model-api-e2e.md`
-- `core-08-prompt-pack-recovery-loop.md`
-- `core-09-real-repo-task-layer.md`
-- `core-10-70-80-eval-open-source-packaging.md`
-- `core-11-eval-expansion-executable-seeds.md`
-- `core-12-eval-expansion-second-batch.md`
-- `core-13-eval-expansion-third-batch.md`
-- `core-14-eval-expansion-final-starter-batch.md`
-- `core-15-reference-agent-comparison.md`
-- `core-16-reference-agent-cost-and-cross-agent.md`
-- `core-17-reference-agent-pricing-table-baseline.md`
-- `core-18-context-economy-cache-aware-context-engine.md`
-- `core-19-compaction-quality-eval.md`
-- `core-20-plan-state-machine.md`
-- `core-21-long-running-task-eval.md`
-- `core-22-tool-runtime-transaction.md`
-- `core-23-model-gateway-budget-controller.md`
-- `core-24-durable-session-store-replay.md`
-- `core-25-repo-intelligence-relevance-index.md`
-- `core-26-human-approval-interruption-protocol.md`
-
-## Current Boundary
-
-Core 14 establishes executable repo seeds for all 20 Core 10 starter cases and brings cumulative executable starter coverage to 20/20. Core 15 records a small Codex local CLI reference-agent sample for 8 seeds, including repair, safety refusal, ambiguity refusal, and expected failed-verification outcomes. Core 16 adds a cost measurement basis and cross-agent readiness gate for those runs. Core 17 adds an explicit local pricing table baseline that produces configured USD estimates from the same evidence. `course-13-eval-reference-cost-evidence.md` teaches this Core 13-17 bridge before Production Upgrade. Core 18 adds a cache-aware Context Economy Engine with stable prefix, dynamic tail, token budget eviction, artifact boundary, and cache simulation reports. Core 19 adds a compaction quality evaluator that detects objective drift, constraint loss, failure loss, plan loss, modified-file loss, and pending-action loss. Core 20 adds a Plan State Machine with step lifecycle, blocked reasons, revisions, compaction resume, permission checks, and final grounding. Core 21 adds a long-running task eval with repeated failure history, compaction resume, cost curve, no-false-final attribution, and learning handoff. Core 22 adds a deterministic ToolRuntime transaction layer with diff preview, multi-file commit, rollback, stale reread protection, protected-file approval gates, and high-risk Bash approval routing. Core 23 adds a deterministic ModelGateway budget controller with token/cost budget gates, retry/fallback traces, capability registry filtering, and narrow JSON tool-call repair. Core 24 adds deterministic durable session replay with append-only event logs, snapshot restore, crash recovery, compaction audit, and secret redaction checks. Core 25 adds deterministic repo intelligence with repo map, symbol/test/rule index, relevance scoring, incremental update, and token benefit evidence. Core 26 adds deterministic human approval and interruption protocol evidence with approval_required, approve/reject path, interruption, handoff, and no-hidden-execution checks. `course-14-production-upgrade-evidence-chain.md` teaches Core 18-26 as one Production Upgrade evidence chain; `course-15` through `course-17` split it into detailed verify-case execution-chain courses. This is not a Claude Code baseline, not a RelativeScore, not a real vendor bill, not real provider cache billing, not a production long-running benchmark, not a full production ToolRuntime, not a real provider reliability guarantee, not a distributed durable store, not production semantic search, not a production approval UI, and not a production-level Claude Code 70%-80% capability claim.
-
-## Contributing
-
-Before handing off changes, run:
+## 核心命令
 
 ```bash
+# 跑所有 Lab
+npm run verify:labs
+
+# 跑全部 Lab + Core，本项目最重要的健康检查
+npm run verify:all
+
+# 跑真实模型适配器的本地契约验证，不需要真实 API key
+npm run core:07:verify
+
+# 跑 Core 18-26 中的几个关键生产化证据
+npm run core:18:verify
+npm run core:22:verify
+npm run core:24:verify
+npm run core:26:verify
+```
+
+`npm run core:07:live` 会读取本地 `.env.local` 里的模型配置。`.env.local` 被 git 忽略，不能提交。可从 [.env.example](.env.example) 复制模板。
+
+## 当前已经完成什么
+
+- Lab 01-08：运行循环、消息事实流、读文件/搜索/命令、编辑安全、上下文、计划、压缩和评测。
+- Core 01-12：把 Lab 机制集成成可运行核心运行时，并接入真实模型适配器、真实仓库测试夹具和评测打包。
+- Core 13-17：完成 20/20 可执行入门评测任务集，记录 8 个 Codex local 参考运行，建立 token、成本和价格边界。
+- Core 18-26：完成上下文经济、压缩质量、计划状态机、长任务评测、工具事务、模型预算闸门、会话重放、仓库理解和人工批准的本地确定性证据链。
+- GitHub Actions：`npm run verify:all` 已接入 CI。
+
+最新状态见 [CURRENT_STATE.md](CURRENT_STATE.md)，完整验证证据见 [Core 验证记录](docs/records/core-run-record.md)。
+
+## 能力边界
+
+本项目已经能证明很多代码智能体核心机制可以在本地稳定运行，但它仍然不是：
+
+- Claude Code 官方实现。
+- Claude Code 源码复刻。
+- 生产级 Claude Code 替代品。
+- 真实大仓库 70%-80% 成功率认证。
+- 真实 Claude Code baseline。
+- 真实厂商账单或模型服务真实缓存计费。
+- 跨 Agent 相对分数（RelativeScore）。
+
+更完整的公开表达边界见 [开源边界说明](docs/open-source-boundary.md)。
+
+## 贡献
+
+欢迎贡献中文教学、验证用例、文档结构和边界说明。提交前请读：
+
+- [CONTRIBUTING.md](CONTRIBUTING.md)
+- [SECURITY.md](SECURITY.md)
+- [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md)
+- [GitHub 发布检查表](docs/github-release-checklist.md)
+
+提交前至少运行：
+
+```bash
+git diff --check
 npm run verify:all
 ```
-
-Keep secrets in local ignored files such as `.env.local`; do not write API keys into source, docs, traces, or verification records.
-
-See `CONTRIBUTING.md`, `SECURITY.md`, `CODE_OF_CONDUCT.md`, and `docs/github-release-checklist.md` before opening a public PR or release.

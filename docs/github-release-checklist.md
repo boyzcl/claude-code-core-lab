@@ -1,10 +1,10 @@
-# GitHub Release Checklist
+# GitHub 发布检查表
 
 本文是开源到 GitHub 前的最小检查表。它不是当前进度事实源；当前状态仍看 `../CURRENT_STATE.md`。
 
 ## 1. 项目定位
 
-- README 说明这是 clean-room learning project。
+- README 说明这是围绕 Claude Code 核心机制的中文学习项目。
 - README 没有写成 Claude Code 源码复刻或官方实现。
 - `docs/open-source-boundary.md` 已说明 capability claim 边界。
 - `LICENSE`、`CONTRIBUTING.md`、`SECURITY.md`、`CODE_OF_CONDUCT.md` 存在。
@@ -23,7 +23,15 @@
 - Core 18-26 有总览课和三门细课。
 - 英文术语有中文解释或中文上下文。
 
-## 4. Evidence 边界检查
+## 4. GitHub 读者体验检查
+
+- README 第一屏能说明：这是围绕 Claude Code 核心机制的中文学习项目。
+- README 能回答新用户最关心的五件事：项目是什么、怎么运行、怎么学习、会得到什么结果、不能期待什么。
+- 根目录只保留入口、配置和源码目录，不把课程、记录和历史文章堆在第一屏。
+- `docs/README.md`、`docs/index.md`、`docs/authority-map.md` 能把学习材料、当前规则、证据记录和历史背景分开。
+- 普通中文学习者不需要先理解 `clean-room`、`Runtime`、`Context` 等英文词，也能知道下一步该读哪一页、跑哪条命令。
+
+## 5. Evidence 边界检查
 
 - 20/20 executable 不写成生产级 benchmark。
 - codex-local baseline 不写成 Claude Code baseline。
@@ -31,7 +39,7 @@
 - cache simulation 不写成真实 provider cache billing。
 - 没有第二 agent 真实 runs 前，不添加 RelativeScore。
 
-## 5. 验证
+## 6. 验证
 
 至少运行：
 
@@ -53,7 +61,7 @@ git diff --check
 npm run verify:all
 ```
 
-## 6. 发布前最后检查
+## 7. 发布前最后检查
 
 - `git status --short` 中没有意外的密钥、日志、压缩包或 node_modules。
 - README 的 Quick Start 可以在干净 clone 后执行。

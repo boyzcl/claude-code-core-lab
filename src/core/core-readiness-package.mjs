@@ -243,6 +243,7 @@ export async function inspectOpenSourceDocs(root = process.cwd()) {
       "docs/index.md",
       "docs/authority-map.md",
       "npm run verify:all",
+      "Claude Code Core Lab",
     ]),
     requiredDoc("AGENTS.md", [
       "CURRENT_STATE.md",
@@ -250,10 +251,10 @@ export async function inspectOpenSourceDocs(root = process.cwd()) {
       "Do not commit API keys",
     ]),
     requiredDoc("docs/index.md", [
-      "Current Rules",
+      "当前规则",
       "History",
-      "Evidence",
-      "docs/authority-map.md",
+      "关键证据",
+      "authority-map.md",
     ]),
     requiredDoc("docs/authority-map.md", [
       "Navigation Register",
@@ -261,7 +262,7 @@ export async function inspectOpenSourceDocs(root = process.cwd()) {
       "Conflict Rules",
       "Evidence Boundaries",
     ]),
-    requiredDoc("core-10-70-80-eval-open-source-packaging.md", [
+    requiredDoc("docs/core/core-10-70-80-eval-open-source-packaging.md", [
       "Core 10",
       "starter task suite",
       "not a production 70%-80% claim",

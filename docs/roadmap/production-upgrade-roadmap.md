@@ -104,7 +104,7 @@ Core 26 把人类审批和打断接入 Runtime 状态。
 3. 有对应 `src/core/*.verify.mjs`，至少覆盖 happy path、边界、回归和 out-of-scope guard。
 4. `package.json` 暴露 demo 和 verify 脚本。
 5. `npm run verify:all` 通过。
-6. `CURRENT_STATE.md`、`core-run-record.md`、`README.md`、`docs/index.md` 和必要 authority 文档同步。
+6. `CURRENT_STATE.md`、`docs/records/core-run-record.md`、`README.md`、`docs/index.md` 和必要 authority 文档同步。
 7. 学习者可以运行 demo / verify，并用一句话复述“这证明了什么”。
 ```
 
@@ -211,7 +211,7 @@ Core 18-26 暂不承诺：
 
 ## 8. 与验证矩阵的关系
 
-具体可执行验收以 `production-upgrade-validation-matrix.md` 为准。
+具体可执行验收以 `docs/roadmap/production-upgrade-validation-matrix.md` 为准。
 
 本文件负责：
 

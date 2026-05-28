@@ -251,7 +251,7 @@ Core Build Pass 不再新增一条平行的 `Review-XX` 主线。
 | 0 | `course-00-teaching-standard.md` | 怎么避免“模型知道/Agent 应该/合理动作”里的隐式信息 | 你能判断一句 Agent 描述是否说明了来源、给法、目标、约束和验证 |
 | 1 | `course-01-initial-model-request.md` | 模型第一次被调用时到底看到了什么 | 你能说清 ModelRequest 里的 messages、tools、state、policy |
 | 2 | `course-02-action-selection-rubric.md` | 模型怎么判断下一步动作是否合理 | 你能用“合法 + 信息增益 + 阶段匹配”判断 Search/Read/Edit/Bash/AskUser |
-| 3 | `course-03-clean-room-prompt-pack.md` | 怎么从 Runtime 需求倒推 clean-room Prompt Pack | 你能区分 prompt 引导、Policy 强制、Tool 行动、State 记录 |
+| 3 | `course-03-clean-room-prompt-pack.md` | 怎么在公开学习边界下，从运行时需求倒推 Prompt Pack | 你能区分提示词引导、权限策略强制、工具行动、状态记录 |
 | 4 | `course-04-single-task-full-trace.md` | 一条任务如何从用户输入跑到最终验证 | 你能画出 MessageStream、ToolCall、ToolResult、StateUpdate |
 | 5 | `course-05-product-mental-model.md` | 怎么把前面机制沉淀成产品心智模型 | 你能从用户、模型、Runtime、工具、Eval 五个界面解释产品 |
 | 6 | `course-06-labs-to-core-map.md` | 怎么把 8 个 Lab 映射成 Core 产品骨架 | 你能解释每个 Lab 在 Core 里变成哪个模块、数据如何流动、哪些仍然是 toy |
@@ -297,73 +297,46 @@ module-05 是工程参考编号。
 
 ---
 
-## 4. 未来开源项目的文档结构
+## 4. 当前开源项目的文档结构
 
-未来可以整理成一个 clean-room 学习项目：
+当前 GitHub 项目已经按“首页友好、课程可顺序学习、证据可追踪”的方式整理：
 
 ```text
-claude-code-core-learning/
+claude-code-core-lab/
   README.md
+  package.json
+  src/
+    lab01 ... lab08
+    core/
   docs/
+    README.md
     index.md
     authority-map.md
-
+    start-here-for-learners.md
+    project-structure.md
     course/
-      course-00-teaching-standard.md
-      course-01-initial-model-request.md
-      course-02-action-selection-rubric.md
-      course-03-clean-room-prompt-pack.md
-      course-04-single-task-full-trace.md
-      course-05-product-mental-model.md
-
-    modules/
-      module-01-runtime-loop.md
-      module-02-message-session-store.md
-      module-03-tool-runtime.md
-      module-04-core-tools.md
-      module-05-context-engine.md
-      module-06-policy-engine.md
-      module-07-plan-mode.md
-      module-08-compaction-artifact.md
-      module-09-trace-eval.md
-      module-10-model-gateway.md
-
-    labs/
-      lab-01-mock-runtime-loop.md
-      lab-02-message-store.md
-      lab-03-read-search-bash.md
-      lab-04-edit-tool-safety.md
-      lab-05-context-engine-v1.md
-      lab-06-plan-mode-v1.md
-      lab-07-compaction-v1.md
-      lab-08-eval-runner.md
-
-    evals/
-      eval-case-schema.md
-      starter-cases.md
-      scoring-rubric.md
-
-    adr/
-      ADR-001-model-is-agent.md
-      ADR-002-tool-runtime-boundary.md
-      ADR-003-context-priority.md
-      ADR-004-read-before-write.md
-
-    field-notes/
-      FN-001-why-tool-errors-must-be-structured.md
-      FN-002-why-compact-loses-tasks.md
-
-  src/
-    ...
-  evals/
-    cases/
-  examples/
+      course-00 ... course-17
+    lab/
+      lab-01 ... lab-08
+    core/
+      core-01 ... core-26
+    records/
+      core-run-record.md
+      labs-verification-record.md
+    roadmap/
+      production-upgrade-roadmap.md
+      production-upgrade-validation-matrix.md
+    reference/
+      架构、实现、评测参考
+    history/
+      早期分析文章
 ```
 
 开源时的定位：
 
 ```text
-A clean-room learning project for building a Claude Code-like local coding agent runtime.
+围绕 Claude Code 核心机制的中文学习项目：
+从零构建一个 Claude Code-like local coding agent runtime。
 ```
 
 不能定位成：
@@ -376,9 +349,9 @@ Claude Code 源码复刻
 
 ---
 
-## 5. Clean-room 边界
+## 5. 公开学习边界
 
-为了未来能开源，学习过程中必须遵守 clean-room 边界。
+为了能公开学习、复现和协作，学习过程中必须遵守公开学习边界：学 Claude Code 的产品机制和工程问题，但不复制官方源码、私有 Prompt 或非公开实现。
 
 可以公开：
 
@@ -406,7 +379,7 @@ Claude Code 源码复刻
 公开表达方式：
 
 ```text
-Based on product behavior and clean-room runtime design, this project teaches how to build a Claude Code-like coding agent core.
+这个项目基于公开产品行为和我们自己写的运行时设计，教学如何构建一个 Claude Code-like 代码智能体核心。
 ```
 
 不要表达成：
@@ -417,7 +390,7 @@ This is how Claude Code source code works internally.
 
 ### 5.1 官方 Claude Code preset 与第三方 prompt diff 的使用策略
 
-你提到的第三方 Claude Code 版本对比站，可以作为研究材料，但不能改变本项目的 clean-room 原则。
+你提到的第三方 Claude Code 版本对比站，可以作为研究材料，但不能改变本项目的公开学习边界。
 
 我们采用三层策略：
 
@@ -425,7 +398,7 @@ This is how Claude Code source code works internally.
 | --- | --- | --- |
 | 用官方 Anthropic Agent SDK 的 `claude_code` preset 跑 reference baseline | 可以 | 这是官方公开支持的方式，适合做对照组 |
 | 查看第三方 prompt/tool diff 来理解版本演化和规则类别 | 可以，但只作研究观察 | 它可以提醒我们哪些类别值得关注 |
-| 直接复制第三方提取的 Claude Code system prompt 到我们的开源 Prompt Pack | 不可以 | 会破坏 clean-room 边界，也削弱学习目标 |
+| 直接复制第三方提取的 Claude Code system prompt 到我们的开源 Prompt Pack | 不可以 | 会破坏公开学习边界，也削弱学习目标 |
 
 正确使用方式：
 
@@ -435,7 +408,7 @@ Reference Agent:
   目标是对照能力和行为。
 
 Learning Runtime:
-  必须使用我们自己写的 clean-room Prompt Pack。
+  必须使用我们自己写的 Prompt Pack。
   每条规则都要说明来源、给法、目标、缺失后果和 eval 验证。
 
 Research Notes:
@@ -497,7 +470,7 @@ course-05-product-mental-model.md
    再搞清楚模型如何判断下一步动作是否合理。
 
 3. course-03-clean-room-prompt-pack.md
-   再学习如何把 Runtime 需求转成 clean-room Prompt Pack，而不是复制官方或第三方 prompt。
+   再学习如何把运行时需求转成我们自己写的 Prompt Pack，而不是复制官方或第三方 prompt。
 
 4. course-04-single-task-full-trace.md
    再看模型拿到初始请求后，如何一轮轮完成任务。
@@ -512,7 +485,7 @@ course-05-product-mental-model.md
 你能不能判断一句“模型知道/Agent 应该/合理动作”是否说明了来源？
 你能不能讲清楚模型第一次被调用时看到了哪些 messages、tools 和 state？
 你能不能讲清楚“合理动作”来自用户目标、当前状态、工具说明、Policy 和动作选择规则？
-你能不能讲清楚 clean-room Prompt Pack 和官方 reference baseline 的区别？
+你能不能讲清楚“自己写的学习用 Prompt Pack”和官方 reference baseline 的区别？
 你能不能不用代码，讲清楚用户输入后 Runtime 发生的 12 个步骤？
 你能不能解释为什么工具失败要回灌给模型？
 你能不能解释为什么 Claude Code-like 产品不是 workflow chain？
@@ -847,7 +820,7 @@ src/model/openaiResponses.ts
 ```text
 清理私有路径。
 删除非公开源码依赖。
-把个人学习笔记改写成 clean-room 教程。
+把个人学习笔记改写成不复制官方源码和私有提示词的公开教程。
 为每个 lab 补 README。
 为每个 eval case 补说明。
 写清楚项目定位和免责声明。
@@ -1271,7 +1244,7 @@ course-01 初始模型请求
 course-02 动作选择规则
    course-02-action-selection-rubric.md
 
-course-03 Clean-room Prompt Pack
+course-03 公开学习边界下的 Prompt Pack
    course-03-clean-room-prompt-pack.md
 
 course-04 单任务完整轨迹
@@ -1369,7 +1342,7 @@ course-02
   -> 告诉我们模型如何判断下一步动作是否合理
 
 course-03
-  -> 告诉我们如何从 Runtime 需求倒推 clean-room system prompt
+  -> 告诉我们如何从运行时需求倒推自己写的 system prompt
 
 course-04
   -> 告诉我们一条任务如何从用户输入跑到最终验证
@@ -1428,7 +1401,7 @@ course-05-product-mental-model.md
 course-00-teaching-standard.md 已完成第一版。
 course-01-initial-model-request.md 已按无隐式信息规范补充 Knowledge Provenance 和 Context Item Contract。
 course-02-action-selection-rubric.md 已按无隐式信息规范补充 Action Claim Contract。
-course-03-clean-room-prompt-pack.md 已完成第一版，用于说明如何从 Runtime 需求倒推 clean-room Prompt Pack，并区分官方 reference baseline。
+course-03-clean-room-prompt-pack.md 已完成第一版，用于说明如何从运行时需求倒推自己写的 Prompt Pack，并区分官方 reference baseline。
 course-04-single-task-full-trace.md 已完成第一版，并已重构关键 Turn 的显式信息来源、动作判定、失败回灌、验证和 Final Answer 条件。
 course-05-product-mental-model.md 已创建，用来把前四课沉淀成产品级理解。
 学习顺序应调整为：course-00 -> course-01 -> course-02 -> course-03 -> course-04 -> course-05。
