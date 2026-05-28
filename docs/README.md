@@ -12,7 +12,7 @@
 
 | 目录 | 内容 |
 | --- | --- |
-| `course/` | 课程主线，按 course-00 到 course-17 顺序学习 |
+| `course/` | 课程主线，按 course-00 到 course-18 顺序学习 |
 | `lab/` | 单机制 Lab 说明 |
 | `core/` | Core 集成阶段记录 |
 | `records/` | 运行和验证记录 |

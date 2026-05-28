@@ -27,7 +27,7 @@ npm run verify:all
 
 1. 读 `../README.md`，知道项目目标、结构和边界。
 2. 读 `docs/course/claude-code-core-learning-path.md`，知道课程总路线。
-3. 顺序学习 `docs/course/course-00...` 到 `docs/course/course-17...`。
+3. 顺序学习 `docs/course/course-00...` 到 `docs/course/course-18...`。
 4. 每读完一段，就运行对应 `npm run lab:*:verify` 或 `npm run core:*:verify`。
 
 不要只读文档。这个项目的重点是：
@@ -46,6 +46,7 @@ npm run verify:all
 | 主体机制 | `course-08` 到 `course-12` | 模型网关、上下文、计划、压缩、评测和真实仓库测试夹具 |
 | 评测和对照 | `course-13` | 可执行任务种子、参考智能体、成本口径和价格边界 |
 | 生产化升级 | `course-14` 到 `course-17` | 上下文经济、会话重放、仓库理解、人工批准等证据链 |
+| 产品表层 Core | `course-18` / `core-27` 起 | settings / permission、hooks、memory、checkpoint、subagent 等产品表层机制如何先过 validation matrix 再实现；Core 27 / 28 / 29 / 30 / 31 已有 execution-chain 示例 |
 
 ## 你最终会得到什么
 

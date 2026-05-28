@@ -22,7 +22,7 @@
 课程主线。按编号顺序读：
 
 ```text
-course-00 -> course-01 -> ... -> course-17
+course-00 -> course-01 -> ... -> course-18
 ```
 
 课程负责回答：
@@ -58,6 +58,11 @@ Core 是集成阶段记录。
 docs/core/core-18-context-economy-cache-aware-context-engine.md
 docs/core/core-24-durable-session-store-replay.md
 docs/core/core-26-human-approval-interruption-protocol.md
+docs/core/core-27-settings-permission-resolver.md
+docs/core/core-28-hooks-lifecycle.md
+docs/core/core-29-memory-source-auto-memory.md
+docs/core/core-30-checkpoint-rewind.md
+docs/core/core-31-subagent-context-isolation.md
 ```
 
 Core 文档负责说明：

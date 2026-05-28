@@ -658,6 +658,125 @@ high-risk Bash -> riskClass high_risk_bash
 | approval decision | user approve/reject | approval.approved / approval.rejected | 控制执行或 revision | 人类决定停留在聊天外 |
 | interruption | user new goal/constraint | session.interrupted / constraint.added | 暂停 step 并修订 plan | 用户变更不可恢复 |
 | handoff | unfinished state | handoff artifact | 新会话恢复 | 未完成任务被误认为完成 |
+| checkpoint | session snapshot + file hashes | checkpoint event / snapshot reference | 用户可见恢复点 | rewind 无审计或覆盖用户改动 |
+| rewind request | user action / recovery command | rewind decision + replay | 回到旧状态并解释差异 | 恢复只靠聊天承诺 |
+| subagent result | delegated task trace | structured handoff / compressed result | 保持主上下文不被研究结果淹没 | 主代理重复研究或丢证据 |
+| subagent context boundary | task-specific context | isolated context snapshot | 避免泄漏无关主上下文 | 子代理看到过多材料或误用旧约束 |
+| hook event | pre/post/user hook | session event | 外部反馈可审计 | hook 阻断停留在聊天外 |
+| memory event | memory write / forget / freshness check | session event + memory index | 长期记忆可恢复、可审计 | 用户要求 forget 但索引仍引用旧记忆 |
+
+---
+
+### 12.1 Product Surface 如何接回 Core 24-26
+
+Checkpoint、rewind、subagent、hooks 这些产品表层特性，先接回本课，而不是立刻拆成新课：
+
+```text
+Core 24 问：这些事件能否写进 append-only log、snapshot 和 replay？
+Core 25 问：这些事件是否影响 repo relevance、测试选择或规则检索？
+Core 26 问：这些事件是否改变 approval、interruption、handoff 和 no hidden execution？
+```
+
+归位规则：
+
+| 产品表层材料 | 接回哪一层 | 理由 |
+| --- | --- | --- |
+| checkpoint | Core 24 / Core 22 | 它是用户可见 snapshot，可能绑定文件 hash |
+| rewind | Core 24 / Core 22 | 它是 replay + 文件状态恢复，必须防覆盖用户改动 |
+| subagent | Core 21 / Core 25 / Core 24 | 它需要独立上下文、结构化结果和 session 记录 |
+| hooks | Core 24 / Core 26 | 它是外部事件，可能阻断工具或添加约束 |
+| memory source | Core 24 / Core 25 / Course 09 | 它需要记录 write/forget/freshness，但不能替代 repo evidence 或 compact summary |
+| skill / slash command | Core 23 / Core 26 | 它是工具表面和权限继承问题 |
+
+独立 Core 的门槛：
+
+```text
+如果只是说明“可以恢复”“可以委派子代理”，补 Course 17。
+如果实现 checkpoint creation、rewind state、partial rewind denial、subagent context isolation、hook replay、memory forget/freshness event 和 no hidden execution，再考虑独立 Core。
+```
+
+Core 27 已把 `settings / permission rules` 补成 Core 26 之前的前置决策层：
+
+```text
+Core 27 决定 action 是 allow / ask / deny。
+Core 26 只处理 ask 之后的人类批准、拒绝、打断和 handoff。
+```
+
+因此学习时不要把两者混在一起：
+
+```text
+Permission Resolver 不是 Human Approval Protocol。
+Human Approval Protocol 也不是配置优先级解析器。
+```
+
+Core 28 已把 `hooks` 补成 session / approval 之前的 lifecycle event 层：
+
+```text
+pre hook block -> session event + no tool execution。
+post hook feedback -> dynamic observation，不升级为 system prompt。
+user prompt hook -> Runtime constraint，不伪装成人工审批。
+```
+
+因此学习时也不要把 hooks 和 Core 26 混在一起：
+
+```text
+Hooks Lifecycle 可以阻断或补充反馈。
+Human Approval Protocol 负责人的 approve / reject / interrupt / handoff。
+```
+
+Core 29 已把 `memory source` 补成长期上下文来源治理层：
+
+```text
+memory.written / memory.forgotten / memory.freshness_checked
+  -> durable session event
+  -> memory-index.json
+  -> context memory block
+```
+
+因此学习时不要把 memory 和 session replay 混在一起：
+
+```text
+Core 24 证明 event log / snapshot / replay。
+Core 29 证明 memory type、index、forget、stale verification 和 no code-structure memory。
+```
+
+Core 30 已把 `checkpoint / rewind` 补成用户可见恢复层：
+
+```text
+checkpoint.created
+  -> fileStateSnapshot + durable snapshot id
+  -> rewind.requested
+  -> externalChangeConflict or rewind.applied
+  -> rewindAudit
+```
+
+因此学习时也不要把 checkpoint 和 Core 24 混在一起：
+
+```text
+Core 24 证明 event log / snapshot / replay。
+Core 30 证明 checkpoint 是否绑定文件 hash、rewind 是否恢复文件状态、外部改动是否阻止覆盖、audit 是否能解释恢复。
+Core 22 仍负责 transaction preview / commit / rollback。
+```
+
+Core 31 已把 `subagent context isolation` 补成 session / repo intelligence 之间的委派边界：
+
+```text
+delegation.started
+  -> subagentContext 只包含 allowed paths
+  -> subagent.result_received
+  -> delegation.completed
+  -> delegationLedger / isolationAudit
+```
+
+因此学习时不要把 subagent 和 Core 24 / Core 25 混在一起：
+
+```text
+Core 24 证明 event log / snapshot / replay。
+Core 25 证明 repo map / symbol index / test index / relevance scoring。
+Core 31 证明子代理只拿隔离上下文，父代理只接收 summary + evidence refs，重复研究会被 ledger 阻止，失败会结构化回传。
+```
+
+Core 27-31 的完整教学执行链继续读 `course-18-product-surface-implementation-chain.md`。本课只负责把它们接回 Core 24-26 的 session、repo relevance 和 human approval 边界。
 
 ---
 

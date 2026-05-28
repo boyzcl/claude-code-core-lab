@@ -225,7 +225,7 @@ run-record / verification-record
 当前学习主线只认：
 
 ```text
-course-00 -> course-01 -> course-02 -> course-03 -> course-04 -> course-05 -> course-06 -> course-07 -> course-08 -> course-09 -> course-10 -> course-11 -> course-12 -> course-13 -> course-14 -> course-15 -> course-16 -> course-17
+course-00 -> course-01 -> course-02 -> course-03 -> course-04 -> course-05 -> course-06 -> course-07 -> course-08 -> course-09 -> course-10 -> course-11 -> course-12 -> course-13 -> course-14 -> course-15 -> course-16 -> course-17 -> course-18
 ```
 
 `course-06` 之后进入 Core Build Pass，`course-07` 负责把 Core Build Pass 已完成的 Core 01 到 Core 12 重新整理成教学总览；`course-08` 到 `course-12` 负责按主题拆开学习：
@@ -234,11 +234,12 @@ course-00 -> course-01 -> course-02 -> course-03 -> course-04 -> course-05 -> co
 core-01 -> core-02 -> core-03 -> ... -> core-12
 ```
 
-`course-13` 负责补齐 Core 13-17 的 executable suite、reference-agent、cost basis 和 pricing boundary 教学；`course-14` 负责把 Core 18-26 Production Upgrade 重新整理成教学总览；`course-15` 到 `course-17` 负责按主题拆开学习：
+`course-13` 负责补齐 Core 13-17 的 executable suite、reference-agent、cost basis 和 pricing boundary 教学；`course-14` 负责把 Core 18-26 Production Upgrade 重新整理成教学总览；`course-15` 到 `course-17` 负责按主题拆开学习；`course-18` 负责把 Core 27-31 Product Surface 重新整理成 execution-chain：
 
 ```text
 core-13 -> core-14 -> core-15 -> core-16 -> core-17
 core-18 -> core-19 -> core-20 -> ... -> core-26
+core-27 -> core-28 -> core-29 -> core-30 -> core-31
 ```
 
 Core Build Pass 不再新增一条平行的 `Review-XX` 主线。
@@ -266,6 +267,7 @@ Core Build Pass 不再新增一条平行的 `Review-XX` 主线。
 | 15 | `course-15-context-compaction-plan-production.md` | Context Economy、Compaction Quality、Plan State Machine 如何构成状态保真链 | 你能从 Core 18-20 verify case 指到 stablePrefix、compaction diff、plan trace、permission 和 final grounding |
 | 16 | `course-16-long-running-tool-gateway-production.md` | Long-Running Eval、ToolRuntime Transaction、ModelGateway Budget 如何构成执行安全链 | 你能从 Core 21-23 verify case 解释 failureHistory、transaction rollback、budget gate、retry/fallback 和 capability filtering |
 | 17 | `course-17-session-repo-approval-production.md` | Durable Session、Repo Intelligence、Human Approval 如何构成恢复和协作链 | 你能从 Core 24-26 verify case 解释 event replay、relevance reasons、approval_required、interrupt 和 no hidden execution |
+| 18 | `course-18-product-surface-implementation-chain.md` | Settings、Hooks、Memory、Checkpoint、Subagent 如何从 Product Surface 材料落成 Runtime execution-chain | 你能从 Core 27-31 verify case 解释 permission decision、hook lifecycle、memory governance、rewind audit、subagent isolation 和官方实现边界 |
 
 不要再使用：
 
@@ -315,11 +317,11 @@ claude-code-core-lab/
     start-here-for-learners.md
     project-structure.md
     course/
-      course-00 ... course-17
+      course-00 ... course-18
     lab/
       lab-01 ... lab-08
     core/
-      core-01 ... core-26
+      core-01 ... core-31
     records/
       core-run-record.md
       labs-verification-record.md

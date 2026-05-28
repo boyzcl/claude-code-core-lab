@@ -707,6 +707,72 @@ newerMessages 负责保留最新事实和用户约束。
 | failed verification | CoreState | compactSummary + verification_state | 防止假完成 | 摘要可能把失败写成通过 |
 | latest failures | ToolResult | compactSummary.latestFailures | 指导恢复 | 模型不知道下一步修什么 |
 | long outputs | older tool results | compaction artifacts | 保留证据但不挤占 context | 证据丢失或上下文被日志淹没 |
+| project memory / CLAUDE.md | Project Rules / Memory source | Context Engine 作为规则或 memory block 放入 | 提供长期项目约定和用户偏好 | 模型可能重复问已知偏好或忽略项目规则 |
+| auto memory | Memory Store | 经类型过滤后进入 context，不进入 compact summary 原文 | 跨会话保留用户、反馈、项目或外部引用信息 | 长期协作偏好丢失 |
+| memory index | Memory Store | memory index / reference block | 找到应该读取的长期记忆 | 模型把临时任务状态误当长期事实 |
+
+---
+
+### 11.1 Product Surface 补充：Memory 和 Compaction 不是一回事
+
+Claude Code 产品表层材料里能看到 memory / CLAUDE.md / auto memory 这类机制。它们很容易被误解成“更大的 compact summary”，但在本课程里必须分开：
+
+| 机制 | 中文理解 | 生命周期 | 主要风险 |
+| --- | --- | --- | --- |
+| `CLAUDE.md` / project rules | 项目规则入口 | 随仓库存在，可被版本管理 | 规则过期或和当前任务冲突 |
+| Memory | 长期记忆 | 跨会话存在，可写入、索引、删除 | 过时、误存代码结构、泄漏私人信息 |
+| Compaction | 压缩摘要 | 当前任务内缓解上下文压力 | 丢 active plan、失败、约束、下一步 |
+| Plan State | 计划状态 | 当前任务执行状态 | 被摘要覆盖、状态漂移 |
+
+所以本课补充一个边界：
+
+```text
+Compaction 负责当前任务状态保真。
+Memory 负责跨会话长期信息。
+CLAUDE.md / project rules 负责仓库级规则。
+Plan 负责当前任务执行位置。
+```
+
+它们都可能进入 Context Engine，但不能互相替代。
+
+具体规则：
+
+```text
+1. 进行中的短期任务状态，不写入长期 memory。
+2. 代码结构、文件路径和函数存在性，优先从 repo 重新读取，不靠 memory 当事实。
+3. memory 提到的文件或函数，在建议用户行动前必须重新验证。
+4. 用户要求 forget 时，memory 必须可删除；compact summary 不承担这个职责。
+5. compaction 不能把 failed verification 写成 passed，也不能让旧 memory 覆盖最新用户约束。
+```
+
+这就是为什么 Memory Source 先补 Course 09 / Core 18 / Core 19 / Core 24：
+
+```text
+如果只是讲长期信息如何进入上下文，它属于 Context / Compaction 主题。
+只有当我们实现 memory type、write/index、forget、stale verification 和 no code-structure memory 的 verify case 时，它才值得独立成 Core。
+```
+
+Core 29 已按这个门槛落地：
+
+```text
+Memory Source / CLAUDE.md / Auto Memory
+  -> memory type routing
+  -> write and index
+  -> forget
+  -> stale verification
+  -> compaction boundary
+  -> no code-structure memory
+```
+
+所以学习时要保持三条线分开：
+
+```text
+Course 09 / Core 19 看 compactSummary 是否保真。
+Core 29 看长期 memory 是否可治理、可删除、可重新验证。
+Core 25 / Read/Search 看代码结构事实是否来自当前 repo evidence。
+```
+
+Core 29 的 memory 细节会在 `course-18-product-surface-implementation-chain.md` 中和 Core 27、28、30、31 一起复盘。本课只负责守住 Plan / Compaction 与长期 memory 的边界。
 
 ---
 

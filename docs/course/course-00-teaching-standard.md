@@ -131,7 +131,7 @@ projectRules
 
 ## 2. 信息来源分层
 
-教学文档必须把模型决策所需信息分成 8 类。
+教学文档必须至少区分以下来源类别。早期课程主要用前 8 类解释模型为什么知道；Product Surface Study 之后，官方公开资料、产品工件观察和第三方提取线索也必须单独标注，不能混成同一种 authority。
 
 | 来源 | 含义 | 是否可靠 | 示例 |
 | --- | --- | --- | --- |
@@ -143,6 +143,7 @@ projectRules
 | Project Rules | 仓库规则和约定 | 中高，受优先级约束 | CLAUDE.md、README |
 | Policy Rules | Runtime 硬边界 | 最高 | 未读不能 Edit、危险命令拒绝 |
 | Official Public Docs / SDK Preset | 官方公开能力和合法调用方式 | 高，但只限公开范围 | Anthropic Agent SDK 的 `claude_code` preset |
+| Product Artifact Observation | 从 Claude Code 分发物、source map、运行材料中观察到的结构 | 中，需要转译和边界标注 | tool definitions、system-reminder 类别、启动上下文形态 |
 | Third-party Prompt Extraction | 第三方观察资料 | 低到中，只能作研究线索 | prompt/tool diff 网站 |
 | Model Prior | 模型预训练常识 | 低到中 | 分页常见词 pageSize/limit |
 
@@ -151,17 +152,18 @@ projectRules
 ```text
 凡是高风险决策，不能只依赖 Model Prior。
 凡是关键行为，至少要进入 System Prompt、Tool Description、Policy 或 Eval。
-第三方提取的 prompt/tool 内容不能直接进入开源 Prompt Pack。
+Product Artifact Observation 和第三方提取的 prompt/tool 内容不能直接进入开源 Prompt Pack。
+可以学习机制类别，但要转译成自己的对象模型、规则说明和 verify case。
 ```
 
-### 2.1 官方 prompt / 第三方提取 prompt 的边界
+### 2.1 官方资料 / 产品工件观察 / 第三方提取的边界
 
 可以做三件事：
 
 ```text
 1. 使用官方公开文档理解能力边界和 API 形态。
 2. 如果使用 Anthropic Agent SDK，可以用官方 `claude_code` preset 做 reference baseline。
-3. 用第三方 prompt diff 观察规则类别和版本演化趋势。
+3. 用 Claude Code 产品工件观察和第三方 prompt diff 研究规则类别、工具表面和版本演化趋势。
 ```
 
 不应该做三件事：
@@ -172,6 +174,13 @@ projectRules
 3. 不要让学习者以为“复制 prompt”就是构建 Claude Code-like 产品。
 ```
 
+中间层做法：
+
+```text
+可以说：我们观察到 Claude Code 产品工件中存在某类机制，因此本项目学习这种机制。
+不能说：这就是官方公开源码，或这就是本项目可以直接复制的官方提示词。
+```
+
 进入我们 clean-room Prompt Pack 的每条规则，都必须回答：
 
 ```text
@@ -180,6 +189,32 @@ projectRules
 希望影响什么决策？
 如果没有会怎样？
 用哪个 eval case 验证？
+```
+
+### 2.2 Product Surface Core 的教学合同
+
+Core 27-31 这类 Product Surface 主题进入教学文档时，必须再补一层合同：
+
+| 主题 | 必须讲清 | 不能声称 |
+| --- | --- | --- |
+| Settings / Permission Resolver | permissionConfig、ruleSource、resolverTrace、allow/ask/deny 和 no hidden execution | 完整 enterprise policy、官方 Settings 内部实现或 GUI permission prompt |
+| Hooks Lifecycle | hookRegistry、hookEvent、hookDecision、hookFeedback、redaction 和不升级为 system prompt | 真实 shell hook 产品、任意脚本 sandbox 或完整插件系统 |
+| Memory Source / CLAUDE.md / Auto Memory | memoryType、memoryIndex、forgetEvent、freshness check、long_term_memory 和 no code-structure memory | 官方 memory 文件格式、远端多用户 memory 服务或代码智能数据库 |
+| Checkpoint / Rewind | checkpoint、fileStateSnapshot、externalChangeConflict、rewindAudit 和 append-only event boundary | IDE rewind UI、跨机器恢复或分布式 session store |
+| Subagent Context Isolation | delegatedTask、subagentContext、subagentResult、delegationLedger 和 isolationAudit | 真实多进程调度、远端 worker 隔离或 agent marketplace |
+
+写作要求：
+
+```text
+先说明它补哪个已有 course/core。
+再说明新增 Runtime state 和 enforced boundary。
+最后说明对应 verify case 和 out-of-scope。
+```
+
+这保证 Product Surface 课程仍然遵守同一条原则：
+
+```text
+只学习机制，转译成本项目自己的对象模型、实现和 verify。
 ```
 
 ---

@@ -18,9 +18,10 @@
 
 ## 3. 学习路径检查
 
-- `course-00` 到 `course-17` 连续可导航。
+- `course-00` 到 `course-18` 连续可导航。
 - Core 13-17 有课程解释，不从 course-12 直接跳到 Production Upgrade。
 - Core 18-26 有总览课和三门细课。
+- Core 27-31 有 Product Surface execution-chain 细课。
 - 英文术语有中文解释或中文上下文。
 
 ## 4. GitHub 读者体验检查

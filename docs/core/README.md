@@ -9,6 +9,11 @@ Core 文档记录每个集成阶段实现了什么、verify 证明了什么、�
 - [Core 18 Context Economy](core-18-context-economy-cache-aware-context-engine.md)
 - [Core 24 Durable Session Replay](core-24-durable-session-store-replay.md)
 - [Core 26 Human Approval](core-26-human-approval-interruption-protocol.md)
+- [Core 27 Settings Permission Resolver](core-27-settings-permission-resolver.md)
+- [Core 28 Hooks Lifecycle](core-28-hooks-lifecycle.md)
+- [Core 29 Memory Source](core-29-memory-source-auto-memory.md)
+- [Core 30 Checkpoint Rewind](core-30-checkpoint-rewind.md)
+- [Core 31 Subagent Context Isolation](core-31-subagent-context-isolation.md)
 
 源码和验证脚本在：
 

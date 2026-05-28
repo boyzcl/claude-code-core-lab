@@ -18,10 +18,13 @@
 - [开源边界](open-source-boundary.md): 对外能力声明、公开边界、secret 边界。
 - [生产化升级路线图](roadmap/production-upgrade-roadmap.md): Core 18-26 路线。
 - [生产化升级验证矩阵](roadmap/production-upgrade-validation-matrix.md): Core 18-26 验证矩阵。
+- [产品表层学习路线图](roadmap/product-surface-study-roadmap.md): Core 26 之后，如何从 Claude Code 产品工件中学习，并判断补旧课还是新建 Core。
+- [产品表层验证矩阵](roadmap/product-surface-validation-matrix.md): 新阶段的证据层级、同主题合并规则和候选 Core 进入条件。
+- [产品表层候选 Core Mini Brief](roadmap/product-surface-core-candidates.md): Settings、Hooks、Memory、Subagent、Checkpoint 是否值得独立成 Core 的评审。
 
 ## 学习材料
 
-- [Course](course/): 课程主线，按 `course-00` 到 `course-17` 学。
+- [Course](course/): 课程主线，按 `course-00` 到 `course-18` 学。
 - [Lab](lab/): 单机制实验说明。
 - [Core](core/): Core 集成阶段记录。
 - [Records](records/): 运行记录和验证记录。
@@ -38,6 +41,14 @@
 - [Course 15 Context Compaction Plan Production](course/course-15-context-compaction-plan-production.md)
 - [Course 16 Long Running Tool Gateway Production](course/course-16-long-running-tool-gateway-production.md)
 - [Course 17 Session Repo Approval Production](course/course-17-session-repo-approval-production.md)
+- [Course 18 Product Surface Implementation Chain](course/course-18-product-surface-implementation-chain.md)
+- [Product Surface Study Roadmap](roadmap/product-surface-study-roadmap.md)
+- [Product Surface Core Candidates](roadmap/product-surface-core-candidates.md)
+- [Core 27 Settings Permission Resolver](core/core-27-settings-permission-resolver.md)
+- [Core 28 Hooks Lifecycle](core/core-28-hooks-lifecycle.md)
+- [Core 29 Memory Source](core/core-29-memory-source-auto-memory.md)
+- [Core 30 Checkpoint Rewind](core/core-30-checkpoint-rewind.md)
+- [Core 31 Subagent Context Isolation](core/core-31-subagent-context-isolation.md)
 
 ## 关键证据
 
@@ -45,6 +56,11 @@
 - [Lab 验证记录](records/labs-verification-record.md)
 - `../src/core/*.verify.mjs`
 - `../src/lab*/**/*.verify.mjs`
+- `../src/core/settings-permission-resolver.verify.mjs`
+- `../src/core/hooks-lifecycle.verify.mjs`
+- `../src/core/memory-source-auto-memory.verify.mjs`
+- `../src/core/checkpoint-rewind.verify.mjs`
+- `../src/core/subagent-context-isolation.verify.mjs`
 
 ## 开源协作
 

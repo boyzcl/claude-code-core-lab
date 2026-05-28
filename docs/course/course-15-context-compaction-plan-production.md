@@ -1096,6 +1096,40 @@ plan 不是 prompt 建议。
 | blocked reason | Runtime failure / user change | blockStep reason + evidence | 解释为什么暂停 | 失败历史被覆盖 |
 | revision history | revisePlan | planRevisionLog | 保留旧计划和新计划关系 | 用户变更不可审计 |
 | final grounding | plan steps + verificationState | finalAnswerDecision | 防止 plan 未完成却 final | passed 测试和完成计划可能脱钩 |
+| startup context | Runtime environment / project entry | stable or dynamic context block | 让模型知道工作目录、平台、git 状态和项目入口 | 模型可能误判命令或上下文边界 |
+| memory block | Memory source / project rules | candidate block，按优先级选择 | 提供长期偏好或项目规则 | 长期协作信息无法进入上下文 |
+| system-reminder | Runtime / Policy / Hook feedback | dynamic tail reminder block | 临时提醒风险、阻断或审批状态 | 模型可能重复被拒绝动作 |
+
+---
+
+### 15.1 Product Surface 如何接回 Core 18-20
+
+Claude Code 产品表层里的 startup context、system-reminder、memory、CLAUDE.md 这类材料，第一落点不是新 Core，而是 Core 18-20：
+
+```text
+Core 18 问：这些材料是否应该进入本轮上下文？进入 stable prefix 还是 dynamic tail？
+Core 19 问：压缩后这些材料里的任务状态有没有丢？哪些不该进入 compact summary？
+Core 20 问：这些材料是否改变 active step、blocked、revision 或 final grounding？
+```
+
+归位规则：
+
+| 产品表层材料 | 接回哪一层 | 理由 |
+| --- | --- | --- |
+| startup environment | Core 18 | 它是上下文候选 block，影响命令和路径判断 |
+| system-reminder | Core 18 / Core 20 | 它通常是动态状态提醒，可能影响当前 step 或权限 |
+| CLAUDE.md / project rules | Core 18 / Core 25 | 它是高优先级规则上下文，也会进入 repo rule index |
+| auto memory | Core 18 / Core 19 / Core 24 | 它是长期信息来源，不等于 compact summary |
+| plan-related reminder | Core 20 | 它应落到 plan state，而不是只留在模型文字里 |
+
+独立 Core 的门槛：
+
+```text
+如果只是说明这些材料怎么进入上下文，补 Course 15。
+如果实现 memory type、forget、stale verification、no code-structure memory、segment provenance / precedence 或独立 verify，才考虑独立 Core。
+```
+
+当前已经落地的 Product Surface Core 27-31 统一在 `course-18-product-surface-implementation-chain.md` 中细读；本课只负责说明它们如何先接回 Core 18-20 的 Context / Compaction / Plan 主线。
 
 ---
 

@@ -1,6 +1,6 @@
 # CURRENT_STATE：Claude Code Core 学习项目当前状态
 
-最后更新：2026-05-28 16:42 CST
+最后更新：2026-05-28 20:43 CST
 
 本文是新对话入口和当前状态单一事实源。它不替代课程、Lab、Core 文档，只回答：
 
@@ -105,6 +105,7 @@ Eval 如何证明能力真的变强。
 | `docs/course/course-15-context-compaction-plan-production.md` | 课程 | Core 18-20 的 Context Economy、Compaction Quality、Plan State Machine 执行链 |
 | `docs/course/course-16-long-running-tool-gateway-production.md` | 课程 | Core 21-23 的 Long-Running Eval、ToolRuntime Transaction、ModelGateway Budget 执行链 |
 | `docs/course/course-17-session-repo-approval-production.md` | 课程 | Core 24-26 的 Durable Session、Repo Intelligence、Human Approval 执行链 |
+| `docs/course/course-18-product-surface-implementation-chain.md` | 课程 | Core 27-31 的 Settings、Hooks、Memory、Checkpoint、Subagent Product Surface 执行链 |
 | `docs/production-upgrade-terms-zh.md` | 术语参考 | Core 18-26 英文术语的中文解释和边界 |
 | `docs/start-here-for-learners.md` | 学习者入口 | 第一次打开仓库时的学习路线和运行入口 |
 | `docs/open-source-boundary.md` | 开源边界 | 对外能力声明、公开学习边界和 secret 边界 |
@@ -136,8 +137,16 @@ Eval 如何证明能力真的变强。
 | `docs/core/core-24-durable-session-store-replay.md` | 集成实现记录 | 证明 Durable Session Store 可以记录 append-only event log、snapshot restore、crash recovery、trace replay、compaction audit 和 secret boundary evidence |
 | `docs/core/core-25-repo-intelligence-relevance-index.md` | 集成实现记录 | 证明 Repo Intelligence 可以记录 repo map、symbol/test/rule index、relevance scoring、incremental update 和 token benefit evidence |
 | `docs/core/core-26-human-approval-interruption-protocol.md` | 集成实现记录 | 证明 Human Approval Protocol 可以记录 approval_required、approve/reject path、interruption、handoff 和 no hidden execution evidence |
+| `docs/core/core-27-settings-permission-resolver.md` | 集成实现记录 | 证明 Settings / Permission Resolver 可以把 user/project/local/policy 配置解析为 allow / ask / deny，并记录 ruleSource、resolverTrace 和 decisionCache evidence |
+| `docs/core/core-28-hooks-lifecycle.md` | 集成实现记录 | 证明 Hooks Lifecycle 可以把 user prompt / pre tool / post tool hooks 记录为可审计 session event、受限 observation、阻断决策和脱敏输出 |
+| `docs/core/core-29-memory-source-auto-memory.md` | 集成实现记录 | 证明 Memory Source / CLAUDE.md / Auto Memory 可以把长期记忆路由、写入索引、删除、重新验证并作为独立 context source |
+| `docs/core/core-30-checkpoint-rewind.md` | 集成实现记录 | 证明 Checkpoint / Rewind 可以把恢复点绑定文件 hash、session event、外部改动冲突和 audit replay |
+| `docs/core/core-31-subagent-context-isolation.md` | 集成实现记录 | 证明 Subagent Context Isolation 可以把 delegated task、隔离上下文、结构化结果、去重 ledger 和 audit replay 串起来 |
 | `docs/roadmap/production-upgrade-roadmap.md` | 生产化升级总控 | Core 18-26 的路线、依赖、边界和统一完成定义 |
 | `docs/roadmap/production-upgrade-validation-matrix.md` | 验证矩阵 | Core 18-26 的验证先行口径和必过检查 |
+| `docs/roadmap/product-surface-study-roadmap.md` | 产品表层学习总控 | Core 26 之后如何研究 Claude Code 产品工件，并判断补旧课还是新建 Core |
+| `docs/roadmap/product-surface-validation-matrix.md` | 产品表层验证矩阵 | 新阶段的证据层级、同主题合并门、候选 Core 进入条件 |
+| `docs/roadmap/product-surface-core-candidates.md` | 产品表层候选 Core Mini Brief | Settings、Hooks、Memory、Subagent、Checkpoint 是否值得独立成 Core 的评审 |
 | `README.md` | 项目总入口 | 快速运行、文档导航和当前边界 |
 | `AGENTS.md` | Agent 控制入口 | Agent 工作规则、secret 边界和完成定义 |
 | `docs/index.md` | 文档索引 | 区分当前规则、历史和证据 |
@@ -156,7 +165,8 @@ Eval 如何证明能力真的变强。
 学习顺序 / 命名规则：docs/course/claude-code-core-learning-path.md
 课程正文：对应 course-XX 文档
 实验机制：对应 lab-XX 文档和 src/labXX 代码
-集成行为：docs/core/core-01-integrated-runtime.md、docs/core/core-02-model-gateway.md、docs/core/core-03-context-engine-integration.md、docs/core/core-04-plan-mode-integration.md、docs/core/core-05-compaction-artifact-integration.md、docs/core/core-06-trace-eval-harness-expansion.md、docs/core/core-07-real-model-api-e2e.md、docs/core/core-08-prompt-pack-recovery-loop.md、docs/core/core-09-real-repo-task-layer.md、docs/core/core-10-70-80-eval-open-source-packaging.md、docs/core/core-11-eval-expansion-executable-seeds.md、docs/core/core-12-eval-expansion-second-batch.md、docs/core/core-13-eval-expansion-third-batch.md、docs/core/core-14-eval-expansion-final-starter-batch.md、docs/core/core-15-reference-agent-comparison.md、docs/core/core-16-reference-agent-cost-and-cross-agent.md、docs/core/core-17-reference-agent-pricing-table-baseline.md、docs/core/core-18-context-economy-cache-aware-context-engine.md、docs/core/core-19-compaction-quality-eval.md、docs/core/core-20-plan-state-machine.md、docs/core/core-21-long-running-task-eval.md、docs/core/core-22-tool-runtime-transaction.md、docs/core/core-23-model-gateway-budget-controller.md 和 src/core 代码
+集成行为：docs/core/core-01-integrated-runtime.md 到 docs/core/core-31-subagent-context-isolation.md 和 src/core 代码
+产品表层阶段：docs/roadmap/product-surface-study-roadmap.md、docs/roadmap/product-surface-validation-matrix.md、docs/roadmap/product-surface-core-candidates.md
 历史观点：两篇原始分析文章只作背景材料
 ```
 
@@ -179,12 +189,13 @@ course-08 到 course-12 已按执行链样板重写，并由学习者逐课复�
 docs/course/course-13-eval-reference-cost-evidence.md 已创建，用于补齐 Core 13-17 的 executable suite、reference-agent baseline、cost basis、pricing table 和 RelativeScore 阻塞边界。
 docs/course/course-14-production-upgrade-evidence-chain.md 已创建，用于衔接 course-13，并讲清 Core 18-26 Production Upgrade 的阶段理由、生产化问题、证据链和 out-of-scope 边界。
 docs/course/course-15-context-compaction-plan-production.md、docs/course/course-16-long-running-tool-gateway-production.md、docs/course/course-17-session-repo-approval-production.md 已创建，用于按 course-08 到 course-12 的同一执行链标准细读 Core 18-26 verify case。
+docs/course/course-18-product-surface-implementation-chain.md 已创建，用于按同一执行链标准细读 Core 27-31 的 Settings / Permission Resolver、Hooks Lifecycle、Memory Source、Checkpoint / Rewind 和 Subagent Context Isolation。
 docs/production-upgrade-terms-zh.md 已创建，用于把 Core 18-26 的英文代码术语翻译成中文机制解释。
 docs/start-here-for-learners.md、docs/open-source-boundary.md、docs/github-release-checklist.md 已创建，用于开源前的学习者入口、能力声明边界和发布检查。
 README.md 已按中文学习者第一屏重写：先说明这是围绕 Claude Code 核心机制的中文学习项目，再给运行命令、学习路线、项目结构、预期结果和能力边界。
 根目录已瘦身，课程、Core、Lab、验证记录、参考资料和历史材料已移动到 docs/course、docs/core、docs/lab、docs/records、docs/reference、docs/history，并补充各目录 README。
 Teaching Consolidation Pass 第一轮完成。
-Production Upgrade Teaching Consolidation Pass 已完成总览课和三门细课整理；Open Source Learning Preview Preparation 已完成本地最终验证，下一步是同步 GitHub 并观察 CI。
+Production Upgrade Teaching Consolidation Pass 已完成总览课和三门细课整理；Open Source Learning Preview 已同步 GitHub 并通过 CI；Product Surface Study Stage Preparation 已完成路线、验证矩阵、课程补充和候选 Core mini brief；Product Surface Teaching Consolidation Pass 已完成 course-18 并同步导航入口。
 ```
 
 已亲自体验：
@@ -194,13 +205,13 @@ lab-01 到 lab-08 已由学习者运行、复述和理解。
 course-06 中 Lab 到 Core 的映射问题已由学习者确认能回答。
 ```
 
-当前正在进行：
+当前状态：
 
 ```text
-Open Source Learning Preview GitHub Sync
+Product Surface Teaching Consolidation Pass 已完成
 ```
 
-它的目的不是继续补 starter seed、扩写抽象架构，或把 deterministic local evidence 夸大成生产级能力，而是把课程主线、开源边界、协作文件、CI 和导航整理到可以发布学习预览的状态。
+它的目的不是看到 Claude Code 产品表层材料就新增一串 Core，而是把已经完成的 Core 27-31 整理成和前面课程一致的教学体系，并继续守住 roadmap / validation matrix / mini brief 的进入门槛。
 
 当前断点：
 
@@ -217,6 +228,12 @@ Core 23 Production ModelGateway + Budget Controller 已实现并通过目标验�
 Core 24 Durable Session Store + Replay 已实现并通过目标验证。
 Core 25 Repo Intelligence + Relevance Index 已实现并通过目标验证。
 Core 26 Human Approval + Interruption Protocol 已实现并通过目标验证。
+Core 27 Settings / Permission Resolver 已实现并通过目标验证。
+Core 28 Hooks Lifecycle 已实现并通过目标验证。
+Core 29 Memory Source / CLAUDE.md / Auto Memory 已实现并通过目标验证。
+Core 30 Checkpoint / Rewind 已实现并通过目标验证。
+Core 31 Subagent Context Isolation 已实现并通过目标验证。
+Course 18 Product Surface Implementation Chain 已创建，用于把 Core 27-31 整理成和 course-14 到 course-17 一致的教学执行链。
 Production Upgrade Roadmap Pass 已建立 Core 18-26 路线：Context Economy、Compaction Quality、Plan State Machine、Long-Running Eval、ToolRuntime Transaction、ModelGateway Budget、Durable Replay、Repo Intelligence、Human Approval。
 Core Build Pass 第一轮完成。
 Teaching Consolidation Pass 第一轮完成，course-07 到 course-12 已由学习者复盘通过。
@@ -227,6 +244,13 @@ Open Source Learning Preview docs 已补齐：LICENSE、CONTRIBUTING、SECURITY�
 GitHub 展示层已按中文学习者视角重构：README 第一屏明确 Claude Code 学习对象，说明怎么运行、怎么学习、预期结果、项目结构和能力边界；根目录只保留入口文件，docs 分区承载课程和证据。
 中文术语入口已前移：README、学习者入口、docs 入口和 Course 03 均采用中文先行，`clean-room` 只解释为公开学习边界，不再作为普通用户第一屏定位。
 Markdown 链接轻量检查已通过：README/docs 内部 Markdown 链接无断链。
+Product Surface Study Stage Preparation 已完成：已建立阶段总控、验证矩阵和候选 Core mini brief；Course 00 / Course 03 / Course 08 / Course 09 / Course 15-17 已补充产品表层材料归位规则。从 Claude Code 产品工件、系统提示词提取、source map 观察和官方文档中学习时，必须先做 evidence tier、same-topic merge、runtime boundary、verify shape 和 public boundary 判断；同主题优先补回已有 course/core，只有新 Runtime 边界才候选 Core 27+。
+Product Surface Study Core 27 Implementation Pass 已完成：Settings / Permission Resolver 先补实现级 validation matrix，再实现 permissionConfig、resolverTrace、ruleSource、decisionCache、allow/ask/deny、prefix command rule 和 no hidden execution evidence。Core 27 明确不重复 Core 22 transaction 或 Core 26 approval decision。
+Product Surface Study Core 28 Implementation Pass 已完成：Hooks Lifecycle 先补实现级 validation matrix，再实现 hookRegistry、hookEvent、hookDecision、hookFeedback、redactedHookOutput、pre/post/user hook、hook failure、secret boundary 和 no hidden execution evidence。Core 28 明确不重复 Core 24 durable store 或 Core 26 approval decision。
+Product Surface Study Core 29 Implementation Pass 已完成：Memory Source / CLAUDE.md / Auto Memory 先补实现级 validation matrix，再实现 memoryStore、memoryIndex、memoryType、memoryFreshnessCheck、forgetEvent、write/index、forget、stale verification、compaction boundary 和 no code-structure memory evidence。Core 29 明确不重复 Course 08/09 或 Core 18/19/24。
+Product Surface Study Core 30 Implementation Pass 已完成：Checkpoint / Rewind 先补实现级 validation matrix，再实现 checkpoint、rewindRequest、fileStateSnapshot、externalChangeConflict、rewindAudit、checkpoint creation、rewind state、partial rewind denial、audit replay 和 event log boundary evidence。Core 30 明确不重复 Core 22 transaction 或 Core 24 durable replay。
+Product Surface Study Core 31 Implementation Pass 已完成：Subagent Context Isolation 先补实现级 validation matrix，再实现 delegatedTask、subagentContext、subagentResult、delegationLedger、isolationAudit、independent task、context isolation、no duplicate research、result contract 和 failure propagation evidence。Core 31 明确不重复 Core 21 long-running eval、Core 24 durable store 或 Core 25 repo intelligence。
+Product Surface Teaching Consolidation Pass 已完成：Course 00 / 03 / 08 / 09 / 15 / 16 / 17 的 Product Surface 补充已和 Core 27-31 边界对齐；Course 18 已新增为 Core 27-31 的 execution-chain 细课；README、docs/index、authority-map、course README 和 CURRENT_STATE 已同步导航。
 Eval Expansion Pass starter executable suite 完成，累计 20/20 starter case executable。
 Reference-Agent Comparison Pass 已完成第一批 Codex local CLI 小样本对照：8 个 executable seeds 有真实 run evidence，覆盖修复、失败归因、安全拒绝和歧义拒绝。
 Cost + Cross-Agent Pass 已补上 8 个 codex-local sample runs 的 cost 计量口径：token、cached token、uncached token、output token、reasoning output token、latency 和 raw log hash 都可汇总；没有 pricing table 时 USD 仍保持 null。横向对照当前结论是 single_baseline_only：本机只有 codex-local 有 recorded runs，未检测到 Claude Code / Claude / OpenCode / Aider / Cursor Agent / Gemini / Qwen / OpenAI CLI 的可用第二 baseline。没有第二 agent 真实 runs 前，不生成 RelativeScore。
@@ -268,6 +292,7 @@ docs/course/course-14-production-upgrade-evidence-chain.md
 docs/course/course-15-context-compaction-plan-production.md
 docs/course/course-16-long-running-tool-gateway-production.md
 docs/course/course-17-session-repo-approval-production.md
+docs/course/course-18-product-surface-implementation-chain.md
 ```
 
 Lab 层：
@@ -315,6 +340,11 @@ src/core/model-gateway-budget-controller.mjs
 src/core/durable-session-store-replay.mjs
 src/core/repo-intelligence-relevance-index.mjs
 src/core/human-approval-interruption-protocol.mjs
+src/core/settings-permission-resolver.mjs
+src/core/hooks-lifecycle.mjs
+src/core/memory-source-auto-memory.mjs
+src/core/checkpoint-rewind.mjs
+src/core/subagent-context-isolation.mjs
 ```
 
 验证层：
@@ -349,6 +379,11 @@ src/core/model-gateway-budget-controller.verify.mjs
 src/core/durable-session-store-replay.verify.mjs
 src/core/repo-intelligence-relevance-index.verify.mjs
 src/core/human-approval-interruption-protocol.verify.mjs
+src/core/settings-permission-resolver.verify.mjs
+src/core/hooks-lifecycle.verify.mjs
+src/core/memory-source-auto-memory.verify.mjs
+src/core/checkpoint-rewind.verify.mjs
+src/core/subagent-context-isolation.verify.mjs
 ```
 
 集成层：
@@ -380,8 +415,16 @@ docs/core/core-23-model-gateway-budget-controller.md
 docs/core/core-24-durable-session-store-replay.md
 docs/core/core-25-repo-intelligence-relevance-index.md
 docs/core/core-26-human-approval-interruption-protocol.md
+docs/core/core-27-settings-permission-resolver.md
+docs/core/core-28-hooks-lifecycle.md
+docs/core/core-29-memory-source-auto-memory.md
+docs/core/core-30-checkpoint-rewind.md
+docs/core/core-31-subagent-context-isolation.md
 docs/roadmap/production-upgrade-roadmap.md
 docs/roadmap/production-upgrade-validation-matrix.md
+docs/roadmap/product-surface-study-roadmap.md
+docs/roadmap/product-surface-validation-matrix.md
+docs/roadmap/product-surface-core-candidates.md
 README.md
 AGENTS.md
 docs/index.md
@@ -438,6 +481,14 @@ src/core/repo-intelligence-relevance-index.mjs
 src/core/repo-intelligence-relevance-index.verify.mjs
 src/core/human-approval-interruption-protocol.mjs
 src/core/human-approval-interruption-protocol.verify.mjs
+src/core/settings-permission-resolver.mjs
+src/core/settings-permission-resolver.verify.mjs
+src/core/hooks-lifecycle.mjs
+src/core/hooks-lifecycle.verify.mjs
+src/core/memory-source-auto-memory.mjs
+src/core/memory-source-auto-memory.verify.mjs
+src/core/checkpoint-rewind.mjs
+src/core/checkpoint-rewind.verify.mjs
 ```
 
 ---
@@ -828,6 +879,67 @@ assertNoHiddenExecution 会扫描 event log，确认 approvalRequired tool.execu
 这只是 deterministic local approval protocol evidence，不是完整 GUI approval 产品、enterprise policy 系统或真实多人协作权限模型。
 ```
 
+Core 27 已确认：
+
+```text
+SettingsPermissionResolver 可以读取 user/project/local/policy 四层 permissionConfig，并按 policy > local > project > user 解析。
+resolver report 会记录 ruleSource、matchedRule、shadowedMatches、resolverTrace、precedence 和 decisionCache。
+同一 action 可以解析为 allow / ask / deny：allow 进入 mock tool execution，ask 只生成 Core 26 approval_required bridge，deny 结构化拒绝。
+命令前缀规则只匹配明确前缀和参数，不把 npm test 外推到 npm testing 或 npm test:unit。
+ask / deny action 的 providerCalls delta 和 toolExecutions delta 都为 0。
+assertNoHiddenPermissionExecution 会扫描 trace，确认只有 allow 后才允许 tool.executed。
+这只是 deterministic local permission resolver evidence，不是完整 enterprise policy 产品、真实 Claude Code Settings / Permission 内部实现、GUI permission prompt、完整 shell parser 或 sandbox。
+```
+
+Core 28 已确认：
+
+```text
+HooksLifecycleRuntime 可以把 userPromptSubmit、preToolUse、postToolUse hooks 作为 Runtime lifecycle event 处理。
+userPromptSubmit hook 可以把 public API 约束加入 Runtime State，并确认不进入 systemMessages。
+preToolUse hook 可以返回 block，写入 hook.pre_tool.blocked 和 tool.blocked_by_hook，且 toolExecutions delta=0。
+postToolUse hook 可以把反馈写入 dynamicObservations，并标记 promotedToSystem=false。
+hook failure 会被结构化为 hook_failed，且不能把 permission deny 的 action 升级为可执行。
+hook output 在写入 DurableSessionStore 前会脱敏 Bearer、sk- 和 token 样式文本，secret scan 通过。
+assertNoHiddenHookExecution 会确认 blocked / denied action 不会出现 tool.executed。
+这只是 deterministic local hooks lifecycle evidence，不是真实 shell hook 产品、任意用户脚本安全沙箱、完整插件系统或真实 Claude Code hooks 内部实现。
+```
+
+Core 29 已确认：
+
+```text
+MemorySourceRuntime 可以把 user、feedback、project、reference 四类 memory candidate 路由到不同 read/write policy、contextPriority 和 freshness 要求。
+CLAUDE.md 可以作为 project memory source 被索引，但不通过 auto memory 随意改写。
+writeMemory 会把正文写入 memory/items/<id>.json，把 summary、bodyPath、bodyHash 和 references 写入 memory-index.json，正文和索引分离。
+forgetMemory 会删除 body file、移除 index entry，并写入 forgetEvent。
+recommendMemories 对带 references 的 memory 会先执行 freshness check；缺失文件或 symbol 的 stale memory 不进入推荐。
+buildContextSnapshot 会把 long_term_memory block 和 compact_summary block 分开，memoryMixedWithCompactSummary=false。
+代码结构事实会被拒绝为 code_structure_memory_denied，并建议 read_repo_or_update_repo_index。
+这只是 deterministic local memory source evidence，不是真实 Claude Code memory 文件格式、远端多用户 memory 服务、隐私合规系统、完整代码智能数据库或官方实现。
+```
+
+Core 30 已确认：
+
+```text
+CheckpointRewindRuntime 可以创建 checkpoint，并把它绑定到文件 hash、session event seq、event hash 和 durable snapshot id。
+rewind request 会从 source checkpoint 回到 target checkpoint，并恢复目标 checkpoint 的文件内容和 replay state。
+如果 source checkpoint 之后存在外部文件改动，rewind 会返回 externalChangeConflict，不恢复任何文件。
+rewind audit 可以解释 source checkpoint、target checkpoint、restored files 和 replay through seq。
+rewind 只向 event log 追加 checkpoint / rewind audit events，不截断或改写 Core 22 transaction evidence 和 Core 24 durable replay evidence。
+这只是 deterministic local checkpoint rewind evidence，不是 IDE rewind UI、跨机器恢复、分布式 session store、完整 patch parser 或真实 Claude Code Checkpoint 内部实现。
+```
+
+Core 31 已确认：
+
+```text
+SubagentContextIsolationRuntime 可以把父代理请求转成 delegatedTask，并为每个任务生成只含 allowed paths 的 subagentContext。
+independent tasks 可以在同一 parallel group 中运行；session evidence 通过本地 append queue 串行写入 Core 24 event log，避免破坏 seq/hash chain。
+subagentResult 只向父代理返回 summary、evidenceRefs、contextDigestHash 和 structured failure，不返回 raw parent messages 或 raw transcript。
+delegationLedger 会按 task signature 阻止重复研究；重复委派返回 duplicate_reused，researchExecuted=false。
+failure propagation 会把 isolated context 中的失败结构化为 failure.reason 和 retryHint，并写入 parent receipt。
+isolationAudit 可以从 session events replay delegation.started、subagent.result_received、delegation.completed 和 ledger entry。
+这只是 deterministic local subagent isolation evidence，不是真实多进程 agent 调度、远端 worker 隔离、agent marketplace 或真实 Claude Code Subagent 内部实现。
+```
+
 Production Upgrade Roadmap Pass 已确认：
 
 ```text
@@ -846,7 +958,7 @@ Core 18 到 Core 26 的顺序为 Context Economy、Compaction Quality Eval、Pla
 最后一次完整验证时间：
 
 ```text
-2026-05-28 16:42 CST
+2026-05-28 20:43 CST
 ```
 
 运行命令：
@@ -859,6 +971,7 @@ npm run verify:all
 
 ```bash
 git diff --check
+rg stale course/product-surface references
 node --input-type=module - <<'NODE'
 // markdown link check
 NODE
@@ -901,8 +1014,13 @@ core-23: 9/9 passed
 core-24: 8/8 passed
 core-25: 9/9 passed
 core-26: 9/9 passed
+core-27: 8/8 passed
+core-28: 9/9 passed
+core-29: 9/9 passed
+core-30: 8/8 passed
+core-31: 9/9 passed
 
-total: 222/222 passed
+total: 265/265 passed
 exit code: 0
 ```
 
@@ -910,13 +1028,14 @@ exit code: 0
 
 ```text
 git diff --check: passed
+stale reference scans: passed
 markdown links: passed
 ```
 
 这证明：
 
 ```text
-当前 Lab 机制、Core 01 集成链路、Core 02 Model Gateway 边界、Core 03 Context Engine 集成链路、Core 04 Plan Mode 权限链路、Core 05 Compaction / Artifact 链路、Core 06 Trace / Eval Harness 链路、Core 07 Real Model API E2E 链路、Core 08 Prompt Pack / Recovery Loop 链路、Core 09 Real Repo Task Layer 链路、Core 10 Eval / Open Source Packaging 链路、Core 11 第一批 executable seed 链路、Core 12 第二批 executable seed 链路、Core 13 第三批 executable seed 链路、Core 14 final starter batch 链路、Core 15 codex-local reference comparison 链路、Core 16 reference-agent cost/cross-agent readiness 链路、Core 17 pricing table baseline 链路、Core 18 context economy/cache-aware context 链路、Core 19 compaction quality eval 链路、Core 20 plan state machine 链路、Core 21 long-running task eval 链路、Core 22 tool runtime transaction 链路、Core 23 model gateway budget controller 链路、Core 24 durable session replay 链路、Core 25 repo intelligence relevance 链路和 Core 26 human approval interruption 链路都可运行。
+当前 Lab 机制、Core 01 集成链路、Core 02 Model Gateway 边界、Core 03 Context Engine 集成链路、Core 04 Plan Mode 权限链路、Core 05 Compaction / Artifact 链路、Core 06 Trace / Eval Harness 链路、Core 07 Real Model API E2E 链路、Core 08 Prompt Pack / Recovery Loop 链路、Core 09 Real Repo Task Layer 链路、Core 10 Eval / Open Source Packaging 链路、Core 11 第一批 executable seed 链路、Core 12 第二批 executable seed 链路、Core 13 第三批 executable seed 链路、Core 14 final starter batch 链路、Core 15 codex-local reference comparison 链路、Core 16 reference-agent cost/cross-agent readiness 链路、Core 17 pricing table baseline 链路、Core 18 context economy/cache-aware context 链路、Core 19 compaction quality eval 链路、Core 20 plan state machine 链路、Core 21 long-running task eval 链路、Core 22 tool runtime transaction 链路、Core 23 model gateway budget controller 链路、Core 24 durable session replay 链路、Core 25 repo intelligence relevance 链路、Core 26 human approval interruption 链路、Core 27 settings permission resolver 链路、Core 28 hooks lifecycle 链路、Core 29 memory source 链路、Core 30 checkpoint rewind 链路和 Core 31 subagent context isolation 链路都可运行。
 ```
 
 Core 07 live 另已确认：
@@ -934,9 +1053,10 @@ DeepSeek Chat Completions API 已经在本机完成真实端到端调用。
 学习侧还缺：
 
 ```text
-学习者需要正式复盘 docs/course/course-13-eval-reference-cost-evidence.md 到 docs/course/course-17-session-repo-approval-production.md。
+学习者需要正式复盘 docs/course/course-13-eval-reference-cost-evidence.md 到 docs/course/course-18-product-surface-implementation-chain.md。
 学习者需要能把 Core 13-17 复述为 executable suite -> codex-local baseline -> cost basis -> pricing boundary -> RelativeScore blocked 的证据桥。
 学习者需要能把 Core 18-26 复述为 Context / Compaction / Plan / Eval / ToolRuntime / ModelGateway / Session / Repo Intelligence / Human Approval 的生产化证据链。
+学习者需要能把 Core 27-31 复述为 Settings / Hooks / Memory / Checkpoint / Subagent 的 Product Surface execution-chain，并能说明每个主题的 Runtime state、enforced boundary、verify case 和不能声称的官方实现边界。
 学习者需要继续区分 deterministic local evidence、真实 provider billing、真实 provider cache billing、生产级 benchmark、SystemScore 和 RelativeScore。
 ```
 
@@ -963,10 +1083,15 @@ Core 23 已实现 deterministic model gateway budget controller；但它不是�
 Core 24 已实现 deterministic durable session replay；但它不是分布式 durable storage、跨机器 session 产品或生产级 audit log。
 Core 25 已实现 deterministic repo intelligence relevance index；但它不是完整语义 embedding 检索、任意超大仓库生产级索引或真实 IDE / LSP 全量符号能力。
 Core 26 已实现 deterministic human approval interruption protocol；但它不是完整 GUI approval 产品、enterprise policy 系统或真实多人协作权限模型。
+Core 27 已实现 deterministic settings permission resolver；但它不是完整 enterprise policy 产品、真实 Claude Code Settings / Permission 内部实现、GUI permission prompt、完整 shell parser 或 sandbox。
+Core 28 已实现 deterministic hooks lifecycle；但它不是真实 shell hook 产品、任意用户脚本安全沙箱、完整插件系统或真实 Claude Code hooks 内部实现。
+Core 29 已实现 deterministic memory source；但它不是真实 Claude Code memory 文件格式、远端多用户 memory 服务、隐私合规系统、完整代码智能数据库或官方实现。
+Core 30 已实现 deterministic checkpoint rewind；但它不是 IDE rewind UI、跨机器恢复、分布式 session store、完整 patch parser 或真实 Claude Code Checkpoint 内部实现。
+Core 31 已实现 deterministic subagent context isolation；但它不是真实多进程 agent 调度、远端 worker 隔离、agent marketplace 或真实 Claude Code Subagent 内部实现。
 Core 18-26 已完成 deterministic local evidence 主线；但仍不能声称完整 Claude Code 生产能力、任意真实仓库 70%-80% 成功率或跨 agent RelativeScore。
 ```
 
-文档治理侧还缺：
+文档治理侧当前结论：
 
 ```text
 README + docs/index + authority-map 的入口层已经建立。
@@ -974,6 +1099,8 @@ README + docs/index + authority-map 的入口层已经建立。
 历史文档已移动到 docs/history，只作背景材料，不再占据根目录。
 当前已达到 GitHub learning-preview 发布结构；发布后仍应继续收集真实中文学习者反馈。
 Production Upgrade Roadmap Pass 已建立路线入口，course-14 到 course-17 已建立 Core 18-26 教学整理入口；未来新路线开始前仍要先写清新的 roadmap / validation matrix，并同步 CURRENT_STATE、README、docs/index 和 authority-map。
+Product Surface Study Stage Preparation 已完成路线入口、验证矩阵、Step A 课程补充和候选 Core mini brief。Core 27、Core 28、Core 29、Core 30 和 Core 31 已作为当前候选池 A-E 实现；后续仍不能直接新增一串 Core，必须先从候选池中选择真正满足 Runtime boundary 和 verify shape 的主题，并补具体实现级 validation matrix。
+Product Surface Teaching Consolidation Pass 已完成 course-18 教学入口，并将 course-00 / 03 / 08 / 09 / 15 / 16 / 17 的 Product Surface 补充对齐到 Core 27-31 的对象、状态、verify 和公开边界。
 ```
 
 ---
@@ -983,25 +1110,26 @@ Production Upgrade Roadmap Pass 已建立路线入口，course-14 到 course-17 
 下一步只做一件事：
 
 ```text
-同步 GitHub 仓库 main，并观察 GitHub Actions verify workflow 是否通过。
+Product Surface Study 当前候选池 A-E 已完成，且 course-18 已把 Core 27-31 收口成 Product Surface execution-chain；下一步是学习者复盘 course-18，或在新增 Product Surface 候选前先写新的 mini brief 和实现级 validation matrix。
 ```
 
 推荐优先顺序：
 
 ```text
-1. 提交当前 GitHub 展示层、docs 分区和 Core 10 发布检查更新。
-2. 推送到 https://github.com/boyzcl/claude-code-core-lab。
-3. 确认 GitHub Actions 跑 `npm install`、`git diff --check`、`npm run verify:all`。
-4. 发布后继续收集真实中文学习者反馈。
-5. 下一条路线开始前，先写新的 roadmap / validation matrix，不直接把当前 deterministic local evidence 扩写成生产级声明。
+1. 复盘 docs/roadmap/product-surface-study-roadmap.md、product-surface-validation-matrix.md 和 product-surface-core-candidates.md。
+2. 读 docs/course/course-18-product-surface-implementation-chain.md，把 Core 27-31 作为一条教学执行链复述。
+3. 顺序读 Core 27-31 文档，确认每个 Core 和前置 Core 的 non-duplication boundary。
+4. 运行 npm run core:27:verify 到 npm run core:31:verify，确认每个 Product Surface Core 的 focused evidence。
+5. 若要新增候选，先写 mini brief、evidence tier、same-topic merge、runtime boundary、verify shape 和 public boundary。
+6. 不使用提取 prompt 原文、source map 原文或反编译源码片段。
 ```
 
 做完下一步后的预期结果：
 
 ```text
-GitHub 首页能让中文学习者理解项目对象、使用方式、学习路径、预期结果和能力边界。
-CI 继续证明 deterministic local evidence 链可复现。
-后续路线再决定是真实 repo benchmark、第二 reference-agent baseline，还是 approval / policy 产品层。
+学习者能把 Product Surface Study 复述为：先归位，后 gate，最后只实现有 Runtime state、enforced boundary、fixture、verify case 和 out-of-scope 的主题；Core 27-31 不是五个 UI 功能，而是 Settings / Hooks / Memory / Checkpoint / Subagent 各自落成 Runtime evidence 的教学链。
+Core 21 / Core 22 / Core 24 / Core 25 / Core 26 中已有叙事不会被重复造课。
+项目继续避免把提取 prompt / source map 观察直接写成官方公开实现或生产级 Claude Code 能力。
 ```
 
 ---
@@ -1053,8 +1181,16 @@ docs/core/core-23-model-gateway-budget-controller.md
 docs/core/core-24-durable-session-store-replay.md
 docs/core/core-25-repo-intelligence-relevance-index.md
 docs/core/core-26-human-approval-interruption-protocol.md
+docs/core/core-27-settings-permission-resolver.md
+docs/core/core-28-hooks-lifecycle.md
+docs/core/core-29-memory-source-auto-memory.md
+docs/core/core-30-checkpoint-rewind.md
+docs/core/core-31-subagent-context-isolation.md
 docs/roadmap/production-upgrade-roadmap.md
 docs/roadmap/production-upgrade-validation-matrix.md
+docs/roadmap/product-surface-study-roadmap.md
+docs/roadmap/product-surface-validation-matrix.md
+docs/roadmap/product-surface-core-candidates.md
 README.md
 AGENTS.md
 docs/index.md
@@ -1091,13 +1227,20 @@ Core 23 Production ModelGateway + Budget Controller 已实现并通过目标验�
 Core 24 Durable Session Store + Replay 已实现并通过目标验证。
 Core 25 Repo Intelligence + Relevance Index 已实现并通过目标验证。
 Core 26 Human Approval + Interruption Protocol 已实现并通过目标验证。
+Core 27 Settings / Permission Resolver 已实现并通过目标验证。
+Core 28 Hooks Lifecycle 已实现并通过目标验证。
+Core 29 Memory Source / CLAUDE.md / Auto Memory 已实现并通过目标验证。
+Core 30 Checkpoint / Rewind 已实现并通过目标验证。
+Core 31 Subagent Context Isolation 已实现并通过目标验证。
 Production Upgrade Roadmap Pass 已建立 Core 18-26 路线和验证矩阵。
 course-07 Core Build Pass Overview 已创建并复盘完成。
 course-08 到 course-12 已按执行链样板重写并复盘完成。
 course-13 Eval Reference Cost Evidence 已创建，用于复盘 Core 13-17 的 executable suite、codex-local baseline、cost basis、pricing boundary 和 RelativeScore 阻塞。
 course-14 Production Upgrade Evidence Chain 已创建，用于复盘 Core 18-26 的 deterministic local evidence 主线。
 course-15 到 course-17 已创建，用于按同一执行链标准细读 Core 18-26 verify case。
-Open Source Learning Preview Preparation 已补齐课程桥、开源边界、协作文件和 CI，并完成本地最终验证。下一步同步 GitHub 仓库并观察 GitHub Actions。
+course-18 Product Surface Implementation Chain 已创建，用于按同一执行链标准细读 Core 27-31 verify case。
+Open Source Learning Preview 已补齐课程桥、开源边界、协作文件和 CI，已同步 GitHub 并通过 CI。
+Product Surface Study Stage Preparation 已完成 Core 26 之后的新阶段路线、验证矩阵、Step A 课程补充和候选 Core mini brief。Core 27 Settings / Permission Resolver、Core 28 Hooks Lifecycle、Core 29 Memory Source、Core 30 Checkpoint / Rewind 和 Core 31 Subagent Context Isolation 已进入实现并通过验证。Product Surface Teaching Consolidation Pass 已完成 course-18 和导航同步。当前候选池 A-E 已完成；新增候选前必须先补 mini brief 和实现级 validation matrix。
 ```
 
 恢复后不要立即做：
@@ -1118,9 +1261,11 @@ Open Source Learning Preview Preparation 已补齐课程桥、开源边界、协
 2. 先读 docs/start-here-for-learners.md 和 docs/open-source-boundary.md。
 3. 再读 docs/course/course-13-eval-reference-cost-evidence.md，确认 Core 13-17 的 evidence bridge 不再缺课。
 4. 继续读 docs/course/course-14-production-upgrade-evidence-chain.md 到 docs/course/course-17-session-repo-approval-production.md，确认 Core 18-26 每组 verify case 的对象、状态和断言。
-5. 不要把 Core 18-26 的 deterministic local evidence 扩写成生产级 Claude Code 能力声明。
-6. 下一阶段开始前，先写清新的 roadmap / validation matrix。
-7. 不要在没有真实外部对照或更大 benchmark 时声称 70%-80% 成功率、真实 provider SLA 或跨 agent RelativeScore。
+5. 读 docs/course/course-18-product-surface-implementation-chain.md，确认 Core 27-31 每组 verify case 的对象、状态和边界。
+6. 不要把 Core 18-31 的 deterministic local evidence 扩写成生产级 Claude Code 能力声明。
+7. 下一阶段开始前，先写清新的 roadmap / validation matrix。
+8. 不要在没有真实外部对照或更大 benchmark 时声称 70%-80% 成功率、真实 provider SLA 或跨 agent RelativeScore。
+9. Product Surface Study 必须先判断同主题是否补旧课；只有新 Runtime 边界和可执行 verify shape 才能新建 Core。
 ```
 
 ---
@@ -1196,6 +1341,16 @@ npm --prefix /Users/boyzcl/Documents/A/C run core:25
 npm --prefix /Users/boyzcl/Documents/A/C run core:25:verify
 npm --prefix /Users/boyzcl/Documents/A/C run core:26
 npm --prefix /Users/boyzcl/Documents/A/C run core:26:verify
+npm --prefix /Users/boyzcl/Documents/A/C run core:27
+npm --prefix /Users/boyzcl/Documents/A/C run core:27:verify
+npm --prefix /Users/boyzcl/Documents/A/C run core:28
+npm --prefix /Users/boyzcl/Documents/A/C run core:28:verify
+npm --prefix /Users/boyzcl/Documents/A/C run core:29
+npm --prefix /Users/boyzcl/Documents/A/C run core:29:verify
+npm --prefix /Users/boyzcl/Documents/A/C run core:30
+npm --prefix /Users/boyzcl/Documents/A/C run core:30:verify
+npm --prefix /Users/boyzcl/Documents/A/C run core:31
+npm --prefix /Users/boyzcl/Documents/A/C run core:31:verify
 npm --prefix /Users/boyzcl/Documents/A/C run verify:all
 ```
 
@@ -1241,6 +1396,11 @@ Core 23 model gateway budget controller 已完成，token/cost budget gate / ret
 Core 24 durable session replay 已完成，append-only event log / snapshot restore / crash recovery / trace replay / compaction audit / secret boundary 均有 verify evidence。
 Core 25 repo intelligence relevance index 已完成，repo map / symbol index / test index / rule discovery / relevance scoring / incremental update / token benefit 均有 verify evidence。
 Core 26 human approval interruption protocol 已完成，approval_required / approve path / reject path / interruption / handoff / no hidden execution 均有 verify evidence。
+Core 27 settings permission resolver 已完成，config precedence / allow ask deny / prefix command rule / no hidden execution / decision cache 均有 verify evidence。
+Core 28 hooks lifecycle 已完成，pre tool hook / post tool hook / user prompt hook / hook failure / secret boundary / no hidden execution 均有 verify evidence。
+Core 29 memory source 已完成，memory type routing / write and index / forget / stale verification / compaction boundary / no code-structure memory 均有 verify evidence。
+Core 30 checkpoint rewind 已完成，checkpoint creation / rewind state / external change conflict / audit replay / event log boundary 均有 verify evidence。
+Core 31 subagent context isolation 已完成，independent task / context isolation / no duplicate research / result contract / failure propagation / isolation audit 均有 verify evidence。
 Production Upgrade Roadmap Pass 已建立 Core 18-26 路线和验证矩阵。
 Core 18-26 Production Upgrade Roadmap Pass 当前实现主线已完成。
 没有跨 agent 真实 runs 前不要生成 RelativeScore。
@@ -1254,4 +1414,9 @@ Core 18-26 Production Upgrade Roadmap Pass 当前实现主线已完成。
 不要把 Core 24 的 deterministic durable replay 当作分布式 durable storage、跨机器 session 产品或生产级 audit log。
 不要把 Core 25 的 deterministic repo index 当作完整语义 embedding 检索、任意超大仓库生产级索引或真实 IDE / LSP 全量符号能力。
 不要把 Core 26 的 deterministic approval protocol 当作完整 GUI approval 产品、enterprise policy 系统或真实多人协作权限模型。
+不要把 Core 27 的 deterministic permission resolver 当作完整 enterprise policy 产品、真实 Claude Code Settings / Permission 内部实现、GUI permission prompt、完整 shell parser 或 sandbox。
+不要把 Core 28 的 deterministic hooks lifecycle 当作真实 shell hook 产品、任意用户脚本安全沙箱、完整插件系统或真实 Claude Code hooks 内部实现。
+不要把 Core 29 的 deterministic memory source 当作真实 Claude Code memory 文件格式、远端多用户 memory 服务、隐私合规系统、完整代码智能数据库或官方实现。
+不要把 Core 30 的 deterministic checkpoint rewind 当作 IDE rewind UI、跨机器恢复、分布式 session store、完整 patch parser 或真实 Claude Code Checkpoint 内部实现。
+不要把 Core 31 的 deterministic subagent context isolation 当作真实多进程 agent 调度、远端 worker 隔离、agent marketplace 或真实 Claude Code Subagent 内部实现。
 ```
