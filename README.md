@@ -85,6 +85,14 @@ npm run verify:all
 4. 每读完一组机制，运行对应 Lab 或 Core 验证脚本。
 5. 不懂英文术语时，看 [中文术语表](docs/production-upgrade-terms-zh.md)。
 
+如果你只是先试水，不需要一上来读完整 19 门课。可以按时间选择：
+
+| 时间 | 推荐路径 |
+| --- | --- |
+| 30 分钟 | 跑 `npm run verify:labs`，读 README、学习者入口和 Course 00 |
+| 半天 | 读 Course 00、01、03、07、13、14、18，跑 `core:10`、`core:18`、`core:31` verify |
+| 系统学习 | 按 Course 00 到 Course 18 顺序读，每一组都跟源码和 verify |
+
 最小体验路径：
 
 ```bash
