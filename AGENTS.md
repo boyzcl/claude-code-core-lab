@@ -7,7 +7,7 @@ This file is the root Agent control entry for this repository. Use it to route w
 1. Read `CURRENT_STATE.md` for the current breakpoint, latest verification, and next action.
 2. Read `docs/authority-map.md` when documents disagree.
 3. Read `docs/index.md` to find current rules, history, and evidence.
-4. Use the nearest `core-XX-*.md` or `lab-XX-*.md` file for implementation context.
+4. Use the nearest `docs/core/core-XX-*.md` or `docs/lab/lab-XX-*.md` file for implementation context.
 
 ## Work Rules
 
@@ -43,7 +43,7 @@ A Core stage is complete only when all of these are true:
 2. A matching `*.verify.mjs` script proves the behavior.
 3. The stage document explains what was proven and what remains out of scope.
 4. `package.json` exposes the demo and verify scripts.
-5. `CURRENT_STATE.md` and `core-run-record.md` reflect the new stage.
+5. `CURRENT_STATE.md` and `docs/records/core-run-record.md` reflect the new stage.
 
 ## Secret Handling
 

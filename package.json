@@ -1,7 +1,6 @@
 {
-  "name": "claude-code-core-learning",
+  "name": "claude-code-core-lab",
   "version": "0.0.1",
-  "private": true,
   "type": "module",
   "scripts": {
     "lab:01": "node src/lab01/mock-runtime-loop.mjs",

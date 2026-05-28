@@ -1,12 +1,14 @@
-# Course 03 Clean-room Prompt Pack：从 Runtime 需求倒推系统提示词
+# Course 03 公开学习边界下的 Prompt Pack：从运行时需求倒推系统提示词
 
 > 本文是 Prompt Pack 学习模块。
 >
 > 目标不是复刻 Claude Code 的私有提示词，而是学会：
 >
 > ```text
-> 如何为一个 Claude Code-like Agent Runtime 设计 clean-room Prompt Pack。
+> 如何为一个 Claude Code-like 代码智能体运行时设计我们自己写的 Prompt Pack。
 > ```
+>
+> 文件名里的 `clean-room` 可以先理解成“公开学习边界”：不复制官方源码、私有提示词或非公开实现，用自己写的规则学习同一类产品问题。
 >
 > 本文遵守 `course-00-teaching-standard.md`：
 >
@@ -26,8 +28,8 @@ Reference Baseline Prompt
   用来做对照，不直接变成我们的开源实现。
 
 Learning Runtime Prompt Pack
-  我们自己写的 clean-room prompt。
-  用来学习和构建自己的 Agent Runtime。
+  我们自己写的 prompt。
+  用来学习和构建自己的代码智能体运行时。
 ```
 
 第三方 prompt diff 的角色：
@@ -83,7 +85,7 @@ Eval 负责纠偏。
 
 ---
 
-## 2. Clean-room Prompt Pack 结构
+## 2. 自写 Prompt Pack 结构
 
 第一版建议拆成 8 个文件：
 
@@ -132,7 +134,7 @@ Rule:
 | 字段 | 含义 |
 | --- | --- |
 | `id` | 规则稳定编号 |
-| `text` | clean-room 规则文本 |
+| `text` | 我们自己写的规则文本 |
 | `source` | 来源：runtime need、tool contract、policy、eval failure、official docs category |
 | `how_to_supply` | 放进 system、mode、tool description 还是 recovery instruction |
 | `decision_enabled` | 影响模型哪个决策 |
@@ -178,7 +180,7 @@ S06: When uncertain, gather evidence with tools before making changes.
 缺事实时要先观察。
 ```
 
-它们和成熟 coding agent 的规则类别相似，但文本和组织方式是 clean-room 的。
+它们和成熟代码智能体的规则类别相似，但文本和组织方式必须由本项目自己写。
 
 ---
 
@@ -414,8 +416,8 @@ reference_runner:
 
 learning_runner:
   provider: our_runtime
-  system_prompt: clean-room prompt pack
-  purpose: learn and implement Agent Runtime
+  system_prompt: self-written prompt pack
+  purpose: learn and implement coding agent runtime
 ```
 
 比较时看：
@@ -440,7 +442,7 @@ learning_runner:
 
 ## 14. 第一版 Prompt Pack 草案
 
-下面是 clean-room `system.md` 的最小草案。
+下面是教学用 `system.md` 的最小草案。
 
 注意：这是我们自己的教学用 prompt，不是 Claude Code 官方 prompt。
 

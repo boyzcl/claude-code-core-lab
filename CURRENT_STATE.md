@@ -1,6 +1,6 @@
 # CURRENT_STATE：Claude Code Core 学习项目当前状态
 
-最后更新：2026-05-28 15:35 CST
+最后更新：2026-05-28 16:42 CST
 
 本文是新对话入口和当前状态单一事实源。它不替代课程、Lab、Core 文档，只回答：
 
@@ -27,7 +27,7 @@
 第二目标：
 
 ```text
-在学习完成后，把这条学习过程整理成可开源、可复刻、可教学的 clean-room 路径。
+在学习完成后，把这条学习过程整理成可开源、可复刻、可教学的公开学习路径。
 ```
 
 当前产品目标不是完整复刻 Claude Code，而是先构建：
@@ -86,77 +86,77 @@ Eval 如何证明能力真的变强。
 | 文档 | 当前角色 | Authority |
 | --- | --- | --- |
 | `CURRENT_STATE.md` | 当前状态入口、新对话接力、下一步动作 | 当前进度和下一步以本文为准 |
-| `claude-code-core-learning-path.md` | 学习总控 | 学习路线、阶段定义、命名规则 |
-| `course-00-teaching-standard.md` | 教学规范 | 说明如何避免隐式信息 |
-| `course-01-initial-model-request.md` | 课程 | 模型第一次被调用时看见什么 |
-| `course-02-action-selection-rubric.md` | 课程 | 动作选择如何判断“合理” |
-| `course-03-clean-room-prompt-pack.md` | 课程 | clean-room Prompt Pack 如何从 Runtime 需求倒推 |
-| `course-04-single-task-full-trace.md` | 课程 | 单任务如何从用户输入跑到验证完成 |
-| `course-05-product-mental-model.md` | 课程 | 从用户、模型、Runtime、工具、Eval 五层理解产品 |
-| `course-06-labs-to-core-map.md` | 课程 | 8 个 Lab 如何映射成 Core 产品骨架 |
-| `course-07-core-build-pass-overview.md` | 课程 | Core 01 到 Core 12 主体构建的教学总览 |
-| `course-08-model-gateway-and-context-engine.md` | 课程 | ModelGateway 与 Context Engine 如何控制模型输出和可见世界 |
-| `course-09-plan-mode-and-compaction.md` | 课程 | Plan Mode 与 Compaction 如何让长任务受控不断片 |
-| `course-10-trace-eval-real-model-and-recovery.md` | 课程 | Trace / Eval / Real Model / Prompt Recovery 如何让系统可证明、可恢复 |
-| `course-11-real-repo-task-layer.md` | 课程 | 真实 repo fixture 比 toy workspace 多证明了什么 |
-| `course-12-eval-packaging-and-executable-seeds.md` | 课程 | Eval packaging 与 executable seeds 如何把能力证明体系落地 |
-| `course-13-eval-reference-cost-evidence.md` | 课程 | Core 13-17 的 executable suite、reference-agent、cost basis 和 pricing boundary 执行链 |
-| `course-14-production-upgrade-evidence-chain.md` | 课程 | Core 18-26 Production Upgrade 如何形成 deterministic local evidence 链 |
-| `course-15-context-compaction-plan-production.md` | 课程 | Core 18-20 的 Context Economy、Compaction Quality、Plan State Machine 执行链 |
-| `course-16-long-running-tool-gateway-production.md` | 课程 | Core 21-23 的 Long-Running Eval、ToolRuntime Transaction、ModelGateway Budget 执行链 |
-| `course-17-session-repo-approval-production.md` | 课程 | Core 24-26 的 Durable Session、Repo Intelligence、Human Approval 执行链 |
+| `docs/course/claude-code-core-learning-path.md` | 学习总控 | 学习路线、阶段定义、命名规则 |
+| `docs/course/course-00-teaching-standard.md` | 教学规范 | 说明如何避免隐式信息 |
+| `docs/course/course-01-initial-model-request.md` | 课程 | 模型第一次被调用时看见什么 |
+| `docs/course/course-02-action-selection-rubric.md` | 课程 | 动作选择如何判断“合理” |
+| `docs/course/course-03-clean-room-prompt-pack.md` | 课程 | clean-room Prompt Pack 如何从 Runtime 需求倒推 |
+| `docs/course/course-04-single-task-full-trace.md` | 课程 | 单任务如何从用户输入跑到验证完成 |
+| `docs/course/course-05-product-mental-model.md` | 课程 | 从用户、模型、Runtime、工具、Eval 五层理解产品 |
+| `docs/course/course-06-labs-to-core-map.md` | 课程 | 8 个 Lab 如何映射成 Core 产品骨架 |
+| `docs/course/course-07-core-build-pass-overview.md` | 课程 | Core 01 到 Core 12 主体构建的教学总览 |
+| `docs/course/course-08-model-gateway-and-context-engine.md` | 课程 | ModelGateway 与 Context Engine 如何控制模型输出和可见世界 |
+| `docs/course/course-09-plan-mode-and-compaction.md` | 课程 | Plan Mode 与 Compaction 如何让长任务受控不断片 |
+| `docs/course/course-10-trace-eval-real-model-and-recovery.md` | 课程 | Trace / Eval / Real Model / Prompt Recovery 如何让系统可证明、可恢复 |
+| `docs/course/course-11-real-repo-task-layer.md` | 课程 | 真实 repo fixture 比 toy workspace 多证明了什么 |
+| `docs/course/course-12-eval-packaging-and-executable-seeds.md` | 课程 | Eval packaging 与 executable seeds 如何把能力证明体系落地 |
+| `docs/course/course-13-eval-reference-cost-evidence.md` | 课程 | Core 13-17 的 executable suite、reference-agent、cost basis 和 pricing boundary 执行链 |
+| `docs/course/course-14-production-upgrade-evidence-chain.md` | 课程 | Core 18-26 Production Upgrade 如何形成 deterministic local evidence 链 |
+| `docs/course/course-15-context-compaction-plan-production.md` | 课程 | Core 18-20 的 Context Economy、Compaction Quality、Plan State Machine 执行链 |
+| `docs/course/course-16-long-running-tool-gateway-production.md` | 课程 | Core 21-23 的 Long-Running Eval、ToolRuntime Transaction、ModelGateway Budget 执行链 |
+| `docs/course/course-17-session-repo-approval-production.md` | 课程 | Core 24-26 的 Durable Session、Repo Intelligence、Human Approval 执行链 |
 | `docs/production-upgrade-terms-zh.md` | 术语参考 | Core 18-26 英文术语的中文解释和边界 |
 | `docs/start-here-for-learners.md` | 学习者入口 | 第一次打开仓库时的学习路线和运行入口 |
-| `docs/open-source-boundary.md` | 开源边界 | 对外能力声明、clean-room 和 secret 边界 |
+| `docs/open-source-boundary.md` | 开源边界 | 对外能力声明、公开学习边界和 secret 边界 |
 | `docs/github-release-checklist.md` | 开源检查表 | 发布到 GitHub 前的最小检查 |
-| `lab-01-*` 到 `lab-08-*` | 可执行实验 | 每个 Lab 证明一个局部机制 |
-| `core-01-integrated-runtime.md` | 集成实现记录 | 证明多个 Lab 机制可以合成最小 Runtime |
-| `core-02-model-gateway.md` | 集成实现记录 | 证明模型层可以替换成 Model Gateway，且 Runtime / Tool / Policy 边界不变 |
-| `core-03-context-engine-integration.md` | 集成实现记录 | 证明 Context Engine 可以接入 CoreRuntime，控制本轮模型可见世界 |
-| `core-04-plan-mode-integration.md` | 集成实现记录 | 证明 Plan Mode 可以接入 CoreRuntime，控制计划审批和工具权限 |
-| `core-05-compaction-artifact-integration.md` | 集成实现记录 | 证明 Compaction / Artifact 可以接入 CoreRuntime，保留长任务关键状态 |
-| `core-06-trace-eval-harness-expansion.md` | 集成实现记录 | 证明 Trace / Eval Harness 可以接入 CoreRuntime，生成评分和失败归因证据 |
-| `core-07-real-model-api-e2e.md` | 集成实现记录 | 证明真实模型 API 可以接入 ModelGateway，且本地 Runtime 边界不变 |
-| `core-08-prompt-pack-recovery-loop.md` | 集成实现记录 | 证明 Prompt Pack 可以引导模型恢复，但不能替代 Runtime 强制边界 |
-| `core-09-real-repo-task-layer.md` | 集成实现记录 | 证明 CoreRuntime 可以处理真实仓库任务层的规则、测试、多文件和 stale edit |
-| `core-10-70-80-eval-open-source-packaging.md` | 集成实现记录 | 证明项目已有 starter eval packaging 和最小开源文档入口 |
-| `core-11-eval-expansion-executable-seeds.md` | 集成实现记录 | 证明第一批 starter case 可以变成 executable repo seeds |
-| `core-12-eval-expansion-second-batch.md` | 集成实现记录 | 证明第二批 starter case 可以变成 executable repo seeds，并预留 reference-agent runner 接口 |
-| `core-13-eval-expansion-third-batch.md` | 集成实现记录 | 证明第三批 starter case 可以变成 executable repo seeds，累计 15/20 starter case executable |
-| `core-14-eval-expansion-final-starter-batch.md` | 集成实现记录 | 证明剩余 starter case 可以变成 executable repo seeds，累计 20/20 starter case executable |
-| `core-15-reference-agent-comparison.md` | 集成实现记录 | 证明本机 Codex CLI 可以作为第一阶段 reference-agent baseline 产生小样本真实对照证据 |
-| `core-16-reference-agent-cost-and-cross-agent.md` | 集成实现记录 | 证明 8 个 codex-local runs 已有 cost 计量口径，并明确横向对照仍被第二 agent baseline 阻塞 |
-| `core-17-reference-agent-pricing-table-baseline.md` | 集成实现记录 | 证明显式本地 pricing table 可以为 8 个 codex-local runs 生成 configured estimated USD，同时不声称真实厂商账单 |
-| `core-18-context-economy-cache-aware-context-engine.md` | 集成实现记录 | 证明 Context Economy Engine 可以输出 stable prefix、dynamic tail、eviction、artifact 和 cache simulation 证据 |
-| `core-19-compaction-quality-eval.md` | 集成实现记录 | 证明 Compaction Quality Eval 可以机器对照压缩前后状态并识别 compaction_loss |
-| `core-20-plan-state-machine.md` | 集成实现记录 | 证明 Plan State Machine 可以追踪 step lifecycle、blocked、revision、resume、permission 和 final grounding |
-| `core-21-long-running-task-eval.md` | 集成实现记录 | 证明 Long-Running Task Eval 可以评估多轮修复、重复失败、压缩恢复、成本曲线和 no false final |
-| `core-22-tool-runtime-transaction.md` | 集成实现记录 | 证明 ToolRuntime Transaction 可以预览 diff、多文件提交、回滚并拦截 stale/protected/high-risk |
-| `core-23-model-gateway-budget-controller.md` | 集成实现记录 | 证明 ModelGateway 可以在 provider 调用前执行 token/cost budget gate，并记录 retry/fallback、capability filtering 和 output repair evidence |
-| `core-24-durable-session-store-replay.md` | 集成实现记录 | 证明 Durable Session Store 可以记录 append-only event log、snapshot restore、crash recovery、trace replay、compaction audit 和 secret boundary evidence |
-| `core-25-repo-intelligence-relevance-index.md` | 集成实现记录 | 证明 Repo Intelligence 可以记录 repo map、symbol/test/rule index、relevance scoring、incremental update 和 token benefit evidence |
-| `core-26-human-approval-interruption-protocol.md` | 集成实现记录 | 证明 Human Approval Protocol 可以记录 approval_required、approve/reject path、interruption、handoff 和 no hidden execution evidence |
-| `production-upgrade-roadmap.md` | 生产化升级总控 | Core 18-26 的路线、依赖、边界和统一完成定义 |
-| `production-upgrade-validation-matrix.md` | 验证矩阵 | Core 18-26 的验证先行口径和必过检查 |
+| `docs/lab/lab-01-*` 到 `docs/lab/lab-08-*` | 可执行实验 | 每个 Lab 证明一个局部机制 |
+| `docs/core/core-01-integrated-runtime.md` | 集成实现记录 | 证明多个 Lab 机制可以合成最小 Runtime |
+| `docs/core/core-02-model-gateway.md` | 集成实现记录 | 证明模型层可以替换成 Model Gateway，且 Runtime / Tool / Policy 边界不变 |
+| `docs/core/core-03-context-engine-integration.md` | 集成实现记录 | 证明 Context Engine 可以接入 CoreRuntime，控制本轮模型可见世界 |
+| `docs/core/core-04-plan-mode-integration.md` | 集成实现记录 | 证明 Plan Mode 可以接入 CoreRuntime，控制计划审批和工具权限 |
+| `docs/core/core-05-compaction-artifact-integration.md` | 集成实现记录 | 证明 Compaction / Artifact 可以接入 CoreRuntime，保留长任务关键状态 |
+| `docs/core/core-06-trace-eval-harness-expansion.md` | 集成实现记录 | 证明 Trace / Eval Harness 可以接入 CoreRuntime，生成评分和失败归因证据 |
+| `docs/core/core-07-real-model-api-e2e.md` | 集成实现记录 | 证明真实模型 API 可以接入 ModelGateway，且本地 Runtime 边界不变 |
+| `docs/core/core-08-prompt-pack-recovery-loop.md` | 集成实现记录 | 证明 Prompt Pack 可以引导模型恢复，但不能替代 Runtime 强制边界 |
+| `docs/core/core-09-real-repo-task-layer.md` | 集成实现记录 | 证明 CoreRuntime 可以处理真实仓库任务层的规则、测试、多文件和 stale edit |
+| `docs/core/core-10-70-80-eval-open-source-packaging.md` | 集成实现记录 | 证明项目已有 starter eval packaging 和最小开源文档入口 |
+| `docs/core/core-11-eval-expansion-executable-seeds.md` | 集成实现记录 | 证明第一批 starter case 可以变成 executable repo seeds |
+| `docs/core/core-12-eval-expansion-second-batch.md` | 集成实现记录 | 证明第二批 starter case 可以变成 executable repo seeds，并预留 reference-agent runner 接口 |
+| `docs/core/core-13-eval-expansion-third-batch.md` | 集成实现记录 | 证明第三批 starter case 可以变成 executable repo seeds，累计 15/20 starter case executable |
+| `docs/core/core-14-eval-expansion-final-starter-batch.md` | 集成实现记录 | 证明剩余 starter case 可以变成 executable repo seeds，累计 20/20 starter case executable |
+| `docs/core/core-15-reference-agent-comparison.md` | 集成实现记录 | 证明本机 Codex CLI 可以作为第一阶段 reference-agent baseline 产生小样本真实对照证据 |
+| `docs/core/core-16-reference-agent-cost-and-cross-agent.md` | 集成实现记录 | 证明 8 个 codex-local runs 已有 cost 计量口径，并明确横向对照仍被第二 agent baseline 阻塞 |
+| `docs/core/core-17-reference-agent-pricing-table-baseline.md` | 集成实现记录 | 证明显式本地 pricing table 可以为 8 个 codex-local runs 生成 configured estimated USD，同时不声称真实厂商账单 |
+| `docs/core/core-18-context-economy-cache-aware-context-engine.md` | 集成实现记录 | 证明 Context Economy Engine 可以输出 stable prefix、dynamic tail、eviction、artifact 和 cache simulation 证据 |
+| `docs/core/core-19-compaction-quality-eval.md` | 集成实现记录 | 证明 Compaction Quality Eval 可以机器对照压缩前后状态并识别 compaction_loss |
+| `docs/core/core-20-plan-state-machine.md` | 集成实现记录 | 证明 Plan State Machine 可以追踪 step lifecycle、blocked、revision、resume、permission 和 final grounding |
+| `docs/core/core-21-long-running-task-eval.md` | 集成实现记录 | 证明 Long-Running Task Eval 可以评估多轮修复、重复失败、压缩恢复、成本曲线和 no false final |
+| `docs/core/core-22-tool-runtime-transaction.md` | 集成实现记录 | 证明 ToolRuntime Transaction 可以预览 diff、多文件提交、回滚并拦截 stale/protected/high-risk |
+| `docs/core/core-23-model-gateway-budget-controller.md` | 集成实现记录 | 证明 ModelGateway 可以在 provider 调用前执行 token/cost budget gate，并记录 retry/fallback、capability filtering 和 output repair evidence |
+| `docs/core/core-24-durable-session-store-replay.md` | 集成实现记录 | 证明 Durable Session Store 可以记录 append-only event log、snapshot restore、crash recovery、trace replay、compaction audit 和 secret boundary evidence |
+| `docs/core/core-25-repo-intelligence-relevance-index.md` | 集成实现记录 | 证明 Repo Intelligence 可以记录 repo map、symbol/test/rule index、relevance scoring、incremental update 和 token benefit evidence |
+| `docs/core/core-26-human-approval-interruption-protocol.md` | 集成实现记录 | 证明 Human Approval Protocol 可以记录 approval_required、approve/reject path、interruption、handoff 和 no hidden execution evidence |
+| `docs/roadmap/production-upgrade-roadmap.md` | 生产化升级总控 | Core 18-26 的路线、依赖、边界和统一完成定义 |
+| `docs/roadmap/production-upgrade-validation-matrix.md` | 验证矩阵 | Core 18-26 的验证先行口径和必过检查 |
 | `README.md` | 项目总入口 | 快速运行、文档导航和当前边界 |
 | `AGENTS.md` | Agent 控制入口 | Agent 工作规则、secret 边界和完成定义 |
 | `docs/index.md` | 文档索引 | 区分当前规则、历史和证据 |
 | `docs/authority-map.md` | authority map | 文档冲突优先级和 canonical doc 声明 |
-| `labs-verification-record.md` | 验证记录 | Lab 全量验证历史记录 |
-| `core-run-record.md` | 验证记录 | Core 集成验证历史记录 |
-| `claude-code-agent-runtime-framework.md` | 架构参考 | 产品和运行时抽象 |
-| `claude-code-core-implementation-blueprint.md` | 施工图参考 | 模块级实现规格 |
-| `claude-code-70-80-validation-and-model-access.md` | 验收和模型接入参考 | 能力定义、评测、GPT / OpenAI-compatible API 接入 |
-| `agent-runtime-optimization-loop.md` | 迭代参考 | trace、失败归因、eval、灰度和回归 |
+| `docs/records/labs-verification-record.md` | 验证记录 | Lab 全量验证历史记录 |
+| `docs/records/core-run-record.md` | 验证记录 | Core 集成验证历史记录 |
+| `docs/reference/claude-code-agent-runtime-framework.md` | 架构参考 | 产品和运行时抽象 |
+| `docs/reference/claude-code-core-implementation-blueprint.md` | 施工图参考 | 模块级实现规格 |
+| `docs/reference/claude-code-70-80-validation-and-model-access.md` | 验收和模型接入参考 | 能力定义、评测、GPT / OpenAI-compatible API 接入 |
+| `docs/reference/agent-runtime-optimization-loop.md` | 迭代参考 | trace、失败归因、eval、灰度和回归 |
 
 冲突处理：
 
 ```text
 当前进度 / 下一步动作：CURRENT_STATE.md
-学习顺序 / 命名规则：claude-code-core-learning-path.md
+学习顺序 / 命名规则：docs/course/claude-code-core-learning-path.md
 课程正文：对应 course-XX 文档
 实验机制：对应 lab-XX 文档和 src/labXX 代码
-集成行为：core-01-integrated-runtime.md、core-02-model-gateway.md、core-03-context-engine-integration.md、core-04-plan-mode-integration.md、core-05-compaction-artifact-integration.md、core-06-trace-eval-harness-expansion.md、core-07-real-model-api-e2e.md、core-08-prompt-pack-recovery-loop.md、core-09-real-repo-task-layer.md、core-10-70-80-eval-open-source-packaging.md、core-11-eval-expansion-executable-seeds.md、core-12-eval-expansion-second-batch.md、core-13-eval-expansion-third-batch.md、core-14-eval-expansion-final-starter-batch.md、core-15-reference-agent-comparison.md、core-16-reference-agent-cost-and-cross-agent.md、core-17-reference-agent-pricing-table-baseline.md、core-18-context-economy-cache-aware-context-engine.md、core-19-compaction-quality-eval.md、core-20-plan-state-machine.md、core-21-long-running-task-eval.md、core-22-tool-runtime-transaction.md、core-23-model-gateway-budget-controller.md 和 src/core 代码
+集成行为：docs/core/core-01-integrated-runtime.md、docs/core/core-02-model-gateway.md、docs/core/core-03-context-engine-integration.md、docs/core/core-04-plan-mode-integration.md、docs/core/core-05-compaction-artifact-integration.md、docs/core/core-06-trace-eval-harness-expansion.md、docs/core/core-07-real-model-api-e2e.md、docs/core/core-08-prompt-pack-recovery-loop.md、docs/core/core-09-real-repo-task-layer.md、docs/core/core-10-70-80-eval-open-source-packaging.md、docs/core/core-11-eval-expansion-executable-seeds.md、docs/core/core-12-eval-expansion-second-batch.md、docs/core/core-13-eval-expansion-third-batch.md、docs/core/core-14-eval-expansion-final-starter-batch.md、docs/core/core-15-reference-agent-comparison.md、docs/core/core-16-reference-agent-cost-and-cross-agent.md、docs/core/core-17-reference-agent-pricing-table-baseline.md、docs/core/core-18-context-economy-cache-aware-context-engine.md、docs/core/core-19-compaction-quality-eval.md、docs/core/core-20-plan-state-machine.md、docs/core/core-21-long-running-task-eval.md、docs/core/core-22-tool-runtime-transaction.md、docs/core/core-23-model-gateway-budget-controller.md 和 src/core 代码
 历史观点：两篇原始分析文章只作背景材料
 ```
 
@@ -174,15 +174,17 @@ course-01 到 course-06 已由学习者复习完成。
 当前教学整理：
 
 ```text
-course-07-core-build-pass-overview.md 已完成并由学习者复盘通过。
+docs/course/course-07-core-build-pass-overview.md 已完成并由学习者复盘通过。
 course-08 到 course-12 已按执行链样板重写，并由学习者逐课复盘完成。
-course-13-eval-reference-cost-evidence.md 已创建，用于补齐 Core 13-17 的 executable suite、reference-agent baseline、cost basis、pricing table 和 RelativeScore 阻塞边界。
-course-14-production-upgrade-evidence-chain.md 已创建，用于衔接 course-13，并讲清 Core 18-26 Production Upgrade 的阶段理由、生产化问题、证据链和 out-of-scope 边界。
-course-15-context-compaction-plan-production.md、course-16-long-running-tool-gateway-production.md、course-17-session-repo-approval-production.md 已创建，用于按 course-08 到 course-12 的同一执行链标准细读 Core 18-26 verify case。
+docs/course/course-13-eval-reference-cost-evidence.md 已创建，用于补齐 Core 13-17 的 executable suite、reference-agent baseline、cost basis、pricing table 和 RelativeScore 阻塞边界。
+docs/course/course-14-production-upgrade-evidence-chain.md 已创建，用于衔接 course-13，并讲清 Core 18-26 Production Upgrade 的阶段理由、生产化问题、证据链和 out-of-scope 边界。
+docs/course/course-15-context-compaction-plan-production.md、docs/course/course-16-long-running-tool-gateway-production.md、docs/course/course-17-session-repo-approval-production.md 已创建，用于按 course-08 到 course-12 的同一执行链标准细读 Core 18-26 verify case。
 docs/production-upgrade-terms-zh.md 已创建，用于把 Core 18-26 的英文代码术语翻译成中文机制解释。
 docs/start-here-for-learners.md、docs/open-source-boundary.md、docs/github-release-checklist.md 已创建，用于开源前的学习者入口、能力声明边界和发布检查。
+README.md 已按中文学习者第一屏重写：先说明这是围绕 Claude Code 核心机制的中文学习项目，再给运行命令、学习路线、项目结构、预期结果和能力边界。
+根目录已瘦身，课程、Core、Lab、验证记录、参考资料和历史材料已移动到 docs/course、docs/core、docs/lab、docs/records、docs/reference、docs/history，并补充各目录 README。
 Teaching Consolidation Pass 第一轮完成。
-Production Upgrade Teaching Consolidation Pass 已完成总览课和三门细课整理；Open Source Learning Preview Preparation 正在收束。
+Production Upgrade Teaching Consolidation Pass 已完成总览课和三门细课整理；Open Source Learning Preview Preparation 已完成本地最终验证，下一步是同步 GitHub 并观察 CI。
 ```
 
 已亲自体验：
@@ -195,7 +197,7 @@ course-06 中 Lab 到 Core 的映射问题已由学习者确认能回答。
 当前正在进行：
 
 ```text
-Open Source Learning Preview Preparation
+Open Source Learning Preview GitHub Sync
 ```
 
 它的目的不是继续补 starter seed、扩写抽象架构，或把 deterministic local evidence 夸大成生产级能力，而是把课程主线、开源边界、协作文件、CI 和导航整理到可以发布学习预览的状态。
@@ -221,7 +223,10 @@ Teaching Consolidation Pass 第一轮完成，course-07 到 course-12 已由学�
 Eval / Reference / Cost Teaching Bridge 已完成 course-13 整理：Core 13-17 被讲成 20/20 executable suite、codex-local baseline、cost basis、pricing boundary 和 RelativeScore 阻塞的 evidence bridge。
 Production Upgrade Teaching Consolidation Pass 已完成 course-14 到 course-17 整理：Core 18-26 被讲成 Context / Compaction / Plan / Eval / ToolRuntime / ModelGateway / Session / Repo Intelligence / Human Approval 的 deterministic local evidence 链，并按 Core 18-20、Core 21-23、Core 24-26 拆成 verify-case execution-chain 细课。
 Production Upgrade 中文术语表已补充，课程阅读时先按中文理解，英文只用于对照代码字段和 verify case 名称。
-Open Source Learning Preview docs 已补齐：LICENSE、CONTRIBUTING、SECURITY、CODE_OF_CONDUCT、.env.example、GitHub Actions verify workflow、学习者入口、开源边界和 GitHub release checklist。
+Open Source Learning Preview docs 已补齐：LICENSE、CONTRIBUTING、SECURITY、CODE_OF_CONDUCT、.env.example、GitHub Actions verify workflow、学习者入口、开源边界、项目结构说明和 GitHub release checklist。
+GitHub 展示层已按中文学习者视角重构：README 第一屏明确 Claude Code 学习对象，说明怎么运行、怎么学习、预期结果、项目结构和能力边界；根目录只保留入口文件，docs 分区承载课程和证据。
+中文术语入口已前移：README、学习者入口、docs 入口和 Course 03 均采用中文先行，`clean-room` 只解释为公开学习边界，不再作为普通用户第一屏定位。
+Markdown 链接轻量检查已通过：README/docs 内部 Markdown 链接无断链。
 Eval Expansion Pass starter executable suite 完成，累计 20/20 starter case executable。
 Reference-Agent Comparison Pass 已完成第一批 Codex local CLI 小样本对照：8 个 executable seeds 有真实 run evidence，覆盖修复、失败归因、安全拒绝和歧义拒绝。
 Cost + Cross-Agent Pass 已补上 8 个 codex-local sample runs 的 cost 计量口径：token、cached token、uncached token、output token、reasoning output token、latency 和 raw log hash 都可汇总；没有 pricing table 时 USD 仍保持 null。横向对照当前结论是 single_baseline_only：本机只有 codex-local 有 recorded runs，未检测到 Claude Code / Claude / OpenCode / Aider / Cursor Agent / Gemini / Qwen / OpenAI CLI 的可用第二 baseline。没有第二 agent 真实 runs 前，不生成 RelativeScore。
@@ -245,37 +250,37 @@ Core 18-26 Production Upgrade Roadmap Pass 已完成当前 deterministic local e
 课程层：
 
 ```text
-course-00-teaching-standard.md
-course-01-initial-model-request.md
-course-02-action-selection-rubric.md
-course-03-clean-room-prompt-pack.md
-course-04-single-task-full-trace.md
-course-05-product-mental-model.md
-course-06-labs-to-core-map.md
-course-07-core-build-pass-overview.md
-course-08-model-gateway-and-context-engine.md
-course-09-plan-mode-and-compaction.md
-course-10-trace-eval-real-model-and-recovery.md
-course-11-real-repo-task-layer.md
-course-12-eval-packaging-and-executable-seeds.md
-course-13-eval-reference-cost-evidence.md
-course-14-production-upgrade-evidence-chain.md
-course-15-context-compaction-plan-production.md
-course-16-long-running-tool-gateway-production.md
-course-17-session-repo-approval-production.md
+docs/course/course-00-teaching-standard.md
+docs/course/course-01-initial-model-request.md
+docs/course/course-02-action-selection-rubric.md
+docs/course/course-03-clean-room-prompt-pack.md
+docs/course/course-04-single-task-full-trace.md
+docs/course/course-05-product-mental-model.md
+docs/course/course-06-labs-to-core-map.md
+docs/course/course-07-core-build-pass-overview.md
+docs/course/course-08-model-gateway-and-context-engine.md
+docs/course/course-09-plan-mode-and-compaction.md
+docs/course/course-10-trace-eval-real-model-and-recovery.md
+docs/course/course-11-real-repo-task-layer.md
+docs/course/course-12-eval-packaging-and-executable-seeds.md
+docs/course/course-13-eval-reference-cost-evidence.md
+docs/course/course-14-production-upgrade-evidence-chain.md
+docs/course/course-15-context-compaction-plan-production.md
+docs/course/course-16-long-running-tool-gateway-production.md
+docs/course/course-17-session-repo-approval-production.md
 ```
 
 Lab 层：
 
 ```text
-lab-01-mock-runtime-loop.md
-lab-02-message-store.md
-lab-03-read-search-bash.md
-lab-04-edit-tool-safety.md
-lab-05-context-engine-v1.md
-lab-06-plan-mode-v1.md
-lab-07-compaction-v1.md
-lab-08-eval-runner.md
+docs/lab/lab-01-mock-runtime-loop.md
+docs/lab/lab-02-message-store.md
+docs/lab/lab-03-read-search-bash.md
+docs/lab/lab-04-edit-tool-safety.md
+docs/lab/lab-05-context-engine-v1.md
+docs/lab/lab-06-plan-mode-v1.md
+docs/lab/lab-07-compaction-v1.md
+docs/lab/lab-08-eval-runner.md
 ```
 
 代码层：
@@ -349,34 +354,34 @@ src/core/human-approval-interruption-protocol.verify.mjs
 集成层：
 
 ```text
-core-01-integrated-runtime.md
-core-02-model-gateway.md
-core-03-context-engine-integration.md
-core-04-plan-mode-integration.md
-core-05-compaction-artifact-integration.md
-core-06-trace-eval-harness-expansion.md
-core-07-real-model-api-e2e.md
-core-08-prompt-pack-recovery-loop.md
-core-09-real-repo-task-layer.md
-core-10-70-80-eval-open-source-packaging.md
-core-11-eval-expansion-executable-seeds.md
-core-12-eval-expansion-second-batch.md
-core-13-eval-expansion-third-batch.md
-core-14-eval-expansion-final-starter-batch.md
-core-15-reference-agent-comparison.md
-core-16-reference-agent-cost-and-cross-agent.md
-core-17-reference-agent-pricing-table-baseline.md
-core-18-context-economy-cache-aware-context-engine.md
-core-19-compaction-quality-eval.md
-core-20-plan-state-machine.md
-core-21-long-running-task-eval.md
-core-22-tool-runtime-transaction.md
-core-23-model-gateway-budget-controller.md
-core-24-durable-session-store-replay.md
-core-25-repo-intelligence-relevance-index.md
-core-26-human-approval-interruption-protocol.md
-production-upgrade-roadmap.md
-production-upgrade-validation-matrix.md
+docs/core/core-01-integrated-runtime.md
+docs/core/core-02-model-gateway.md
+docs/core/core-03-context-engine-integration.md
+docs/core/core-04-plan-mode-integration.md
+docs/core/core-05-compaction-artifact-integration.md
+docs/core/core-06-trace-eval-harness-expansion.md
+docs/core/core-07-real-model-api-e2e.md
+docs/core/core-08-prompt-pack-recovery-loop.md
+docs/core/core-09-real-repo-task-layer.md
+docs/core/core-10-70-80-eval-open-source-packaging.md
+docs/core/core-11-eval-expansion-executable-seeds.md
+docs/core/core-12-eval-expansion-second-batch.md
+docs/core/core-13-eval-expansion-third-batch.md
+docs/core/core-14-eval-expansion-final-starter-batch.md
+docs/core/core-15-reference-agent-comparison.md
+docs/core/core-16-reference-agent-cost-and-cross-agent.md
+docs/core/core-17-reference-agent-pricing-table-baseline.md
+docs/core/core-18-context-economy-cache-aware-context-engine.md
+docs/core/core-19-compaction-quality-eval.md
+docs/core/core-20-plan-state-machine.md
+docs/core/core-21-long-running-task-eval.md
+docs/core/core-22-tool-runtime-transaction.md
+docs/core/core-23-model-gateway-budget-controller.md
+docs/core/core-24-durable-session-store-replay.md
+docs/core/core-25-repo-intelligence-relevance-index.md
+docs/core/core-26-human-approval-interruption-protocol.md
+docs/roadmap/production-upgrade-roadmap.md
+docs/roadmap/production-upgrade-validation-matrix.md
 README.md
 AGENTS.md
 docs/index.md
@@ -826,8 +831,8 @@ assertNoHiddenExecution 会扫描 event log，确认 approvalRequired tool.execu
 Production Upgrade Roadmap Pass 已确认：
 
 ```text
-Core 18-26 的生产化升级路线已经落到 production-upgrade-roadmap.md。
-Core 18-26 的验证先行口径已经落到 production-upgrade-validation-matrix.md。
+Core 18-26 的生产化升级路线已经落到 docs/roadmap/production-upgrade-roadmap.md。
+Core 18-26 的验证先行口径已经落到 docs/roadmap/production-upgrade-validation-matrix.md。
 下一阶段主线从 second reference-agent baseline 调整为 Runtime 生产化升级。
 Core 18 到 Core 26 的顺序为 Context Economy、Compaction Quality Eval、Plan State Machine、Long-Running Task Eval、ToolRuntime Transaction、ModelGateway Budget、Durable Replay、Repo Intelligence、Human Approval。
 每个 Core 必须先有阶段文档、实现、verify 脚本、package 脚本、verify:all、CURRENT_STATE 和 run record 更新，才算完成。
@@ -841,13 +846,22 @@ Core 18 到 Core 26 的顺序为 Context Economy、Compaction Quality Eval、Pla
 最后一次完整验证时间：
 
 ```text
-2026-05-28 00:57 CST
+2026-05-28 16:42 CST
 ```
 
 运行命令：
 
 ```bash
 npm run verify:all
+```
+
+额外检查：
+
+```bash
+git diff --check
+node --input-type=module - <<'NODE'
+// markdown link check
+NODE
 ```
 
 结果：
@@ -892,6 +906,13 @@ total: 222/222 passed
 exit code: 0
 ```
 
+额外检查结果：
+
+```text
+git diff --check: passed
+markdown links: passed
+```
+
 这证明：
 
 ```text
@@ -913,7 +934,7 @@ DeepSeek Chat Completions API 已经在本机完成真实端到端调用。
 学习侧还缺：
 
 ```text
-学习者需要正式复盘 course-13-eval-reference-cost-evidence.md 到 course-17-session-repo-approval-production.md。
+学习者需要正式复盘 docs/course/course-13-eval-reference-cost-evidence.md 到 docs/course/course-17-session-repo-approval-production.md。
 学习者需要能把 Core 13-17 复述为 executable suite -> codex-local baseline -> cost basis -> pricing boundary -> RelativeScore blocked 的证据桥。
 学习者需要能把 Core 18-26 复述为 Context / Compaction / Plan / Eval / ToolRuntime / ModelGateway / Session / Repo Intelligence / Human Approval 的生产化证据链。
 学习者需要继续区分 deterministic local evidence、真实 provider billing、真实 provider cache billing、生产级 benchmark、SystemScore 和 RelativeScore。
@@ -948,10 +969,10 @@ Core 18-26 已完成 deterministic local evidence 主线；但仍不能声称完
 文档治理侧还缺：
 
 ```text
-README + docs/index + authority-map 的最小入口层已经建立。
-开源协作文件、学习者入口、开源边界和 GitHub release checklist 已补齐。
-历史文档还没有全量迁移或归档；当前只做了 bounded pilot。
-当前已接近 GitHub learning-preview 发布状态，但仍应在发布前完成最终验证和人工确认。
+README + docs/index + authority-map 的入口层已经建立。
+开源协作文件、学习者入口、开源边界、项目结构说明和 GitHub release checklist 已补齐。
+历史文档已移动到 docs/history，只作背景材料，不再占据根目录。
+当前已达到 GitHub learning-preview 发布结构；发布后仍应继续收集真实中文学习者反馈。
 Production Upgrade Roadmap Pass 已建立路线入口，course-14 到 course-17 已建立 Core 18-26 教学整理入口；未来新路线开始前仍要先写清新的 roadmap / validation matrix，并同步 CURRENT_STATE、README、docs/index 和 authority-map。
 ```
 
@@ -962,27 +983,25 @@ Production Upgrade Roadmap Pass 已建立路线入口，course-14 到 course-17 
 下一步只做一件事：
 
 ```text
-完成 Open Source Learning Preview 的最终验证，并由维护者决定是否推送到 GitHub。
+同步 GitHub 仓库 main，并观察 GitHub Actions verify workflow 是否通过。
 ```
 
 推荐优先顺序：
 
 ```text
-1. 运行 git diff --check。
-2. 如修改核心验证链路或 package.json，再运行 npm run verify:all；开源前推荐仍运行 npm run verify:all。
-3. 阅读 docs/open-source-boundary.md，确认 README 和课程没有越界能力声明。
-4. 阅读 docs/github-release-checklist.md，确认 secret、课程连续性、CI 和 evidence boundary。
-5. 维护者决定是否创建 GitHub repo、推送分支并开放 issue / PR。
-6. 下一条路线开始前，先写新的 roadmap / validation matrix，不直接把当前 deterministic local evidence 扩写成生产级声明。
+1. 提交当前 GitHub 展示层、docs 分区和 Core 10 发布检查更新。
+2. 推送到 https://github.com/boyzcl/claude-code-core-lab。
+3. 确认 GitHub Actions 跑 `npm install`、`git diff --check`、`npm run verify:all`。
+4. 发布后继续收集真实中文学习者反馈。
+5. 下一条路线开始前，先写新的 roadmap / validation matrix，不直接把当前 deterministic local evidence 扩写成生产级声明。
 ```
 
 做完下一步后的预期结果：
 
 ```text
-得到一个新的阶段路线入口：
-  明确下一阶段要证明真实 repo benchmark、第二 reference-agent baseline，还是 approval / policy 产品层。
-  明确哪些证据属于 deterministic local evidence，哪些需要真实外部对照。
-  继续避免生产级能力声明漂移。
+GitHub 首页能让中文学习者理解项目对象、使用方式、学习路径、预期结果和能力边界。
+CI 继续证明 deterministic local evidence 链可复现。
+后续路线再决定是真实 repo benchmark、第二 reference-agent baseline，还是 approval / policy 产品层。
 ```
 
 ---
@@ -993,49 +1012,49 @@ Production Upgrade Roadmap Pass 已建立路线入口，course-14 到 course-17 
 
 ```text
 CURRENT_STATE.md
-claude-code-core-learning-path.md
+docs/course/claude-code-core-learning-path.md
 docs/start-here-for-learners.md
 docs/open-source-boundary.md
 docs/github-release-checklist.md
-course-06-labs-to-core-map.md
-course-07-core-build-pass-overview.md
-course-08-model-gateway-and-context-engine.md
-course-09-plan-mode-and-compaction.md
-course-10-trace-eval-real-model-and-recovery.md
-course-11-real-repo-task-layer.md
-course-12-eval-packaging-and-executable-seeds.md
-course-13-eval-reference-cost-evidence.md
-course-14-production-upgrade-evidence-chain.md
-course-15-context-compaction-plan-production.md
-course-16-long-running-tool-gateway-production.md
-course-17-session-repo-approval-production.md
-core-02-model-gateway.md
-core-03-context-engine-integration.md
-core-04-plan-mode-integration.md
-core-05-compaction-artifact-integration.md
-core-06-trace-eval-harness-expansion.md
-core-07-real-model-api-e2e.md
-core-08-prompt-pack-recovery-loop.md
-core-09-real-repo-task-layer.md
-core-10-70-80-eval-open-source-packaging.md
-core-11-eval-expansion-executable-seeds.md
-core-12-eval-expansion-second-batch.md
-core-13-eval-expansion-third-batch.md
-core-14-eval-expansion-final-starter-batch.md
-core-15-reference-agent-comparison.md
-core-16-reference-agent-cost-and-cross-agent.md
-core-17-reference-agent-pricing-table-baseline.md
-core-18-context-economy-cache-aware-context-engine.md
-core-19-compaction-quality-eval.md
-core-20-plan-state-machine.md
-core-21-long-running-task-eval.md
-core-22-tool-runtime-transaction.md
-core-23-model-gateway-budget-controller.md
-core-24-durable-session-store-replay.md
-core-25-repo-intelligence-relevance-index.md
-core-26-human-approval-interruption-protocol.md
-production-upgrade-roadmap.md
-production-upgrade-validation-matrix.md
+docs/course/course-06-labs-to-core-map.md
+docs/course/course-07-core-build-pass-overview.md
+docs/course/course-08-model-gateway-and-context-engine.md
+docs/course/course-09-plan-mode-and-compaction.md
+docs/course/course-10-trace-eval-real-model-and-recovery.md
+docs/course/course-11-real-repo-task-layer.md
+docs/course/course-12-eval-packaging-and-executable-seeds.md
+docs/course/course-13-eval-reference-cost-evidence.md
+docs/course/course-14-production-upgrade-evidence-chain.md
+docs/course/course-15-context-compaction-plan-production.md
+docs/course/course-16-long-running-tool-gateway-production.md
+docs/course/course-17-session-repo-approval-production.md
+docs/core/core-02-model-gateway.md
+docs/core/core-03-context-engine-integration.md
+docs/core/core-04-plan-mode-integration.md
+docs/core/core-05-compaction-artifact-integration.md
+docs/core/core-06-trace-eval-harness-expansion.md
+docs/core/core-07-real-model-api-e2e.md
+docs/core/core-08-prompt-pack-recovery-loop.md
+docs/core/core-09-real-repo-task-layer.md
+docs/core/core-10-70-80-eval-open-source-packaging.md
+docs/core/core-11-eval-expansion-executable-seeds.md
+docs/core/core-12-eval-expansion-second-batch.md
+docs/core/core-13-eval-expansion-third-batch.md
+docs/core/core-14-eval-expansion-final-starter-batch.md
+docs/core/core-15-reference-agent-comparison.md
+docs/core/core-16-reference-agent-cost-and-cross-agent.md
+docs/core/core-17-reference-agent-pricing-table-baseline.md
+docs/core/core-18-context-economy-cache-aware-context-engine.md
+docs/core/core-19-compaction-quality-eval.md
+docs/core/core-20-plan-state-machine.md
+docs/core/core-21-long-running-task-eval.md
+docs/core/core-22-tool-runtime-transaction.md
+docs/core/core-23-model-gateway-budget-controller.md
+docs/core/core-24-durable-session-store-replay.md
+docs/core/core-25-repo-intelligence-relevance-index.md
+docs/core/core-26-human-approval-interruption-protocol.md
+docs/roadmap/production-upgrade-roadmap.md
+docs/roadmap/production-upgrade-validation-matrix.md
 README.md
 AGENTS.md
 docs/index.md
@@ -1078,7 +1097,7 @@ course-08 到 course-12 已按执行链样板重写并复盘完成。
 course-13 Eval Reference Cost Evidence 已创建，用于复盘 Core 13-17 的 executable suite、codex-local baseline、cost basis、pricing boundary 和 RelativeScore 阻塞。
 course-14 Production Upgrade Evidence Chain 已创建，用于复盘 Core 18-26 的 deterministic local evidence 主线。
 course-15 到 course-17 已创建，用于按同一执行链标准细读 Core 18-26 verify case。
-Open Source Learning Preview Preparation 已补齐课程桥、开源边界、协作文件和 CI。下一步完成最终验证，并由维护者决定是否推送到 GitHub。
+Open Source Learning Preview Preparation 已补齐课程桥、开源边界、协作文件和 CI，并完成本地最终验证。下一步同步 GitHub 仓库并观察 GitHub Actions。
 ```
 
 恢复后不要立即做：
@@ -1097,8 +1116,8 @@ Open Source Learning Preview Preparation 已补齐课程桥、开源边界、协
 ```text
 1. 不再补 starter seed；20/20 starter executable suite 已完成。
 2. 先读 docs/start-here-for-learners.md 和 docs/open-source-boundary.md。
-3. 再读 course-13-eval-reference-cost-evidence.md，确认 Core 13-17 的 evidence bridge 不再缺课。
-4. 继续读 course-14-production-upgrade-evidence-chain.md 到 course-17-session-repo-approval-production.md，确认 Core 18-26 每组 verify case 的对象、状态和断言。
+3. 再读 docs/course/course-13-eval-reference-cost-evidence.md，确认 Core 13-17 的 evidence bridge 不再缺课。
+4. 继续读 docs/course/course-14-production-upgrade-evidence-chain.md 到 docs/course/course-17-session-repo-approval-production.md，确认 Core 18-26 每组 verify case 的对象、状态和断言。
 5. 不要把 Core 18-26 的 deterministic local evidence 扩写成生产级 Claude Code 能力声明。
 6. 下一阶段开始前，先写清新的 roadmap / validation matrix。
 7. 不要在没有真实外部对照或更大 benchmark 时声称 70%-80% 成功率、真实 provider SLA 或跨 agent RelativeScore。

@@ -1,6 +1,6 @@
 # Contributing
 
-感谢你想参与这个学习项目。本仓库的目标不是复刻 Claude Code 源码，而是用 clean-room 的方式构建一个可运行、可验证、可教学的 Claude Code-like Core。
+感谢你想参与这个学习项目。本仓库的目标不是复刻 Claude Code 源码，而是围绕 Claude Code 的核心产品机制，构建一个可运行、可验证、可教学的本地 Agent Core。
 
 ## 贡献范围
 
@@ -27,7 +27,7 @@ deterministic local verify case
 ## 开发流程
 
 1. 先读 `CURRENT_STATE.md`、`docs/index.md`、`docs/authority-map.md`。
-2. 找到最接近的 `course-XX`、`lab-XX` 或 `core-XX` 文档。
+2. 找到最接近的 `docs/course/course-XX`、`docs/lab/lab-XX` 或 `docs/core/core-XX` 文档。
 3. 修改实现时同时补对应 verify；只改教学文档时说明证据来源和边界。
 4. 提交前至少运行：
 
