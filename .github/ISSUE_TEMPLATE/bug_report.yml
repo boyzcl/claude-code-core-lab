@@ -1,0 +1,73 @@
+name: Bug report
+description: Report a reproducible failure in code, docs, or verification.
+title: "[Bug]: "
+labels: ["bug", "needs-reproduction"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for helping improve Claude Code Core Lab.
+
+        Please do not paste API keys, provider tokens, private logs, copied Claude Code prompts, source maps, or decompiled source snippets.
+  - type: textarea
+    id: summary
+    attributes:
+      label: What failed?
+      description: Describe the concrete failure or mismatch.
+      placeholder: "Example: npm run core:29:verify fails after..."
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Reproduction steps
+      description: List the smallest command sequence that reproduces the problem.
+      placeholder: |
+        1. npm install
+        2. npm run ...
+        3. Observe ...
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected result
+      description: What did the docs or verify script lead you to expect?
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual result
+      description: Paste concise output only. Redact secrets and private paths when needed.
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - README / learner entry
+        - Course docs
+        - Lab docs or scripts
+        - Core docs or scripts
+        - Product Surface roadmap
+        - GitHub / CI / contribution flow
+        - Other
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      description: OS, Node version, npm version, and branch or commit if known.
+      placeholder: "macOS 15, Node 22.x, npm 10.x, commit abc123"
+  - type: checkboxes
+    id: boundary
+    attributes:
+      label: Boundary check
+      options:
+        - label: I removed secrets, tokens, private logs, copied prompts, source maps, and decompiled source snippets.
+          required: true
+        - label: I checked whether the relevant README, docs/index, authority-map, course, lab, or core document already explains this behavior.
+          required: true

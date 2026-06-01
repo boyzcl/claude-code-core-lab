@@ -7,12 +7,15 @@
 | 路径 | 用途 |
 | --- | --- |
 | `README.md` | GitHub 首页，说明项目是什么、怎么运行、怎么学习 |
+| `CHANGELOG.md` | 面向发布和治理变化的人工变更记录，不替代当前状态 |
 | `package.json` | 所有 Lab / Core / verify 命令 |
 | `src/` | 真正可运行的实现和验证脚本 |
 | `docs/` | 课程、记录、路线、参考资料 |
 | `AGENTS.md` | 给 Agent 和维护者看的工作规则 |
 | `CURRENT_STATE.md` | 当前进度和恢复入口 |
 | `.github/workflows/verify.yml` | GitHub Actions 全量验证 |
+| `.github/ISSUE_TEMPLATE/` | bug report 和 learning feedback 模板 |
+| `.github/PULL_REQUEST_TEMPLATE.md` | PR 证据、边界和导航检查 |
 | `.env.example` | live model 本地配置模板 |
 
 根目录不再堆满课程和阶段记录。第一次访问 GitHub 的用户应该能先看懂入口，而不是被几十个 Markdown 文件淹没。
@@ -101,6 +104,8 @@ docs/roadmap/production-upgrade-validation-matrix.md
 架构和实现参考。
 
 这些文档比课程更长、更像设计资料。第一次学习不需要逐字读完，遇到实现问题时再查。
+
+其中 `open-source-project-standards.md` 负责把优秀 GitHub 项目经验转译成本项目规范；`core-runtime-object-map.md` 负责把 Lab 01 到 Core 31 收束成少数 Runtime object。
 
 ## docs/history
 

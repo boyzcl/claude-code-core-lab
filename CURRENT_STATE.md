@@ -1,6 +1,6 @@
 # CURRENT_STATE：Claude Code Core 学习项目当前状态
 
-最后更新：2026-05-28 20:43 CST
+最后更新：2026-06-01 11:32 CST
 
 本文是新对话入口和当前状态单一事实源。它不替代课程、Lab、Core 文档，只回答：
 
@@ -157,6 +157,10 @@ Eval 如何证明能力真的变强。
 | `docs/reference/claude-code-core-implementation-blueprint.md` | 施工图参考 | 模块级实现规格 |
 | `docs/reference/claude-code-70-80-validation-and-model-access.md` | 验收和模型接入参考 | 能力定义、评测、GPT / OpenAI-compatible API 接入 |
 | `docs/reference/agent-runtime-optimization-loop.md` | 迭代参考 | trace、失败归因、eval、灰度和回归 |
+| `docs/reference/open-source-project-standards.md` | 开源项目规范参考 | 把优秀 GitHub 项目经验转译成本项目 README、reference、Issue、PR 和验证标准 |
+| `docs/reference/core-runtime-object-map.md` | Runtime 对象地图 | 把 Lab 01 到 Core 31 收束为少数 Runtime object 和 boundary |
+| `CHANGELOG.md` | 变更记录 | 面向发布和治理变化的人工变更记录，不替代当前状态 |
+| `.github/ISSUE_TEMPLATE/` / `.github/PULL_REQUEST_TEMPLATE.md` | GitHub 协作入口 | 把 bug、learning feedback 和 PR 变成可复现、可验证、守边界的协作对象 |
 
 冲突处理：
 
@@ -196,6 +200,7 @@ README.md 已按中文学习者第一屏重写：先说明这是围绕 Claude Co
 根目录已瘦身，课程、Core、Lab、验证记录、参考资料和历史材料已移动到 docs/course、docs/core、docs/lab、docs/records、docs/reference、docs/history，并补充各目录 README。
 Teaching Consolidation Pass 第一轮完成。
 Production Upgrade Teaching Consolidation Pass 已完成总览课和三门细课整理；Open Source Learning Preview 已同步 GitHub 并通过 CI；Product Surface Study Stage Preparation 已完成路线、验证矩阵、课程补充和候选 Core mini brief；Product Surface Teaching Consolidation Pass 已完成 course-18 并同步导航入口。
+Open Source Project Standards Pass 已完成：新增 GitHub Issue / PR 模板、CHANGELOG、开源项目规范参考和 Core Runtime Object Map，并同步 README、CONTRIBUTING、docs index、authority map、project structure 和 GitHub release checklist。
 ```
 
 已亲自体验：
@@ -208,10 +213,10 @@ course-06 中 Lab 到 Core 的映射问题已由学习者确认能回答。
 当前状态：
 
 ```text
-Product Surface Teaching Consolidation Pass 已完成
+Open Source Project Standards Pass 已完成
 ```
 
-它的目的不是看到 Claude Code 产品表层材料就新增一串 Core，而是把已经完成的 Core 27-31 整理成和前面课程一致的教学体系，并继续守住 roadmap / validation matrix / mini brief 的进入门槛。
+它的目的不是再新增 Core，而是把优秀 GitHub 项目的可理解、可运行、可信任、可贡献经验转译成本项目自己的公开协作对象和学习辅助对象，并继续守住 clean-room、secret 和 capability claim 边界。
 
 当前断点：
 
@@ -958,7 +963,7 @@ Core 18 到 Core 26 的顺序为 Context Economy、Compaction Quality Eval、Pla
 最后一次完整验证时间：
 
 ```text
-2026-05-28 20:43 CST
+2026-06-01 11:32 CST
 ```
 
 运行命令：
@@ -972,6 +977,7 @@ npm run verify:all
 ```bash
 git diff --check
 rg stale course/product-surface references
+new-file whitespace scan
 node --input-type=module - <<'NODE'
 // markdown link check
 NODE

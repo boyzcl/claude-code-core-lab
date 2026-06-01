@@ -1,0 +1,58 @@
+name: Course or learning feedback
+description: Suggest a clearer explanation, route, example, or boundary in the learning system.
+title: "[Learning]: "
+labels: ["docs", "learning-feedback"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this for learning friction: unclear course order, missing verify link, confusing boundary language, or a place where the docs do not match the code.
+
+        Please do not submit copied Claude Code prompt text, source maps, decompiled source, API keys, or private traces.
+  - type: input
+    id: location
+    attributes:
+      label: Where did you get stuck?
+      description: Link or name the README, course, lab, core, roadmap, or reference file.
+      placeholder: "docs/course/course-18-product-surface-implementation-chain.md"
+    validations:
+      required: true
+  - type: textarea
+    id: friction
+    attributes:
+      label: What was confusing?
+      description: Explain the learning friction from a reader's point of view.
+      placeholder: "I could run the verify script, but I could not tell which runtime object proved..."
+    validations:
+      required: true
+  - type: textarea
+    id: expected_learning_result
+    attributes:
+      label: Expected learning result
+      description: What should a learner be able to explain, run, or verify after this section?
+    validations:
+      required: true
+  - type: textarea
+    id: suggested_fix
+    attributes:
+      label: Suggested fix
+      description: Optional. Suggest a smaller explanation, command, diagram, or boundary note.
+  - type: dropdown
+    id: learning_path
+    attributes:
+      label: Learning path
+      options:
+        - 30-minute quick check
+        - Half-day main path
+        - Full Course 00-18 path
+        - Contributor / maintainer path
+        - Not sure
+    validations:
+      required: true
+  - type: checkboxes
+    id: boundary
+    attributes:
+      label: Boundary check
+      options:
+        - label: This feedback is about this project's own teaching, implementation, or verify evidence, not a request to copy private Claude Code materials.
+          required: true

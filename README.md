@@ -84,6 +84,7 @@ npm run verify:all
 3. 从 [Course 00](docs/course/course-00-teaching-standard.md) 开始顺序读到 [Course 18](docs/course/course-18-product-surface-implementation-chain.md)。
 4. 每读完一组机制，运行对应 Lab 或 Core 验证脚本。
 5. 不懂英文术语时，看 [中文术语表](docs/production-upgrade-terms-zh.md)。
+6. 想把 31 个 Core 收束成少数对象时，看 [Core Runtime Object Map](docs/reference/core-runtime-object-map.md)。
 
 如果你只是先试水，不需要一上来读完整 19 门课。可以按时间选择：
 
@@ -113,6 +114,7 @@ npm run core:31:verify
 ```text
 .
 ├── README.md                     # GitHub 首页，先看这里
+├── CHANGELOG.md                  # 面向发布和治理变化的人工变更记录
 ├── package.json                  # npm scripts，所有 verify 入口
 ├── src/                          # 可运行实现
 │   ├── lab01 ... lab08           # 单机制实验
@@ -127,7 +129,7 @@ npm run core:31:verify
 │   └── history/                  # 早期分析文章，仅作背景
 ├── AGENTS.md                     # 给 Agent / 维护者看的工作规则
 ├── CURRENT_STATE.md              # 当前进度和恢复入口
-└── .github/workflows/verify.yml  # GitHub Actions 验证
+└── .github/                      # GitHub Actions、Issue 模板和 PR 模板
 ```
 
 更详细的目录解释见 [项目结构说明](docs/project-structure.md)。
@@ -207,6 +209,7 @@ npm run core:31:verify
 - [CONTRIBUTING.md](CONTRIBUTING.md)
 - [SECURITY.md](SECURITY.md)
 - [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md)
+- [Open Source Project Standards](docs/reference/open-source-project-standards.md)
 - [GitHub 发布检查表](docs/github-release-checklist.md)
 
 提交前至少运行：

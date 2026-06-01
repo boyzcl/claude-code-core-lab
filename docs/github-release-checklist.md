@@ -8,6 +8,8 @@
 - README 没有写成 Claude Code 源码复刻或官方实现。
 - `docs/open-source-boundary.md` 已说明 capability claim 边界。
 - `LICENSE`、`CONTRIBUTING.md`、`SECURITY.md`、`CODE_OF_CONDUCT.md` 存在。
+- `CHANGELOG.md` 存在，并说明它不替代 `CURRENT_STATE.md`。
+- `.github/ISSUE_TEMPLATE/` 和 `.github/PULL_REQUEST_TEMPLATE.md` 存在，并要求复现、证据和公开边界检查。
 
 ## 2. Secret 检查
 
@@ -31,6 +33,8 @@
 - 根目录只保留入口、配置和源码目录，不把课程、记录和历史文章堆在第一屏。
 - `docs/README.md`、`docs/index.md`、`docs/authority-map.md` 能把学习材料、当前规则、证据记录和历史背景分开。
 - 普通中文学习者不需要先理解 `clean-room`、`Runtime`、`Context` 等英文词，也能知道下一步该读哪一页、跑哪条命令。
+- `docs/reference/open-source-project-standards.md` 能说明本项目如何吸收 GitHub 典范经验但不照搬。
+- `docs/reference/core-runtime-object-map.md` 能把 Lab 01 到 Core 31 收束为少数 Runtime object。
 
 ## 5. Evidence 边界检查
 

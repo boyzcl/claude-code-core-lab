@@ -7,6 +7,7 @@
 - [项目首页](../README.md)
 - [学习者入口](start-here-for-learners.md)
 - [课程路线](course/claude-code-core-learning-path.md)
+- [Core Runtime Object Map](reference/core-runtime-object-map.md)
 - [项目结构说明](project-structure.md)
 - [中文术语表](production-upgrade-terms-zh.md)
 
@@ -16,6 +17,7 @@
 - [AGENTS.md](../AGENTS.md): Agent / 维护者工作规则。
 - [权威关系图（Authority Map）](authority-map.md): 文档冲突优先级。
 - [开源边界](open-source-boundary.md): 对外能力声明、公开边界、secret 边界。
+- [开源项目规范](reference/open-source-project-standards.md): 把优秀 GitHub 项目经验转译成本项目的 README、reference、Issue、PR 和验证标准。
 - [生产化升级路线图](roadmap/production-upgrade-roadmap.md): Core 18-26 路线。
 - [生产化升级验证矩阵](roadmap/production-upgrade-validation-matrix.md): Core 18-26 验证矩阵。
 - [产品表层学习路线图](roadmap/product-surface-study-roadmap.md): Core 26 之后，如何从 Claude Code 产品工件中学习，并判断补旧课还是新建 Core。
@@ -28,7 +30,7 @@
 - [Lab](lab/): 单机制实验说明。
 - [Core](core/): Core 集成阶段记录。
 - [Records](records/): 运行记录和验证记录。
-- [Reference](reference/): 架构、实现和评测参考。
+- [Reference](reference/): 架构、实现、评测、开源项目规范和 Runtime 对象地图。
 - [History](history/): 早期分析文章，只作背景。
 
 ## 关键课程
@@ -49,6 +51,8 @@
 - [Core 29 Memory Source](core/core-29-memory-source-auto-memory.md)
 - [Core 30 Checkpoint Rewind](core/core-30-checkpoint-rewind.md)
 - [Core 31 Subagent Context Isolation](core/core-31-subagent-context-isolation.md)
+- [Core Runtime Object Map](reference/core-runtime-object-map.md)
+- [Open Source Project Standards](reference/open-source-project-standards.md)
 
 ## 关键证据
 
@@ -68,6 +72,7 @@
 - [贡献指南](../CONTRIBUTING.md)
 - [安全策略](../SECURITY.md)
 - [行为准则](../CODE_OF_CONDUCT.md)
+- [变更记录](../CHANGELOG.md)
 - [许可证](../LICENSE)
 
 ## 说明

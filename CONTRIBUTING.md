@@ -29,7 +29,9 @@ deterministic local verify case
 1. 先读 `CURRENT_STATE.md`、`docs/index.md`、`docs/authority-map.md`。
 2. 找到最接近的 `docs/course/course-XX`、`docs/lab/lab-XX` 或 `docs/core/core-XX` 文档。
 3. 修改实现时同时补对应 verify；只改教学文档时说明证据来源和边界。
-4. 提交前至少运行：
+4. 如果只是报告问题或学习卡点，优先使用 `.github/ISSUE_TEMPLATE/` 里的 bug report 或 learning feedback 模板。
+5. 提交 PR 时按 `.github/PULL_REQUEST_TEMPLATE.md` 写清变更范围、验证命令和公开边界。
+6. 提交前至少运行：
 
 ```bash
 git diff --check
@@ -55,6 +57,8 @@ Action Claim Contract
 学习者应该亲手改哪里
 本课最终要能回答的问题
 ```
+
+新增参考资料时，先按 `docs/reference/open-source-project-standards.md` 的收录 gate 判断它属于当前规则、参考资料、历史背景还是证据记录。新增或重排 Core 主题时，先用 `docs/reference/core-runtime-object-map.md` 判断它落在哪个 Runtime object 和 boundary 上。
 
 ## Secret 边界
 
