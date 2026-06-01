@@ -1,4 +1,4 @@
-# Open Source Project Standards：把 GitHub 典范转译成本项目规范
+# 开源项目规范（Open Source Project Standards）：把 GitHub 典范转译成本项目规范
 
 本文把外部优秀 GitHub 项目的经验转译成 Claude Code Core Lab 自己可执行的标准。它不是新的项目路线图，也不替代 `CURRENT_STATE.md`、`docs/authority-map.md` 或 verify 脚本。
 
@@ -25,8 +25,8 @@
 | --- | --- | --- |
 | 小型工具库矩阵 | 项目边界清楚、README 一致、维护方式稳定 | 保持 course -> lab -> core 命名，不把 README 写成进度流水账 |
 | 生态型前端项目 | 文档、示例、生态位置和项目资产目录清楚 | 把本项目定位为中文 AI Coding runtime 学习基础设施，而不是孤立代码仓库 |
-| 教育型 AI 仓库 | 最小可运行、逐步扩展、复现实验清楚 | 每个课程都回到源码、verify case 和不能声称的边界 |
-| 极简系统项目 | 少数核心抽象解释完整系统 | 用 Runtime object map 收束 31 个 Core，而不是让学习者死记阶段列表 |
+| 教育型 AI 仓库 | 最小可运行、逐步扩展、复现实验清楚 | 每个课程都回到源码、验证用例（verify case）和不能声称的边界 |
+| 极简系统项目 | 少数核心抽象解释完整系统 | 用运行时对象地图（Runtime object map）收束 31 个 Core，而不是让学习者死记阶段列表 |
 | awesome-list 类知识库 | 筛选标准、分类、贡献规则和过期治理 | `docs/reference/` 只收录有明确用途、证据等级和边界说明的材料 |
 | GitHub 健康仓库 | README、License、Contributing、Security、Code of Conduct、CI | 根目录保留健康文件，GitHub 模板要求复现、证据和 secret boundary |
 
@@ -61,11 +61,11 @@ README 只做入口，不做百科。它必须回答：
 
 | Gate | 必须回答 |
 | --- | --- |
-| 用途 | 它帮助理解哪个 Runtime object、Course、Lab、Core 或 eval 边界？ |
+| 用途 | 它帮助理解哪个运行时对象（Runtime object）、课程（Course）、实验（Lab）、核心阶段（Core）或评测（eval）边界？ |
 | 来源层级 | 它是公开文档、公开产品行为、公开论文、内部学习笔记，还是历史背景？ |
-| 可验证性 | 它能否落到本项目自己的代码、fixture、verify case 或边界说明？ |
+| 可验证性 | 它能否落到本项目自己的代码、测试夹具（fixture）、验证用例（verify case）或边界说明？ |
 | 时效性 | 它是否可能过期？如果会，是否标明检查日期或只作为背景？ |
-| 安全边界 | 是否包含 secret、私有日志、复制 prompt、source map 或反编译源码？ |
+| 安全边界 | 是否包含密钥（secret）、私有日志、复制提示词（prompt）、源码映射（source map）或反编译源码？ |
 | Authority | 它是当前规则、参考资料、历史背景，还是证据记录？ |
 
 只有通过这些 gate 的资料才适合进入公开仓库。不能通过的资料可以留在本地私有笔记，但不能进入项目文档。
@@ -82,7 +82,7 @@ Bug issue 必须尽量包含：
 实际结果
 相关区域
 环境信息
-secret / prompt / source map / decompiled source 边界确认
+密钥（secret）/ 提示词（prompt）/ 源码映射（source map）/ 反编译源码（decompiled source）边界确认
 ```
 
 Learning feedback issue 必须尽量包含：
@@ -137,8 +137,8 @@ Markdown 链接可达
 花哨但不可运行的官网优先
 泛 AI Coding 百科化
 英文开源话术直接搬进中文教学
-复制 Claude Code prompt 原文
-复制 source map 或反编译源码片段
+复制 Claude Code 提示词（prompt）原文
+复制源码映射（source map）或反编译源码片段
 把本地 deterministic evidence 写成生产级能力
 ```
 

@@ -1,4 +1,4 @@
-# Course 00 Teaching Standard：无隐式信息教学规范
+# Course 00 教学标准（Teaching Standard）：无隐式信息教学规范
 
 > 本文是学习项目的教学写作规范。
 >
@@ -62,7 +62,7 @@
 ```text
 它从哪里知道？
 这个信息在 ModelRequest 的哪个位置？
-是 user message、system prompt、runtime state、tool result、project rule，还是模型常识？
+是用户消息（user message）、系统提示词（system prompt）、运行时状态（runtime state）、工具结果（tool result）、项目规则（project rule），还是模型常识？
 ```
 
 ### 1.2 任何“应该”都要问约束
@@ -127,25 +127,74 @@ projectRules
 不给会发生什么错误？
 ```
 
+### 1.5 解释性文档必须中文先行
+
+本项目面向中文学习者。当前解释性文档必须采用“中文在前，英文作为词汇括注”的写法：
+
+```text
+运行时对象（Runtime object）
+模型网关（ModelGateway）
+允许 / 询问 / 拒绝（allow / ask / deny）
+产品表层（Product Surface）
+```
+
+不要把英文产品词、功能词或源码词直接当成未解释对象。例如不要只写：
+
+```text
+Runtime object
+Product Surface execution-chain
+clean-room
+```
+
+应该改成：
+
+```text
+运行时对象（Runtime object）
+产品表层执行链（Product Surface execution-chain）
+公开学习边界；只有文件名里保留 clean-room
+```
+
+适用范围：
+
+```text
+README、学习者入口、docs 入口、当前 course / lab / core / roadmap、当前 reference 综合文。
+```
+
+例外范围：
+
+```text
+文件名、命令名、代码字段、错误码、verify case 名、真实命令输出、历史文档原文。
+```
+
+这些例外不需要硬翻译，但正文第一次解释时仍应给中文含义：
+
+```text
+验证缺失（verification_missing）
+工具运行时（ToolRuntime）
+npm run verify:all
+```
+
+历史材料不做机械改写；如果历史材料与当前术语规范冲突，以当前课程、authority map 和术语表为准。
+
 ---
 
 ## 2. 信息来源分层
 
-教学文档必须至少区分以下来源类别。早期课程主要用前 8 类解释模型为什么知道；Product Surface Study 之后，官方公开资料、产品工件观察和第三方提取线索也必须单独标注，不能混成同一种 authority。
+教学文档必须至少区分以下来源类别。早期课程主要用前 8 类解释模型为什么知道；产品表层学习（Product Surface Study）之后，官方公开资料、产品工件观察和第三方提取线索也必须单独标注，不能混成同一种权威来源（authority）。
 
 | 来源 | 含义 | 是否可靠 | 示例 |
 | --- | --- | --- | --- |
-| User Message | 用户当前任务和约束 | 高，但可能模糊 | “修复分页 bug 并测试” |
-| System Prompt | Agent 总行为准则 | 高 | “改前先读，改后验证” |
-| Runtime State | 当前会话状态 | 高 | 已读文件、已改文件、验证状态 |
-| Tool Schema/Description | 可用动作和参数 | 高 | Search 用来定位文件 |
-| Tool Result | 工具返回的观察事实 | 高，但要防 prompt injection | SearchResult、Bash output |
-| Project Rules | 仓库规则和约定 | 中高，受优先级约束 | CLAUDE.md、README |
-| Policy Rules | Runtime 硬边界 | 最高 | 未读不能 Edit、危险命令拒绝 |
-| Official Public Docs / SDK Preset | 官方公开能力和合法调用方式 | 高，但只限公开范围 | Anthropic Agent SDK 的 `claude_code` preset |
-| Product Artifact Observation | 从 Claude Code 分发物、source map、运行材料中观察到的结构 | 中，需要转译和边界标注 | tool definitions、system-reminder 类别、启动上下文形态 |
-| Third-party Prompt Extraction | 第三方观察资料 | 低到中，只能作研究线索 | prompt/tool diff 网站 |
-| Model Prior | 模型预训练常识 | 低到中 | 分页常见词 pageSize/limit |
+| 用户消息（User Message） | 用户当前任务和约束 | 高，但可能模糊 | “修复分页 bug 并测试” |
+| 系统提示词（System Prompt） | Agent 总行为准则 | 高 | “改前先读，改后验证” |
+| 运行时状态（Runtime State） | 当前会话状态 | 高 | 已读文件、已改文件、验证状态 |
+| 工具模式 / 说明（Tool Schema / Description） | 可用动作和参数 | 高 | Search 用来定位文件 |
+| 工具结果（Tool Result） | 工具返回的观察事实 | 高，但要防提示词注入（prompt injection） | SearchResult、Bash output |
+| 项目规则（Project Rules） | 仓库规则和约定 | 中高，受优先级约束 | CLAUDE.md、README |
+| 策略规则（Policy Rules） | Runtime 硬边界 | 最高 | 未读不能 Edit、危险命令拒绝 |
+| 官方公开文档 / SDK 预设（Official Public Docs / SDK Preset） | 官方公开能力和合法调用方式 | 高，但只限公开范围 | Anthropic Agent SDK 的 `claude_code` preset |
+| 产品工件观察（Product Artifact Observation） | 从 Claude Code 分发物、源码映射（source map）、运行材料中观察到的结构 | 中，需要转译和边界标注 | tool definitions、system-reminder 类别、启动上下文形态 |
+| 第三方提示词提取（Third-party Prompt Extraction） | 第三方观察资料 | 低到中，只能作研究线索 | prompt/tool diff 网站 |
+| 模型先验（Model Prior） | 模型预训练常识 | 低到中 | 分页常见词 pageSize/limit |
 
 写作要求：
 
@@ -153,7 +202,7 @@ projectRules
 凡是高风险决策，不能只依赖 Model Prior。
 凡是关键行为，至少要进入 System Prompt、Tool Description、Policy 或 Eval。
 Product Artifact Observation 和第三方提取的 prompt/tool 内容不能直接进入开源 Prompt Pack。
-可以学习机制类别，但要转译成自己的对象模型、规则说明和 verify case。
+可以学习机制类别，但要转译成自己的对象模型、规则说明和验证用例（verify case）。
 ```
 
 ### 2.1 官方资料 / 产品工件观察 / 第三方提取的边界
@@ -169,7 +218,7 @@ Product Artifact Observation 和第三方提取的 prompt/tool 内容不能直�
 不应该做三件事：
 
 ```text
-1. 不要把第三方提取的 Claude Code system prompt 逐字复制进我们的开源实现。
+1. 不要把第三方提取的 Claude Code 系统提示词（system prompt）逐字复制进我们的开源实现。
 2. 不要把第三方提取内容当作官方文档。
 3. 不要让学习者以为“复制 prompt”就是构建 Claude Code-like 产品。
 ```
@@ -181,7 +230,7 @@ Product Artifact Observation 和第三方提取的 prompt/tool 内容不能直�
 不能说：这就是官方公开源码，或这就是本项目可以直接复制的官方提示词。
 ```
 
-进入我们 clean-room Prompt Pack 的每条规则，都必须回答：
+进入我们公开学习边界下提示词包（Prompt Pack）的每条规则，都必须回答：
 
 ```text
 为什么需要这条规则？
@@ -191,24 +240,24 @@ Product Artifact Observation 和第三方提取的 prompt/tool 内容不能直�
 用哪个 eval case 验证？
 ```
 
-### 2.2 Product Surface Core 的教学合同
+### 2.2 产品表层核心阶段（Product Surface Core）的教学合同
 
-Core 27-31 这类 Product Surface 主题进入教学文档时，必须再补一层合同：
+Core 27-31 这类产品表层（Product Surface）主题进入教学文档时，必须再补一层合同：
 
 | 主题 | 必须讲清 | 不能声称 |
 | --- | --- | --- |
-| Settings / Permission Resolver | permissionConfig、ruleSource、resolverTrace、allow/ask/deny 和 no hidden execution | 完整 enterprise policy、官方 Settings 内部实现或 GUI permission prompt |
-| Hooks Lifecycle | hookRegistry、hookEvent、hookDecision、hookFeedback、redaction 和不升级为 system prompt | 真实 shell hook 产品、任意脚本 sandbox 或完整插件系统 |
-| Memory Source / CLAUDE.md / Auto Memory | memoryType、memoryIndex、forgetEvent、freshness check、long_term_memory 和 no code-structure memory | 官方 memory 文件格式、远端多用户 memory 服务或代码智能数据库 |
-| Checkpoint / Rewind | checkpoint、fileStateSnapshot、externalChangeConflict、rewindAudit 和 append-only event boundary | IDE rewind UI、跨机器恢复或分布式 session store |
-| Subagent Context Isolation | delegatedTask、subagentContext、subagentResult、delegationLedger 和 isolationAudit | 真实多进程调度、远端 worker 隔离或 agent marketplace |
+| 设置与权限解析器（Settings / Permission Resolver） | permissionConfig、ruleSource、resolverTrace、允许 / 询问 / 拒绝（allow / ask / deny）和禁止隐藏执行（no hidden execution） | 完整企业策略（enterprise policy）、官方 Settings 内部实现或 GUI permission prompt |
+| 钩子生命周期（Hooks Lifecycle） | hookRegistry、hookEvent、hookDecision、hookFeedback、脱敏（redaction）和不升级为系统提示词（system prompt） | 真实 shell hook 产品、任意脚本沙箱（sandbox）或完整插件系统 |
+| 记忆来源 / 项目记忆 / 自动记忆（Memory Source / CLAUDE.md / Auto Memory） | memoryType、memoryIndex、forgetEvent、鲜度检查（freshness check）、长期记忆（long_term_memory）和 no code-structure memory | 官方 memory 文件格式、远端多用户 memory 服务或代码智能数据库 |
+| 检查点与回退（Checkpoint / Rewind） | checkpoint、fileStateSnapshot、externalChangeConflict、rewindAudit 和只追加事件边界（append-only event boundary） | IDE rewind UI、跨机器恢复或分布式 session store |
+| 子代理上下文隔离（Subagent Context Isolation） | delegatedTask、subagentContext、subagentResult、delegationLedger 和 isolationAudit | 真实多进程调度、远端 worker 隔离或 agent marketplace |
 
 写作要求：
 
 ```text
 先说明它补哪个已有 course/core。
-再说明新增 Runtime state 和 enforced boundary。
-最后说明对应 verify case 和 out-of-scope。
+再说明新增运行时状态（Runtime state）和强制边界（enforced boundary）。
+最后说明对应验证用例（verify case）和不在当前范围（out-of-scope）。
 ```
 
 这保证 Product Surface 课程仍然遵守同一条原则：
@@ -219,7 +268,7 @@ Core 27-31 这类 Product Surface 主题进入教学文档时，必须再补一�
 
 ---
 
-## 3. Knowledge Provenance 表
+## 3. 知识来源表（Knowledge Provenance）
 
 每个 course 文档都应该至少有一张 Knowledge Provenance 表。
 
@@ -241,7 +290,7 @@ Core 27-31 这类 Product Surface 主题进入教学文档时，必须再补一�
 
 ---
 
-## 4. Context Item Contract
+## 4. 上下文项合同（Context Item Contract）
 
 每个要放进初始上下文的信息，都必须写清 6 个字段。
 

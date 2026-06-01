@@ -1,4 +1,4 @@
-# Course 18 Product Surface Implementation Chain：从 Core 27 到 Core 31 学产品表层如何落成 Runtime 边界
+# Course 18 产品表层实现链（Product Surface Implementation Chain）：从 Core 27 到 Core 31 学产品表层如何落成运行时边界（Runtime Boundary）
 
 > 本课对应 Core 27、Core 28、Core 29、Core 30、Core 31。
 >
@@ -13,18 +13,18 @@
 > 本课接在这条链之后，回答一个更容易混淆的问题：
 >
 > ```text
-> 从 Claude Code 产品表层看到的 settings、hooks、memory、checkpoint、subagent，
+> 从 Claude Code 产品表层看到的设置、钩子、记忆、检查点、子代理（settings / hooks / memory / checkpoint / subagent），
 > 如何不变成提示词摘抄或功能清单，
-> 而是转译成本项目自己的 Runtime object、state、boundary 和 verify evidence？
+> 而是转译成本项目自己的运行时对象（Runtime object）、状态（state）、边界（boundary）和验证证据（verify evidence）？
 > ```
 >
-> 本课不复制 Claude Code prompt 原文、source map 原文或反编译源码片段。所有机制都以本项目自己的对象模型、实现和验证脚本为准。
+> 本课不复制 Claude Code 提示词（prompt）原文、源码映射（source map）原文或反编译源码片段。所有机制都以本项目自己的对象模型、实现和验证脚本为准。
 
 ---
 
 ## 0. 本课跟踪哪五条执行链
 
-Core 27-31 不是五个孤立 UI 功能，而是 Product Surface Study 当前候选池 A-E 的实现收口。
+Core 27-31 不是五个孤立 UI 功能，而是产品表层学习（Product Surface Study）当前候选池 A-E 的实现收口。
 
 ```text
 Core 27 Settings / Permission Resolver:
@@ -47,35 +47,35 @@ Core 31 Subagent Context Isolation:
 
 ```text
 主线 A：Permission Resolver
-  verify case
+  验证用例（verify case）
     -> SettingsPermissionResolver
     -> permissionConfig / resolverTrace / ruleSource / decisionCache
     -> allow / ask / deny
     -> no hidden execution
 
 主线 B：Hooks Lifecycle
-  verify case
+  验证用例（verify case）
     -> HooksLifecycleRuntime
     -> hookRegistry / hookEvent / hookDecision / hookFeedback
     -> block / observation / constraint / redaction
-    -> no system prompt promotion
+    -> 不升级系统提示词（no system prompt promotion）
 
 主线 C：Memory Source
-  verify case
+  验证用例（verify case）
     -> MemorySourceRuntime
     -> memoryType / memoryStore / memoryIndex / forgetEvent
     -> freshness check / long_term_memory block
     -> no code-structure memory
 
 主线 D：Checkpoint Rewind
-  verify case
+  验证用例（verify case）
     -> CheckpointRewindRuntime
     -> checkpoint / fileStateSnapshot / rewindRequest
     -> externalChangeConflict / restoredSessionState
     -> rewindAudit / append-only event boundary
 
 主线 E：Subagent Context Isolation
-  verify case
+  验证用例（verify case）
     -> SubagentContextIsolationRuntime
     -> delegatedTask / subagentContext / subagentResult
     -> delegationLedger / parent receipt
@@ -85,7 +85,7 @@ Core 31 Subagent Context Isolation:
 一句话：
 
 ```text
-Product Surface 的教学重点不是“产品里有这些名字”，而是这些名字是否落成新的 Runtime state、强制边界和可运行验证。
+产品表层（Product Surface）的教学重点不是“产品里有这些名字”，而是这些名字是否落成新的运行时状态（Runtime state）、强制边界和可运行验证。
 ```
 
 ---
@@ -123,10 +123,10 @@ src/core/subagent-context-isolation.verify.mjs
 读法仍然和 `course-15` 到 `course-17` 一样：
 
 ```text
-先看 verify case 名字。
+先看验证用例（verify case）名字。
 再看它构造了什么 fixture。
-再看哪个 Runtime object 被调用。
-再看返回报告里的 state 字段。
+再看哪个运行时对象（Runtime object）被调用。
+再看返回报告里的状态（state）字段。
 最后看断言防止了哪类能力误判。
 ```
 
@@ -134,7 +134,7 @@ src/core/subagent-context-isolation.verify.mjs
 
 ## 2. 为什么先有 roadmap / matrix / mini brief
 
-Product Surface Study 有一个关键风险：
+产品表层学习（Product Surface Study）有一个关键风险：
 
 ```text
 看到产品表层材料后，直接新增一串 Core。
@@ -152,9 +152,9 @@ Validation Matrix:
 Mini Brief:
   它补哪个已有主题？
   为什么不能只补旧文档？
-  新增 Runtime state 是什么？
-  新增 enforced boundary 是什么？
-  最小 fixture 和 verify case 是什么？
+  新增运行时状态（Runtime state）是什么？
+  新增强制边界（enforced boundary）是什么？
+  最小测试夹具（fixture）和验证用例（verify case）是什么？
 ```
 
 这一步是教学的一部分。它防止学习者把：
@@ -298,7 +298,7 @@ Core 28 补的是 hooks 如何作为 lifecycle event 进入 Runtime。
 对应 case：
 
 ```text
-user prompt hook: constraint enters runtime state, not system prompt
+用户提示钩子（user prompt hook）：约束进入运行时状态（runtime state），不是系统提示词（system prompt）
 ```
 
 输入：
@@ -324,7 +324,7 @@ systemMessages
 这个 case 防止的误解：
 
 ```text
-hook feedback 不是更高优先级 system prompt。
+钩子反馈（hook feedback）不是更高优先级系统提示词（system prompt）。
 它是受限 Runtime State 或 observation。
 ```
 
@@ -414,7 +414,7 @@ contextPriority
 requiresFreshnessCheck
 ```
 
-这说明 memory 不是“长一点的摘要”，而是带类型和策略的 Runtime state。
+这说明记忆（memory）不是“长一点的摘要”，而是带类型和策略的运行时状态（Runtime state）。
 
 ### 5.2 CLAUDE.md / write and index / forget 证明什么
 
@@ -646,18 +646,18 @@ Subagent Context Isolation 是委派边界，不是多进程 agent 调度、远�
 
 ---
 
-## 8. 五条链如何接成 Product Surface execution-chain
+## 8. 五条链如何接成产品表层执行链（Product Surface execution-chain）
 
 本课的“chain”不是说每个用户请求都按同一个函数栈固定调用五个 Core。更准确的理解是：
 
 ```text
-Product Surface material
+产品表层材料（Product Surface material）
   -> roadmap / validation matrix / mini brief
-  -> 本项目自己的 Runtime object
-  -> state field
-  -> enforced boundary
-  -> verify evidence
-  -> out-of-scope boundary
+  -> 本项目自己的运行时对象（Runtime object）
+  -> 状态字段（state field）
+  -> 强制边界（enforced boundary）
+  -> 验证证据（verify evidence）
+  -> 范围外边界（out-of-scope boundary）
 ```
 
 当它们进入一次 Claude Code-like 任务时，可以这样组合理解：
@@ -691,17 +691,17 @@ research delegation
 
 ```text
 不要把五个 Core 当成 UI 功能介绍。
-也不要把五个 Core 强行合并成一个巨型 Product Surface Runtime。
+也不要把五个 Core 强行合并成一个巨型产品表层运行时（Product Surface Runtime）。
 ```
 
 每个 Core 独立的原因，仍然以：
 
 ```text
-新增 Runtime state
-新增 enforced boundary
-新增 fixture
-新增 verify case
-清楚 out-of-scope
+新增运行时状态（Runtime state）
+新增强制边界（enforced boundary）
+新增测试夹具（fixture）
+新增验证用例（verify case）
+清楚不在当前范围（out-of-scope）
 ```
 
 为准。
@@ -712,7 +712,7 @@ research delegation
 
 | 判断 / 信息 | 来源 | 怎么进入系统 | 目标 | 如果没有 |
 | --- | --- | --- | --- | --- |
-| Product Surface 主题是否独立 | roadmap / validation matrix / mini brief | 课程和 Core 前置评审 | 防止看到产品名就新增 Core | 课程体系变成功能清单 |
+| 产品表层（Product Surface）主题是否独立 | roadmap / validation matrix / mini brief | 课程和 Core 前置评审 | 防止看到产品名就新增 Core | 课程体系变成功能清单 |
 | permissionConfig | user / project / local / policy fixture | SettingsPermissionResolver input | 解析 allow / ask / deny | 高风险动作只能靠模型自觉 |
 | ruleSource / resolverTrace | resolver evaluation | decision report | 解释哪条规则生效 | 决策不可审计 |
 | decisionCache | repeated action signature | resolver cache report | 证明缓存不丢来源 | 性能优化可能破坏可解释性 |
@@ -758,7 +758,7 @@ Action:
   工具会在用户批准前隐藏执行，破坏 no hidden execution。
 ```
 
-### 10.2 Hook feedback 可以升级成 system prompt 吗
+### 10.2 钩子反馈（Hook feedback）可以升级成系统提示词（system prompt）吗
 
 ```text
 Action:
@@ -775,7 +775,7 @@ Action:
   Course 08 segment precedence。
 
 硬约束:
-  hook feedback 进入 dynamic observation，不升级为 system prompt。
+  钩子反馈（hook feedback）进入动态观察（dynamic observation），不升级为系统提示词（system prompt）。
 
 如果做错会怎样:
   外部反馈获得过高优先级，可能覆盖安全边界。
@@ -890,7 +890,7 @@ src/core/hooks-lifecycle.mjs
 npm run core:28:verify
 ```
 
-应该看到 post tool hook 或 user prompt hook 的边界失败。这个练习证明 hooks 不是 system prompt 注入通道。
+应该看到工具后钩子（post tool hook）或用户提示钩子（user prompt hook）的边界失败。这个练习证明钩子（hooks）不是系统提示词（system prompt）注入通道。
 
 ### 11.3 允许代码结构事实写入 memory
 
@@ -952,10 +952,10 @@ npm run core:31:verify
 
 读完本课后，学习者应该能回答：
 
-1. Product Surface Study 为什么必须先有 roadmap、validation matrix 和 mini brief？
+1. 产品表层学习（Product Surface Study）为什么必须先有路线图（roadmap）、验证矩阵（validation matrix）和 mini brief？
 2. Core 27 为什么不等于 Core 26 Human Approval？
 3. `ask` 和 `approve` 的差别在哪里？
-4. hook feedback 为什么不能升级成 system prompt？
+4. 钩子反馈（hook feedback）为什么不能升级成系统提示词（system prompt）？
 5. hook failure 为什么不能绕过 permission deny？
 6. Memory 和 compact summary 的生命周期差别是什么？
 7. 为什么 `CLAUDE.md` 可以作为 project memory source，但 auto memory 不能随意改写它？
@@ -966,7 +966,7 @@ npm run core:31:verify
 12. subagentContext 为什么只能包含 task-specific context？
 13. parent receipt 为什么只接收 summary、evidenceRefs 和 digest，而不是 raw transcript？
 14. Core 27-31 分别不证明哪些生产级能力？
-15. 未来新增 Product Surface Core 前，必须先补哪些评审材料？
+15. 未来新增产品表层核心阶段（Product Surface Core）前，必须先补哪些评审材料？
 
 ---
 
@@ -987,7 +987,7 @@ Core 27-31 已经证明的是：
 
 ```text
 Claude Code 官方 Settings / Hooks / Memory / Checkpoint / Subagent 内部实现。
-Claude Code prompt 原文、source map 原文或反编译源码复刻。
+Claude Code 提示词（prompt）原文、源码映射（source map）原文或反编译源码复刻。
 完整 enterprise policy 产品。
 任意用户脚本安全 sandbox。
 真实远端多用户 memory 服务。

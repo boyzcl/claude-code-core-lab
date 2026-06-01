@@ -105,13 +105,15 @@ docs/roadmap/production-upgrade-validation-matrix.md
 
 这些文档比课程更长、更像设计资料。第一次学习不需要逐字读完，遇到实现问题时再查。
 
-其中 `open-source-project-standards.md` 负责把优秀 GitHub 项目经验转译成本项目规范；`core-runtime-object-map.md` 负责把 Lab 01 到 Core 31 收束成少数 Runtime object。
+其中 `code-agent-implementation-logic.md` 负责用一篇当前综合文章讲完整代码智能体（Code Agent）搭建逻辑；`open-source-project-standards.md` 负责把优秀 GitHub 项目经验转译成本项目规范；`core-runtime-object-map.md` 负责把 Lab 01 到 Core 31 收束成少数运行时对象（Runtime object）。
+
+当前解释性文档采用中文先行、英文括注；历史材料保留原语境，不作为当前术语规范入口。
 
 ## docs/history
 
 早期分析文章，只作背景材料。
 
-这些文章可以帮助理解项目怎么来的，但不覆盖当前规则、课程和 verify evidence。
+这些文章可以帮助理解项目怎么来的，但不覆盖当前规则、课程和验证证据（verify evidence）。
 
 ## src
 

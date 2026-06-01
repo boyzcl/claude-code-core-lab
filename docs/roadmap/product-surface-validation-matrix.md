@@ -1,4 +1,4 @@
-# Product Surface Validation Matrix：Claude Code 产品表层学习验证矩阵
+# 产品表层验证矩阵（Product Surface Validation Matrix）：Claude Code 产品表层学习验证矩阵
 
 本文对应 `product-surface-study-roadmap.md`。
 
@@ -14,47 +14,47 @@
 
 ## 1. 全局验证原则
 
-所有 Product Surface Study 主题都必须先过这六个门：
+所有产品表层学习（Product Surface Study）主题都必须先过这六个门：
 
-| Gate | 必须证明 | 失败判定 |
+| 验证门（Gate） | 必须证明 | 失败判定 |
 | --- | --- | --- |
-| Evidence tier | 材料来自 A/B/C/D 哪一层 | 把第三方提取材料写成官方公开文档 |
-| Same-topic merge | 是否能补入已有课程或 Core | 能补旧主题却新建散模块 |
-| Runtime boundary | 是否新增状态、权限、工具、会话或上下文边界 | 只是文字规则却声称新 Core |
-| Verify shape | 最小可执行验证是什么 | 只有分析，没有可运行检查 |
-| Public boundary | 是否避免原文 prompt / 反编译源码进入 repo | 提交可还原提取原文的内容 |
-| Out of scope | 是否写清不能证明什么 | 把学习证据说成 Claude Code 官方实现 |
+| 证据层级（Evidence tier） | 材料来自 A/B/C/D 哪一层 | 把第三方提取材料写成官方公开文档 |
+| 同主题合并（Same-topic merge） | 是否能补入已有课程或 Core | 能补旧主题却新建散模块 |
+| 运行时边界（Runtime boundary） | 是否新增状态、权限、工具、会话或上下文边界 | 只是文字规则却声称新 Core |
+| 验证形态（Verify shape） | 最小可执行验证是什么 | 只有分析，没有可运行检查 |
+| 公开边界（Public boundary） | 是否避免原文提示词（prompt）/ 反编译源码进入 repo | 提交可还原提取原文的内容 |
+| 不在当前范围（Out of scope） | 是否写清不能证明什么 | 把学习证据说成 Claude Code 官方实现 |
 
 ---
 
-## 2. Mini Brief 模板
+## 2. 迷你简报（Mini Brief）模板
 
-每个候选主题进入实现前，必须先写 mini brief：
+每个候选主题进入实现前，必须先写迷你简报（mini brief）：
 
 ```text
-Topic:
-Existing course/core to extend:
-Why not only extend existing docs:
-Evidence tier:
-New runtime state:
-New enforced boundary:
-Minimal fixture:
-Minimal verify cases:
-Out of scope:
-Public-safe wording:
+主题（Topic）:
+要扩展的已有课程 / 核心阶段（Existing course/core to extend）:
+为什么不能只补已有文档（Why not only extend existing docs）:
+证据层级（Evidence tier）:
+新增运行时状态（New runtime state）:
+新增强制边界（New enforced boundary）:
+最小测试夹具（Minimal fixture）:
+最小验证用例（Minimal verify cases）:
+不在当前范围（Out of scope）:
+公开安全表述（Public-safe wording）:
 ```
 
 判定：
 
 ```text
-没有 new runtime state 或 new enforced boundary -> 不独立成 Core。
-没有 minimal verify cases -> 不进入实现。
-public-safe wording 说不清 -> 不进入公开文档。
+没有新的运行时状态（new runtime state）或新的强制边界（new enforced boundary） -> 不独立成 Core。
+没有最小验证用例（minimal verify cases） -> 不进入实现。
+公开安全表述（public-safe wording）说不清 -> 不进入公开文档。
 ```
 
 ---
 
-## 3. Prompt Assembly / Prompt Governance
+## 3. 提示词装配 / 提示词治理（Prompt Assembly / Prompt Governance）
 
 先归入：
 
@@ -66,18 +66,18 @@ Core 08
 
 只有满足以下条件才独立：
 
-| Case | 验证方法 | 预期结果 | 证据 |
+| 用例（Case） | 验证方法 | 预期结果 | 证据 |
 | --- | --- | --- | --- |
-| segment provenance | 构造 system、tool、project、memory、runtime reminder 分段 | 每段都有 source / reason / public-safe flag | assembly report |
-| precedence | 同主题规则来自不同来源 | 高优先级规则覆盖低优先级规则 | precedence trace |
-| injection isolation | tool result 中放入伪 system instruction | 被标记为 external content，不进入 system segment | safety report |
-| no raw extraction | 扫描 docs/src | 不包含提取 prompt 原文或长段相似文本 | secret/public scan |
+| 分段来源（segment provenance） | 构造系统、工具、项目、记忆、运行时提醒（system / tool / project / memory / runtime reminder）分段 | 每段都有来源 / 理由 / 公开安全标记（source / reason / public-safe flag） | 装配报告（assembly report） |
+| 优先级（precedence） | 同主题规则来自不同来源 | 高优先级规则覆盖低优先级规则 | 优先级轨迹（precedence trace） |
+| 注入隔离（injection isolation） | 工具结果（tool result）中放入伪系统指令（system instruction） | 被标记为外部内容（external content），不进入系统分段（system segment） | 安全报告（safety report） |
+| 不含原始提取（no raw extraction） | 扫描 docs/src | 不包含提取提示词（prompt）原文或长段相似文本 | 密钥 / 公开扫描（secret/public scan） |
 
 如果只讲“好提示词怎么写”，不独立成 Core。
 
 ---
 
-## 4. Settings / Permission Resolver
+## 4. 设置与权限解析器（Settings / Permission Resolver）
 
 先归入：
 
@@ -88,18 +88,18 @@ Core 26
 
 可独立条件：
 
-| Case | 验证方法 | 预期结果 | 证据 |
+| 用例（Case） | 验证方法 | 预期结果 | 证据 |
 | --- | --- | --- | --- |
-| config precedence | 构造 user / project / local / policy 四层配置 | 优先级稳定且可解释 | resolver report |
-| allow ask deny | 同一工具命中不同规则 | allow 直接执行，ask 进入审批，deny 拒绝 | policy trace |
-| prefix command rule | Bash 命令前缀匹配 | 只允许明确前缀，不外推到相似命令 | command decision |
-| no hidden execution | ask/deny 前不执行工具 | provider/tool call count 为 0 | trace assertion |
+| 配置优先级（config precedence） | 构造用户 / 项目 / 本地 / 策略（user / project / local / policy）四层配置 | 优先级稳定且可解释 | 解析报告（resolver report） |
+| 允许 / 询问 / 拒绝（allow ask deny） | 同一工具命中不同规则 | 允许（allow）直接执行，询问（ask）进入审批，拒绝（deny）直接拒绝 | 策略轨迹（policy trace） |
+| 前缀命令规则（prefix command rule） | Bash 命令前缀匹配 | 只允许明确前缀，不外推到相似命令 | 命令决策（command decision） |
+| 禁止隐藏执行（no hidden execution） | 询问 / 拒绝（ask / deny）前不执行工具 | 服务商 / 工具调用次数（provider/tool call count）为 0 | 轨迹断言（trace assertion） |
 
 如果只是补充“高风险先问”的教学，不独立。
 
-### 4.1 Core 27 实现级 Validation Matrix
+### 4.1 Core 27 实现级验证矩阵（Validation Matrix）
 
-Core 27 已选择 Settings / Permission Resolver 作为第一个 Product Surface Core。它的实现边界是：
+Core 27 已选择设置与权限解析器（Settings / Permission Resolver）作为第一个产品表层核心阶段（Product Surface Core）。它的实现边界是：
 
 ```text
 Settings / permissions -> PermissionResolver -> allow / ask / deny decision
@@ -112,9 +112,9 @@ Core 22 的 diff preview / transaction commit / rollback。
 Core 26 的 approve / reject / interrupt / handoff。
 ```
 
-本项目采用自己的对象模型，不复制 prompt 原文、source map 原文或反编译源码片段。
+本项目采用自己的对象模型，不复制提示词（prompt）原文、源码映射（source map）原文或反编译源码片段。
 
-新增 Runtime state：
+新增运行时状态（Runtime state）：
 
 ```text
 permissionConfig
@@ -131,14 +131,14 @@ policy > local > project > user
 
 这是本项目为了可验证学习而定义的稳定优先级，不声称等同于 Claude Code 官方内部实现。
 
-| Case | Fixture | 预期结果 | 证据 |
+| 用例（Case） | 测试夹具（Fixture） | 预期结果 | 证据 |
 | --- | --- | --- | --- |
-| config precedence | user / project / local / policy 四层规则同时命中 `git push origin main` | policy deny 胜出，project/user 命中被记录为 shadowedMatches；`node scripts/test.cjs` 由 local allow 胜出 | resolver report、trace、ruleSource、shadowedMatches |
-| allow ask deny | local allow 测试命令、project ask `git push`、policy deny `rm -rf` | allow 执行，ask 只桥接到 Core 26 approval_required，deny 直接拒绝 | permission trace、harness counters |
-| prefix command rule | `npm test` 前缀规则，对比 `npm test -- --runInBand`、`npm testing`、`npm test:unit` | 只允许明确前缀加参数，不外推到相似命令名 | command decision |
-| no hidden execution | ask / deny action 在进入审批或拒绝前 | providerCalls delta=0，toolExecutions delta=0 | trace assertion |
-| decision cache | 同一 action 重复解析 | 第二次 fromCache=true，仍保留 ruleSource 和 matchedRule | decisionCache、resolverTrace |
-| boundary | boundary object | 不声称 Core 22 transaction、Core 26 approval decision、enterprise policy、GUI permission product 或官方实现 | boundary assertions |
+| 配置优先级（config precedence） | 用户 / 项目 / 本地 / 策略（user / project / local / policy）四层规则同时命中 `git push origin main` | 策略拒绝（policy deny）胜出，project/user 命中被记录为 shadowedMatches；`node scripts/test.cjs` 由本地允许（local allow）胜出 | 解析报告、轨迹、ruleSource、shadowedMatches |
+| 允许 / 询问 / 拒绝（allow ask deny） | 本地允许（local allow）测试命令、项目询问（project ask）`git push`、策略拒绝（policy deny）`rm -rf` | allow 执行，ask 只桥接到 Core 26 approval_required，deny 直接拒绝 | 权限轨迹、harness counters |
+| 前缀命令规则（prefix command rule） | `npm test` 前缀规则，对比 `npm test -- --runInBand`、`npm testing`、`npm test:unit` | 只允许明确前缀加参数，不外推到相似命令名 | 命令决策（command decision） |
+| 禁止隐藏执行（no hidden execution） | 询问 / 拒绝动作（ask / deny action）在进入审批或拒绝前 | providerCalls delta=0，toolExecutions delta=0 | 轨迹断言（trace assertion） |
+| 决策缓存（decision cache） | 同一动作（action）重复解析 | 第二次 fromCache=true，仍保留 ruleSource 和 matchedRule | decisionCache、resolverTrace |
+| 边界（boundary） | 边界对象（boundary object） | 不声称 Core 22 事务（transaction）、Core 26 批准决策（approval decision）、企业策略（enterprise policy）、GUI 权限产品（permission product）或官方实现 | 边界断言（boundary assertions） |
 
 通过条件：
 
@@ -149,7 +149,7 @@ npm run verify:all
 
 ---
 
-## 5. Hooks Lifecycle
+## 5. 钩子生命周期（Hooks Lifecycle）
 
 先归入：
 
@@ -160,19 +160,19 @@ Core 26
 
 可独立条件：
 
-| Case | 验证方法 | 预期结果 | 证据 |
+| 用例（Case） | 验证方法 | 预期结果 | 证据 |
 | --- | --- | --- | --- |
-| pre tool hook | 工具执行前 hook 返回 block | 工具不执行，反馈进入 session event | event log |
-| post tool hook | 工具执行后 hook 返回 message | 反馈作为用户相关观察进入后续上下文 | context snapshot |
-| user prompt hook | 用户提交后 hook 补充约束 | 约束进入 Runtime State，不伪装成 system | state update |
-| hook failure | hook 脚本失败 | 结构化失败，不绕过原权限 | hook report |
-| secret boundary | hook 输出含 token 样式文本 | 写入前脱敏 | redaction report |
+| 工具前钩子（pre tool hook） | 工具执行前钩子（hook）返回阻断（block） | 工具不执行，反馈进入会话事件（session event） | 事件日志（event log） |
+| 工具后钩子（post tool hook） | 工具执行后钩子（hook）返回消息（message） | 反馈作为用户相关观察进入后续上下文 | 上下文快照（context snapshot） |
+| 用户提示钩子（user prompt hook） | 用户提交后钩子（hook）补充约束 | 约束进入运行时状态（Runtime State），不伪装成系统（system） | 状态更新（state update） |
+| 钩子失败（hook failure） | hook 脚本失败 | 结构化失败，不绕过原权限 | 钩子报告（hook report） |
+| 密钥边界（secret boundary） | hook 输出含 token 样式文本 | 写入前脱敏 | 脱敏报告（redaction report） |
 
 如果只是说明 hooks 存在，不独立。
 
-### 5.1 Core 28 实现级 Validation Matrix
+### 5.1 Core 28 实现级验证矩阵（Validation Matrix）
 
-Core 28 已选择 Hooks Lifecycle 作为第二个 Product Surface Core。它的实现边界是：
+Core 28 已选择钩子生命周期（Hooks Lifecycle）作为第二个产品表层核心阶段（Product Surface Core）。它的实现边界是：
 
 ```text
 hook registry -> lifecycle event -> constrained session event / observation / block decision
@@ -185,9 +185,9 @@ Core 24 的 durable store 新实现。
 Core 26 的 approve / reject / interrupt / handoff。
 ```
 
-本项目采用自己的对象模型，不复制 prompt 原文、source map 原文或反编译源码片段。
+本项目采用自己的对象模型，不复制提示词（prompt）原文、源码映射（source map）原文或反编译源码片段。
 
-新增 Runtime state：
+新增运行时状态（Runtime state）：
 
 ```text
 hookRegistry
@@ -201,7 +201,7 @@ redactedHookOutput
 | --- | --- | --- | --- |
 | pre tool hook | `preToolUse` hook 对 write-mode test command 返回 block | tool 不执行，block feedback 写入 session event | event log、tool execution counter |
 | post tool hook | `postToolUse` hook 在允许的 Bash 后返回 message | message 进入下一轮 context 的 dynamic observation，不进入 system | context snapshot |
-| user prompt hook | `userPromptSubmit` hook 从用户输入补 public API 约束 | 约束进入 Runtime State，不伪装成 system prompt | state update、context snapshot |
+| 用户提示钩子（user prompt hook） | `userPromptSubmit` hook 从用户输入补 public API 约束 | 约束进入运行时状态（Runtime State），不伪装成系统提示词（system prompt） | 状态更新（state update）、上下文快照（context snapshot） |
 | hook failure | `preToolUse` hook 抛错，同时 permission deny `rm -rf` | hook failure 结构化记录，原 permission deny 不被绕过，tool 不执行 | hook report、permission trace |
 | secret boundary | hook output 含 `Bearer` 和 `sk-` 样式文本 | 写入 session event 前脱敏，secret scan 通过 | redaction report、secret scan |
 | no hidden execution | blocked / denied action | 没有 allow 且未被 hook block 的 action 才能出现 `tool.executed` | trace assertion |
@@ -216,7 +216,7 @@ npm run verify:all
 
 ---
 
-## 6. Memory / CLAUDE.md / Auto Memory
+## 6. 记忆 / 项目记忆 / 自动记忆（Memory / CLAUDE.md / Auto Memory）
 
 先归入：
 
@@ -241,9 +241,9 @@ Core 24
 
 如果只是把 CLAUDE.md 当项目规则读入上下文，补 Core 18/25 即可。
 
-### 6.1 Core 29 实现级 Validation Matrix
+### 6.1 Core 29 实现级验证矩阵（Validation Matrix）
 
-Core 29 已选择 Memory Source / CLAUDE.md / Auto Memory 作为第三个 Product Surface Core。它的实现边界是：
+Core 29 已选择记忆来源 / 项目记忆 / 自动记忆（Memory Source / CLAUDE.md / Auto Memory）作为第三个产品表层核心阶段（Product Surface Core）。它的实现边界是：
 
 ```text
 memory type -> memory store / index -> freshness check -> context source
@@ -259,9 +259,9 @@ Core 19 的 compaction quality scoring。
 Core 24 的 durable session store 新实现。
 ```
 
-本项目采用自己的对象模型，不复制 prompt 原文、source map 原文或反编译源码片段。
+本项目采用自己的对象模型，不复制提示词（prompt）原文、源码映射（source map）原文或反编译源码片段。
 
-新增 Runtime state：
+新增运行时状态（Runtime state）：
 
 ```text
 memoryStore
@@ -290,7 +290,7 @@ npm run verify:all
 
 ---
 
-## 7. Subagent / Context Isolation
+## 7. 子代理 / 上下文隔离（Subagent / Context Isolation）
 
 先归入：
 
@@ -311,9 +311,9 @@ Core 25
 
 如果只是“深度搜索时可以用子代理”的提示词规则，不独立。
 
-### 7.1 Core 31 实现级 Validation Matrix
+### 7.1 Core 31 实现级验证矩阵（Validation Matrix）
 
-Core 31 已选择 Subagent Context Isolation 作为第五个 Product Surface Core。它的实现边界是：
+Core 31 已选择子代理上下文隔离（Subagent Context Isolation）作为第五个产品表层核心阶段（Product Surface Core）。它的实现边界是：
 
 ```text
 delegated task -> isolated context -> subagent result -> parent receipt -> delegation ledger
@@ -327,9 +327,9 @@ Core 24 的 durable store / append-only hash chain / snapshot / crash recovery�
 Core 25 的 repo map / symbol index / test index / relevance scoring / incremental update。
 ```
 
-本项目采用自己的对象模型，不复制 prompt 原文、source map 原文或反编译源码片段。
+本项目采用自己的对象模型，不复制提示词（prompt）原文、源码映射（source map）原文或反编译源码片段。
 
-新增 Runtime state：
+新增运行时状态（Runtime state）：
 
 ```text
 delegatedTask
@@ -382,7 +382,7 @@ Core 26
 
 ---
 
-## 9. Checkpoint / Rewind
+## 9. 检查点 / 回退（Checkpoint / Rewind）
 
 先归入：
 
@@ -402,9 +402,9 @@ Core 24
 
 如果只是 session replay，不独立。
 
-### 9.1 Core 30 实现级 Validation Matrix
+### 9.1 Core 30 实现级验证矩阵（Validation Matrix）
 
-Core 30 已选择 Checkpoint / Rewind 作为第四个 Product Surface Core。它的实现边界是：
+Core 30 已选择检查点与回退（Checkpoint / Rewind）作为第四个产品表层核心阶段（Product Surface Core）。它的实现边界是：
 
 ```text
 checkpoint -> rewind request -> external change check -> file restore + audit replay
@@ -417,9 +417,9 @@ Core 22 的 diff preview / transaction commit / transaction rollback / stale edi
 Core 24 的 append-only event log 新实现 / durable snapshot store / crash recovery。
 ```
 
-本项目采用自己的对象模型，不复制 prompt 原文、source map 原文或反编译源码片段。
+本项目采用自己的对象模型，不复制提示词（prompt）原文、源码映射（source map）原文或反编译源码片段。
 
-新增 Runtime state：
+新增运行时状态（Runtime state）：
 
 ```text
 checkpoint
@@ -471,13 +471,13 @@ README
 
 ## 11. 阶段完成定义
 
-Product Surface Study 进入实现前，必须满足：
+产品表层学习（Product Surface Study）进入实现前，必须满足：
 
 ```text
 1. roadmap 和 validation matrix 已登记到 docs/index.md。
 2. authority-map 声明本阶段材料的主文档和边界。
 3. Course 00 明确 A/B/C/D 证据层级。
-4. 每个候选 Core 先有 mini brief。
+4. 每个候选 Core 先有迷你简报（mini brief）。
 5. 没有候选主题绕过 same-topic merge gate。
 6. git diff --check 通过。
 7. 如果新增 verify 脚本或 package 脚本，npm run verify:all 通过。

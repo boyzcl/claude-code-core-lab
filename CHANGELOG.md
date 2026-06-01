@@ -6,6 +6,8 @@ This project uses a human-readable changelog for learning-system and repository-
 
 ### Added
 
+- Added a current synthesis article explaining how to implement a code agent from runtime loop to product-surface boundaries, with Chinese-first terminology.
+- Added a Chinese-first terminology rule for current explanatory docs, with explicit exceptions for file names, commands, code fields, verify cases, outputs, and historical text.
 - Added GitHub issue templates for reproducible bug reports and course or learning feedback.
 - Added a pull request template with evidence and public-boundary checks.
 - Added reference guidance for GitHub project standards and core runtime object mapping.

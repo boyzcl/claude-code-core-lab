@@ -178,7 +178,7 @@ Rule:
 只有当我们实现可执行的 assembly provenance、precedence、injection isolation 和 no raw extraction 扫描时，它才可能成为独立 Core。
 ```
 
-Core 27-31 已经落地的 Product Surface 主题不回填为 prompt 原文：
+Core 27-31 已经落地的产品表层（Product Surface）主题不回填为 prompt 原文：
 
 ```text
 Permission Resolver 属于工具执行前的 Runtime decision。
@@ -575,7 +575,7 @@ final answer honesty -> F01-F05
 ```text
 Plan Mode 细节
 Compact summary 格式
-Product Surface 主题和 Prompt Pack 的装配边界
+产品表层（Product Surface）主题和 Prompt Pack 的装配边界
 具体工具参数说明
 不同 permission mode 的注入文案
 项目规则冲突处理细节

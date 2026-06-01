@@ -23,7 +23,7 @@
 - `course-00` 到 `course-18` 连续可导航。
 - Core 13-17 有课程解释，不从 course-12 直接跳到 Production Upgrade。
 - Core 18-26 有总览课和三门细课。
-- Core 27-31 有 Product Surface execution-chain 细课。
+- Core 27-31 有产品表层执行链（Product Surface execution-chain）细课。
 - 英文术语有中文解释或中文上下文。
 
 ## 4. GitHub 读者体验检查
@@ -32,9 +32,9 @@
 - README 能回答新用户最关心的五件事：项目是什么、怎么运行、怎么学习、会得到什么结果、不能期待什么。
 - 根目录只保留入口、配置和源码目录，不把课程、记录和历史文章堆在第一屏。
 - `docs/README.md`、`docs/index.md`、`docs/authority-map.md` 能把学习材料、当前规则、证据记录和历史背景分开。
-- 普通中文学习者不需要先理解 `clean-room`、`Runtime`、`Context` 等英文词，也能知道下一步该读哪一页、跑哪条命令。
+- 普通中文学习者不需要先理解公开学习边界、运行时（Runtime）、上下文（Context）等术语，也能知道下一步该读哪一页、跑哪条命令。
 - `docs/reference/open-source-project-standards.md` 能说明本项目如何吸收 GitHub 典范经验但不照搬。
-- `docs/reference/core-runtime-object-map.md` 能把 Lab 01 到 Core 31 收束为少数 Runtime object。
+- `docs/reference/core-runtime-object-map.md` 能把 Lab 01 到 Core 31 收束为少数运行时对象（Runtime object）。
 
 ## 5. Evidence 边界检查
 

@@ -28,11 +28,11 @@
 - 评测如何把“能力变强了”变成可运行证据。
 - 参考智能体、成本估算、相对分数为什么都有严格证据门槛。
 - Core 18-26 为什么是一条生产化升级证据链，而不是九个散功能。
-- Core 27 如何把 settings / permission rules 解析成工具执行前的 allow / ask / deny。
-- Core 28 如何把 hooks 作为 Runtime lifecycle event 处理，而不是把外部反馈伪装成 system prompt。
-- Core 29 如何把 CLAUDE.md / user / feedback / reference memory 变成可索引、可删除、可重新验证的上下文来源。
-- Core 30 如何把 checkpoint / rewind 变成绑定文件 hash、session event 和 audit replay 的恢复边界。
-- Core 31 如何把 subagent 变成 delegated task、隔离上下文、结构化回传和去重 ledger。
+- Core 27 如何把设置 / 权限规则（settings / permission rules）解析成工具执行前的允许 / 询问 / 拒绝（allow / ask / deny）。
+- Core 28 如何把钩子（hooks）作为运行时生命周期事件（Runtime lifecycle event）处理，而不是把外部反馈伪装成系统提示词（system prompt）。
+- Core 29 如何把 `CLAUDE.md`、用户记忆 / 反馈记忆 / 参考记忆（user / feedback / reference memory）变成可索引、可删除、可重新验证的上下文来源。
+- Core 30 如何把检查点 / 回退（checkpoint / rewind）变成绑定文件指纹（hash）、会话事件（session event）和审计回放（audit replay）的恢复边界。
+- Core 31 如何把子代理（subagent）变成委派任务（delegated task）、隔离上下文、结构化回传和去重账本（ledger）。
 
 ## 适合谁
 
@@ -46,7 +46,7 @@
 - Claude Code 官方源码。
 - Claude Code 完整复刻。
 - 可直接替代 Claude Code 的生产级产品。
-- 真实厂商账单、真实 Claude Code baseline 或跨 Agent RelativeScore。
+- 真实厂商账单、真实 Claude Code 基线（baseline）或跨智能体相对分数（Agent RelativeScore）。
 
 ## 30 秒跑起来
 
@@ -84,7 +84,8 @@ npm run verify:all
 3. 从 [Course 00](docs/course/course-00-teaching-standard.md) 开始顺序读到 [Course 18](docs/course/course-18-product-surface-implementation-chain.md)。
 4. 每读完一组机制，运行对应 Lab 或 Core 验证脚本。
 5. 不懂英文术语时，看 [中文术语表](docs/production-upgrade-terms-zh.md)。
-6. 想把 31 个 Core 收束成少数对象时，看 [Core Runtime Object Map](docs/reference/core-runtime-object-map.md)。
+6. 想把 31 个 Core 收束成少数对象时，看 [核心运行时对象地图（Core Runtime Object Map）](docs/reference/core-runtime-object-map.md)。
+7. 想读一篇完整长文时，看 [代码智能体实现逻辑（Code Agent Implementation Logic）](docs/reference/code-agent-implementation-logic.md)。
 
 如果你只是先试水，不需要一上来读完整 19 门课。可以按时间选择：
 
@@ -153,19 +154,19 @@ npm run core:22:verify
 npm run core:24:verify
 npm run core:26:verify
 
-# 跑第一个 Product Surface Core
+# 跑第一个产品表层核心阶段（Product Surface Core）
 npm run core:27:verify
 
-# 跑第二个 Product Surface Core
+# 跑第二个产品表层核心阶段（Product Surface Core）
 npm run core:28:verify
 
-# 跑第三个 Product Surface Core
+# 跑第三个产品表层核心阶段（Product Surface Core）
 npm run core:29:verify
 
-# 跑第四个 Product Surface Core
+# 跑第四个产品表层核心阶段（Product Surface Core）
 npm run core:30:verify
 
-# 跑第五个 Product Surface Core
+# 跑第五个产品表层核心阶段（Product Surface Core）
 npm run core:31:verify
 ```
 
@@ -177,13 +178,13 @@ npm run core:31:verify
 - Core 01-12：把 Lab 机制集成成可运行核心运行时，并接入真实模型适配器、真实仓库测试夹具和评测打包。
 - Core 13-17：完成 20/20 可执行入门评测任务集，记录 8 个 Codex local 参考运行，建立 token、成本和价格边界。
 - Core 18-26：完成上下文经济、压缩质量、计划状态机、长任务评测、工具事务、模型预算闸门、会话重放、仓库理解和人工批准的本地确定性证据链。
-- Core 27：完成第一个 Product Surface Core，把 settings / permission rules 解析为 allow / ask / deny，并确认它不重复 Core 22 transaction 或 Core 26 approval decision。
-- Core 28：完成第二个 Product Surface Core，把 hooks 处理为 user prompt / pre tool / post tool lifecycle event，并确认它不重复 Core 24 durable store 或 Core 26 approval decision。
-- Core 29：完成第三个 Product Surface Core，把 Memory Source / CLAUDE.md / Auto Memory 处理为长期上下文来源，并确认它不重复 Course 08/09 或 Core 18/19/24。
-- Core 30：完成第四个 Product Surface Core，把 Checkpoint / Rewind 处理为用户可见恢复点，并确认它不重复 Core 22 transaction 或 Core 24 durable replay。
-- Core 31：完成第五个 Product Surface Core，把 Subagent Context Isolation 处理为 delegated task、隔离上下文、结构化结果和 delegation ledger，并确认它不重复 Core 21 / Core 24 / Core 25。
-- Course 18：完成 Product Surface 教学整理，把 Core 27-31 讲成 Settings、Hooks、Memory、Checkpoint、Subagent 的 execution-chain，并继续守住不复制 prompt 原文、source map 原文或反编译源码片段的公开边界。
-- 下一阶段：已建立 [Product Surface Study Roadmap](docs/roadmap/product-surface-study-roadmap.md)、验证矩阵和候选 Core mini brief；Core 27 / 28 / 29 / 30 / 31 已覆盖当前候选池，未来候选仍需先判断补旧课程还是新建 Core。
+- Core 27：完成第一个产品表层核心阶段（Product Surface Core），把设置 / 权限规则（settings / permission rules）解析为允许 / 询问 / 拒绝（allow / ask / deny），并确认它不重复 Core 22 的事务（transaction）或 Core 26 的批准决策（approval decision）。
+- Core 28：完成第二个产品表层核心阶段（Product Surface Core），把钩子（hooks）处理为用户提示、工具前、工具后生命周期事件（user prompt / pre tool / post tool lifecycle event），并确认它不重复 Core 24 的持久存储（durable store）或 Core 26 的批准决策（approval decision）。
+- Core 29：完成第三个产品表层核心阶段（Product Surface Core），把记忆来源 / 项目记忆 / 自动记忆（Memory Source / CLAUDE.md / Auto Memory）处理为长期上下文来源，并确认它不重复 Course 08/09 或 Core 18/19/24。
+- Core 30：完成第四个产品表层核心阶段（Product Surface Core），把检查点 / 回退（Checkpoint / Rewind）处理为用户可见恢复点，并确认它不重复 Core 22 的事务（transaction）或 Core 24 的持久回放（durable replay）。
+- Core 31：完成第五个产品表层核心阶段（Product Surface Core），把子代理上下文隔离（Subagent Context Isolation）处理为委派任务（delegated task）、隔离上下文、结构化结果和委派账本（delegation ledger），并确认它不重复 Core 21 / Core 24 / Core 25。
+- Course 18：完成产品表层（Product Surface）教学整理，把 Core 27-31 讲成设置、钩子、记忆、检查点、子代理（Settings / Hooks / Memory / Checkpoint / Subagent）的执行链（execution-chain），并继续守住不复制提示词（prompt）原文、源码映射（source map）原文或反编译源码片段的公开边界。
+- 下一阶段：已建立 [产品表层学习路线图（Product Surface Study Roadmap）](docs/roadmap/product-surface-study-roadmap.md)、验证矩阵和候选 Core 迷你简报（mini brief）；Core 27 / 28 / 29 / 30 / 31 已覆盖当前候选池，未来候选仍需先判断补旧课程还是新建 Core。
 - GitHub Actions：`npm run verify:all` 已接入 CI。
 
 最新状态见 [CURRENT_STATE.md](CURRENT_STATE.md)，完整验证证据见 [Core 验证记录](docs/records/core-run-record.md)。
@@ -209,7 +210,7 @@ npm run core:31:verify
 - [CONTRIBUTING.md](CONTRIBUTING.md)
 - [SECURITY.md](SECURITY.md)
 - [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md)
-- [Open Source Project Standards](docs/reference/open-source-project-standards.md)
+- [开源项目规范（Open Source Project Standards）](docs/reference/open-source-project-standards.md)
 - [GitHub 发布检查表](docs/github-release-checklist.md)
 
 提交前至少运行：

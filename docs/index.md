@@ -7,9 +7,10 @@
 - [项目首页](../README.md)
 - [学习者入口](start-here-for-learners.md)
 - [课程路线](course/claude-code-core-learning-path.md)
-- [Core Runtime Object Map](reference/core-runtime-object-map.md)
+- [核心运行时对象地图（Core Runtime Object Map）](reference/core-runtime-object-map.md)
+- [代码智能体实现逻辑（Code Agent Implementation Logic）](reference/code-agent-implementation-logic.md)
 - [项目结构说明](project-structure.md)
-- [中文术语表](production-upgrade-terms-zh.md)
+- [项目中文术语表（Chinese-First Terms）](production-upgrade-terms-zh.md)
 
 ## 当前规则
 
@@ -22,7 +23,7 @@
 - [生产化升级验证矩阵](roadmap/production-upgrade-validation-matrix.md): Core 18-26 验证矩阵。
 - [产品表层学习路线图](roadmap/product-surface-study-roadmap.md): Core 26 之后，如何从 Claude Code 产品工件中学习，并判断补旧课还是新建 Core。
 - [产品表层验证矩阵](roadmap/product-surface-validation-matrix.md): 新阶段的证据层级、同主题合并规则和候选 Core 进入条件。
-- [产品表层候选 Core Mini Brief](roadmap/product-surface-core-candidates.md): Settings、Hooks、Memory、Subagent、Checkpoint 是否值得独立成 Core 的评审。
+- [产品表层候选 Core 迷你简报（Mini Brief）](roadmap/product-surface-core-candidates.md): 设置、钩子、记忆、子代理、检查点（Settings / Hooks / Memory / Subagent / Checkpoint）是否值得独立成 Core 的评审。
 
 ## 学习材料
 
@@ -36,23 +37,24 @@
 ## 关键课程
 
 - [Course 00 教学标准](course/course-00-teaching-standard.md)
-- [Course 07 Core Build Pass Overview](course/course-07-core-build-pass-overview.md)
-- [Course 12 Eval Packaging And Executable Seeds](course/course-12-eval-packaging-and-executable-seeds.md)
-- [Course 13 Eval Reference Cost Evidence](course/course-13-eval-reference-cost-evidence.md)
-- [Course 14 Production Upgrade Evidence Chain](course/course-14-production-upgrade-evidence-chain.md)
-- [Course 15 Context Compaction Plan Production](course/course-15-context-compaction-plan-production.md)
-- [Course 16 Long Running Tool Gateway Production](course/course-16-long-running-tool-gateway-production.md)
-- [Course 17 Session Repo Approval Production](course/course-17-session-repo-approval-production.md)
-- [Course 18 Product Surface Implementation Chain](course/course-18-product-surface-implementation-chain.md)
-- [Product Surface Study Roadmap](roadmap/product-surface-study-roadmap.md)
-- [Product Surface Core Candidates](roadmap/product-surface-core-candidates.md)
-- [Core 27 Settings Permission Resolver](core/core-27-settings-permission-resolver.md)
-- [Core 28 Hooks Lifecycle](core/core-28-hooks-lifecycle.md)
-- [Core 29 Memory Source](core/core-29-memory-source-auto-memory.md)
-- [Core 30 Checkpoint Rewind](core/core-30-checkpoint-rewind.md)
-- [Core 31 Subagent Context Isolation](core/core-31-subagent-context-isolation.md)
-- [Core Runtime Object Map](reference/core-runtime-object-map.md)
-- [Open Source Project Standards](reference/open-source-project-standards.md)
+- [Course 07 核心构建总览（Core Build Pass Overview）](course/course-07-core-build-pass-overview.md)
+- [Course 12 评测打包和可执行种子（Eval Packaging And Executable Seeds）](course/course-12-eval-packaging-and-executable-seeds.md)
+- [Course 13 评测、参考运行和成本证据（Eval Reference Cost Evidence）](course/course-13-eval-reference-cost-evidence.md)
+- [Course 14 生产化升级证据链（Production Upgrade Evidence Chain）](course/course-14-production-upgrade-evidence-chain.md)
+- [Course 15 上下文、压缩和计划生产化（Context Compaction Plan Production）](course/course-15-context-compaction-plan-production.md)
+- [Course 16 长任务、工具和网关生产化（Long Running Tool Gateway Production）](course/course-16-long-running-tool-gateway-production.md)
+- [Course 17 会话、仓库和批准生产化（Session Repo Approval Production）](course/course-17-session-repo-approval-production.md)
+- [Course 18 产品表层实现链（Product Surface Implementation Chain）](course/course-18-product-surface-implementation-chain.md)
+- [产品表层学习路线图（Product Surface Study Roadmap）](roadmap/product-surface-study-roadmap.md)
+- [产品表层候选 Core（Product Surface Core Candidates）](roadmap/product-surface-core-candidates.md)
+- [Core 27 设置与权限解析器（Settings Permission Resolver）](core/core-27-settings-permission-resolver.md)
+- [Core 28 钩子生命周期（Hooks Lifecycle）](core/core-28-hooks-lifecycle.md)
+- [Core 29 记忆来源（Memory Source）](core/core-29-memory-source-auto-memory.md)
+- [Core 30 检查点回退（Checkpoint Rewind）](core/core-30-checkpoint-rewind.md)
+- [Core 31 子代理上下文隔离（Subagent Context Isolation）](core/core-31-subagent-context-isolation.md)
+- [核心运行时对象地图（Core Runtime Object Map）](reference/core-runtime-object-map.md)
+- [开源项目规范（Open Source Project Standards）](reference/open-source-project-standards.md)
+- [代码智能体实现逻辑（Code Agent Implementation Logic）](reference/code-agent-implementation-logic.md)
 
 ## 关键证据
 

@@ -1,6 +1,6 @@
 # CURRENT_STATE：Claude Code Core 学习项目当前状态
 
-最后更新：2026-06-01 11:32 CST
+最后更新：2026-06-01 15:37 CST
 
 本文是新对话入口和当前状态单一事实源。它不替代课程、Lab、Core 文档，只回答：
 
@@ -90,58 +90,58 @@ Eval 如何证明能力真的变强。
 | `docs/course/course-00-teaching-standard.md` | 教学规范 | 说明如何避免隐式信息 |
 | `docs/course/course-01-initial-model-request.md` | 课程 | 模型第一次被调用时看见什么 |
 | `docs/course/course-02-action-selection-rubric.md` | 课程 | 动作选择如何判断“合理” |
-| `docs/course/course-03-clean-room-prompt-pack.md` | 课程 | clean-room Prompt Pack 如何从 Runtime 需求倒推 |
+| `docs/course/course-03-clean-room-prompt-pack.md` | 课程 | 公开学习边界下的提示词包（Prompt Pack）如何从运行时（Runtime）需求倒推 |
 | `docs/course/course-04-single-task-full-trace.md` | 课程 | 单任务如何从用户输入跑到验证完成 |
-| `docs/course/course-05-product-mental-model.md` | 课程 | 从用户、模型、Runtime、工具、Eval 五层理解产品 |
-| `docs/course/course-06-labs-to-core-map.md` | 课程 | 8 个 Lab 如何映射成 Core 产品骨架 |
+| `docs/course/course-05-product-mental-model.md` | 课程 | 从用户、模型、运行时（Runtime）、工具和评测（Eval）五层理解产品 |
+| `docs/course/course-06-labs-to-core-map.md` | 课程 | 8 个实验（Lab）如何映射成核心阶段（Core）产品骨架 |
 | `docs/course/course-07-core-build-pass-overview.md` | 课程 | Core 01 到 Core 12 主体构建的教学总览 |
-| `docs/course/course-08-model-gateway-and-context-engine.md` | 课程 | ModelGateway 与 Context Engine 如何控制模型输出和可见世界 |
-| `docs/course/course-09-plan-mode-and-compaction.md` | 课程 | Plan Mode 与 Compaction 如何让长任务受控不断片 |
-| `docs/course/course-10-trace-eval-real-model-and-recovery.md` | 课程 | Trace / Eval / Real Model / Prompt Recovery 如何让系统可证明、可恢复 |
-| `docs/course/course-11-real-repo-task-layer.md` | 课程 | 真实 repo fixture 比 toy workspace 多证明了什么 |
-| `docs/course/course-12-eval-packaging-and-executable-seeds.md` | 课程 | Eval packaging 与 executable seeds 如何把能力证明体系落地 |
-| `docs/course/course-13-eval-reference-cost-evidence.md` | 课程 | Core 13-17 的 executable suite、reference-agent、cost basis 和 pricing boundary 执行链 |
-| `docs/course/course-14-production-upgrade-evidence-chain.md` | 课程 | Core 18-26 Production Upgrade 如何形成 deterministic local evidence 链 |
-| `docs/course/course-15-context-compaction-plan-production.md` | 课程 | Core 18-20 的 Context Economy、Compaction Quality、Plan State Machine 执行链 |
-| `docs/course/course-16-long-running-tool-gateway-production.md` | 课程 | Core 21-23 的 Long-Running Eval、ToolRuntime Transaction、ModelGateway Budget 执行链 |
-| `docs/course/course-17-session-repo-approval-production.md` | 课程 | Core 24-26 的 Durable Session、Repo Intelligence、Human Approval 执行链 |
-| `docs/course/course-18-product-surface-implementation-chain.md` | 课程 | Core 27-31 的 Settings、Hooks、Memory、Checkpoint、Subagent Product Surface 执行链 |
-| `docs/production-upgrade-terms-zh.md` | 术语参考 | Core 18-26 英文术语的中文解释和边界 |
+| `docs/course/course-08-model-gateway-and-context-engine.md` | 课程 | 模型网关（ModelGateway）与上下文引擎（Context Engine）如何控制模型输出和可见世界 |
+| `docs/course/course-09-plan-mode-and-compaction.md` | 课程 | 计划模式（Plan Mode）与压缩（Compaction）如何让长任务受控不断片 |
+| `docs/course/course-10-trace-eval-real-model-and-recovery.md` | 课程 | 轨迹 / 评测 / 真实模型 / 提示词恢复（Trace / Eval / Real Model / Prompt Recovery）如何让系统可证明、可恢复 |
+| `docs/course/course-11-real-repo-task-layer.md` | 课程 | 真实仓库测试夹具（repo fixture）比玩具工作区（toy workspace）多证明了什么 |
+| `docs/course/course-12-eval-packaging-and-executable-seeds.md` | 课程 | 评测打包（Eval packaging）与可执行种子（executable seeds）如何把能力证明体系落地 |
+| `docs/course/course-13-eval-reference-cost-evidence.md` | 课程 | Core 13-17 的可执行任务集（executable suite）、参考智能体（reference-agent）、成本口径（cost basis）和定价边界（pricing boundary）执行链 |
+| `docs/course/course-14-production-upgrade-evidence-chain.md` | 课程 | Core 18-26 生产化升级（Production Upgrade）如何形成本地确定性证据（deterministic local evidence）链 |
+| `docs/course/course-15-context-compaction-plan-production.md` | 课程 | Core 18-20 的上下文经济（Context Economy）、压缩质量（Compaction Quality）、计划状态机（Plan State Machine）执行链 |
+| `docs/course/course-16-long-running-tool-gateway-production.md` | 课程 | Core 21-23 的长任务评测（Long-Running Eval）、工具运行时事务（ToolRuntime Transaction）、模型网关预算（ModelGateway Budget）执行链 |
+| `docs/course/course-17-session-repo-approval-production.md` | 课程 | Core 24-26 的持久会话（Durable Session）、仓库理解（Repo Intelligence）、人工批准（Human Approval）执行链 |
+| `docs/course/course-18-product-surface-implementation-chain.md` | 课程 | Core 27-31 的设置、钩子、记忆、检查点、子代理（Settings / Hooks / Memory / Checkpoint / Subagent）产品表层执行链 |
+| `docs/production-upgrade-terms-zh.md` | 术语参考 | 当前解释性文档的中文先行术语入口；文件名沿用生产化升级阶段的历史名称 |
 | `docs/start-here-for-learners.md` | 学习者入口 | 第一次打开仓库时的学习路线和运行入口 |
-| `docs/open-source-boundary.md` | 开源边界 | 对外能力声明、公开学习边界和 secret 边界 |
+| `docs/open-source-boundary.md` | 开源边界 | 对外能力声明、公开学习边界和密钥（secret）边界 |
 | `docs/github-release-checklist.md` | 开源检查表 | 发布到 GitHub 前的最小检查 |
-| `docs/lab/lab-01-*` 到 `docs/lab/lab-08-*` | 可执行实验 | 每个 Lab 证明一个局部机制 |
-| `docs/core/core-01-integrated-runtime.md` | 集成实现记录 | 证明多个 Lab 机制可以合成最小 Runtime |
-| `docs/core/core-02-model-gateway.md` | 集成实现记录 | 证明模型层可以替换成 Model Gateway，且 Runtime / Tool / Policy 边界不变 |
-| `docs/core/core-03-context-engine-integration.md` | 集成实现记录 | 证明 Context Engine 可以接入 CoreRuntime，控制本轮模型可见世界 |
-| `docs/core/core-04-plan-mode-integration.md` | 集成实现记录 | 证明 Plan Mode 可以接入 CoreRuntime，控制计划审批和工具权限 |
-| `docs/core/core-05-compaction-artifact-integration.md` | 集成实现记录 | 证明 Compaction / Artifact 可以接入 CoreRuntime，保留长任务关键状态 |
-| `docs/core/core-06-trace-eval-harness-expansion.md` | 集成实现记录 | 证明 Trace / Eval Harness 可以接入 CoreRuntime，生成评分和失败归因证据 |
-| `docs/core/core-07-real-model-api-e2e.md` | 集成实现记录 | 证明真实模型 API 可以接入 ModelGateway，且本地 Runtime 边界不变 |
-| `docs/core/core-08-prompt-pack-recovery-loop.md` | 集成实现记录 | 证明 Prompt Pack 可以引导模型恢复，但不能替代 Runtime 强制边界 |
-| `docs/core/core-09-real-repo-task-layer.md` | 集成实现记录 | 证明 CoreRuntime 可以处理真实仓库任务层的规则、测试、多文件和 stale edit |
-| `docs/core/core-10-70-80-eval-open-source-packaging.md` | 集成实现记录 | 证明项目已有 starter eval packaging 和最小开源文档入口 |
-| `docs/core/core-11-eval-expansion-executable-seeds.md` | 集成实现记录 | 证明第一批 starter case 可以变成 executable repo seeds |
-| `docs/core/core-12-eval-expansion-second-batch.md` | 集成实现记录 | 证明第二批 starter case 可以变成 executable repo seeds，并预留 reference-agent runner 接口 |
-| `docs/core/core-13-eval-expansion-third-batch.md` | 集成实现记录 | 证明第三批 starter case 可以变成 executable repo seeds，累计 15/20 starter case executable |
-| `docs/core/core-14-eval-expansion-final-starter-batch.md` | 集成实现记录 | 证明剩余 starter case 可以变成 executable repo seeds，累计 20/20 starter case executable |
-| `docs/core/core-15-reference-agent-comparison.md` | 集成实现记录 | 证明本机 Codex CLI 可以作为第一阶段 reference-agent baseline 产生小样本真实对照证据 |
-| `docs/core/core-16-reference-agent-cost-and-cross-agent.md` | 集成实现记录 | 证明 8 个 codex-local runs 已有 cost 计量口径，并明确横向对照仍被第二 agent baseline 阻塞 |
-| `docs/core/core-17-reference-agent-pricing-table-baseline.md` | 集成实现记录 | 证明显式本地 pricing table 可以为 8 个 codex-local runs 生成 configured estimated USD，同时不声称真实厂商账单 |
-| `docs/core/core-18-context-economy-cache-aware-context-engine.md` | 集成实现记录 | 证明 Context Economy Engine 可以输出 stable prefix、dynamic tail、eviction、artifact 和 cache simulation 证据 |
-| `docs/core/core-19-compaction-quality-eval.md` | 集成实现记录 | 证明 Compaction Quality Eval 可以机器对照压缩前后状态并识别 compaction_loss |
-| `docs/core/core-20-plan-state-machine.md` | 集成实现记录 | 证明 Plan State Machine 可以追踪 step lifecycle、blocked、revision、resume、permission 和 final grounding |
-| `docs/core/core-21-long-running-task-eval.md` | 集成实现记录 | 证明 Long-Running Task Eval 可以评估多轮修复、重复失败、压缩恢复、成本曲线和 no false final |
-| `docs/core/core-22-tool-runtime-transaction.md` | 集成实现记录 | 证明 ToolRuntime Transaction 可以预览 diff、多文件提交、回滚并拦截 stale/protected/high-risk |
-| `docs/core/core-23-model-gateway-budget-controller.md` | 集成实现记录 | 证明 ModelGateway 可以在 provider 调用前执行 token/cost budget gate，并记录 retry/fallback、capability filtering 和 output repair evidence |
-| `docs/core/core-24-durable-session-store-replay.md` | 集成实现记录 | 证明 Durable Session Store 可以记录 append-only event log、snapshot restore、crash recovery、trace replay、compaction audit 和 secret boundary evidence |
-| `docs/core/core-25-repo-intelligence-relevance-index.md` | 集成实现记录 | 证明 Repo Intelligence 可以记录 repo map、symbol/test/rule index、relevance scoring、incremental update 和 token benefit evidence |
-| `docs/core/core-26-human-approval-interruption-protocol.md` | 集成实现记录 | 证明 Human Approval Protocol 可以记录 approval_required、approve/reject path、interruption、handoff 和 no hidden execution evidence |
-| `docs/core/core-27-settings-permission-resolver.md` | 集成实现记录 | 证明 Settings / Permission Resolver 可以把 user/project/local/policy 配置解析为 allow / ask / deny，并记录 ruleSource、resolverTrace 和 decisionCache evidence |
-| `docs/core/core-28-hooks-lifecycle.md` | 集成实现记录 | 证明 Hooks Lifecycle 可以把 user prompt / pre tool / post tool hooks 记录为可审计 session event、受限 observation、阻断决策和脱敏输出 |
-| `docs/core/core-29-memory-source-auto-memory.md` | 集成实现记录 | 证明 Memory Source / CLAUDE.md / Auto Memory 可以把长期记忆路由、写入索引、删除、重新验证并作为独立 context source |
-| `docs/core/core-30-checkpoint-rewind.md` | 集成实现记录 | 证明 Checkpoint / Rewind 可以把恢复点绑定文件 hash、session event、外部改动冲突和 audit replay |
-| `docs/core/core-31-subagent-context-isolation.md` | 集成实现记录 | 证明 Subagent Context Isolation 可以把 delegated task、隔离上下文、结构化结果、去重 ledger 和 audit replay 串起来 |
+| `docs/lab/lab-01-*` 到 `docs/lab/lab-08-*` | 可执行实验 | 每个实验（Lab）证明一个局部机制 |
+| `docs/core/core-01-integrated-runtime.md` | 集成实现记录 | 证明多个实验（Lab）机制可以合成最小运行时（Runtime） |
+| `docs/core/core-02-model-gateway.md` | 集成实现记录 | 证明模型层可以替换成模型网关（Model Gateway），且运行时 / 工具 / 策略（Runtime / Tool / Policy）边界不变 |
+| `docs/core/core-03-context-engine-integration.md` | 集成实现记录 | 证明上下文引擎（Context Engine）可以接入 CoreRuntime，控制本轮模型可见世界 |
+| `docs/core/core-04-plan-mode-integration.md` | 集成实现记录 | 证明计划模式（Plan Mode）可以接入 CoreRuntime，控制计划审批和工具权限 |
+| `docs/core/core-05-compaction-artifact-integration.md` | 集成实现记录 | 证明压缩 / 附件（Compaction / Artifact）可以接入 CoreRuntime，保留长任务关键状态 |
+| `docs/core/core-06-trace-eval-harness-expansion.md` | 集成实现记录 | 证明轨迹 / 评测框架（Trace / Eval Harness）可以接入 CoreRuntime，生成评分和失败归因证据 |
+| `docs/core/core-07-real-model-api-e2e.md` | 集成实现记录 | 证明真实模型 API 可以接入模型网关（ModelGateway），且本地运行时（Runtime）边界不变 |
+| `docs/core/core-08-prompt-pack-recovery-loop.md` | 集成实现记录 | 证明提示词包（Prompt Pack）可以引导模型恢复，但不能替代运行时（Runtime）强制边界 |
+| `docs/core/core-09-real-repo-task-layer.md` | 集成实现记录 | 证明 CoreRuntime 可以处理真实仓库任务层的规则、测试、多文件和过期编辑（stale edit） |
+| `docs/core/core-10-70-80-eval-open-source-packaging.md` | 集成实现记录 | 证明项目已有入门评测打包（starter eval packaging）和最小开源文档入口 |
+| `docs/core/core-11-eval-expansion-executable-seeds.md` | 集成实现记录 | 证明第一批入门用例（starter case）可以变成可执行仓库种子（executable repo seeds） |
+| `docs/core/core-12-eval-expansion-second-batch.md` | 集成实现记录 | 证明第二批入门用例（starter case）可以变成可执行仓库种子（executable repo seeds），并预留参考智能体运行器（reference-agent runner）接口 |
+| `docs/core/core-13-eval-expansion-third-batch.md` | 集成实现记录 | 证明第三批入门用例（starter case）可以变成可执行仓库种子（executable repo seeds），累计 15/20 入门用例可执行（starter case executable） |
+| `docs/core/core-14-eval-expansion-final-starter-batch.md` | 集成实现记录 | 证明剩余入门用例（starter case）可以变成可执行仓库种子（executable repo seeds），累计 20/20 入门用例可执行（starter case executable） |
+| `docs/core/core-15-reference-agent-comparison.md` | 集成实现记录 | 证明本机 Codex CLI 可以作为第一阶段参考智能体基线（reference-agent baseline）产生小样本真实对照证据 |
+| `docs/core/core-16-reference-agent-cost-and-cross-agent.md` | 集成实现记录 | 证明 8 个本机 Codex 运行（codex-local runs）已有成本（cost）计量口径，并明确横向对照仍被第二智能体基线（agent baseline）阻塞 |
+| `docs/core/core-17-reference-agent-pricing-table-baseline.md` | 集成实现记录 | 证明显式本地价格表（pricing table）可以为 8 个本机 Codex 运行（codex-local runs）生成配置估算美元成本（configured estimated USD），同时不声称真实厂商账单 |
+| `docs/core/core-18-context-economy-cache-aware-context-engine.md` | 集成实现记录 | 证明上下文经济引擎（Context Economy Engine）可以输出稳定前缀（stable prefix）、动态尾部（dynamic tail）、驱逐（eviction）、附件（artifact）和缓存模拟（cache simulation）证据 |
+| `docs/core/core-19-compaction-quality-eval.md` | 集成实现记录 | 证明压缩质量评测（Compaction Quality Eval）可以机器对照压缩前后状态并识别压缩丢失（compaction_loss） |
+| `docs/core/core-20-plan-state-machine.md` | 集成实现记录 | 证明计划状态机（Plan State Machine）可以追踪步骤生命周期（step lifecycle）、阻塞（blocked）、修订（revision）、恢复（resume）、权限（permission）和最终回答落地（final grounding） |
+| `docs/core/core-21-long-running-task-eval.md` | 集成实现记录 | 证明长任务评测（Long-Running Task Eval）可以评估多轮修复、重复失败、压缩恢复、成本曲线和禁止虚假完成（no false final） |
+| `docs/core/core-22-tool-runtime-transaction.md` | 集成实现记录 | 证明工具运行时事务（ToolRuntime Transaction）可以预览差异（diff）、多文件提交、回滚并拦截过期 / 受保护 / 高风险动作（stale / protected / high-risk） |
+| `docs/core/core-23-model-gateway-budget-controller.md` | 集成实现记录 | 证明模型网关（ModelGateway）可以在服务商（provider）调用前执行令牌 / 成本预算闸门（token / cost budget gate），并记录重试 / 回退（retry / fallback）、能力过滤（capability filtering）和输出修复证据（output repair evidence） |
+| `docs/core/core-24-durable-session-store-replay.md` | 集成实现记录 | 证明持久会话存储（Durable Session Store）可以记录只追加事件日志（append-only event log）、快照恢复（snapshot restore）、崩溃恢复（crash recovery）、轨迹回放（trace replay）、压缩审计（compaction audit）和密钥边界证据（secret boundary evidence） |
+| `docs/core/core-25-repo-intelligence-relevance-index.md` | 集成实现记录 | 证明仓库理解（Repo Intelligence）可以记录仓库地图（repo map）、符号 / 测试 / 规则索引（symbol / test / rule index）、相关性评分（relevance scoring）、增量更新（incremental update）和令牌收益证据（token benefit evidence） |
+| `docs/core/core-26-human-approval-interruption-protocol.md` | 集成实现记录 | 证明人工批准协议（Human Approval Protocol）可以记录需要批准（approval_required）、批准 / 拒绝路径（approve / reject path）、中断（interruption）、交接（handoff）和禁止隐藏执行证据（no hidden execution evidence） |
+| `docs/core/core-27-settings-permission-resolver.md` | 集成实现记录 | 证明设置与权限解析器（Settings / Permission Resolver）可以把用户 / 项目 / 本地 / 策略（user / project / local / policy）配置解析为允许 / 询问 / 拒绝（allow / ask / deny），并记录规则来源、解析轨迹和决策缓存（ruleSource / resolverTrace / decisionCache）证据 |
+| `docs/core/core-28-hooks-lifecycle.md` | 集成实现记录 | 证明钩子生命周期（Hooks Lifecycle）可以把用户提示、工具前、工具后钩子（user prompt / pre tool / post tool hooks）记录为可审计会话事件（session event）、受限观察（observation）、阻断决策和脱敏输出 |
+| `docs/core/core-29-memory-source-auto-memory.md` | 集成实现记录 | 证明记忆来源 / 项目记忆 / 自动记忆（Memory Source / CLAUDE.md / Auto Memory）可以把长期记忆路由、写入索引、删除、重新验证并作为独立上下文来源（context source） |
+| `docs/core/core-30-checkpoint-rewind.md` | 集成实现记录 | 证明检查点与回退（Checkpoint / Rewind）可以把恢复点绑定文件指纹（hash）、会话事件（session event）、外部改动冲突和审计回放（audit replay） |
+| `docs/core/core-31-subagent-context-isolation.md` | 集成实现记录 | 证明子代理上下文隔离（Subagent Context Isolation）可以把委派任务（delegated task）、隔离上下文、结构化结果、去重账本（ledger）和审计回放（audit replay）串起来 |
 | `docs/roadmap/production-upgrade-roadmap.md` | 生产化升级总控 | Core 18-26 的路线、依赖、边界和统一完成定义 |
 | `docs/roadmap/production-upgrade-validation-matrix.md` | 验证矩阵 | Core 18-26 的验证先行口径和必过检查 |
 | `docs/roadmap/product-surface-study-roadmap.md` | 产品表层学习总控 | Core 26 之后如何研究 Claude Code 产品工件，并判断补旧课还是新建 Core |
@@ -157,8 +157,9 @@ Eval 如何证明能力真的变强。
 | `docs/reference/claude-code-core-implementation-blueprint.md` | 施工图参考 | 模块级实现规格 |
 | `docs/reference/claude-code-70-80-validation-and-model-access.md` | 验收和模型接入参考 | 能力定义、评测、GPT / OpenAI-compatible API 接入 |
 | `docs/reference/agent-runtime-optimization-loop.md` | 迭代参考 | trace、失败归因、eval、灰度和回归 |
+| `docs/reference/code-agent-implementation-logic.md` | 当前综合文章 | 用中文优先术语讲清代码智能体（Code Agent）从运行时循环到产品表层边界的完整搭建逻辑 |
 | `docs/reference/open-source-project-standards.md` | 开源项目规范参考 | 把优秀 GitHub 项目经验转译成本项目 README、reference、Issue、PR 和验证标准 |
-| `docs/reference/core-runtime-object-map.md` | Runtime 对象地图 | 把 Lab 01 到 Core 31 收束为少数 Runtime object 和 boundary |
+| `docs/reference/core-runtime-object-map.md` | 运行时对象地图 | 把 Lab 01 到 Core 31 收束为少数运行时对象（Runtime object）和边界（boundary） |
 | `CHANGELOG.md` | 变更记录 | 面向发布和治理变化的人工变更记录，不替代当前状态 |
 | `.github/ISSUE_TEMPLATE/` / `.github/PULL_REQUEST_TEMPLATE.md` | GitHub 协作入口 | 把 bug、learning feedback 和 PR 变成可复现、可验证、守边界的协作对象 |
 
@@ -182,7 +183,7 @@ Eval 如何证明能力真的变强。
 
 ```text
 course-01 到 course-06 已由学习者复习完成。
-学习者已经能理解模型、Runtime、Tool、Policy、State、Context、Plan、Compaction、Eval 的基本循环关系。
+学习者已经能理解模型、运行时（Runtime）、工具（Tool）、策略（Policy）、状态（State）、上下文（Context）、计划（Plan）、压缩（Compaction）和评测（Eval）的基本循环关系。
 ```
 
 当前教学整理：
@@ -190,17 +191,19 @@ course-01 到 course-06 已由学习者复习完成。
 ```text
 docs/course/course-07-core-build-pass-overview.md 已完成并由学习者复盘通过。
 course-08 到 course-12 已按执行链样板重写，并由学习者逐课复盘完成。
-docs/course/course-13-eval-reference-cost-evidence.md 已创建，用于补齐 Core 13-17 的 executable suite、reference-agent baseline、cost basis、pricing table 和 RelativeScore 阻塞边界。
-docs/course/course-14-production-upgrade-evidence-chain.md 已创建，用于衔接 course-13，并讲清 Core 18-26 Production Upgrade 的阶段理由、生产化问题、证据链和 out-of-scope 边界。
-docs/course/course-15-context-compaction-plan-production.md、docs/course/course-16-long-running-tool-gateway-production.md、docs/course/course-17-session-repo-approval-production.md 已创建，用于按 course-08 到 course-12 的同一执行链标准细读 Core 18-26 verify case。
-docs/course/course-18-product-surface-implementation-chain.md 已创建，用于按同一执行链标准细读 Core 27-31 的 Settings / Permission Resolver、Hooks Lifecycle、Memory Source、Checkpoint / Rewind 和 Subagent Context Isolation。
+docs/course/course-13-eval-reference-cost-evidence.md 已创建，用于补齐 Core 13-17 的可执行任务集（executable suite）、参考智能体基线（reference-agent baseline）、成本口径（cost basis）、价格表（pricing table）和相对分数（RelativeScore）阻塞边界。
+docs/course/course-14-production-upgrade-evidence-chain.md 已创建，用于衔接 course-13，并讲清 Core 18-26 生产化升级（Production Upgrade）的阶段理由、生产化问题、证据链和不在当前范围（out-of-scope）边界。
+docs/course/course-15-context-compaction-plan-production.md、docs/course/course-16-long-running-tool-gateway-production.md、docs/course/course-17-session-repo-approval-production.md 已创建，用于按 course-08 到 course-12 的同一执行链标准细读 Core 18-26 验证用例（verify case）。
+docs/course/course-18-product-surface-implementation-chain.md 已创建，用于按同一执行链标准细读 Core 27-31 的设置与权限解析器（Settings / Permission Resolver）、钩子生命周期（Hooks Lifecycle）、记忆来源（Memory Source）、检查点与回退（Checkpoint / Rewind）和子代理上下文隔离（Subagent Context Isolation）。
 docs/production-upgrade-terms-zh.md 已创建，用于把 Core 18-26 的英文代码术语翻译成中文机制解释。
 docs/start-here-for-learners.md、docs/open-source-boundary.md、docs/github-release-checklist.md 已创建，用于开源前的学习者入口、能力声明边界和发布检查。
 README.md 已按中文学习者第一屏重写：先说明这是围绕 Claude Code 核心机制的中文学习项目，再给运行命令、学习路线、项目结构、预期结果和能力边界。
 根目录已瘦身，课程、Core、Lab、验证记录、参考资料和历史材料已移动到 docs/course、docs/core、docs/lab、docs/records、docs/reference、docs/history，并补充各目录 README。
 Teaching Consolidation Pass 第一轮完成。
-Production Upgrade Teaching Consolidation Pass 已完成总览课和三门细课整理；Open Source Learning Preview 已同步 GitHub 并通过 CI；Product Surface Study Stage Preparation 已完成路线、验证矩阵、课程补充和候选 Core mini brief；Product Surface Teaching Consolidation Pass 已完成 course-18 并同步导航入口。
-Open Source Project Standards Pass 已完成：新增 GitHub Issue / PR 模板、CHANGELOG、开源项目规范参考和 Core Runtime Object Map，并同步 README、CONTRIBUTING、docs index、authority map、project structure 和 GitHub release checklist。
+生产化升级教学整理（Production Upgrade Teaching Consolidation Pass）已完成总览课和三门细课整理；开源学习预览（Open Source Learning Preview）已同步 GitHub 并通过 CI；产品表层学习阶段准备（Product Surface Study Stage Preparation）已完成路线、验证矩阵、课程补充和候选 Core mini brief；产品表层教学整理（Product Surface Teaching Consolidation Pass）已完成 course-18 并同步导航入口。
+开源项目规范整理（Open Source Project Standards Pass）已完成：新增 GitHub Issue / PR 模板、CHANGELOG、开源项目规范参考和核心运行时对象地图（Core Runtime Object Map），并同步 README、CONTRIBUTING、docs index、authority map、project structure 和 GitHub release checklist。
+代码智能体实现逻辑（Code Agent Implementation Logic）Pass 已完成：新增 `docs/reference/code-agent-implementation-logic.md`，用中文优先术语、用户视角和 Claude Code 负责人视角，重新讲清代码智能体从最小运行时循环、工具安全、模型边界、上下文、计划、压缩、评测、真实仓库、生产化治理到产品表层运行时边界的搭建逻辑。
+中文先行术语规范 Pass 已完成：`course-00` 已正式规定当前解释性文档采用中文在前、英文括注；`authority-map` 已登记该规则；`docs/production-upgrade-terms-zh.md` 已升级为当前解释性文档术语入口。历史材料、文件名、命令名、代码字段、错误码和 verify case 名不做机械改写。
 ```
 
 已亲自体验：
@@ -213,49 +216,49 @@ course-06 中 Lab 到 Core 的映射问题已由学习者确认能回答。
 当前状态：
 
 ```text
-Open Source Project Standards Pass 已完成
+中文先行术语规范 Pass 已完成
 ```
 
-它的目的不是再新增 Core，而是把优秀 GitHub 项目的可理解、可运行、可信任、可贡献经验转译成本项目自己的公开协作对象和学习辅助对象，并继续守住 clean-room、secret 和 capability claim 边界。
+它的目的不是再新增 Core，而是把中文读者的当前解释性文档阅读规则正式化：中文先行，英文作为词汇括注；历史材料和代码字段保留原貌，避免机械改写。
 
 当前断点：
 
 ```text
-Core 15 Reference-Agent Comparison 已实现并通过目标验证。
-Core 16 Reference-Agent Cost + Cross-Agent 已实现并通过目标验证。
-Core 17 Reference-Agent Pricing Table Baseline 已实现并通过目标验证。
-Core 18 Context Economy + Cache-Aware Context Engine 已实现并通过目标验证。
-Core 19 Compaction Quality Eval 已实现并通过目标验证。
-Core 20 Plan State Machine 已实现并通过目标验证。
-Core 21 Long-Running Task Eval 已实现并通过目标验证。
-Core 22 ToolRuntime Transaction + Patch Safety 已实现并通过目标验证。
-Core 23 Production ModelGateway + Budget Controller 已实现并通过目标验证。
-Core 24 Durable Session Store + Replay 已实现并通过目标验证。
-Core 25 Repo Intelligence + Relevance Index 已实现并通过目标验证。
-Core 26 Human Approval + Interruption Protocol 已实现并通过目标验证。
-Core 27 Settings / Permission Resolver 已实现并通过目标验证。
-Core 28 Hooks Lifecycle 已实现并通过目标验证。
-Core 29 Memory Source / CLAUDE.md / Auto Memory 已实现并通过目标验证。
-Core 30 Checkpoint / Rewind 已实现并通过目标验证。
-Core 31 Subagent Context Isolation 已实现并通过目标验证。
-Course 18 Product Surface Implementation Chain 已创建，用于把 Core 27-31 整理成和 course-14 到 course-17 一致的教学执行链。
-Production Upgrade Roadmap Pass 已建立 Core 18-26 路线：Context Economy、Compaction Quality、Plan State Machine、Long-Running Eval、ToolRuntime Transaction、ModelGateway Budget、Durable Replay、Repo Intelligence、Human Approval。
-Core Build Pass 第一轮完成。
-Teaching Consolidation Pass 第一轮完成，course-07 到 course-12 已由学习者复盘通过。
-Eval / Reference / Cost Teaching Bridge 已完成 course-13 整理：Core 13-17 被讲成 20/20 executable suite、codex-local baseline、cost basis、pricing boundary 和 RelativeScore 阻塞的 evidence bridge。
-Production Upgrade Teaching Consolidation Pass 已完成 course-14 到 course-17 整理：Core 18-26 被讲成 Context / Compaction / Plan / Eval / ToolRuntime / ModelGateway / Session / Repo Intelligence / Human Approval 的 deterministic local evidence 链，并按 Core 18-20、Core 21-23、Core 24-26 拆成 verify-case execution-chain 细课。
+Core 15 参考智能体对照（Reference-Agent Comparison）已实现并通过目标验证。
+Core 16 参考智能体成本与横向对照（Reference-Agent Cost + Cross-Agent）已实现并通过目标验证。
+Core 17 参考智能体价格表基线（Reference-Agent Pricing Table Baseline）已实现并通过目标验证。
+Core 18 上下文经济与缓存感知上下文引擎（Context Economy + Cache-Aware Context Engine）已实现并通过目标验证。
+Core 19 压缩质量评测（Compaction Quality Eval）已实现并通过目标验证。
+Core 20 计划状态机（Plan State Machine）已实现并通过目标验证。
+Core 21 长任务评测（Long-Running Task Eval）已实现并通过目标验证。
+Core 22 工具运行时事务与补丁安全（ToolRuntime Transaction + Patch Safety）已实现并通过目标验证。
+Core 23 生产化模型网关与预算控制器（Production ModelGateway + Budget Controller）已实现并通过目标验证。
+Core 24 持久会话存储与回放（Durable Session Store + Replay）已实现并通过目标验证。
+Core 25 仓库理解与相关性索引（Repo Intelligence + Relevance Index）已实现并通过目标验证。
+Core 26 人工批准与中断协议（Human Approval + Interruption Protocol）已实现并通过目标验证。
+Core 27 设置与权限解析器（Settings / Permission Resolver）已实现并通过目标验证。
+Core 28 钩子生命周期（Hooks Lifecycle）已实现并通过目标验证。
+Core 29 记忆来源 / 项目记忆 / 自动记忆（Memory Source / CLAUDE.md / Auto Memory）已实现并通过目标验证。
+Core 30 检查点与回退（Checkpoint / Rewind）已实现并通过目标验证。
+Core 31 子代理上下文隔离（Subagent Context Isolation）已实现并通过目标验证。
+Course 18 产品表层实现链（Product Surface Implementation Chain）已创建，用于把 Core 27-31 整理成和 course-14 到 course-17 一致的教学执行链。
+生产化升级路线（Production Upgrade Roadmap）Pass 已建立 Core 18-26 路线：上下文经济、压缩质量、计划状态机、长任务评测、工具运行时事务、模型网关预算、持久回放、仓库理解、人工批准。
+核心构建（Core Build）Pass 第一轮完成。
+教学整理（Teaching Consolidation）Pass 第一轮完成，course-07 到 course-12 已由学习者复盘通过。
+评测 / 参考运行 / 成本教学桥（Eval / Reference / Cost Teaching Bridge）已完成 course-13 整理：Core 13-17 被讲成 20/20 可执行任务集（executable suite）、本机 Codex 基线（codex-local baseline）、成本口径（cost basis）、定价边界（pricing boundary）和相对分数（RelativeScore）阻塞的证据桥（evidence bridge）。
+生产化升级教学整理（Production Upgrade Teaching Consolidation Pass）已完成 course-14 到 course-17 整理：Core 18-26 被讲成上下文、压缩、计划、评测、工具运行时、模型网关、会话、仓库理解、人工批准（Context / Compaction / Plan / Eval / ToolRuntime / ModelGateway / Session / Repo Intelligence / Human Approval）的本地确定性证据（deterministic local evidence）链，并按 Core 18-20、Core 21-23、Core 24-26 拆成验证用例执行链（verify-case execution-chain）细课。
 Production Upgrade 中文术语表已补充，课程阅读时先按中文理解，英文只用于对照代码字段和 verify case 名称。
 Open Source Learning Preview docs 已补齐：LICENSE、CONTRIBUTING、SECURITY、CODE_OF_CONDUCT、.env.example、GitHub Actions verify workflow、学习者入口、开源边界、项目结构说明和 GitHub release checklist。
 GitHub 展示层已按中文学习者视角重构：README 第一屏明确 Claude Code 学习对象，说明怎么运行、怎么学习、预期结果、项目结构和能力边界；根目录只保留入口文件，docs 分区承载课程和证据。
-中文术语入口已前移：README、学习者入口、docs 入口和 Course 03 均采用中文先行，`clean-room` 只解释为公开学习边界，不再作为普通用户第一屏定位。
+中文术语入口已前移：README、学习者入口、docs 入口和 Course 03 均采用中文先行；早期文件名里的英文标签只解释为公开学习边界，不再作为普通用户第一屏定位，也不作为运行时对象。
 Markdown 链接轻量检查已通过：README/docs 内部 Markdown 链接无断链。
-Product Surface Study Stage Preparation 已完成：已建立阶段总控、验证矩阵和候选 Core mini brief；Course 00 / Course 03 / Course 08 / Course 09 / Course 15-17 已补充产品表层材料归位规则。从 Claude Code 产品工件、系统提示词提取、source map 观察和官方文档中学习时，必须先做 evidence tier、same-topic merge、runtime boundary、verify shape 和 public boundary 判断；同主题优先补回已有 course/core，只有新 Runtime 边界才候选 Core 27+。
-Product Surface Study Core 27 Implementation Pass 已完成：Settings / Permission Resolver 先补实现级 validation matrix，再实现 permissionConfig、resolverTrace、ruleSource、decisionCache、allow/ask/deny、prefix command rule 和 no hidden execution evidence。Core 27 明确不重复 Core 22 transaction 或 Core 26 approval decision。
-Product Surface Study Core 28 Implementation Pass 已完成：Hooks Lifecycle 先补实现级 validation matrix，再实现 hookRegistry、hookEvent、hookDecision、hookFeedback、redactedHookOutput、pre/post/user hook、hook failure、secret boundary 和 no hidden execution evidence。Core 28 明确不重复 Core 24 durable store 或 Core 26 approval decision。
-Product Surface Study Core 29 Implementation Pass 已完成：Memory Source / CLAUDE.md / Auto Memory 先补实现级 validation matrix，再实现 memoryStore、memoryIndex、memoryType、memoryFreshnessCheck、forgetEvent、write/index、forget、stale verification、compaction boundary 和 no code-structure memory evidence。Core 29 明确不重复 Course 08/09 或 Core 18/19/24。
-Product Surface Study Core 30 Implementation Pass 已完成：Checkpoint / Rewind 先补实现级 validation matrix，再实现 checkpoint、rewindRequest、fileStateSnapshot、externalChangeConflict、rewindAudit、checkpoint creation、rewind state、partial rewind denial、audit replay 和 event log boundary evidence。Core 30 明确不重复 Core 22 transaction 或 Core 24 durable replay。
-Product Surface Study Core 31 Implementation Pass 已完成：Subagent Context Isolation 先补实现级 validation matrix，再实现 delegatedTask、subagentContext、subagentResult、delegationLedger、isolationAudit、independent task、context isolation、no duplicate research、result contract 和 failure propagation evidence。Core 31 明确不重复 Core 21 long-running eval、Core 24 durable store 或 Core 25 repo intelligence。
-Product Surface Teaching Consolidation Pass 已完成：Course 00 / 03 / 08 / 09 / 15 / 16 / 17 的 Product Surface 补充已和 Core 27-31 边界对齐；Course 18 已新增为 Core 27-31 的 execution-chain 细课；README、docs/index、authority-map、course README 和 CURRENT_STATE 已同步导航。
+产品表层学习阶段准备（Product Surface Study Stage Preparation）已完成：已建立阶段总控、验证矩阵和候选 Core 迷你简报（mini brief）；Course 00 / Course 03 / Course 08 / Course 09 / Course 15-17 已补充产品表层材料归位规则。从 Claude Code 产品工件、系统提示词提取、源码映射（source map）观察和官方文档中学习时，必须先做证据层级（evidence tier）、同主题合并（same-topic merge）、运行时边界（runtime boundary）、验证形态（verify shape）和公开边界（public boundary）判断；同主题优先补回已有 course/core，只有新的运行时边界（Runtime boundary）才候选 Core 27+。
+产品表层学习 Core 27 实现（Product Surface Study Core 27 Implementation）Pass 已完成：设置与权限解析器（Settings / Permission Resolver）先补实现级验证矩阵（validation matrix），再实现 permissionConfig、resolverTrace、ruleSource、decisionCache、允许 / 询问 / 拒绝（allow / ask / deny）、前缀命令规则（prefix command rule）和禁止隐藏执行证据（no hidden execution evidence）。Core 27 明确不重复 Core 22 事务（transaction）或 Core 26 批准决策（approval decision）。
+产品表层学习 Core 28 实现（Product Surface Study Core 28 Implementation）Pass 已完成：钩子生命周期（Hooks Lifecycle）先补实现级验证矩阵（validation matrix），再实现 hookRegistry、hookEvent、hookDecision、hookFeedback、redactedHookOutput、工具前 / 工具后 / 用户钩子（pre / post / user hook）、钩子失败（hook failure）、密钥边界（secret boundary）和禁止隐藏执行证据（no hidden execution evidence）。Core 28 明确不重复 Core 24 持久存储（durable store）或 Core 26 批准决策（approval decision）。
+产品表层学习 Core 29 实现（Product Surface Study Core 29 Implementation）Pass 已完成：记忆来源 / 项目记忆 / 自动记忆（Memory Source / CLAUDE.md / Auto Memory）先补实现级验证矩阵（validation matrix），再实现 memoryStore、memoryIndex、memoryType、memoryFreshnessCheck、forgetEvent、写入 / 索引（write / index）、遗忘（forget）、过期验证（stale verification）、压缩边界（compaction boundary）和禁止代码结构记忆证据（no code-structure memory evidence）。Core 29 明确不重复 Course 08/09 或 Core 18/19/24。
+产品表层学习 Core 30 实现（Product Surface Study Core 30 Implementation）Pass 已完成：检查点与回退（Checkpoint / Rewind）先补实现级验证矩阵（validation matrix），再实现 checkpoint、rewindRequest、fileStateSnapshot、externalChangeConflict、rewindAudit、检查点创建（checkpoint creation）、回退状态（rewind state）、部分回退拒绝（partial rewind denial）、审计回放（audit replay）和事件日志边界证据（event log boundary evidence）。Core 30 明确不重复 Core 22 事务（transaction）或 Core 24 持久回放（durable replay）。
+产品表层学习 Core 31 实现（Product Surface Study Core 31 Implementation）Pass 已完成：子代理上下文隔离（Subagent Context Isolation）先补实现级验证矩阵（validation matrix），再实现 delegatedTask、subagentContext、subagentResult、delegationLedger、isolationAudit、独立任务（independent task）、上下文隔离（context isolation）、禁止重复研究（no duplicate research）、结果契约（result contract）和失败传播证据（failure propagation evidence）。Core 31 明确不重复 Core 21 长任务评测（long-running eval）、Core 24 持久存储（durable store）或 Core 25 仓库理解（repo intelligence）。
+产品表层教学整理（Product Surface Teaching Consolidation Pass）已完成：Course 00 / 03 / 08 / 09 / 15 / 16 / 17 的产品表层（Product Surface）补充已和 Core 27-31 边界对齐；Course 18 已新增为 Core 27-31 的执行链（execution-chain）细课；README、docs/index、authority-map、course README 和 CURRENT_STATE 已同步导航。
 Eval Expansion Pass starter executable suite 完成，累计 20/20 starter case executable。
 Reference-Agent Comparison Pass 已完成第一批 Codex local CLI 小样本对照：8 个 executable seeds 有真实 run evidence，覆盖修复、失败归因、安全拒绝和歧义拒绝。
 Cost + Cross-Agent Pass 已补上 8 个 codex-local sample runs 的 cost 计量口径：token、cached token、uncached token、output token、reasoning output token、latency 和 raw log hash 都可汇总；没有 pricing table 时 USD 仍保持 null。横向对照当前结论是 single_baseline_only：本机只有 codex-local 有 recorded runs，未检测到 Claude Code / Claude / OpenCode / Aider / Cursor Agent / Gemini / Qwen / OpenAI CLI 的可用第二 baseline。没有第二 agent 真实 runs 前，不生成 RelativeScore。
@@ -1060,10 +1063,10 @@ DeepSeek Chat Completions API 已经在本机完成真实端到端调用。
 
 ```text
 学习者需要正式复盘 docs/course/course-13-eval-reference-cost-evidence.md 到 docs/course/course-18-product-surface-implementation-chain.md。
-学习者需要能把 Core 13-17 复述为 executable suite -> codex-local baseline -> cost basis -> pricing boundary -> RelativeScore blocked 的证据桥。
-学习者需要能把 Core 18-26 复述为 Context / Compaction / Plan / Eval / ToolRuntime / ModelGateway / Session / Repo Intelligence / Human Approval 的生产化证据链。
-学习者需要能把 Core 27-31 复述为 Settings / Hooks / Memory / Checkpoint / Subagent 的 Product Surface execution-chain，并能说明每个主题的 Runtime state、enforced boundary、verify case 和不能声称的官方实现边界。
-学习者需要继续区分 deterministic local evidence、真实 provider billing、真实 provider cache billing、生产级 benchmark、SystemScore 和 RelativeScore。
+学习者需要能把 Core 13-17 复述为可执行任务集（executable suite）-> 本机 Codex 基线（codex-local baseline）-> 成本口径（cost basis）-> 定价边界（pricing boundary）-> 相对分数阻塞（RelativeScore blocked）的证据桥。
+学习者需要能把 Core 18-26 复述为上下文、压缩、计划、评测、工具运行时、模型网关、会话、仓库理解、人工批准（Context / Compaction / Plan / Eval / ToolRuntime / ModelGateway / Session / Repo Intelligence / Human Approval）的生产化证据链。
+学习者需要能把 Core 27-31 复述为设置、钩子、记忆、检查点、子代理（Settings / Hooks / Memory / Checkpoint / Subagent）的产品表层执行链（Product Surface execution-chain），并能说明每个主题的运行时状态（Runtime state）、强制边界（enforced boundary）、验证用例（verify case）和不能声称的官方实现边界。
+学习者需要继续区分本地确定性证据（deterministic local evidence）、真实服务商账单（provider billing）、真实服务商缓存账单（provider cache billing）、生产级基准（benchmark）、系统分数（SystemScore）和相对分数（RelativeScore）。
 ```
 
 工程侧还缺：
@@ -1073,8 +1076,8 @@ Core 03 仍是 starter Context Engine，不是完整生产级上下文系统。
 Core 04 仍是 starter Plan Mode，不是完整人工审批交互。
 Core 05 仍是 starter Compaction，不是完整生产级压缩系统。
 Core 06 仍是 starter Eval Harness，不是完整 70%-80% 能力评测集。
-Core 07 仍是 starter Model Adapter E2E，不是完整 provider router / retry / cost control。
-Core 08 仍是 starter Prompt Pack / Recovery Loop，不是完整 production prompt/runtime recovery system。
+Core 07 仍是入门模型适配器端到端（starter Model Adapter E2E），不是完整服务商路由 / 重试 / 成本控制（provider router / retry / cost control）。
+Core 08 仍是入门提示词包 / 恢复循环（starter Prompt Pack / Recovery Loop），不是完整生产级提示词 / 运行时恢复系统（production prompt/runtime recovery system）。
 Core 09 仍是受控 fixture，不是直接在任意真实仓库里自动执行复杂任务。
 Core 10 到 Core 14 已完成 20/20 starter executable suite，但仍不是完整 120-case benchmark，也不是 reference-agent 70%-80% 认证。
 Core 15 已记录 8 个 codex-local CLI 小样本对照，但仍不是 Claude Code baseline，也不是跨 agent RelativeScore。
@@ -1105,8 +1108,8 @@ README + docs/index + authority-map 的入口层已经建立。
 历史文档已移动到 docs/history，只作背景材料，不再占据根目录。
 当前已达到 GitHub learning-preview 发布结构；发布后仍应继续收集真实中文学习者反馈。
 Production Upgrade Roadmap Pass 已建立路线入口，course-14 到 course-17 已建立 Core 18-26 教学整理入口；未来新路线开始前仍要先写清新的 roadmap / validation matrix，并同步 CURRENT_STATE、README、docs/index 和 authority-map。
-Product Surface Study Stage Preparation 已完成路线入口、验证矩阵、Step A 课程补充和候选 Core mini brief。Core 27、Core 28、Core 29、Core 30 和 Core 31 已作为当前候选池 A-E 实现；后续仍不能直接新增一串 Core，必须先从候选池中选择真正满足 Runtime boundary 和 verify shape 的主题，并补具体实现级 validation matrix。
-Product Surface Teaching Consolidation Pass 已完成 course-18 教学入口，并将 course-00 / 03 / 08 / 09 / 15 / 16 / 17 的 Product Surface 补充对齐到 Core 27-31 的对象、状态、verify 和公开边界。
+产品表层学习阶段准备（Product Surface Study Stage Preparation）已完成路线入口、验证矩阵、Step A 课程补充和候选 Core 迷你简报（mini brief）。Core 27、Core 28、Core 29、Core 30 和 Core 31 已作为当前候选池 A-E 实现；后续仍不能直接新增一串 Core，必须先从候选池中选择真正满足运行时边界（Runtime boundary）和验证形态（verify shape）的主题，并补具体实现级验证矩阵（validation matrix）。
+产品表层教学整理（Product Surface Teaching Consolidation Pass）已完成 course-18 教学入口，并将 course-00 / 03 / 08 / 09 / 15 / 16 / 17 的产品表层（Product Surface）补充对齐到 Core 27-31 的对象、状态、验证（verify）和公开边界。
 ```
 
 ---
@@ -1116,7 +1119,7 @@ Product Surface Teaching Consolidation Pass 已完成 course-18 教学入口，�
 下一步只做一件事：
 
 ```text
-Product Surface Study 当前候选池 A-E 已完成，且 course-18 已把 Core 27-31 收口成 Product Surface execution-chain；下一步是学习者复盘 course-18，或在新增 Product Surface 候选前先写新的 mini brief 和实现级 validation matrix。
+产品表层学习（Product Surface Study）当前候选池 A-E 已完成，且 course-18 已把 Core 27-31 收口成产品表层执行链（Product Surface execution-chain）；下一步是学习者复盘 course-18，或在新增产品表层候选前先写新的迷你简报（mini brief）和实现级验证矩阵（validation matrix）。
 ```
 
 推荐优先顺序：
@@ -1125,17 +1128,17 @@ Product Surface Study 当前候选池 A-E 已完成，且 course-18 已把 Core 
 1. 复盘 docs/roadmap/product-surface-study-roadmap.md、product-surface-validation-matrix.md 和 product-surface-core-candidates.md。
 2. 读 docs/course/course-18-product-surface-implementation-chain.md，把 Core 27-31 作为一条教学执行链复述。
 3. 顺序读 Core 27-31 文档，确认每个 Core 和前置 Core 的 non-duplication boundary。
-4. 运行 npm run core:27:verify 到 npm run core:31:verify，确认每个 Product Surface Core 的 focused evidence。
-5. 若要新增候选，先写 mini brief、evidence tier、same-topic merge、runtime boundary、verify shape 和 public boundary。
-6. 不使用提取 prompt 原文、source map 原文或反编译源码片段。
+4. 运行 npm run core:27:verify 到 npm run core:31:verify，确认每个产品表层核心阶段（Product Surface Core）的聚焦证据（focused evidence）。
+5. 若要新增候选，先写迷你简报（mini brief）、证据层级（evidence tier）、同主题合并（same-topic merge）、运行时边界（runtime boundary）、验证形态（verify shape）和公开边界（public boundary）。
+6. 不使用提取提示词（prompt）原文、源码映射（source map）原文或反编译源码片段。
 ```
 
 做完下一步后的预期结果：
 
 ```text
-学习者能把 Product Surface Study 复述为：先归位，后 gate，最后只实现有 Runtime state、enforced boundary、fixture、verify case 和 out-of-scope 的主题；Core 27-31 不是五个 UI 功能，而是 Settings / Hooks / Memory / Checkpoint / Subagent 各自落成 Runtime evidence 的教学链。
+学习者能把产品表层学习（Product Surface Study）复述为：先归位，后闸门（gate），最后只实现有运行时状态（Runtime state）、强制边界（enforced boundary）、测试夹具（fixture）、验证用例（verify case）和不在当前范围（out-of-scope）的主题；Core 27-31 不是五个 UI 功能，而是设置、钩子、记忆、检查点、子代理（Settings / Hooks / Memory / Checkpoint / Subagent）各自落成运行时证据（Runtime evidence）的教学链。
 Core 21 / Core 22 / Core 24 / Core 25 / Core 26 中已有叙事不会被重复造课。
-项目继续避免把提取 prompt / source map 观察直接写成官方公开实现或生产级 Claude Code 能力。
+项目继续避免把提取提示词（prompt）/ 源码映射（source map）观察直接写成官方公开实现或生产级 Claude Code 能力。
 ```
 
 ---
@@ -1233,20 +1236,20 @@ Core 23 Production ModelGateway + Budget Controller 已实现并通过目标验�
 Core 24 Durable Session Store + Replay 已实现并通过目标验证。
 Core 25 Repo Intelligence + Relevance Index 已实现并通过目标验证。
 Core 26 Human Approval + Interruption Protocol 已实现并通过目标验证。
-Core 27 Settings / Permission Resolver 已实现并通过目标验证。
-Core 28 Hooks Lifecycle 已实现并通过目标验证。
-Core 29 Memory Source / CLAUDE.md / Auto Memory 已实现并通过目标验证。
-Core 30 Checkpoint / Rewind 已实现并通过目标验证。
-Core 31 Subagent Context Isolation 已实现并通过目标验证。
-Production Upgrade Roadmap Pass 已建立 Core 18-26 路线和验证矩阵。
+Core 27 设置与权限解析器（Settings / Permission Resolver）已实现并通过目标验证。
+Core 28 钩子生命周期（Hooks Lifecycle）已实现并通过目标验证。
+Core 29 记忆来源 / 项目记忆 / 自动记忆（Memory Source / CLAUDE.md / Auto Memory）已实现并通过目标验证。
+Core 30 检查点与回退（Checkpoint / Rewind）已实现并通过目标验证。
+Core 31 子代理上下文隔离（Subagent Context Isolation）已实现并通过目标验证。
+生产化升级路线（Production Upgrade Roadmap）Pass 已建立 Core 18-26 路线和验证矩阵。
 course-07 Core Build Pass Overview 已创建并复盘完成。
 course-08 到 course-12 已按执行链样板重写并复盘完成。
 course-13 Eval Reference Cost Evidence 已创建，用于复盘 Core 13-17 的 executable suite、codex-local baseline、cost basis、pricing boundary 和 RelativeScore 阻塞。
 course-14 Production Upgrade Evidence Chain 已创建，用于复盘 Core 18-26 的 deterministic local evidence 主线。
-course-15 到 course-17 已创建，用于按同一执行链标准细读 Core 18-26 verify case。
-course-18 Product Surface Implementation Chain 已创建，用于按同一执行链标准细读 Core 27-31 verify case。
-Open Source Learning Preview 已补齐课程桥、开源边界、协作文件和 CI，已同步 GitHub 并通过 CI。
-Product Surface Study Stage Preparation 已完成 Core 26 之后的新阶段路线、验证矩阵、Step A 课程补充和候选 Core mini brief。Core 27 Settings / Permission Resolver、Core 28 Hooks Lifecycle、Core 29 Memory Source、Core 30 Checkpoint / Rewind 和 Core 31 Subagent Context Isolation 已进入实现并通过验证。Product Surface Teaching Consolidation Pass 已完成 course-18 和导航同步。当前候选池 A-E 已完成；新增候选前必须先补 mini brief 和实现级 validation matrix。
+course-15 到 course-17 已创建，用于按同一执行链标准细读 Core 18-26 验证用例（verify case）。
+course-18 产品表层实现链（Product Surface Implementation Chain）已创建，用于按同一执行链标准细读 Core 27-31 验证用例（verify case）。
+开源学习预览（Open Source Learning Preview）已补齐课程桥、开源边界、协作文件和 CI，已同步 GitHub 并通过 CI。
+产品表层学习阶段准备（Product Surface Study Stage Preparation）已完成 Core 26 之后的新阶段路线、验证矩阵、Step A 课程补充和候选 Core 迷你简报（mini brief）。Core 27 设置与权限解析器（Settings / Permission Resolver）、Core 28 钩子生命周期（Hooks Lifecycle）、Core 29 记忆来源（Memory Source）、Core 30 检查点与回退（Checkpoint / Rewind）和 Core 31 子代理上下文隔离（Subagent Context Isolation）已进入实现并通过验证。产品表层教学整理（Product Surface Teaching Consolidation Pass）已完成 course-18 和导航同步。当前候选池 A-E 已完成；新增候选前必须先补迷你简报（mini brief）和实现级验证矩阵（validation matrix）。
 ```
 
 恢复后不要立即做：
@@ -1266,12 +1269,12 @@ Product Surface Study Stage Preparation 已完成 Core 26 之后的新阶段路�
 1. 不再补 starter seed；20/20 starter executable suite 已完成。
 2. 先读 docs/start-here-for-learners.md 和 docs/open-source-boundary.md。
 3. 再读 docs/course/course-13-eval-reference-cost-evidence.md，确认 Core 13-17 的 evidence bridge 不再缺课。
-4. 继续读 docs/course/course-14-production-upgrade-evidence-chain.md 到 docs/course/course-17-session-repo-approval-production.md，确认 Core 18-26 每组 verify case 的对象、状态和断言。
-5. 读 docs/course/course-18-product-surface-implementation-chain.md，确认 Core 27-31 每组 verify case 的对象、状态和边界。
+4. 继续读 docs/course/course-14-production-upgrade-evidence-chain.md 到 docs/course/course-17-session-repo-approval-production.md，确认 Core 18-26 每组验证用例（verify case）的对象、状态和断言。
+5. 读 docs/course/course-18-product-surface-implementation-chain.md，确认 Core 27-31 每组验证用例（verify case）的对象、状态和边界。
 6. 不要把 Core 18-31 的 deterministic local evidence 扩写成生产级 Claude Code 能力声明。
 7. 下一阶段开始前，先写清新的 roadmap / validation matrix。
 8. 不要在没有真实外部对照或更大 benchmark 时声称 70%-80% 成功率、真实 provider SLA 或跨 agent RelativeScore。
-9. Product Surface Study 必须先判断同主题是否补旧课；只有新 Runtime 边界和可执行 verify shape 才能新建 Core。
+9. 产品表层学习（Product Surface Study）必须先判断同主题是否补旧课；只有新的运行时边界（Runtime boundary）和可执行验证形态（verify shape）才能新建 Core。
 ```
 
 ---

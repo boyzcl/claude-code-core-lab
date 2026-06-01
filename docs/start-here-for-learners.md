@@ -29,7 +29,7 @@ npm run verify:all
 | --- | --- | --- | --- |
 | 30 分钟快速确认 | 只想判断项目值不值得继续 | 读 README、本页和 Course 00；运行 `npm run verify:labs` | 知道项目目标、边界和本地验证是否能跑 |
 | 半天主线体验 | 想看到完整闭环但不深挖所有细节 | 读 Course 00、01、03、07、13、14、18；运行 `npm run core:10:verify`、`core:18:verify`、`core:31:verify` | 知道课程为什么这样排，以及 Core 如何用 verify 证明机制 |
-| 系统学习 | 想真的复刻学习过程 | 按 Course 00 到 Course 18 顺序读；每一组课程都跟源码和 verify | 能复述从 ModelRequest 到 Product Surface Core 的完整证据链 |
+| 系统学习 | 想真的复刻学习过程 | 按 Course 00 到 Course 18 顺序读；每一组课程都跟源码和 verify | 能复述从模型请求（ModelRequest）到产品表层核心阶段（Product Surface Core）的完整证据链 |
 
 学习节奏建议：
 
@@ -37,8 +37,8 @@ npm run verify:all
 一次只学一组，不要把 course-00 到 course-18 当成一天内读完的长文档。
 每读完一组，只问三个问题：
   1. 这个机制解决什么问题？
-  2. 它落在哪个 Runtime object / state / boundary？
-  3. 哪个 verify case 证明它成立，哪些能力不能声称？
+  2. 它落在哪个运行时对象（Runtime object）、状态（state）或边界（boundary）？
+  3. 哪个验证用例（verify case）证明它成立，哪些能力不能声称？
 ```
 
 ## 怎么学习
@@ -61,9 +61,9 @@ npm run verify:all
 | 阶段 | 可以继续的信号 |
 | --- | --- |
 | Course 00-05 | 你能解释模型“知道”某件事的信息来源，而不是说“模型自然知道” |
-| Course 06-12 | 你能从一个 verify case 找到对应源码对象和断言 |
+| Course 06-12 | 你能从一个验证用例（verify case）找到对应源码对象和断言 |
 | Course 13-17 | 你能说清哪些是本地 deterministic evidence，哪些不是生产能力声明 |
-| Course 18 | 你能把 Settings、Hooks、Memory、Checkpoint、Subagent 都讲成 Runtime state 和 enforced boundary |
+| Course 18 | 你能把设置、钩子、记忆、检查点、子代理（Settings / Hooks / Memory / Checkpoint / Subagent）都讲成运行时状态（Runtime state）和强制边界（enforced boundary） |
 
 ## 学习路线总览
 
@@ -101,7 +101,7 @@ npm run verify:all
 
 ## 看不懂英文术语怎么办
 
-课程里保留了一些英文，是为了对应代码字段和 verify case 名称。
+课程里保留了一些英文，是为了对应代码字段和验证用例（verify case）名称。
 
 先按中文理解：
 
