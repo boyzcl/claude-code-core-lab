@@ -11,9 +11,17 @@
 
 ---
 
-## 1. 先做准备
+## 1. 先建立机制地图
 
-开始前先确认本地能跑：
+开始前先读 [Claude Code-like Agent 核心逻辑总览](core-logic-map.md)。第一次学习的主路径不是读代码，也不是先跑完整验证，而是先能说清：
+
+```text
+User Goal -> Runtime Loop -> Context -> Model Decision -> Tool Call
+-> Policy -> ToolRuntime -> Observation -> State -> Plan
+-> Compaction -> Eval -> Product Surface
+```
+
+读懂后，再确认本地证据能跑：
 
 ```bash
 npm install
@@ -37,18 +45,18 @@ npm run verify:all
 每一节都按同一套动作走：
 
 ```text
-1. 先读指定课程。
-2. 再打开对应源码或 Core 文档。
-3. 跑对应 verify 命令。
-4. 做对应 [练习入口（Exercises）](../exercises/README.md) 里的最小任务。
-5. 看验证输出证明了什么。
+1. 先复述这一节落在完整机制链路的哪个位置。
+2. 再读指定课程或 Core 说明。
+3. 跑对应 verify 命令，把输出当作证据。
+4. 需要追细节时，再打开对应源码或 verify 脚本。
+5. 做对应 [练习入口（Exercises）](../exercises/README.md) 里的最小任务。
 6. 用三句话复述：
    这个机制解决什么问题？
    它落在哪个运行时对象（Runtime object）、状态（state）或边界（boundary）？
    它不能证明什么？
 ```
 
-不要只读文章。这个项目的学习结果不是“知道名词”，而是能把名词落到代码对象、验证用例（verify case）和能力边界。
+不要把读代码当成第一步。这个项目的学习结果不是“知道名词”，而是能先讲清机制，再把机制落到验证用例（verify case）、代码对象和能力边界。
 
 ---
 
@@ -58,7 +66,7 @@ npm run verify:all
 
 | 节次 | 目标 | 读什么 | 跑什么 | 学完应该能回答 |
 | --- | --- | --- | --- | --- |
-| 0 | 建立入口和边界 | [README](../README.md)、[学习者入口](start-here-for-learners.md)、[Course 00](course/course-00-teaching-standard.md) | `npm run verify:labs` | 这个项目是什么，不是什么；为什么要中文先行、证据先行 |
+| 0 | 建立入口、机制和边界 | [README](../README.md)、[核心逻辑总览](core-logic-map.md)、[学习者入口](start-here-for-learners.md)、[Course 00](course/course-00-teaching-standard.md) | 可选：`npm run verify:labs` | 这个项目是什么，不是什么；完整机制链路如何从用户目标走到产品表层 |
 | 1 | 理解产品心智模型 | `course-01` 到 `course-05` | `npm run lab:01:verify`、`npm run lab:02:verify` | 模型第一次被调用时看见什么；消息流为什么是事实源 |
 | 2 | 从实验合成核心运行时 | `course-06`、`course-07` | `npm run verify:labs`、`npm run core:verify` | 8 个实验如何变成最小运行时；工具为什么必须受策略约束 |
 | 3 | 处理模型、上下文、计划和压缩 | `course-08`、`course-09` | `npm run core:02:verify` 到 `npm run core:05:verify` | 模型网关（ModelGateway）、上下文引擎（Context Engine）、计划模式（Plan Mode）和压缩（Compaction）分别管什么 |
@@ -77,9 +85,10 @@ npm run verify:all
 
 ```text
 README
+核心逻辑总览
 学习者入口
 Course 00
-npm run verify:labs
+可选：npm run verify:labs
 ```
 
 目标不是学完，而是判断这个项目是否值得继续。
@@ -88,6 +97,7 @@ npm run verify:labs
 
 ```text
 这个项目为什么不是 Claude Code 官方源码？
+一个 Claude Code-like Agent 的完整运行时链路是什么？
 为什么文档一直强调验证用例（verify case）？
 为什么提示词（prompt）不能替代运行时策略？
 ```
@@ -95,6 +105,7 @@ npm run verify:labs
 ### 4.2 只有半天
 
 ```text
+核心逻辑总览
 Course 00
 Course 01
 Course 03
@@ -154,7 +165,7 @@ npm run project:capstone:solution:verify
 
 | 卡住点 | 回到哪里 |
 | --- | --- |
-| 不知道项目是什么 | [README](../README.md)、[学习者入口](start-here-for-learners.md) |
+| 不知道项目是什么 | [README](../README.md)、[核心逻辑总览](core-logic-map.md)、[学习者入口](start-here-for-learners.md) |
 | 不知道课程顺序 | [课程路线](course/claude-code-core-learning-path.md)、[课程区 README](course/README.md) |
 | 安装或验证失败 | [故障排查（Troubleshooting）](troubleshooting.md) |
 | 不知道怎么动手练 | [练习入口（Exercises）](../exercises/README.md) |
@@ -177,7 +188,7 @@ docs/reference/claude-code-core-implementation-blueprint.md
 docs/reference/claude-code-70-80-validation-and-model-access.md
 ```
 
-这些材料有价值，但更适合作为背景、扩展或复盘。先从课程和验证脚本建立主线，再读大型参考文档。
+这些材料有价值，但更适合作为背景、扩展或复盘。先从核心逻辑总览和课程建立主线，再用验证脚本进入证据层，最后再读大型参考文档。
 
 ---
 
@@ -188,7 +199,7 @@ docs/reference/claude-code-70-80-validation-and-model-access.md
 ```text
 1. 画出一次代码智能体任务从用户目标到最终验证的闭环。
 2. 解释模型、运行时、工具、上下文、策略、计划、压缩、评测分别承担什么职责。
-3. 从任意 Core 文档找到对应源码和验证用例。
+3. 从任意 Core 文档找到对应验证用例，必要时再进入源码。
 4. 完成至少一个从初始失败到参考验证的练习或 capstone。
 5. 判断一个能力声明是否被本项目验证，还是仍属于不能声称的生产能力。
 ```

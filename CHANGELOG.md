@@ -4,7 +4,14 @@ This project uses a human-readable changelog for learning-system and repository-
 
 ## Unreleased
 
-No unreleased changes yet.
+### Added
+
+- Added `docs/core-logic-map.md` as the first mechanism overview for the full Claude Code-like Agent logic chain.
+- Added `assets/diagrams/claude-code-core-mechanism.png` as the README first visual, using a GPT-generated visual base with deterministic labels.
+
+### Changed
+
+- Reordered README, learner entry, learning plan, docs index, course README, authority map, and project structure guidance so learners understand mechanism logic before treating code and verify scripts as evidence.
 
 ## v0.1-learning-preview - 2026-06-02
 

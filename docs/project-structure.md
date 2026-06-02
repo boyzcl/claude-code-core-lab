@@ -9,6 +9,7 @@
 | `README.md` | GitHub 首页，说明项目是什么、怎么运行、怎么学习 |
 | `CHANGELOG.md` | 面向发布和治理变化的人工变更记录，不替代当前状态 |
 | `package.json` | 所有 Lab / Core / verify 命令 |
+| `assets/` | README 和公开文档使用的图片资产 |
 | `src/` | 真正可运行的实现和验证脚本 |
 | `docs/` | 课程、记录、路线、参考资料 |
 | `AGENTS.md` | 给 Agent 和维护者看的工作规则 |
@@ -30,6 +31,7 @@
 
 ```text
 docs/start-here-for-learners.md
+docs/core-logic-map.md
 docs/learning-plan.md
 docs/troubleshooting.md
 docs/index.md
@@ -38,7 +40,17 @@ docs/production-upgrade-terms-zh.md
 docs/open-source-boundary.md
 ```
 
-其中 `learning-plan.md` 只负责学习节奏：30 分钟、半天和七节主线学习法。课程顺序仍以 `docs/course/claude-code-core-learning-path.md` 为准，行为证据仍以 `src/**/*.verify.mjs` 为准。
+其中 `core-logic-map.md` 是第一机制总览：先讲 Claude Code-like Agent 的完整逻辑链路，再把代码和 verify 作为证据入口。`learning-plan.md` 只负责学习节奏：30 分钟、半天和七节主线学习法。课程顺序仍以 `docs/course/claude-code-core-learning-path.md` 为准，行为证据仍以 `src/**/*.verify.mjs` 为准。
+
+## assets
+
+公开文档图片资产。
+
+```text
+assets/diagrams/
+```
+
+当前 README 第一视觉使用 `assets/diagrams/claude-code-core-mechanism.png`。它是 GPT 生成视觉底图加本地确定性标签排版，不是官方 Claude Code 架构图或源码映射。
 
 ## docs/course
 

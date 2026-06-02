@@ -4,16 +4,19 @@
 
 ## 第一次学习
 
+先理解机制逻辑，再选择学习节奏，最后用 verify 进入证据层。Course / Lab / Core 是深入学习材料，不是第一次打开仓库时必须马上读完的负担。
+
 - [项目首页](../README.md)
+- [核心逻辑总览（Core Logic Map）](core-logic-map.md)
 - [学习者入口](start-here-for-learners.md)
 - [从零学习计划（Learning Plan）](learning-plan.md)
 - [故障排查（Troubleshooting）](troubleshooting.md)
-- [练习入口（Exercises）](../exercises/README.md)
-- [capstone-mini-runtime](../projects/capstone-mini-runtime/README.md)
 - [课程路线](course/claude-code-core-learning-path.md)
 - [核心运行时对象地图（Core Runtime Object Map）](reference/core-runtime-object-map.md)
 - [代码智能体实现逻辑（Code Agent Implementation Logic）](reference/code-agent-implementation-logic.md)
 - [Claude Code 官方能力覆盖矩阵](reference/claude-code-capability-coverage-matrix.md)
+- [练习入口（Exercises）](../exercises/README.md)
+- [capstone-mini-runtime](../projects/capstone-mini-runtime/README.md)
 - [项目结构说明](project-structure.md)
 - [项目中文术语表（Chinese-First Terms）](production-upgrade-terms-zh.md)
 
@@ -34,10 +37,11 @@
 
 ## 学习材料
 
+- [Core Logic Map](core-logic-map.md): 第一机制总览，先讲 Agent 完整逻辑链路，再把代码和 verify 作为证据入口。
 - [Course](course/): 课程主线，按 `course-00` 到 `course-18` 学。
 - [Lab](lab/): 单机制实验说明。
 - [Core](core/): Core 集成阶段记录。
-- [Records](records/): 运行记录和验证记录。
+- [Records](records/): 运行记录和验证记录，属于证据层。
 - [Reference](reference/): 架构、实现、评测、开源项目规范和 Runtime 对象地图。
 - [Releases](releases/): 公开 release note。
 - [History](history/): 早期分析文章，只作背景。
@@ -47,6 +51,7 @@
 
 ## 关键课程
 
+- [核心逻辑总览（Core Logic Map）](core-logic-map.md)
 - [Course 00 教学标准](course/course-00-teaching-standard.md)
 - [Course 07 核心构建总览（Core Build Pass Overview）](course/course-07-core-build-pass-overview.md)
 - [Course 12 评测打包和可执行种子（Eval Packaging And Executable Seeds）](course/course-12-eval-packaging-and-executable-seeds.md)

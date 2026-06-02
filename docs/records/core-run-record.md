@@ -2,7 +2,7 @@
 
 运行日期：2026-06-01
 
-最后验证时间：2026-06-02 14:53 CST
+最后验证时间：2026-06-02 15:59 CST
 
 运行命令：
 
@@ -41,6 +41,15 @@ npm run core:31:verify
 npm run docs:links
 npm run project:capstone:solution:verify
 npm run verify:all
+```
+
+本轮 v0.2 Core Logic Clarity Pass 额外确认：
+
+```text
+git diff --check: passed
+npm run docs:links: passed, 233 internal links passed, 33 external links recorded
+npm run project:capstone:solution:verify: 8/8 passed
+npm run verify:all: passed, total 265/265
 ```
 
 ---

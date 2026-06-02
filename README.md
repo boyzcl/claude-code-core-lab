@@ -4,36 +4,24 @@
 
 这是一个中文学习项目：围绕 Claude Code 这类代码智能体的核心机制，从零搭一个可运行、可验证、可复盘的本地核心运行时。
 
-你可以把它理解成一套“动手学 Claude Code 产品机制”的课程和实验：
+你可以把它理解成一套“先看懂机制逻辑，再用课程、实验和验证深入”的学习项目：
 
 ```text
-先学 Claude Code 为什么不是普通聊天机器人
-再手工推演一次代码任务怎么跑
-再用 Lab 拆开单个机制
-再把机制集成成 Core
-最后用验证脚本证明每一步到底成立了什么
+先理解 Claude Code-like Agent 的完整逻辑链路
+再看 Runtime / Context / Tool / Policy / Eval 分别负责什么
+再进入 Course / Lab / Core 深入学习
+最后用 verify 证据确认每一步到底成立了什么
 ```
 
 为了让项目能公开学习和长期维护，本仓库不复制 Claude Code 官方源码、私有提示词或非公开实现。它学习的是 Claude Code 暴露出来的产品问题和代码智能体运行时设计方法，并用我们自己写的代码和评测来复现核心闭环。
 
-## 30 秒主线图
+## 30 秒机制图
 
-```mermaid
-flowchart LR
-  G["User Goal"] --> S["Session / State"]
-  S --> C["Context Assembly"]
-  C --> M["Model Decision"]
-  M --> T["Tool Call"]
-  T --> P["Policy Check"]
-  P --> R["ToolRuntime"]
-  R --> O["Observation"]
-  O --> U["State Update"]
-  U --> V["Verify / Eval"]
-  V --> C
-  V --> F["Grounded Final Answer"]
-```
+![Claude Code Core 完整机制图](assets/diagrams/claude-code-core-mechanism.png)
 
-学习顺序很简单：先用 Course 建心智，再用 Lab 拆机制，再用 Core 合成运行时，最后用 verify 和 capstone 证明自己真的跑通了闭环。官方能力如何映射到本项目，见 [Claude Code 官方能力覆盖矩阵](docs/reference/claude-code-capability-coverage-matrix.md)。
+这张图的读法很简单：用户目标进入运行时循环；上下文决定模型本轮能看见什么；模型提出工具意图；策略和工具运行时负责真正执行；观察结果回灌为状态、计划、压缩和评测证据；产品表层把这些边界变成用户能理解和控制的体验。
+
+第一次理解项目时，先读 [Claude Code-like Agent 核心逻辑总览](docs/core-logic-map.md)。Course / Lab / Core 仍然保留，但它们是深入学习材料，不是首页第一理解负担。官方能力如何映射到本项目，见 [Claude Code 官方能力覆盖矩阵](docs/reference/claude-code-capability-coverage-matrix.md)。
 
 ## 你会学到什么
 
@@ -67,7 +55,42 @@ flowchart LR
 - 可直接替代 Claude Code 的生产级产品。
 - 真实厂商账单、真实 Claude Code 基线（baseline）或跨智能体相对分数（Agent RelativeScore）。
 
-## 30 秒跑起来
+## 你会得到什么结果
+
+看懂并验证后，预期结果不是“得到一个 Claude Code 替代品”，而是：
+
+- 你能在本地运行一套最小代码智能体核心。
+- 你能读懂一次任务从用户输入、上下文组装、工具执行、计划更新到最终验证的链路。
+- 你能用 `npm run core:*:verify` 证明某个机制到底成立了什么。
+- 你能分清“本地确定性证据”和“真实生产能力声明”的差别。
+
+## 推荐学习路线
+
+第一次打开仓库，按这个顺序来：
+
+1. 读 [核心逻辑总览](docs/core-logic-map.md)，先理解完整机制链路。
+2. 读 [学习者入口](docs/start-here-for-learners.md)，选择适合你的学习方式。
+3. 按 [从零学习计划（Learning Plan）](docs/learning-plan.md) 选择 30 分钟、半天或七节主线学习法。
+4. 读 [课程路线](docs/course/claude-code-core-learning-path.md)，知道 course -> lab -> core 为什么这样排。
+5. 从 [Course 00](docs/course/course-00-teaching-standard.md) 开始顺序读到 [Course 18](docs/course/course-18-product-surface-implementation-chain.md)。
+6. 每读完一组机制，再运行对应 Lab 或 Core 验证脚本，把 verify 当作证据入口。
+7. 不懂英文术语时，看 [中文术语表](docs/production-upgrade-terms-zh.md)。
+8. 想把 31 个 Core 收束成少数对象时，看 [核心运行时对象地图（Core Runtime Object Map）](docs/reference/core-runtime-object-map.md)。
+9. 想读一篇完整长文时，看 [代码智能体实现逻辑（Code Agent Implementation Logic）](docs/reference/code-agent-implementation-logic.md)。
+10. 想对照官方公开能力时，看 [Claude Code 官方能力覆盖矩阵](docs/reference/claude-code-capability-coverage-matrix.md)。
+11. 想动手练习时，从 [练习入口（Exercises）](exercises/README.md) 开始；完成主线后做 [capstone-mini-runtime](projects/capstone-mini-runtime/README.md)。
+
+如果你只是先试水，不需要一上来读完整 19 门课。可以按时间选择：
+
+| 时间 | 推荐路径 |
+| --- | --- |
+| 30 分钟 | 读 README、核心逻辑总览、学习者入口和 Course 00；有时间再跑 `npm run verify:labs` |
+| 半天 | 先读核心逻辑总览，再按学习计划里的半天路线读 Course 00、01、03、07、13、14、18，最后跑 `core:10`、`core:18`、`core:31` verify |
+| 系统学习 | 按学习计划里的七节主线读完 Course 00 到 Course 18，每一组都用 verify 进入证据层 |
+
+## 进入证据层
+
+读懂主线后，再用本地验证确认机制确实可复现。
 
 环境要求：
 
@@ -86,38 +109,6 @@ npm run verify:all
 如果看到命令正常结束，说明本地 Lab 和 Core 的确定性验证都可复现。当前完整记录见 [docs/records/core-run-record.md](docs/records/core-run-record.md)，最近一次记录是 `265/265 passed`。
 
 如果安装、验证、真实模型配置或 capstone starter 卡住，先看 [故障排查（Troubleshooting）](docs/troubleshooting.md)。
-
-## 你会得到什么结果
-
-跑完和学完后，预期结果不是“得到一个 Claude Code 替代品”，而是：
-
-- 你能在本地运行一套最小代码智能体核心。
-- 你能读懂一次任务从用户输入、上下文组装、工具执行、计划更新到最终验证的链路。
-- 你能用 `npm run core:*:verify` 证明某个机制到底成立了什么。
-- 你能分清“本地确定性证据”和“真实生产能力声明”的差别。
-
-## 推荐学习路线
-
-第一次打开仓库，按这个顺序来：
-
-1. 读 [学习者入口](docs/start-here-for-learners.md)，先建立整体地图。
-2. 按 [从零学习计划（Learning Plan）](docs/learning-plan.md) 选择 30 分钟、半天或七节主线学习法。
-3. 读 [课程路线](docs/course/claude-code-core-learning-path.md)，知道课程为什么这样排。
-4. 从 [Course 00](docs/course/course-00-teaching-standard.md) 开始顺序读到 [Course 18](docs/course/course-18-product-surface-implementation-chain.md)。
-5. 每读完一组机制，运行对应 Lab 或 Core 验证脚本。
-6. 不懂英文术语时，看 [中文术语表](docs/production-upgrade-terms-zh.md)。
-7. 想把 31 个 Core 收束成少数对象时，看 [核心运行时对象地图（Core Runtime Object Map）](docs/reference/core-runtime-object-map.md)。
-8. 想读一篇完整长文时，看 [代码智能体实现逻辑（Code Agent Implementation Logic）](docs/reference/code-agent-implementation-logic.md)。
-9. 想对照官方公开能力时，看 [Claude Code 官方能力覆盖矩阵](docs/reference/claude-code-capability-coverage-matrix.md)。
-10. 想动手练习时，从 [练习入口（Exercises）](exercises/README.md) 开始；完成主线后做 [capstone-mini-runtime](projects/capstone-mini-runtime/README.md)。
-
-如果你只是先试水，不需要一上来读完整 19 门课。可以按时间选择：
-
-| 时间 | 推荐路径 |
-| --- | --- |
-| 30 分钟 | 跑 `npm run verify:labs`，读 README、学习者入口、学习计划和 Course 00 |
-| 半天 | 按学习计划里的半天路线读 Course 00、01、03、07、13、14、18，跑 `core:10`、`core:18`、`core:31` verify |
-| 系统学习 | 按学习计划里的七节主线读完 Course 00 到 Course 18，每一组都跟源码和 verify |
 
 最小体验路径：
 
@@ -159,10 +150,12 @@ starter 的失败是预期学习材料，不接入 `npm run verify:all`。
 ├── README.md                     # GitHub 首页，先看这里
 ├── CHANGELOG.md                  # 面向发布和治理变化的人工变更记录
 ├── package.json                  # npm scripts，所有 verify 入口
+├── assets/                       # README 和公开文档使用的图片资产
 ├── src/                          # 可运行实现
 │   ├── lab01 ... lab08           # 单机制实验
 │   └── core/                     # 集成后的核心运行时实现和验证脚本
 ├── docs/
+│   ├── core-logic-map.md         # 第一机制总览：先理解逻辑，再进入证据
 │   ├── course/                   # 课程主线：course-00 到 course-18
 │   ├── lab/                      # Lab 说明：单机制怎么跑
 │   ├── core/                     # Core 阶段记录：每个集成阶段证明什么

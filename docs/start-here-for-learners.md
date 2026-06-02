@@ -12,14 +12,26 @@
 为什么 Claude Code 能持续读代码、改代码、跑命令、处理失败、保持上下文、做计划、做验证。
 ```
 
-## 先跑起来
+## 先看机制逻辑
+
+第一次不要从源码、Core 编号或验证记录开始。先看 [Claude Code-like Agent 核心逻辑总览](core-logic-map.md)，把这条链路看懂：
+
+```text
+User Goal -> Runtime Loop -> Context -> Model Decision -> Tool Call
+-> Policy -> ToolRuntime -> Observation -> State -> Plan
+-> Compaction -> Eval -> Product Surface
+```
+
+看懂这条链路之后，再进入 Course / Lab / Core。它们仍然是项目的深入学习材料，但不是首页第一理解负担。
+
+## 再看验证证据
 
 ```bash
 npm install
 npm run verify:all
 ```
 
-如果全部通过，说明这个项目的课程配套代码和验证脚本在你本地可复现。
+如果全部通过，说明这个项目的课程配套代码和验证脚本在你本地可复现。第一次学习不必先跑全量；当你准备进入证据层时再跑也可以。
 
 如果卡在安装、Node 版本、验证脚本、真实模型配置或 capstone starter，先看 [故障排查（Troubleshooting）](troubleshooting.md)。
 
@@ -29,9 +41,9 @@ npm run verify:all
 
 | 方式 | 适合谁 | 怎么做 | 你会得到什么 |
 | --- | --- | --- | --- |
-| 30 分钟快速确认 | 只想判断项目值不值得继续 | 读 README、本页和 Course 00；运行 `npm run verify:labs` | 知道项目目标、边界和本地验证是否能跑 |
-| 半天主线体验 | 想看到完整闭环但不深挖所有细节 | 读 Course 00、01、03、07、13、14、18；运行 `npm run core:10:verify`、`core:18:verify`、`core:31:verify` | 知道课程为什么这样排，以及 Core 如何用 verify 证明机制 |
-| 系统学习 | 想真的复刻学习过程 | 按 Course 00 到 Course 18 顺序读；每一组课程都跟源码、练习和 verify | 能复述从模型请求（ModelRequest）到产品表层核心阶段（Product Surface Core）的完整证据链，并完成 capstone |
+| 30 分钟快速确认 | 只想判断项目值不值得继续 | 读 README、核心逻辑总览、本页和 Course 00；有时间再跑 `npm run verify:labs` | 知道项目目标、边界和 Agent 完整机制链路 |
+| 半天主线体验 | 想看到完整闭环但不深挖所有细节 | 先读核心逻辑总览，再读 Course 00、01、03、07、13、14、18；最后运行 `npm run core:10:verify`、`core:18:verify`、`core:31:verify` | 知道课程为什么这样排，以及 Core 如何用 verify 证明机制 |
+| 系统学习 | 想真的复刻学习过程 | 按 Course 00 到 Course 18 顺序读；每一组课程都用 verify 进入证据层，必要时再查源码 | 能复述从用户目标到产品表层核心阶段（Product Surface Core）的完整证据链，并完成 capstone |
 
 如果你希望有人把学习节奏排成表，直接看 [从零学习计划（Learning Plan）](learning-plan.md)。它把本页的三种方式拆成 30 分钟、半天和七节主线学习法。
 如果你已经读完一组课程，下一步看 [练习入口（Exercises）](../exercises/README.md)；想做端到端任务时，看 [capstone-mini-runtime](../projects/capstone-mini-runtime/README.md)。
@@ -50,15 +62,15 @@ npm run verify:all
 
 推荐按四步走：
 
-1. 读 `../README.md`，知道项目目标、结构和边界。
-2. 读 `docs/course/claude-code-core-learning-path.md`，知道课程总路线。
+1. 读 `../README.md` 和 [核心逻辑总览](core-logic-map.md)，先知道完整机制链路。
+2. 读 `docs/course/claude-code-core-learning-path.md`，知道 course -> lab -> core 为什么这样排。
 3. 顺序学习 `docs/course/course-00...` 到 `docs/course/course-18...`。
-4. 每读完一段，就做对应练习，并运行 `npm run lab:*:verify` 或 `npm run core:*:verify`。
+4. 每读完一段，就运行 `npm run lab:*:verify` 或 `npm run core:*:verify`，把结果当作证据；需要追细节时再看对应源码。
 
 不要只读文档。这个项目的重点是：
 
 ```text
-读课程 -> 跟源码 -> 做练习 -> 跑验证脚本 -> 看证据 -> 复述边界
+读逻辑总览 -> 学机制 -> 看 Course / Lab / Core -> 跑验证脚本 -> 看证据 -> 复述边界
 ```
 
 每一阶段都可以用这个小验收判断是否该继续：
@@ -71,6 +83,8 @@ npm run verify:all
 | Course 18 | 你能把设置、钩子、记忆、检查点、子代理（Settings / Hooks / Memory / Checkpoint / Subagent）都讲成运行时状态（Runtime state）和强制边界（enforced boundary） |
 
 ## 学习路线总览
+
+下面的 Course / Lab / Core 结构是深入学习路径。先看完整逻辑链路，再沿这张表展开。
 
 | 阶段 | 文档 | 你要搞懂什么 |
 | --- | --- | --- |
@@ -122,9 +136,10 @@ Core 18-26 的术语集中看 [Production Upgrade 中文术语表](production-up
 
 从这里开始：
 
-1. [从零学习计划（Learning Plan）](learning-plan.md)
-2. [课程路线](course/claude-code-core-learning-path.md)
-3. [Course 00 教学标准](course/course-00-teaching-standard.md)
-4. [练习入口（Exercises）](../exercises/README.md)
-5. [capstone-mini-runtime](../projects/capstone-mini-runtime/README.md)
-6. [项目结构说明](project-structure.md)
+1. [核心逻辑总览](core-logic-map.md)
+2. [从零学习计划（Learning Plan）](learning-plan.md)
+3. [课程路线](course/claude-code-core-learning-path.md)
+4. [Course 00 教学标准](course/course-00-teaching-standard.md)
+5. [练习入口（Exercises）](../exercises/README.md)
+6. [capstone-mini-runtime](../projects/capstone-mini-runtime/README.md)
+7. [项目结构说明](project-structure.md)

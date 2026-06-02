@@ -1,6 +1,6 @@
 # 课程区
 
-这里是学习主线。按编号顺序读即可：
+这里是深入学习主线。第一次理解项目时，先看 [核心逻辑总览](../core-logic-map.md)，再按编号顺序读课程：
 
 ```text
 course-00 -> course-01 -> ... -> course-18
@@ -8,6 +8,7 @@ course-00 -> course-01 -> ... -> course-18
 
 推荐入口：
 
+- [核心逻辑总览](../core-logic-map.md)
 - [从零学习计划](../learning-plan.md)
 - [课程总路线](claude-code-core-learning-path.md)
 - [Course 00 教学标准](course-00-teaching-standard.md)

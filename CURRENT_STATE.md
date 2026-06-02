@@ -1,6 +1,6 @@
 # CURRENT_STATE：Claude Code Core 学习项目当前状态
 
-最后更新：2026-06-02 14:53 CST
+最后更新：2026-06-02 15:59 CST
 
 本文是新对话入口和当前状态单一事实源。它不替代课程、Lab、Core 文档，只回答：
 
@@ -40,16 +40,18 @@ Claude Code Core
 
 ```text
 User Goal
-  -> Session
-  -> Context Assembly
+  -> Runtime Loop
+  -> Context
   -> Model Decision
   -> Tool Call
-  -> Policy Check
-  -> Tool Execution
+  -> Policy
+  -> ToolRuntime
   -> Observation
-  -> State Update
-  -> Verification
-  -> Next Turn
+  -> State
+  -> Plan
+  -> Compaction
+  -> Eval
+  -> Product Surface
 ```
 
 ---
@@ -73,10 +75,11 @@ Eval 如何证明能力真的变强。
 因此项目从“解释 Claude Code”转成了“学习式重构 Claude Code Core”：
 
 ```text
-先 course 建立心智模型
-再 lab 体验单个机制
-再 core 集成最小产品骨架
-再接真实模型和更完整 eval
+先用 core logic map 建立完整机制主线
+再用 course 建立分段心智模型
+再用 lab 体验单个机制
+再用 core 集成最小产品骨架
+最后用 verify / records / capstone 进入证据层
 ```
 
 ---
@@ -107,6 +110,7 @@ Eval 如何证明能力真的变强。
 | `docs/course/course-17-session-repo-approval-production.md` | 课程 | Core 24-26 的持久会话（Durable Session）、仓库理解（Repo Intelligence）、人工批准（Human Approval）执行链 |
 | `docs/course/course-18-product-surface-implementation-chain.md` | 课程 | Core 27-31 的设置、钩子、记忆、检查点、子代理（Settings / Hooks / Memory / Checkpoint / Subagent）产品表层执行链 |
 | `docs/production-upgrade-terms-zh.md` | 术语参考 | 当前解释性文档的中文先行术语入口；文件名沿用生产化升级阶段的历史名称 |
+| `docs/core-logic-map.md` | 核心逻辑总览 | 第一次理解 Claude Code-like Agent 完整机制链路；代码和 verify 只作为证据入口 |
 | `docs/start-here-for-learners.md` | 学习者入口 | 第一次打开仓库时的学习路线和运行入口 |
 | `docs/learning-plan.md` | 从零学习计划 | 面向第一次学习者的 30 分钟、半天和七节主线学习节奏 |
 | `docs/troubleshooting.md` | 故障排查入口 | 学习者遇到安装、验证、live model、capstone starter 或公开入口同步问题时的排查顺序 |
@@ -152,7 +156,7 @@ Eval 如何证明能力真的变强。
 | `docs/roadmap/product-surface-study-roadmap.md` | 产品表层学习总控 | Core 26 之后如何研究 Claude Code 产品工件，并判断补旧课还是新建 Core |
 | `docs/roadmap/product-surface-validation-matrix.md` | 产品表层验证矩阵 | 新阶段的证据层级、同主题合并门、候选 Core 进入条件 |
 | `docs/roadmap/product-surface-core-candidates.md` | 产品表层候选 Core Mini Brief | Settings、Hooks、Memory、Subagent、Checkpoint 是否值得独立成 Core 的评审 |
-| `README.md` | 项目总入口 | 快速运行、文档导航和当前边界 |
+| `README.md` | 项目总入口 | 第一视觉机制图、学习入口、验证入口和当前边界 |
 | `AGENTS.md` | Agent 控制入口 | Agent 工作规则、secret 边界和完成定义 |
 | `docs/index.md` | 文档索引 | 区分当前规则、历史和证据 |
 | `docs/authority-map.md` | authority map | 文档冲突优先级和 canonical doc 声明 |
@@ -166,6 +170,7 @@ Eval 如何证明能力真的变强。
 | `docs/reference/open-source-project-standards.md` | 开源项目规范参考 | 把优秀 GitHub 项目经验转译成本项目 README、reference、Issue、PR 和验证标准 |
 | `docs/reference/core-runtime-object-map.md` | 运行时对象地图 | 把 Lab 01 到 Core 31 收束为少数运行时对象（Runtime object）和边界（boundary） |
 | `docs/reference/claude-code-capability-coverage-matrix.md` | 官方能力覆盖矩阵 | 把 Claude Code 官方公开能力、本项目 Course / Lab / Core 转译、verify 证据和 out-of-scope 边界放在同一张表里 |
+| `assets/diagrams/claude-code-core-mechanism.png` | README 第一视觉机制图 | 用 GPT 生成视觉底图和本地确定性标签排版展示完整机制链路，不作为官方架构图 |
 | `docs/releases/v0.1-learning-preview.md` | release note | v0.1 learning preview 的发布说明，不替代当前状态或验证记录 |
 | `CHANGELOG.md` | 变更记录 | 面向发布和治理变化的人工变更记录，不替代当前状态 |
 | `scripts/check-doc-links.mjs` | 文档链接检查脚本 | 检查 Markdown 内部相对链接；外部链接只计数，不在 CI 中抓外网 |
@@ -215,6 +220,7 @@ Teaching Consolidation Pass 第一轮完成。
 从零学习计划（Learning Plan）Pass 已完成：新增 `docs/learning-plan.md`，把 README / 学习者入口 / Course 00-18 / Core verify 串成 30 分钟、半天和七节主线学习法，并同步 README、docs 入口、course README、authority-map 和项目结构说明。
 公开学习实践层第一阶段（Complete Learning Pass Phase 1）已完成：新增 `docs/troubleshooting.md`，新增 `exercises/`、`projects/`、`solutions/` 最小结构，并补齐 `projects/capstone-mini-runtime/` 端到端学习任务；README、docs 入口、learning-plan、start-here、course README、authority-map、project-structure 和 GitHub release checklist 已同步入口。
 公开传播专业化第二阶段（Professional Learning Preview Phase 2）已完成：新增 `docs/reference/claude-code-capability-coverage-matrix.md`，用官方公开文档来源把 Claude Code 能力、本项目 Course / Lab / Core 转译、verify 证据和 out-of-scope 边界对齐；README 新增 Runtime 闭环图；新增 `scripts/check-doc-links.mjs`、`npm run docs:links` 并接入 GitHub Actions；新增 `docs/releases/v0.1-learning-preview.md` release note。
+v0.2 Core Logic Clarity Pass 已完成：新增 `docs/core-logic-map.md`，用中文先讲清 User Goal、Runtime Loop、Context、Model Decision、Tool Call、Policy、ToolRuntime、Observation、State、Plan、Compaction、Eval 和 Product Surface 的完整链路；README 第一视觉替换为 `assets/diagrams/claude-code-core-mechanism.png`；README、学习者入口、learning-plan、docs index、course README、authority-map 和 project-structure 已同步为“先理解机制逻辑，再看 verify 证据”的入口顺序。
 ```
 
 已亲自体验：
@@ -227,10 +233,10 @@ course-06 中 Lab 到 Core 的映射问题已由学习者确认能回答。
 当前状态：
 
 ```text
-公开传播专业化第二阶段 Pass 已完成
+v0.2 Core Logic Clarity Pass 已完成
 ```
 
-它的目的不是再新增 Core，而是让公开项目更专业、清晰、可传播：新用户能在 README 第一屏看到 Runtime 闭环，评审者能从能力覆盖矩阵判断官方公开能力如何被本项目教学转译，维护者能用 link check、verify 和 release note 准备 v0.1 learning preview。
+它的目的不是再新增 Core，而是把项目从“可运行、可验证”进一步整理成“逻辑主线清晰、首页一眼看懂”的公开学习项目：新用户先看机制图和核心逻辑总览，再进入 Course / Lab / Core 深入材料，最后用 verify、records 和 capstone 参考验证作为证据层。
 
 当前断点：
 
@@ -977,24 +983,21 @@ Core 18 到 Core 26 的顺序为 Context Economy、Compaction Quality Eval、Pla
 最后一次完整验证时间：
 
 ```text
-2026-06-01 11:32 CST
+2026-06-02 15:59 CST
 ```
 
 运行命令：
 
 ```bash
+npm run docs:links
 npm run verify:all
+npm run project:capstone:solution:verify
 ```
 
 额外检查：
 
 ```bash
 git diff --check
-rg stale course/product-surface references
-new-file whitespace scan
-node --input-type=module - <<'NODE'
-// markdown link check
-NODE
 ```
 
 结果：
@@ -1048,8 +1051,8 @@ exit code: 0
 
 ```text
 git diff --check: passed
-stale reference scans: passed
-markdown links: passed
+npm run docs:links: passed, 233 internal links passed, 33 external links recorded
+npm run project:capstone:solution:verify: 8/8 passed
 ```
 
 这证明：
@@ -1130,25 +1133,25 @@ Production Upgrade Roadmap Pass 已建立路线入口，course-14 到 course-17 
 下一步只做一件事：
 
 ```text
-产品表层学习（Product Surface Study）当前候选池 A-E 已完成，且 course-18 已把 Core 27-31 收口成产品表层执行链（Product Surface execution-chain）；下一步是学习者复盘 course-18，或在新增产品表层候选前先写新的迷你简报（mini brief）和实现级验证矩阵（validation matrix）。
+按新的公开入口复盘 README 第一视觉和 docs/core-logic-map.md，确认学习者能先复述完整机制链路，再进入 Course / Lab / Core 和 verify 证据层。
 ```
 
 推荐优先顺序：
 
 ```text
-1. 复盘 docs/roadmap/product-surface-study-roadmap.md、product-surface-validation-matrix.md 和 product-surface-core-candidates.md。
-2. 读 docs/course/course-18-product-surface-implementation-chain.md，把 Core 27-31 作为一条教学执行链复述。
-3. 顺序读 Core 27-31 文档，确认每个 Core 和前置 Core 的 non-duplication boundary。
-4. 运行 npm run core:27:verify 到 npm run core:31:verify，确认每个产品表层核心阶段（Product Surface Core）的聚焦证据（focused evidence）。
-5. 若要新增候选，先写迷你简报（mini brief）、证据层级（evidence tier）、同主题合并（same-topic merge）、运行时边界（runtime boundary）、验证形态（verify shape）和公开边界（public boundary）。
+1. 读 README 第一屏和 assets/diagrams/claude-code-core-mechanism.png，确认机制图一眼能看懂。
+2. 读 docs/core-logic-map.md，复述 User Goal 到 Product Surface 的完整链路。
+3. 再按 docs/start-here-for-learners.md 和 docs/learning-plan.md 选择学习节奏。
+4. 需要深入时进入 Course / Lab / Core；需要证据时运行对应 verify。
+5. 后续若要新增产品表层候选，仍先写迷你简报（mini brief）、证据层级（evidence tier）、同主题合并（same-topic merge）、运行时边界（runtime boundary）、验证形态（verify shape）和公开边界（public boundary）。
 6. 不使用提取提示词（prompt）原文、源码映射（source map）原文或反编译源码片段。
 ```
 
 做完下一步后的预期结果：
 
 ```text
-学习者能把产品表层学习（Product Surface Study）复述为：先归位，后闸门（gate），最后只实现有运行时状态（Runtime state）、强制边界（enforced boundary）、测试夹具（fixture）、验证用例（verify case）和不在当前范围（out-of-scope）的主题；Core 27-31 不是五个 UI 功能，而是设置、钩子、记忆、检查点、子代理（Settings / Hooks / Memory / Checkpoint / Subagent）各自落成运行时证据（Runtime evidence）的教学链。
-Core 21 / Core 22 / Core 24 / Core 25 / Core 26 中已有叙事不会被重复造课。
+学习者能先把 Claude Code-like Agent 复述为：User Goal 进入 Runtime Loop，Context 约束 Model Decision，Tool Call 经过 Policy 和 ToolRuntime，Observation 回灌 State / Plan / Compaction，Eval 形成证据，Product Surface 呈现用户可控边界。
+Course / Lab / Core 仍作为深入学习材料保留，不变成首页第一理解负担。
 项目继续避免把提取提示词（prompt）/ 源码映射（source map）观察直接写成官方公开实现或生产级 Claude Code 能力。
 ```
 

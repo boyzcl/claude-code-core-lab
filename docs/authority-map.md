@@ -6,7 +6,7 @@ Scope: repo
 Status: active
 Owner: project-maintainer
 Source of Truth: yes
-Related Files: README.md, AGENTS.md, CURRENT_STATE.md, docs/index.md, docs/open-source-boundary.md, docs/troubleshooting.md, docs/reference/claude-code-capability-coverage-matrix.md, docs/releases/v0.1-learning-preview.md, exercises/README.md, projects/README.md, solutions/README.md
+Related Files: README.md, AGENTS.md, CURRENT_STATE.md, docs/index.md, docs/core-logic-map.md, docs/open-source-boundary.md, docs/troubleshooting.md, docs/reference/claude-code-capability-coverage-matrix.md, docs/releases/v0.1-learning-preview.md, exercises/README.md, projects/README.md, solutions/README.md
 
 # Claude Code Core Learning Authority Map
 
@@ -23,6 +23,7 @@ Related Files: README.md, AGENTS.md, CURRENT_STATE.md, docs/index.md, docs/open-
 | `CURRENT_STATE.md` | 当前状态入口 | yes | 当前进度、最新验证、下一步动作唯一事实源 |
 | `docs/index.md` | 文档索引 | yes | 按当前规则 / 历史 / 证据（Current Rules / History / Evidence）路由 |
 | `docs/authority-map.md` | 权威关系图（authority map） | yes | 本文，负责冲突优先级 |
+| `docs/core-logic-map.md` | 核心逻辑总览 | yes | 第一次理解 Claude Code-like Agent 完整机制链路时使用；代码和 verify 只作为证据入口 |
 | `docs/start-here-for-learners.md` | 学习者入口 | yes | 第一次阅读仓库时使用，不替代当前状态（current state） |
 | `docs/learning-plan.md` | 从零学习计划 | yes | 把学习入口拆成 30 分钟、半天和七节主线学习法，不替代课程正文 |
 | `docs/troubleshooting.md` | 故障排查入口 | yes | 学习者遇到安装、验证、live model、capstone starter 或公开入口同步问题时使用 |
@@ -43,6 +44,7 @@ Related Files: README.md, AGENTS.md, CURRENT_STATE.md, docs/index.md, docs/open-
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | 当前进度和下一步 | `CURRENT_STATE.md` | current-rule | repo | active | `docs/course/claude-code-core-learning-path.md` | `docs/records/core-run-record.md` | 当前状态冲突时以 `CURRENT_STATE.md` 为准 |
 | 学习路线和命名 | `docs/course/claude-code-core-learning-path.md` | current-rule | learning-system | active | none | `docs/records/lab-*-run-record.md` | 路线命名冲突时以 learning path 为准 |
+| 核心逻辑总览 | `docs/core-logic-map.md` | learning-overview | learning-system | active | `docs/reference/code-agent-implementation-logic.md`, `docs/reference/core-runtime-object-map.md` | `docs/course/course-00-teaching-standard.md` through `docs/course/course-18-product-surface-implementation-chain.md`, `docs/core/core-01-integrated-runtime.md` through `docs/core/core-31-subagent-context-isolation.md`, `src/**/*.verify.mjs` | 第一次理解机制链路时以 core logic map 为入口；它不替代 course、core 或 verify，行为证据仍以验证脚本和对应 Core 文档为准 |
 | 从零学习计划 | `docs/learning-plan.md` | learner-guide | learning-system | active | none | `docs/course/course-00-teaching-standard.md` through `docs/course/course-18-product-surface-implementation-chain.md`, `src/**/*.verify.mjs` | 学习节奏以 learning plan 为入口；课程顺序和命名仍以 learning path 为准，行为证据以 verify 脚本为准 |
 | 学习实践层 | `exercises/README.md`, `projects/README.md`, `solutions/README.md` | learner-practice | learning-system | active | none | `projects/capstone-mini-runtime/starter/mini-runtime.verify.mjs`, `solutions/capstone-mini-runtime/mini-runtime.verify.mjs` | 练习和项目只补学习闭环；课程顺序仍以 learning path 为准，行为证据仍以 `src/**/*.verify.mjs` 和对应项目 verify 为准；solutions 只能作为参考解法 |
 | 故障排查 | `docs/troubleshooting.md` | troubleshooting | repo | active | none | `src/**/*.verify.mjs`, `solutions/capstone-mini-runtime/mini-runtime.verify.mjs`, GitHub Actions logs | 安装、验证、live model、starter 失败和公开入口同步问题先按 troubleshooting 排查；secret 边界仍以 AGENTS、SECURITY 和 open-source boundary 为准 |
