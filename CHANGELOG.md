@@ -7,7 +7,7 @@ This project uses a human-readable changelog for learning-system and repository-
 ### Added
 
 - Added `docs/core-logic-map.md` as the first mechanism overview for the full Claude Code-like Agent logic chain.
-- Added `assets/diagrams/claude-code-core-mechanism.png` as the README first visual, using a GPT-generated visual base with deterministic labels.
+- Added `assets/diagrams/claude-code-core-mechanism.png` as the README first visual, using a directly generated Chinese mechanism diagram.
 
 ### Changed
 

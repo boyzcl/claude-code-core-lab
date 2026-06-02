@@ -170,7 +170,7 @@ Eval 如何证明能力真的变强。
 | `docs/reference/open-source-project-standards.md` | 开源项目规范参考 | 把优秀 GitHub 项目经验转译成本项目 README、reference、Issue、PR 和验证标准 |
 | `docs/reference/core-runtime-object-map.md` | 运行时对象地图 | 把 Lab 01 到 Core 31 收束为少数运行时对象（Runtime object）和边界（boundary） |
 | `docs/reference/claude-code-capability-coverage-matrix.md` | 官方能力覆盖矩阵 | 把 Claude Code 官方公开能力、本项目 Course / Lab / Core 转译、verify 证据和 out-of-scope 边界放在同一张表里 |
-| `assets/diagrams/claude-code-core-mechanism.png` | README 第一视觉机制图 | 用 GPT 生成视觉底图和本地确定性标签排版展示完整机制链路，不作为官方架构图 |
+| `assets/diagrams/claude-code-core-mechanism.png` | README 第一视觉机制图 | 用 GPT 直接生成中文机制图展示完整机制链路，不作为官方架构图 |
 | `docs/releases/v0.1-learning-preview.md` | release note | v0.1 learning preview 的发布说明，不替代当前状态或验证记录 |
 | `CHANGELOG.md` | 变更记录 | 面向发布和治理变化的人工变更记录，不替代当前状态 |
 | `scripts/check-doc-links.mjs` | 文档链接检查脚本 | 检查 Markdown 内部相对链接；外部链接只计数，不在 CI 中抓外网 |

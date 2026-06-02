@@ -50,7 +50,7 @@ docs/open-source-boundary.md
 assets/diagrams/
 ```
 
-当前 README 第一视觉使用 `assets/diagrams/claude-code-core-mechanism.png`。它是 GPT 生成视觉底图加本地确定性标签排版，不是官方 Claude Code 架构图或源码映射。
+当前 README 第一视觉使用 `assets/diagrams/claude-code-core-mechanism.png`。它是 GPT 直接生成的中文机制图，不是官方 Claude Code 架构图或源码映射。
 
 ## docs/course
 
