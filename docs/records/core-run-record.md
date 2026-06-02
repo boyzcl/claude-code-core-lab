@@ -1,8 +1,8 @@
 # Core Run Record：Core Runtime 验证记录
 
-运行日期：2026-05-28
+运行日期：2026-06-01
 
-最后验证时间：2026-05-28 00:57 CST
+最后验证时间：2026-06-02 14:53 CST
 
 运行命令：
 
@@ -33,6 +33,13 @@ npm run core:23:verify
 npm run core:24:verify
 npm run core:25:verify
 npm run core:26:verify
+npm run core:27:verify
+npm run core:28:verify
+npm run core:29:verify
+npm run core:30:verify
+npm run core:31:verify
+npm run docs:links
+npm run project:capstone:solution:verify
 npm run verify:all
 ```
 
@@ -67,6 +74,11 @@ core-23: 9/9 passed
 core-24: 8/8 passed
 core-25: 9/9 passed
 core-26: 9/9 passed
+core-27: 8/8 passed
+core-28: 9/9 passed
+core-29: 9/9 passed
+core-30: 8/8 passed
+core-31: 9/9 passed
 ```
 
 case：
@@ -382,6 +394,74 @@ risk classifier: safe action stays outside approval queue
 boundary: approval protocol is local evidence, not production UI
 ```
 
+Core 27 case：
+
+```text
+core27: settings permission resolver demo runs and verifies
+validation matrix: Core 27 does not duplicate Core 22 or Core 26
+config precedence: policy/local/project/user rules are explainable
+allow ask deny: one resolver feeds execute, approval, and refusal paths
+prefix command rule: explicit prefix does not allow similar command
+no hidden execution: ask and deny produce zero provider/tool deltas
+decision cache: repeated action records cache hit without losing source
+boundary: resolver is local evidence, not enterprise policy product
+```
+
+Core 28 case：
+
+```text
+core28: hooks lifecycle demo runs and verifies
+validation matrix: Core 28 does not duplicate Core 24 or Core 26
+pre tool hook: block prevents tool execution and enters event log
+post tool hook: feedback enters next context as observation
+user prompt hook: constraint enters runtime state, not system prompt
+hook failure: structured failure does not bypass permission denial
+secret boundary: hook output is redacted before storage
+no hidden execution: blocked and denied actions never execute
+boundary: hooks lifecycle is local evidence, not shell hook product
+```
+
+Core 29 case：
+
+```text
+core29: memory source demo runs and verifies
+validation matrix: Core 29 does not duplicate Course 08/09 or Core 18/19/24
+memory type routing: user feedback project and reference use distinct policies
+write and index: memory body and index are separated
+forget: deleted memory removes body and updates index
+stale verification: referenced files are checked before recommendation
+compaction boundary: long-term memory stays separate from compact summary
+no code-structure memory: repo facts are denied as long-term memory
+boundary: memory source is local evidence, not official memory product
+```
+
+Core 30 case：
+
+```text
+core30: checkpoint rewind demo runs and verifies
+validation matrix: Core 30 does not duplicate Core 22 or Core 24
+checkpoint creation: checkpoint binds file hashes, event seq, and durable snapshot
+rewind state: files and replay state restore to target checkpoint
+partial rewind denial: external user change blocks restore
+audit replay: rewind report explains source target restored files and replay seq
+event log boundary: rewind appends audit events without truncating history
+boundary: checkpoint rewind is local evidence, not IDE rewind product
+```
+
+Core 31 case：
+
+```text
+core31: subagent context isolation demo runs and verifies
+validation matrix: Core 31 does not duplicate Core 21 24 or 25
+independent task: two delegated tasks run in one parallel group
+context isolation: subagent sees only task-specific files
+no duplicate research: delegated task signature reuses ledger
+result contract: parent receives summary and evidence only
+failure propagation: subagent failure reaches parent as structured failure
+isolation audit: delegation ledger is replayable from session events
+boundary: subagent isolation is local evidence not agent marketplace
+```
+
 ---
 
 ## 2. 全量验证结果
@@ -421,8 +501,13 @@ core-23: 9/9 passed
 core-24: 8/8 passed
 core-25: 9/9 passed
 core-26: 9/9 passed
+core-27: 8/8 passed
+core-28: 9/9 passed
+core-29: 9/9 passed
+core-30: 8/8 passed
+core-31: 9/9 passed
 
-total: 222/222 passed
+total: 265/265 passed
 exit code: 0
 ```
 
@@ -459,6 +544,11 @@ Core 23 可以让 ModelGateway 在 provider 调用前执行 token/cost budget ga
 Core 24 可以让 session event 进入 append-only log，并留下 snapshot restore、crash recovery、trace replay、compaction audit 和 secret scan 证据。
 Core 25 可以让 Context Engine 的输入来自 repo map、symbol/test/rule index、relevance scoring、incremental update 和 token benefit 证据。
 Core 26 可以让 human approval、reject、interruption、handoff 和 no hidden execution 都进入可 replay 的 Runtime 状态。
+Core 27 可以让 settings / permission rules 在工具执行前解析为 allow / ask / deny，并留下 ruleSource、resolverTrace 和 decisionCache 证据。
+Core 28 可以让 hooks 作为 user prompt / pre tool / post tool lifecycle event 进入可审计 session，并留下 hookDecision、hookFeedback、redactedHookOutput 和 no hidden execution 证据。
+Core 29 可以让 CLAUDE.md / user / feedback / reference memory 作为可治理的长期上下文来源，并留下 memoryType、memoryIndex、forgetEvent、memoryFreshnessCheck 和 no code-structure memory 证据。
+Core 30 可以让 checkpoint / rewind 作为用户可见恢复点进入 Runtime 状态，并留下 fileStateSnapshot、externalChangeConflict、rewindAudit 和 append-only event boundary 证据。
+Core 31 可以让 subagent delegation 作为 Runtime 边界进入本地证据链，并留下 delegatedTask、subagentContext、subagentResult、delegationLedger、isolationAudit、no duplicate research 和 structured failure 证据。
 ```
 
 它能在临时 toy workspace 中完成：
@@ -532,7 +622,17 @@ Core 25 已验证 repo map、exported symbol/reference、package scripts/test as
 Core 25 的 Repo Intelligence + Relevance Index 是 deterministic local evidence，不是完整语义 embedding 检索、任意超大仓库生产级索引或真实 IDE / LSP 全量符号能力。
 Core 26 已验证 approval_required、approve path、reject path、interruption、handoff、no hidden execution 和 risk classifier。
 Core 26 的 Human Approval + Interruption Protocol 是 deterministic local evidence，不是完整 GUI approval 产品、enterprise policy 系统或真实多人协作权限模型。
+Core 27 已验证 config precedence、allow ask deny、prefix command rule、no hidden execution、decision cache 和 Core 22 / Core 26 non-duplication boundary。
+Core 27 的 Settings / Permission Resolver 是 deterministic local evidence，不是完整 enterprise policy 产品、真实 Claude Code Settings / Permission 内部实现、GUI permission prompt、完整 shell parser 或 sandbox。
+Core 28 已验证 pre tool hook、post tool hook、user prompt hook、hook failure、secret boundary、no hidden execution 和 Core 24 / Core 26 non-duplication boundary。
+Core 28 的 Hooks Lifecycle 是 deterministic local evidence，不是真实 shell hook 产品、任意用户脚本安全沙箱、完整插件系统或真实 Claude Code hooks 内部实现。
+Core 29 已验证 memory type routing、write and index、forget、stale verification、compaction boundary、no code-structure memory 和 Course 08/09 / Core 18/19/24 non-duplication boundary。
+Core 29 的 Memory Source / CLAUDE.md / Auto Memory 是 deterministic local evidence，不是真实 Claude Code memory 文件格式、远端多用户 memory 服务、隐私合规系统、完整代码智能数据库或官方实现。
+Core 30 已验证 checkpoint creation、rewind state、partial rewind denial、audit replay、event log boundary 和 Core 22 / Core 24 non-duplication boundary。
+Core 30 的 Checkpoint / Rewind 是 deterministic local evidence，不是 IDE rewind UI、跨机器恢复、分布式 session store、完整 patch parser 或真实 Claude Code Checkpoint 内部实现。
+Core 31 已验证 independent task、context isolation、no duplicate research、result contract、failure propagation、isolation audit 和 Core 21 / Core 24 / Core 25 non-duplication boundary。
+Core 31 的 Subagent Context Isolation 是 deterministic local evidence，不是真实多进程 agent 调度、远端 worker 隔离、agent marketplace 或真实 Claude Code Subagent 内部实现。
 README.md、AGENTS.md、docs/index.md 和 docs/authority-map.md 已形成最小开源入口。
 docs/authority-map.md 声明当前规则、历史背景和证据目录的边界。
-verify:all 已覆盖 core:26:verify。
+verify:all 已覆盖 core:31:verify。
 ```

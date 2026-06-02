@@ -188,7 +188,7 @@ User Goal
 历史观点：只作为参考，不覆盖当前规则。
 ```
 
-### 3.1 命名规则：一条主线，四类材料
+### 3.1 命名规则：一条主线，七类材料
 
 为了避免 `Lesson / P / W / L` 混用造成学习路径断裂，后续统一使用下面的命名规则。
 
@@ -217,6 +217,19 @@ core-XX-*.md
   core 表示已经把多个 lab 机制合成一个可运行产品骨架。
   core 不是学习主线本身；学习者理解 core 的文档仍然应该进入 course。
 
+exercise
+  练习入口。
+  exercise 位于 course / lab / core 之后，用来让学习者动手复述、修改、验证。
+  exercise 不新增课程编号，也不替代 verify evidence。
+
+project / capstone
+  端到端项目。
+  project 用来把多个机制合成完整学习任务；capstone 是系统学习后的综合练习。
+
+solution
+  参考解法。
+  solution 只能在学习者先做练习后使用，不作为 current rule，也不替代 src/core 的行为证据。
+
 run-record / verification-record
   运行记录和验证记录。
   只记录命令、结果、case，不承担新的学习主线。
@@ -225,7 +238,7 @@ run-record / verification-record
 当前学习主线只认：
 
 ```text
-course-00 -> course-01 -> course-02 -> course-03 -> course-04 -> course-05 -> course-06 -> course-07 -> course-08 -> course-09 -> course-10 -> course-11 -> course-12 -> course-13 -> course-14 -> course-15 -> course-16 -> course-17
+course-00 -> course-01 -> course-02 -> course-03 -> course-04 -> course-05 -> course-06 -> course-07 -> course-08 -> course-09 -> course-10 -> course-11 -> course-12 -> course-13 -> course-14 -> course-15 -> course-16 -> course-17 -> course-18
 ```
 
 `course-06` 之后进入 Core Build Pass，`course-07` 负责把 Core Build Pass 已完成的 Core 01 到 Core 12 重新整理成教学总览；`course-08` 到 `course-12` 负责按主题拆开学习：
@@ -234,15 +247,17 @@ course-00 -> course-01 -> course-02 -> course-03 -> course-04 -> course-05 -> co
 core-01 -> core-02 -> core-03 -> ... -> core-12
 ```
 
-`course-13` 负责补齐 Core 13-17 的 executable suite、reference-agent、cost basis 和 pricing boundary 教学；`course-14` 负责把 Core 18-26 Production Upgrade 重新整理成教学总览；`course-15` 到 `course-17` 负责按主题拆开学习：
+`course-13` 负责补齐 Core 13-17 的 executable suite、reference-agent、cost basis 和 pricing boundary 教学；`course-14` 负责把 Core 18-26 Production Upgrade 重新整理成教学总览；`course-15` 到 `course-17` 负责按主题拆开学习；`course-18` 负责把 Core 27-31 Product Surface 重新整理成 execution-chain：
 
 ```text
 core-13 -> core-14 -> core-15 -> core-16 -> core-17
 core-18 -> core-19 -> core-20 -> ... -> core-26
+core-27 -> core-28 -> core-29 -> core-30 -> core-31
 ```
 
 Core Build Pass 不再新增一条平行的 `Review-XX` 主线。
 每个 `core-XX` 文档本身必须包含课程层面的学习契约，并受本文 `6.1 Core Build Pass 学习调度框架` 约束。
+实践层不改变课程编号系统；当前实践入口是 `exercises/`、`projects/capstone-mini-runtime/` 和 `solutions/`。
 
 课程索引：
 
@@ -266,6 +281,7 @@ Core Build Pass 不再新增一条平行的 `Review-XX` 主线。
 | 15 | `course-15-context-compaction-plan-production.md` | Context Economy、Compaction Quality、Plan State Machine 如何构成状态保真链 | 你能从 Core 18-20 verify case 指到 stablePrefix、compaction diff、plan trace、permission 和 final grounding |
 | 16 | `course-16-long-running-tool-gateway-production.md` | Long-Running Eval、ToolRuntime Transaction、ModelGateway Budget 如何构成执行安全链 | 你能从 Core 21-23 verify case 解释 failureHistory、transaction rollback、budget gate、retry/fallback 和 capability filtering |
 | 17 | `course-17-session-repo-approval-production.md` | Durable Session、Repo Intelligence、Human Approval 如何构成恢复和协作链 | 你能从 Core 24-26 verify case 解释 event replay、relevance reasons、approval_required、interrupt 和 no hidden execution |
+| 18 | `course-18-product-surface-implementation-chain.md` | Settings、Hooks、Memory、Checkpoint、Subagent 如何从 Product Surface 材料落成 Runtime execution-chain | 你能从 Core 27-31 verify case 解释 permission decision、hook lifecycle、memory governance、rewind audit、subagent isolation 和官方实现边界 |
 
 不要再使用：
 
@@ -314,12 +330,13 @@ claude-code-core-lab/
     authority-map.md
     start-here-for-learners.md
     project-structure.md
+    troubleshooting.md
     course/
-      course-00 ... course-17
+      course-00 ... course-18
     lab/
       lab-01 ... lab-08
     core/
-      core-01 ... core-26
+      core-01 ... core-31
     records/
       core-run-record.md
       labs-verification-record.md
@@ -330,6 +347,18 @@ claude-code-core-lab/
       架构、实现、评测参考
     history/
       早期分析文章
+  exercises/
+    course-00-05/
+    lab-to-core/
+    core-01-12/
+    production-upgrade/
+    product-surface/
+  projects/
+    capstone-mini-runtime/
+  solutions/
+    course-00-05/
+    lab-to-core/
+    capstone-mini-runtime/
 ```
 
 开源时的定位：

@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Start here for learners
+    url: https://github.com/boyzcl/claude-code-core-lab/blob/main/docs/start-here-for-learners.md
+    about: Use this when you are trying to choose the right learning path.
+  - name: Troubleshooting
+    url: https://github.com/boyzcl/claude-code-core-lab/blob/main/docs/troubleshooting.md
+    about: Use this before reporting install, verify, live model, or capstone starter failures.
+  - name: Open-source boundary
+    url: https://github.com/boyzcl/claude-code-core-lab/blob/main/docs/open-source-boundary.md
+    about: Read this before requesting changes related to official Claude Code internals or capability claims.

@@ -711,6 +711,135 @@ unknown tool 或缺 required input 仍然不能进 ToolRuntime。
 | provider failure type | adapter event | gatewayTrace | retry / no retry / fallback | 所有失败被混为一谈 |
 | capability registry | provider metadata | filtered ModelRequest | 不暴露 unsupported capability | prompt 无法强制 provider 能力 |
 | repaired output | model text | repair metadata + schema validation | 兼容窄 JSON 错误 | repair 可能绕过工具契约 |
+| permission settings | user/project/policy config | ToolRuntime authorization input | 决定 allow / ask / deny | 高风险动作只能靠模型自觉 |
+| hook feedback | pre/post/user hook result | session event + dynamic observation | 让外部阻断或反馈进入长任务链路 | hook 结果丢失或被当作 system |
+| memory source | CLAUDE.md / user / feedback / reference memory | typed memory block + freshness trace | 让长期偏好或项目规则进入上下文 | 过时 memory 被当成当前事实 |
+| checkpoint marker | transaction boundary + file hashes | checkpoint event | 给长任务提供用户可见恢复点 | 只能靠聊天说明“可以回退” |
+| deferred tool capability | Provider / Tool Surface Registry | filtered tools / available deferred tools | 只暴露当前可用工具表面 | 模型可能请求未启用工具 |
+
+---
+
+### 13.1 Product Surface 如何接回 Core 21-23
+
+Settings、permission rules、hooks、subagent、deferred tools 这些产品表层特性，首先要接回本课的三条执行链。
+
+```text
+Core 21 问：这些反馈是否进入长任务 failure history、next action 和 cost curve？
+Core 22 问：这些配置是否改变 preview / commit / rollback / high-risk routing？
+Core 23 问：这些能力是否改变 provider call 前的工具表面、预算和 capability filtering？
+```
+
+归位规则：
+
+| 产品表层材料 | 接回哪一层 | 理由 |
+| --- | --- | --- |
+| permission settings | Core 22 / Core 26 | 它决定工具动作 allow / ask / deny |
+| pre tool hook | Core 22 / Core 24 | 它可能阻断工具执行，并写入 session event |
+| post tool hook | Core 21 / Core 24 | 它是新的 observation，可能影响下一步 |
+| user prompt hook | Core 21 / Core 26 | 它可能增加用户约束或改变计划 |
+| memory source | Course 08 / Course 09 / Core 18 / Core 19 / Core 24 | 它是长期上下文来源，不是 compact summary 或 repo index |
+| checkpoint marker | Core 22 / Core 24 | 它要绑定 transaction evidence、file hash 和 session event |
+| subagent delegation | Core 21 / Core 24 / Core 25 | 它需要独立任务、隔离上下文、结构化结果和去重 ledger |
+| deferred tools | Core 23 | 它属于工具表面和 provider capability filtering |
+| retry / fallback policy | Core 23 | 它必须在 provider call 前决策 |
+
+独立 Core 的门槛：
+
+```text
+如果只是说明高风险动作要问用户，补 Core 22 / 26。
+如果实现配置优先级、hook lifecycle、memory type / stale verification、checkpoint file hash / rewind audit、subagent context isolation / result contract、阻断语义、脱敏和 replay，再考虑独立 Core。
+```
+
+Core 27 已把其中的 `permission settings` 立成独立实现层：
+
+```text
+settings / permission rules
+  -> PermissionResolver
+  -> allow / ask / deny
+  -> Core 22 transaction or Core 26 approval protocol
+```
+
+读 Core 27 时要注意：
+
+```text
+它只证明配置优先级、ruleSource、resolverTrace 和 decisionCache。
+它不负责 Core 22 的 preview / commit / rollback。
+它不负责 Core 26 的 approve / reject / interrupt / handoff。
+```
+
+Core 28 已把 `hooks` 中的 pre / post tool lifecycle 立成独立实现层：
+
+```text
+preToolUse hook 可以阻断工具执行。
+postToolUse hook 可以把反馈作为 dynamic observation 交给后续上下文。
+hook failure 必须结构化，不能绕过 Core 27 permission decision。
+```
+
+它不负责：
+
+```text
+Core 24 的 durable store 新实现。
+Core 26 的 human approval decision。
+真实 shell hook 产品或任意用户脚本 sandbox。
+```
+
+Core 29 已把 `memory source` 立成独立实现层：
+
+```text
+CLAUDE.md / user / feedback / reference
+  -> MemorySourceRuntime
+  -> memory body + memory index
+  -> freshness check
+  -> long_term_memory context block
+```
+
+读 Core 29 时要注意：
+
+```text
+它只证明长期 memory 的类型、索引、删除、过时校验和 no code-structure policy。
+它不负责 Core 18 的 token economy。
+它不负责 Core 19 的 compaction quality。
+它不负责 Core 24 的 durable session store 新实现。
+```
+
+Core 30 已把 `checkpoint / rewind` 立成独立实现层：
+
+```text
+transaction evidence
+  -> checkpoint fileStateSnapshot + session event
+  -> rewind request
+  -> external change conflict check
+  -> file restore + audit replay
+```
+
+读 Core 30 时要注意：
+
+```text
+它只证明用户可见 checkpoint、rewind request、外部改动拒绝和 audit replay。
+它不负责 Core 22 的 transaction commit / rollback。
+它不负责 Core 24 的 append-only store 或 crash recovery 新实现。
+```
+
+Core 31 已把 `subagent context isolation` 立成独立实现层：
+
+```text
+delegated task
+  -> isolated subagent context
+  -> structured subagent result
+  -> parent receipt
+  -> delegation ledger
+```
+
+读 Core 31 时要注意：
+
+```text
+它只证明 delegatedTask、subagentContext、subagentResult、delegationLedger 和 isolationAudit。
+它不负责 Core 21 的 long-running eval、cost curve 或 no false final。
+它不负责 Core 25 的 repo index / relevance scoring 新实现。
+它不负责真实多进程 agent 调度、远端 worker 隔离或 agent marketplace。
+```
+
+Core 27-31 的逐 case 教学统一收口到 `course-18-product-surface-implementation-chain.md`。本课的职责是先把这些产品表层材料接回 Core 21-23 的 long-running、ToolRuntime 和 ModelGateway 责任链。
 
 ---
 

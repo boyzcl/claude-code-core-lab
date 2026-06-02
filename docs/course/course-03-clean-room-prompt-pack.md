@@ -112,6 +112,86 @@ prompts/
 
 ---
 
+## 2.5 Product Surface 补充：Prompt Pack 不是最终装配结果
+
+Product Surface Study 之后，Course 03 需要多讲一层：
+
+```text
+Prompt Pack 是规则库。
+Prompt Assembly 是本轮真正交给模型的系统段装配过程。
+Prompt Governance 是这些规则如何版本化、追来源、绑定验证和守公开边界。
+```
+
+这三件事不能混在一起。
+
+| 层 | 中文理解 | 负责什么 | 不负责什么 |
+| --- | --- | --- | --- |
+| Prompt Pack | 提示词规则库 | 保存我们自己写的角色、动作、工具、恢复和输出规则 | 不决定本轮到底装入哪些上下文事实 |
+| Prompt Assembly | 提示词装配 | 把 system、mode、tool descriptions、project rules、runtime reminders 等分段组合成 ModelRequest | 不绕过 Context Engine / Policy |
+| Prompt Governance | 提示词治理 | 记录来源、版本、适用面、验证用例和公开边界 | 不复制 Claude Code 提取原文 |
+
+从 Claude Code 产品表层材料里可以学到的，不是“复制某段原文”，而是：
+
+```text
+成熟代码 Agent 会把身份、任务域、安全边界、工具策略、输出风格、记忆策略和环境信息分层装配。
+```
+
+因此我们补充 Prompt Rule Contract：
+
+```text
+Rule:
+  id:
+  text:
+  source:
+  evidence_tier:
+  how_to_supply:
+  assembly_segment:
+  precedence:
+  decision_enabled:
+  failure_if_missing:
+  hard_or_soft:
+  runtime_enforcement:
+  eval_case:
+  public_boundary:
+```
+
+新增字段：
+
+| 字段 | 含义 |
+| --- | --- |
+| `evidence_tier` | A 官方公开资料、B 产品工件观察、C 第三方整理、D 本项目验证 |
+| `assembly_segment` | system、mode、tool description、runtime reminder、project rule、memory、recovery instruction |
+| `precedence` | 与其他规则冲突时的优先级 |
+| `public_boundary` | 是否可公开原文；B/C 层默认只能公开机制摘要，不能公开提取原文 |
+
+写作要求：
+
+```text
+如果规则来自 B/C 层观察，只能写“我们观察到这一类机制值得学习”，不能贴原文。
+如果规则要进入我们自己的 Prompt Pack，必须改写成自己的规则文本，并绑定 eval 或 Runtime 边界。
+```
+
+这就是为什么 Product Surface Study 的 Prompt Assembly 先补 Course 03，而不是直接新建 Core：
+
+```text
+如果只是学习提示词规则类别，它属于本课。
+只有当我们实现可执行的 assembly provenance、precedence、injection isolation 和 no raw extraction 扫描时，它才可能成为独立 Core。
+```
+
+Core 27-31 已经落地的产品表层（Product Surface）主题不回填为 prompt 原文：
+
+```text
+Permission Resolver 属于工具执行前的 Runtime decision。
+Hooks Lifecycle 属于 session / tool lifecycle event。
+Memory Source 属于长期 context source governance。
+Checkpoint / Rewind 属于恢复点和文件状态边界。
+Subagent Context Isolation 属于委派上下文和结果契约。
+```
+
+它们的执行链统一在 `course-18-product-surface-implementation-chain.md` 中细读。
+
+---
+
 ## 3. Prompt Rule Contract
 
 每条 prompt 规则都必须按这个模板登记。
@@ -495,7 +575,7 @@ final answer honesty -> F01-F05
 ```text
 Plan Mode 细节
 Compact summary 格式
-Memory/skills 规则
+产品表层（Product Surface）主题和 Prompt Pack 的装配边界
 具体工具参数说明
 不同 permission mode 的注入文案
 项目规则冲突处理细节

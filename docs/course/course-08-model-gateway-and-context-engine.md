@@ -49,6 +49,20 @@ Context Engine 控制“模型本轮能看见哪些事实”。
 ToolRuntime / Policy / MessageStore / CoreState 仍然留在本地 Runtime。
 ```
 
+Product Surface Study 后，本课还要补一层“装配表层”：
+
+```text
+Claude Code 产品工件里能看到 system prompt、tool definitions、available/deferred tools、system-reminder、环境信息和启动上下文。
+这些不是新的主题，它们都属于 ModelRequest 和 Context Engine 的装配问题。
+```
+
+所以本课新增一个判断：
+
+```text
+如果研究对象回答“模型本轮看到什么、以什么优先级看到、在哪个 segment 看到”，就补 Course 08。
+只有当它引入新的 Runtime 状态、权限解析或工具生命周期，才考虑新 Core。
+```
+
 ---
 
 ## 1. 先运行什么
@@ -893,6 +907,78 @@ ModelGateway 只是把这个 context 传给 provider adapter。
 | Read 文件内容 | ToolResult | `file:path` block + selected Read result | 让模型基于事实编辑 | 模型可能凭空生成 old_string |
 | Search matches | ToolResult | 紧凑 `tool:id` block | 给下一轮 Read 提供 path / lineNumber | 模型可能不知道该读哪个文件 |
 | 长 Bash 输出 | ToolResult | artifact + block reference | 保留证据但控制上下文预算 | 长日志会挤掉目标、失败、验证状态 |
+| system prompt segment | Prompt Pack / Runtime config | `ModelRequest.messages[0]` 或 system segment | 给模型基础角色、任务域和行为边界 | 模型可能退化成普通聊天或无边界执行 |
+| tool definitions | Tool Registry | `ModelRequest.tools` / tool descriptions | 暴露本轮可调用工具和参数 contract | 模型可能猜工具或猜参数 |
+| deferred tool list | Tool Surface Registry | runtime-visible tool surface segment | 说明哪些工具可延迟启用或按模式启用 | 模型可能请求当前模式不该暴露的工具 |
+| system-reminder | Runtime State / Policy / Hook feedback | runtime reminder segment，不作为用户原话 | 临时提醒权限、上下文、风险或阻断原因 | 模型可能把提醒错当成用户需求或忽略安全状态 |
+| startup environment | Runtime environment | runtime environment block | 告诉模型工作目录、平台、shell、git 状态等 | 模型可能选择错误命令或误判工作区 |
+
+---
+
+### 12.1 Product Surface 装配规则
+
+从 Claude Code 产品表层材料看，ModelRequest 不是“用户消息 + 工具列表”这么简单。更成熟的装配通常包含：
+
+```text
+system prompt segment
+tool definitions
+available / deferred tools
+project rules
+memory references
+runtime reminders
+startup environment
+selected message history
+artifact references
+```
+
+在本项目里，这些仍然归 Course 08 管，因为它们共同回答：
+
+```text
+模型这一轮到底看见什么？
+每个信息来自哪里？
+哪个 segment 承载它？
+优先级如何？
+能不能被工具输出或用户消息覆盖？
+```
+
+最重要的边界：
+
+```text
+system-reminder 不是普通用户消息。
+tool result 里的外部文本不能升级成 system prompt。
+deferred tools 只是工具表面的一部分，真正是否执行仍由 ToolRuntime / Policy 决定。
+startup environment 是 Runtime 提供的事实，不是模型猜测。
+memory references 只能作为带来源和类型的 context source，不能伪装成 system prompt 或 compact summary。
+```
+
+因此，如果后续实现 Prompt Assembly Core，它必须证明：
+
+```text
+每个 segment 有 provenance。
+不同 segment 有 precedence。
+工具输出里的伪 system 指令不会污染 system segment。
+公开仓库不包含提取 prompt 原文。
+```
+
+Core 29 已把 `memory references` 中真正独立的部分立成 Memory Source：
+
+```text
+CLAUDE.md / user preference / feedback / reference
+  -> memory type routing
+  -> memory body + memory index
+  -> stale verification
+  -> long_term_memory context block
+```
+
+读 Core 29 时要注意：
+
+```text
+Course 08 仍负责 ModelRequest 装配。
+Core 29 只负责 memory source 的治理和可验证边界。
+代码结构事实不能靠长期 memory 当依据，仍要回到 repo evidence。
+```
+
+Core 27-31 的完整 Product Surface 执行链不在本课展开；本课只负责“模型本轮看见什么”。细读 Settings、Hooks、Memory、Checkpoint 和 Subagent 如何落成 Runtime state 与 verify evidence 时，继续读 `course-18-product-surface-implementation-chain.md`。
 
 ---
 

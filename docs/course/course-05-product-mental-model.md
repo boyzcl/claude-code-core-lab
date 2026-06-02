@@ -8,7 +8,7 @@
 > course-00：怎么避免隐式信息。
 > course-01：模型第一次被调用时看到了什么。
 > course-02：模型怎么判断下一步动作是否合理。
-> course-03：Prompt Pack 如何 clean-room 设计。
+> course-03：提示词包（Prompt Pack）如何在公开学习边界下设计。
 > course-04：一条任务如何从用户输入跑到最终验证。
 > ```
 >
@@ -462,7 +462,7 @@ Eval：未读就 edit 应失败；用户中途改文件应阻止覆盖。
 6. 一条任务如何通过多轮 ToolResult 推进。
 7. 为什么最终回答必须依赖 VerificationState。
 8. 为什么 Trace/Eval 是产品迭代的一部分。
-9. 为什么 clean-room Prompt Pack 不能直接复制第三方 prompt。
+9. 为什么公开学习边界下的提示词包（Prompt Pack）不能直接复制第三方提示词（prompt）。
 10. 为什么 Claude Code-like 产品的核心是 Runtime，而不是单个 prompt。
 ```
 
