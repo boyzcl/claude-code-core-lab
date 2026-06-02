@@ -6,6 +6,7 @@
 
 - [项目首页](../README.md)
 - [学习者入口](start-here-for-learners.md)
+- [从零学习计划（Learning Plan）](learning-plan.md)
 - [课程路线](course/claude-code-core-learning-path.md)
 - [核心运行时对象地图（Core Runtime Object Map）](reference/core-runtime-object-map.md)
 - [代码智能体实现逻辑（Code Agent Implementation Logic）](reference/code-agent-implementation-logic.md)

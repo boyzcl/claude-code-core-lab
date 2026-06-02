@@ -20,6 +20,21 @@
 
 根目录不再堆满课程和阶段记录。第一次访问 GitHub 的用户应该能先看懂入口，而不是被几十个 Markdown 文件淹没。
 
+## docs 根入口
+
+`docs/` 根目录保留少量跨分区入口：
+
+```text
+docs/start-here-for-learners.md
+docs/learning-plan.md
+docs/index.md
+docs/authority-map.md
+docs/production-upgrade-terms-zh.md
+docs/open-source-boundary.md
+```
+
+其中 `learning-plan.md` 只负责学习节奏：30 分钟、半天和七节主线学习法。课程顺序仍以 `docs/course/claude-code-core-learning-path.md` 为准，行为证据仍以 `src/**/*.verify.mjs` 为准。
+
 ## docs/course
 
 课程主线。按编号顺序读：

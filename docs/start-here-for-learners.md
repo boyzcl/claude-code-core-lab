@@ -31,6 +31,8 @@ npm run verify:all
 | 半天主线体验 | 想看到完整闭环但不深挖所有细节 | 读 Course 00、01、03、07、13、14、18；运行 `npm run core:10:verify`、`core:18:verify`、`core:31:verify` | 知道课程为什么这样排，以及 Core 如何用 verify 证明机制 |
 | 系统学习 | 想真的复刻学习过程 | 按 Course 00 到 Course 18 顺序读；每一组课程都跟源码和 verify | 能复述从模型请求（ModelRequest）到产品表层核心阶段（Product Surface Core）的完整证据链 |
 
+如果你希望有人把学习节奏排成表，直接看 [从零学习计划（Learning Plan）](learning-plan.md)。它把本页的三种方式拆成 30 分钟、半天和七节主线学习法。
+
 学习节奏建议：
 
 ```text
@@ -117,6 +119,7 @@ Core 18-26 的术语集中看 [Production Upgrade 中文术语表](production-up
 
 从这里开始：
 
-1. [课程路线](course/claude-code-core-learning-path.md)
-2. [Course 00 教学标准](course/course-00-teaching-standard.md)
-3. [项目结构说明](project-structure.md)
+1. [从零学习计划（Learning Plan）](learning-plan.md)
+2. [课程路线](course/claude-code-core-learning-path.md)
+3. [Course 00 教学标准](course/course-00-teaching-standard.md)
+4. [项目结构说明](project-structure.md)

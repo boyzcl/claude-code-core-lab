@@ -8,6 +8,7 @@ course-00 -> course-01 -> ... -> course-18
 
 推荐入口：
 
+- [从零学习计划](../learning-plan.md)
 - [课程总路线](claude-code-core-learning-path.md)
 - [Course 00 教学标准](course-00-teaching-standard.md)
 

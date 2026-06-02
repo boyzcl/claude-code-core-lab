@@ -24,6 +24,7 @@ Related Files: README.md, AGENTS.md, CURRENT_STATE.md, docs/index.md, docs/open-
 | `docs/index.md` | 文档索引 | yes | 按当前规则 / 历史 / 证据（Current Rules / History / Evidence）路由 |
 | `docs/authority-map.md` | 权威关系图（authority map） | yes | 本文，负责冲突优先级 |
 | `docs/start-here-for-learners.md` | 学习者入口 | yes | 第一次阅读仓库时使用，不替代当前状态（current state） |
+| `docs/learning-plan.md` | 从零学习计划 | yes | 把学习入口拆成 30 分钟、半天和七节主线学习法，不替代课程正文 |
 | `docs/open-source-boundary.md` | 开源边界入口 | yes | 公开声明、公开学习边界和能力边界 |
 | `docs/production-upgrade-terms-zh.md` | 中文术语表 | yes | 当前解释性文档采用中文先行、英文括注时的术语入口；文件名沿用历史名称 |
 | `docs/reference/code-agent-implementation-logic.md` | 代码智能体实现逻辑综合文 | yes | 当前综合文章，用一篇长文复盘从运行时循环到产品表层边界的搭建逻辑 |
@@ -36,6 +37,7 @@ Related Files: README.md, AGENTS.md, CURRENT_STATE.md, docs/index.md, docs/open-
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | 当前进度和下一步 | `CURRENT_STATE.md` | current-rule | repo | active | `docs/course/claude-code-core-learning-path.md` | `docs/records/core-run-record.md` | 当前状态冲突时以 `CURRENT_STATE.md` 为准 |
 | 学习路线和命名 | `docs/course/claude-code-core-learning-path.md` | current-rule | learning-system | active | none | `docs/records/lab-*-run-record.md` | 路线命名冲突时以 learning path 为准 |
+| 从零学习计划 | `docs/learning-plan.md` | learner-guide | learning-system | active | none | `docs/course/course-00-teaching-standard.md` through `docs/course/course-18-product-surface-implementation-chain.md`, `src/**/*.verify.mjs` | 学习节奏以 learning plan 为入口；课程顺序和命名仍以 learning path 为准，行为证据以 verify 脚本为准 |
 | Agent 工作控制 | `AGENTS.md` | current-rule | repo | active | none | `docs/records/core-run-record.md` | 操作边界冲突时以 `AGENTS.md` 和安全策略为准 |
 | 文档导航 | `docs/index.md` | index | docs | active | none | none | 导航冲突时以 authority map 的 canonical doc 为准 |
 | 文档 authority | `docs/authority-map.md` | reference-authority | docs | active | none | none | 本文优先于索引和历史材料 |

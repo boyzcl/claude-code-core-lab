@@ -1,6 +1,6 @@
 # CURRENT_STATE：Claude Code Core 学习项目当前状态
 
-最后更新：2026-06-01 15:37 CST
+最后更新：2026-06-02 13:37 CST
 
 本文是新对话入口和当前状态单一事实源。它不替代课程、Lab、Core 文档，只回答：
 
@@ -108,6 +108,7 @@ Eval 如何证明能力真的变强。
 | `docs/course/course-18-product-surface-implementation-chain.md` | 课程 | Core 27-31 的设置、钩子、记忆、检查点、子代理（Settings / Hooks / Memory / Checkpoint / Subagent）产品表层执行链 |
 | `docs/production-upgrade-terms-zh.md` | 术语参考 | 当前解释性文档的中文先行术语入口；文件名沿用生产化升级阶段的历史名称 |
 | `docs/start-here-for-learners.md` | 学习者入口 | 第一次打开仓库时的学习路线和运行入口 |
+| `docs/learning-plan.md` | 从零学习计划 | 面向第一次学习者的 30 分钟、半天和七节主线学习节奏 |
 | `docs/open-source-boundary.md` | 开源边界 | 对外能力声明、公开学习边界和密钥（secret）边界 |
 | `docs/github-release-checklist.md` | 开源检查表 | 发布到 GitHub 前的最小检查 |
 | `docs/lab/lab-01-*` 到 `docs/lab/lab-08-*` | 可执行实验 | 每个实验（Lab）证明一个局部机制 |
@@ -204,6 +205,7 @@ Teaching Consolidation Pass 第一轮完成。
 开源项目规范整理（Open Source Project Standards Pass）已完成：新增 GitHub Issue / PR 模板、CHANGELOG、开源项目规范参考和核心运行时对象地图（Core Runtime Object Map），并同步 README、CONTRIBUTING、docs index、authority map、project structure 和 GitHub release checklist。
 代码智能体实现逻辑（Code Agent Implementation Logic）Pass 已完成：新增 `docs/reference/code-agent-implementation-logic.md`，用中文优先术语、用户视角和 Claude Code 负责人视角，重新讲清代码智能体从最小运行时循环、工具安全、模型边界、上下文、计划、压缩、评测、真实仓库、生产化治理到产品表层运行时边界的搭建逻辑。
 中文先行术语规范 Pass 已完成：`course-00` 已正式规定当前解释性文档采用中文在前、英文括注；`authority-map` 已登记该规则；`docs/production-upgrade-terms-zh.md` 已升级为当前解释性文档术语入口。历史材料、文件名、命令名、代码字段、错误码和 verify case 名不做机械改写。
+从零学习计划（Learning Plan）Pass 已完成：新增 `docs/learning-plan.md`，把 README / 学习者入口 / Course 00-18 / Core verify 串成 30 分钟、半天和七节主线学习法，并同步 README、docs 入口、course README、authority-map 和项目结构说明。
 ```
 
 已亲自体验：
@@ -216,7 +218,7 @@ course-06 中 Lab 到 Core 的映射问题已由学习者确认能回答。
 当前状态：
 
 ```text
-中文先行术语规范 Pass 已完成
+从零学习计划 Pass 已完成
 ```
 
 它的目的不是再新增 Core，而是把中文读者的当前解释性文档阅读规则正式化：中文先行，英文作为词汇括注；历史材料和代码字段保留原貌，避免机械改写。

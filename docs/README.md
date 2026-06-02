@@ -5,10 +5,11 @@
 第一次学习：
 
 1. [学习者入口](start-here-for-learners.md)
-2. [课程路线](course/claude-code-core-learning-path.md)
-3. [核心运行时对象地图（Core Runtime Object Map）](reference/core-runtime-object-map.md)
-4. [代码智能体实现逻辑（Code Agent Implementation Logic）](reference/code-agent-implementation-logic.md)
-5. [项目结构说明](project-structure.md)
+2. [从零学习计划（Learning Plan）](learning-plan.md)
+3. [课程路线](course/claude-code-core-learning-path.md)
+4. [核心运行时对象地图（Core Runtime Object Map）](reference/core-runtime-object-map.md)
+5. [代码智能体实现逻辑（Code Agent Implementation Logic）](reference/code-agent-implementation-logic.md)
+6. [项目结构说明](project-structure.md)
 
 主要分区：
 

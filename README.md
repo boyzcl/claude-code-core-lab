@@ -80,20 +80,21 @@ npm run verify:all
 第一次打开仓库，按这个顺序来：
 
 1. 读 [学习者入口](docs/start-here-for-learners.md)，先建立整体地图。
-2. 读 [课程路线](docs/course/claude-code-core-learning-path.md)，知道课程为什么这样排。
-3. 从 [Course 00](docs/course/course-00-teaching-standard.md) 开始顺序读到 [Course 18](docs/course/course-18-product-surface-implementation-chain.md)。
-4. 每读完一组机制，运行对应 Lab 或 Core 验证脚本。
-5. 不懂英文术语时，看 [中文术语表](docs/production-upgrade-terms-zh.md)。
-6. 想把 31 个 Core 收束成少数对象时，看 [核心运行时对象地图（Core Runtime Object Map）](docs/reference/core-runtime-object-map.md)。
-7. 想读一篇完整长文时，看 [代码智能体实现逻辑（Code Agent Implementation Logic）](docs/reference/code-agent-implementation-logic.md)。
+2. 按 [从零学习计划（Learning Plan）](docs/learning-plan.md) 选择 30 分钟、半天或七节主线学习法。
+3. 读 [课程路线](docs/course/claude-code-core-learning-path.md)，知道课程为什么这样排。
+4. 从 [Course 00](docs/course/course-00-teaching-standard.md) 开始顺序读到 [Course 18](docs/course/course-18-product-surface-implementation-chain.md)。
+5. 每读完一组机制，运行对应 Lab 或 Core 验证脚本。
+6. 不懂英文术语时，看 [中文术语表](docs/production-upgrade-terms-zh.md)。
+7. 想把 31 个 Core 收束成少数对象时，看 [核心运行时对象地图（Core Runtime Object Map）](docs/reference/core-runtime-object-map.md)。
+8. 想读一篇完整长文时，看 [代码智能体实现逻辑（Code Agent Implementation Logic）](docs/reference/code-agent-implementation-logic.md)。
 
 如果你只是先试水，不需要一上来读完整 19 门课。可以按时间选择：
 
 | 时间 | 推荐路径 |
 | --- | --- |
-| 30 分钟 | 跑 `npm run verify:labs`，读 README、学习者入口和 Course 00 |
-| 半天 | 读 Course 00、01、03、07、13、14、18，跑 `core:10`、`core:18`、`core:31` verify |
-| 系统学习 | 按 Course 00 到 Course 18 顺序读，每一组都跟源码和 verify |
+| 30 分钟 | 跑 `npm run verify:labs`，读 README、学习者入口、学习计划和 Course 00 |
+| 半天 | 按学习计划里的半天路线读 Course 00、01、03、07、13、14、18，跑 `core:10`、`core:18`、`core:31` verify |
+| 系统学习 | 按学习计划里的七节主线读完 Course 00 到 Course 18，每一组都跟源码和 verify |
 
 最小体验路径：
 
