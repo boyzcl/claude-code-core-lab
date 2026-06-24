@@ -2,6 +2,9 @@
   "name": "claude-code-core-lab",
   "version": "0.0.1",
   "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
   "scripts": {
     "lab:01": "node src/lab01/mock-runtime-loop.mjs",
     "lab:01:verify": "node src/lab01/mock-runtime-loop.verify.mjs",
@@ -84,6 +87,7 @@
     "core:31:verify": "node src/core/subagent-context-isolation.verify.mjs",
     "project:capstone:solution:verify": "node solutions/capstone-mini-runtime/mini-runtime.verify.mjs",
     "docs:links": "node scripts/check-doc-links.mjs",
+    "verify": "npm run docs:links && npm run verify:all",
     "verify:labs": "npm run lab:01:verify && npm run lab:02:verify && npm run lab:03:verify && npm run lab:04:verify && npm run lab:05:verify && npm run lab:06:verify && npm run lab:07:verify && npm run lab:08:verify",
     "verify:all": "npm run verify:labs && npm run core:verify && npm run core:02:verify && npm run core:03:verify && npm run core:04:verify && npm run core:05:verify && npm run core:06:verify && npm run core:07:verify && npm run core:08:verify && npm run core:09:verify && npm run core:10:verify && npm run core:11:verify && npm run core:12:verify && npm run core:13:verify && npm run core:14:verify && npm run core:15:verify && npm run core:16:verify && npm run core:17:verify && npm run core:18:verify && npm run core:19:verify && npm run core:20:verify && npm run core:21:verify && npm run core:22:verify && npm run core:23:verify && npm run core:24:verify && npm run core:25:verify && npm run core:26:verify && npm run core:27:verify && npm run core:28:verify && npm run core:29:verify && npm run core:30:verify && npm run core:31:verify"
   }

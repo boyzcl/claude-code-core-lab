@@ -29,8 +29,5 @@ jobs:
             git diff --check HEAD~1..HEAD || git diff --check
           fi
 
-      - name: Check docs links
-        run: npm run docs:links
-
-      - name: Verify all deterministic checks
-        run: npm run verify:all
+      - name: Verify docs and deterministic checks
+        run: npm run verify

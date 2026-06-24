@@ -35,13 +35,13 @@ deterministic local verify case
 
 ```bash
 git diff --check
-npm run docs:links
+npm run verify
 ```
 
-修改 `package.json`、verify 脚本或核心运行链路时，运行：
+只改教学文档且需要快速复查链接时，可以先运行：
 
 ```bash
-npm run verify:all
+npm run docs:links
 ```
 
 ## 文档标准

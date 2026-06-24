@@ -103,10 +103,10 @@ npm --version
 
 ```bash
 npm install
-npm run verify:all
+npm run verify
 ```
 
-如果看到命令正常结束，说明本地 Lab 和 Core 的确定性验证都可复现。当前完整记录见 [docs/records/core-run-record.md](docs/records/core-run-record.md)，最近一次记录是 `265/265 passed`。
+`npm run verify` 会先检查 Markdown 内部链接，再运行全部 Lab 和 Core 的确定性验证。如果看到命令正常结束，说明本地文档链接和核心验证都可复现。当前完整记录见 [docs/records/core-run-record.md](docs/records/core-run-record.md)，最近一次记录是 `265/265 passed`。
 
 如果安装、验证、真实模型配置或 capstone starter 卡住，先看 [故障排查（Troubleshooting）](docs/troubleshooting.md)。
 
@@ -183,6 +183,9 @@ npm run verify:labs
 # 跑全部 Lab + Core，本项目最重要的健康检查
 npm run verify:all
 
+# 跑文档链接检查 + 全部 Lab/Core，本地提交前推荐入口
+npm run verify
+
 # 跑真实模型适配器的本地契约验证，不需要真实 API key
 npm run core:07:verify
 
@@ -230,7 +233,7 @@ npm run docs:links
 - Course 18：完成产品表层（Product Surface）教学整理，把 Core 27-31 讲成设置、钩子、记忆、检查点、子代理（Settings / Hooks / Memory / Checkpoint / Subagent）的执行链（execution-chain），并继续守住不复制提示词（prompt）原文、源码映射（source map）原文或反编译源码片段的公开边界。
 - 第二阶段公开传播层：新增 [Claude Code 官方能力覆盖矩阵](docs/reference/claude-code-capability-coverage-matrix.md)、[v0.1 learning preview release note](docs/releases/v0.1-learning-preview.md) 和文档链接检查脚本 `npm run docs:links`。
 - 下一阶段：已建立 [产品表层学习路线图（Product Surface Study Roadmap）](docs/roadmap/product-surface-study-roadmap.md)、验证矩阵和候选 Core 迷你简报（mini brief）；Core 27 / 28 / 29 / 30 / 31 已覆盖当前候选池，未来候选仍需先判断补旧课程还是新建 Core。
-- GitHub Actions：`npm run verify:all` 已接入 CI。
+- GitHub Actions：`npm run verify` 已接入 CI。
 
 最新状态见 [CURRENT_STATE.md](CURRENT_STATE.md)，完整验证证据见 [Core 验证记录](docs/records/core-run-record.md)。
 
@@ -265,6 +268,5 @@ npm run docs:links
 
 ```bash
 git diff --check
-npm run docs:links
-npm run verify:all
+npm run verify
 ```
